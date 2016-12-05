@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import { Parse } from 'parse';
 
 import App from './components/App';
-import HomePage from './components/HomePage';
+import HomePage from './containers/HomePage';
 import Login from './components/Login';
 import Signup from './components/Signup';
 

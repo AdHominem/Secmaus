@@ -1,8 +1,11 @@
-import React from 'react';
-import { Parse } from 'parse';
+import React, { PropTypes } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 
 class MeasureForm extends React.Component {
+  static propTypes = {
+    saveMeasure: PropTypes.func.isRequired
+  }
+
   constructor() {
     super();
     this.state = {
@@ -25,21 +28,9 @@ class MeasureForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    const Measure = Parse.Object.extend("Measure");
-    const measure = new Measure();
-
-    measure.set("name", this.state.name);
-    measure.set("description", this.state.description);
-
-    measure.save(null, {
-      success: function() {
-        alert('Maßnahme erfolgreich angelegt');
-      },
-      error: function(measure, error) {
-        alert('Maßnahme konnte nicht angelegt werden: ' + error.message);
-      }
-    });
+    const { saveMeasure } = this.props;
+    saveMeasure(this.state.name, this.state.description);
+    this.setState({description: '', name: ''});
   }
 
   render() {

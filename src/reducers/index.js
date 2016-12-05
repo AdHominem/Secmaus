@@ -1,8 +1,9 @@
-// Set up your root reducer here...
- import { combineReducers } from 'redux';
- import {routerReducer} from 'react-router-redux';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import measuresReducer from './measuresReducer';
 
- const rootReducer = combineReducers({
+const rootReducer = combineReducers({
+  measuresReducer,
   routing: routerReducer
 });
 

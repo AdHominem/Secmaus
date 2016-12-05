@@ -1,39 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 // import { Link } from 'react-router';
-import { Parse } from 'parse';
 import MeasureForm from './MeasureForm';
 
 class HomePage extends React.Component {
-  constructor() {
-    super();
-    this.state = {results: []};
+  static propTypes = {
+    measures: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
   }
 
   componentDidMount() {
-    const self = this;
-    const Measure = Parse.Object.extend("Measure");
-    const query = new Parse.Query(Measure);
-
-    query.find({
-      success: function (results) {
-        console.log(results);
-        self.setState({results: results});
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
+    const { actions } = this.props;
+    actions.loadMeasures();
   }
 
   render() {
-    const results = this.state.results;
-    const body = results.map((object, i) => <li key={i}>{object.get("name")}</li>);
+    const { actions, measures } = this.props;
+    const body = measures.map((object, i) => <li key={i}>{object["name"]}</li>);
     return (
       <div>
         <ul>
           {body}
         </ul>
-        <MeasureForm/>
+        <MeasureForm saveMeasure={actions.saveMeasure} />
       </div>    
     );
   }
