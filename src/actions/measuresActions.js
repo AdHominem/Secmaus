@@ -13,7 +13,7 @@ export function loadMeasures() {
           dispatch(addMeasure(
             result.get("name"),
             result.get("description"),
-            result.get("id")
+            result.get("objectId")
           ));
         }
       },

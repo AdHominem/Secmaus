@@ -4,7 +4,7 @@ import { Parse } from 'parse';
 
 import App from './components/App';
 import Measures from './containers/Measures';
-import Measure from './containers/Measure';
+import Measure from './components/Measure';
 import Login from './components/Login';
 import Signup from './components/Signup';
 

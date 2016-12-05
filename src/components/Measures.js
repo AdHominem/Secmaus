@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 import MeasureForm from './MeasureForm';
 
 
@@ -16,7 +16,13 @@ class Measures extends React.Component {
 
   render() {
     const { actions, measures } = this.props;
-    const body = measures.map((object, i) => <li key={i}>{object["name"]}</li>);
+    const body = measures.map((measure, i) =>
+      <li key={i}>
+        <Link to={`/measure/${measure.id}`}>
+          {measure.name}
+        </Link>
+      </li>
+    );
     return (
       <div>
         <ul>
