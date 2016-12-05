@@ -1,14 +1,26 @@
 $blue: rgba(0,86,136,1);
 $white: #fff;
+$darkFontColor: rgb(79, 82, 86);
+$baseFontColor: #6C7177;
 $font: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 body {
   font-family: $font;
+  color: $baseFontColor;
 }
 
 .sidate {
   .sidebar {
     border-right: 1px solid rgba(0, 0, 0, 0.31);
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .navbar {
     background-color: $blue;
