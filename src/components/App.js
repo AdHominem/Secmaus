@@ -22,12 +22,12 @@ class App extends React.Component {
         <LinkContainer to="signup">
           <NavItem>Sign up</NavItem>
         </LinkContainer>
-      </Nav> : 
+      </Nav> :
       <Nav>
         <NavItem onClick={this.logOut}>Log Out</NavItem>
       </Nav>;
     return (
-      <div>
+      <div className="sidate">
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
