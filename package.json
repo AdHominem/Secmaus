@@ -29,6 +29,7 @@
   "author": "Cory House",
   "license": "MIT",
   "dependencies": {
+    "immutability-helper": "2.0.0",
     "object-assign": "4.1.0",
     "parse": "1.9.2",
     "react": "15.3.2",
