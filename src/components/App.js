@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, Row, Col } from 'react-bootstrap';
 import { Parse } from 'parse';
 import { LinkContainer } from 'react-router-bootstrap';
 import { browserHistory } from 'react-router';
+
 
 class App extends React.Component {
   logOut() {
@@ -36,9 +37,15 @@ class App extends React.Component {
           </Navbar.Header>
           {headerItems}
         </Navbar>
-        <div className="container">
-          {this.props.children}
+        <div className="container-fluid">
+          <Row>
+            <Col sm={3} md={2} className="sidebar"></Col>
+            <Col sm={9} md={10} smOffset={3} className="main">
+                {this.props.children}
+            </Col>
+          </Row>
         </div>
+
       </div>
     );
   }

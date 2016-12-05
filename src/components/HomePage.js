@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 // import { Link } from 'react-router';
 import MeasureForm from './MeasureForm';
 
+
 class HomePage extends React.Component {
   static propTypes = {
     measures: PropTypes.array.isRequired,
@@ -22,7 +23,7 @@ class HomePage extends React.Component {
           {body}
         </ul>
         <MeasureForm saveMeasure={actions.saveMeasure} />
-      </div>    
+      </div>
     );
   }
 }

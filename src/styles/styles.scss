@@ -6,9 +6,11 @@ body {
   font-family: $font;
 }
 
-
 .sidate {
-  .navbar{
+  .sidebar {
+    border-right: 1px solid rgba(0, 0, 0, 0.31);
+  }
+  .navbar {
     background-color: $blue;
   }
   .navbar-default {
@@ -25,6 +27,4 @@ body {
       }
     }
   }
-
-
 }
