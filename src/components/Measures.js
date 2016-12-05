@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import MeasureForm from './MeasureForm';
 
 
-class HomePage extends React.Component {
+class Measures extends React.Component {
   static propTypes = {
     measures: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
@@ -28,4 +28,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+export default Measures;

@@ -10,7 +10,11 @@ export function loadMeasures() {
       success: function (results) {
         for (let i = 0; i < results.length; i++) {
           const result = results[i];
-          dispatch(addMeasure(result.get("name"), result.get("description")));
+          dispatch(addMeasure(
+            result.get("name"),
+            result.get("description"),
+            result.get("id")
+          ));
         }
       },
       error: function (error) {
@@ -29,8 +33,8 @@ export function saveMeasure(name, description) {
     measure.set('description', description);
 
     measure.save(null, {
-      success: function() {
-        dispatch(addMeasure(name, description));
+      success: function(measure) {
+        dispatch(addMeasure(name, description, measure.get("id")));
       },
       error: function(measure, error) {
         console.log(error);
@@ -39,10 +43,11 @@ export function saveMeasure(name, description) {
   };
 }
 
-export function addMeasure(name, description) {
+export function addMeasure(name, description, id) {
   return {
     type: types.ADD_MEASURE,
     name: name,
-    description: description
+    description: description,
+    id: id
   };
 }
