@@ -3,7 +3,8 @@ import { Route, IndexRoute } from 'react-router';
 import { Parse } from 'parse';
 
 import App from './components/App';
-import HomePage from './containers/HomePage';
+import Measures from './containers/Measures';
+import Measure from './containers/Measure';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
@@ -20,11 +21,24 @@ function requireAuth(nextState, replace) {
   }
 }
 
+// function requireAdminAuth(nextState, replace) {
+//   if (!Parse.User.current()) {
+//     replace({
+//       pathname: 'login',
+//       query: { return_to: nextState.location.pathname }
+//     });
+//   }
+// }
+
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage} onEnter={requireAuth}/>
+    <IndexRoute component={Measures} onEnter={requireAuth}/>
+    <Route path="measures" component={Measures} onEnter={requireAuth}>
+      <Route path="/measure/:measureId" component={Measure}/>
+    </Route>
     <Route path="login" component={Login}/>
     <Route path="signup" component={Signup}/>
   </Route>
+  // <Route path="admin" component={AdminPage} onEnter={requireAdminAuth}/>
   // <Route path="*" component={NotFoundPage}/>
 );
