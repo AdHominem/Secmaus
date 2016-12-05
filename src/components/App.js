@@ -40,7 +40,7 @@ class App extends React.Component {
         <div className="container-fluid">
           <Row>
             <Col sm={3} md={2} className="sidebar"></Col>
-            <Col sm={9} md={10} smOffset={3} className="main">
+            <Col sm={9} md={10} className="main">
                 {this.props.children}
             </Col>
           </Row>
