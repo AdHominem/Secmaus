@@ -1,18 +1,42 @@
 import React from 'react';
-import {Link} from 'react-router';
+// import { Link } from 'react-router';
+import { Parse } from 'parse';
+import MeasureForm from './MeasureForm';
 
-const HomePage = () => {
-  return (
-    <div>
-      <h1>React Slingshot</h1>
+class HomePage extends React.Component {
+  constructor() {
+    super();
+    this.state = {results: []};
+  }
 
-      <h2>Get Started</h2>
-      <ol>
-        <li>Review the <Link to="fuel-savings">demo app</Link></li>
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
-    </div>
-  );
-};
+  componentDidMount() {
+    const self = this;
+    const Measure = Parse.Object.extend("Measure");
+    const query = new Parse.Query(Measure);
+
+    query.find({
+      success: function (results) {
+        console.log(results);
+        self.setState({results: results});
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  render() {
+    const results = this.state.results;
+    const body = results.map((object, i) => <li key={i}>{object.get("name")}</li>);
+    return (
+      <div>
+        <ul>
+          {body}
+        </ul>
+        <MeasureForm/>
+      </div>    
+    );
+  }
+}
 
 export default HomePage;
