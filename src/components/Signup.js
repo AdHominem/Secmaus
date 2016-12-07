@@ -32,14 +32,36 @@ class Signup extends React.Component {
       password: this.state.password
     });
 
+
     user.signUp().then(
       function() {
+        console.log("Before Role update!");
+
+        const query = new Parse.Query(Parse.Role);
+
+        query.equalTo("name", "Mitarbeiter");
+
+        query.find({
+          success: function (results) {
+            let role = results[0];
+            role.getUsers().add(user);
+            role.save();
+          },
+          error: function (error) {
+            console.log(error);
+          }
+        });
+
         browserHistory.push('/');
       }, function(err) {
         alert(err.message);
-      } 
+      }
     );
+
   }
+
+
+
 
   render() {
     return (
@@ -55,7 +77,7 @@ class Signup extends React.Component {
             <input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
           </label>
           <input type="submit" onClick={this.handleSubmit}/>
-        </form>    
+        </form>
       </Jumbotron>
     );
   }
