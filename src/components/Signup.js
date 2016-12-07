@@ -7,9 +7,9 @@ class Signup extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const user = new Parse.User({
-      username: this.state.email,
-      email: this.state.email,
-      password: this.state.password
+      username: this.refs.email.value,
+      email: this.refs.email.value,
+      password: this.refs.password.value
     });
 
     user.signUp().then(
