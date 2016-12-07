@@ -36,23 +36,23 @@ class App extends React.Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">
-                SIDATE SecMaus
-              </Link>
+              <Link to="/">SIDATE SecMaus</Link>
             </Navbar.Brand>
           </Navbar.Header>
           {headerItems}
         </Navbar>
-        <Grid>
-          <Row>
-            <Col sm={3} md={2} className="sidebar">
-              <h2>Menü</h2>
-            </Col>
-            <Col sm={9} md={10} className="main">
-                {this.props.children}
-            </Col>
-          </Row>
-        </Grid>
+        <aside className="sidebar-container">
+          <div className="sidebar-content">
+            <div className="sidebar-logo">
+              <a href="/">
+                <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
+              </a>
+            </div>
+          </div>
+        </aside>
+        <main className="main-container">
+          {this.props.children}
+        </main>
       </div>
     );
   }
