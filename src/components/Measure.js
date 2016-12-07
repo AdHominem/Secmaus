@@ -1,6 +1,7 @@
 import React from 'react';
 import { find, propEq } from 'ramda';
 import { Link } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Measure extends React.Component {
   render() {
@@ -8,6 +9,13 @@ class Measure extends React.Component {
     const measure = find(propEq('id', id), this.props.measures);
     if (measure) {
       return (
+      <ReactCSSTransitionGroup
+        transitionName="example"
+        transitionEnterTimeout={0}
+        transitionLeaveTimeout={0}
+        transitionAppear={true}
+        transitionAppearTimeout={3000}>
+
         <div className="measure">
           <h1>{measure.name}</h1>
           <p>{measure.description}</p>
@@ -15,6 +23,8 @@ class Measure extends React.Component {
             Bearbeiten
           </Link>
         </div>
+
+      </ReactCSSTransitionGroup>
       );
     }
 
