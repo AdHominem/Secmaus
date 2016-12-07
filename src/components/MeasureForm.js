@@ -1,4 +1,8 @@
 import React, { PropTypes } from 'react';
+import ReactQuill from 'react-quill';
+import '../styles/quill.css';
+// import RichTextEditor from 'react-rte';
+
 
 class MeasureForm extends React.Component {
   static propTypes = {
@@ -20,10 +24,15 @@ class MeasureForm extends React.Component {
           Name:
           <input type="text" ref="name" defaultValue={this.props.name} />
         </label>
+        <br/>
         <label>
           Description:
-          <input type="text" ref="description" defaultValue={this.props.description} />
         </label>
+        <ReactQuill
+          ref="description"
+          defaultValue={this.props.description}
+          theme="snow"
+        />
         <input type="submit" onClick={handleSubmit}/>
       </form>    
     );
