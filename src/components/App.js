@@ -2,10 +2,14 @@ import React, { PropTypes } from 'react';
 import { Nav, Navbar, NavItem, Row, Col, Grid } from 'react-bootstrap';
 import { Parse } from 'parse';
 import { LinkContainer } from 'react-router-bootstrap';
-import { browserHistory } from 'react-router';
-
+import { Link, browserHistory } from 'react-router';
 
 class App extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.loadMeasures();
+  }
+
   logOut() {
     Parse.User.logOut().then(function() {
       browserHistory.push('/login');
@@ -32,17 +36,19 @@ class App extends React.Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              SIDATE SecMaus
+              <Link to="/">
+                SIDATE SecMaus
+              </Link>
             </Navbar.Brand>
           </Navbar.Header>
           {headerItems}
         </Navbar>
         <Grid>
           <Row>
-            <Col sm={3} md={2} className="sm_sidebar">
+            <Col sm={3} md={2} className="sidebar">
               <h2>Menü</h2>
             </Col>
-            <Col sm={9} md={10} className="sm_main">
+            <Col sm={9} md={10} className="main">
                 {this.props.children}
             </Col>
           </Row>

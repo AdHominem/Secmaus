@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import MeasureForm from './MeasureForm';
-
+import { Jumbotron } from 'react-bootstrap';
 
 class Measures extends React.Component {
   static propTypes = {
@@ -9,13 +9,9 @@ class Measures extends React.Component {
     actions: PropTypes.object.isRequired
   }
 
-  componentDidMount() {
-    const { actions } = this.props;
-    actions.loadMeasures();
-  }
-
   render() {
     const { actions, measures } = this.props;
+    console.dir(measures);
     const body = measures.map((measure, i) =>
       <li key={i}>
         <Link to={`/measure/${measure.id}`}>
@@ -28,7 +24,10 @@ class Measures extends React.Component {
         <ul>
           {body}
         </ul>
-        <MeasureForm saveMeasure={actions.saveMeasure} />
+        <Jumbotron>
+          <h2>Maßname hinzufügen</h2>
+          <MeasureForm saveMeasure={actions.saveMeasure} />
+        </Jumbotron>
       </div>
     );
   }
