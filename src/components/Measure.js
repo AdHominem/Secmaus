@@ -3,6 +3,7 @@ import { find, propEq } from 'ramda';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { browserHistory } from 'react-router';
+import { Parse } from 'parse';
 
 class Measure extends React.Component {
   render() {
@@ -31,7 +32,7 @@ class Measure extends React.Component {
           <Link to={`/measure/${measure.id}/edit`}>
             Bearbeiten
           </Link>
-          <a onClick={handleDeleteMeasure}>Löschen</a>
+          { measure.createdBy === Parse.User.current().id && <a onClick={handleDeleteMeasure}>Löschen</a> }
         </div>
 
       </ReactCSSTransitionGroup>

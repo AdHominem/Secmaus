@@ -11,7 +11,8 @@ export default function measuresReducer(state = {measures: []}, action) {
         $push: [{
           name: action.name,
           description: action.description,
-          id: action.id
+          id: action.id,
+          createdBy: action.createdBy
         }]
       }});
     case types.EDIT_MEASURE:
@@ -21,7 +22,8 @@ export default function measuresReducer(state = {measures: []}, action) {
             {
               name: action.name,
               description: action.description,
-              id: action.id
+              id: measure.id,
+              createdBy: measure.createdBy
             } : measure))
       }});
     case types.DELETE_MEASURE:
