@@ -1,23 +1,33 @@
 import React, { PropTypes } from 'react';
 import ReactQuill from 'react-quill';
 import '../styles/quill.css';
-// import RichTextEditor from 'react-rte';
-
 
 class MeasureForm extends React.Component {
   static propTypes = {
     saveMeasure: PropTypes.func.isRequired
   }
 
-  render() {
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const { saveMeasure } = this.props;
-      saveMeasure(this.refs.name.value, this.refs.description.value);
-      this.refs.name.value = '';
-      this.refs.description.value = '';
-    };
+  constructor(props) {
+    super(props);
+    this.state = { text: props.description };
 
+    this.onTextChange = this.onTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onTextChange(value) {
+    this.setState({ text: value });
+  }
+
+  handleSubmit(event) {
+    const { saveMeasure } = this.props;
+    saveMeasure(this.refs.name.value, this.state.text);
+    this.refs.name.value = '';
+    this.setState({ text: '' });
+    event.preventDefault();
+  }
+
+  render() {
     return (
       <form>
         <label>
@@ -29,11 +39,11 @@ class MeasureForm extends React.Component {
           Description:
         </label>
         <ReactQuill
-          ref="description"
-          defaultValue={this.props.description}
+          value={this.state.text}
+          onChange={this.onTextChange}
           theme="snow"
         />
-        <input type="submit" onClick={handleSubmit}/>
+        <input type="submit" onClick={this.handleSubmit}/>
       </form>    
     );
   }

@@ -43,6 +43,25 @@ export function saveMeasure(name, description) {
   };
 }
 
+export function deleteMeasure(id) {
+  return function (dispatch) {
+    const Measure = Parse.Object.extend("Measure");
+    const query = new Parse.Query(Measure);
+    query.get(id, {
+      success: function(measure) {
+        measure.destroy({});
+        dispatch({
+          type: types.DELETE_MEASURE,
+          id: id
+        });
+      },
+      error: function(measure, error) {
+        console.log(error);
+      }
+    });
+  };
+}
+
 export function editMeasure(id, name, description) {
   return function (dispatch) {
     const Measure = Parse.Object.extend("Measure");

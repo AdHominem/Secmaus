@@ -2,11 +2,20 @@ import React from 'react';
 import { find, propEq } from 'ramda';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { browserHistory } from 'react-router';
 
 class Measure extends React.Component {
   render() {
     const id = this.props.params.measureId;
     const measure = find(propEq('id', id), this.props.measures);
+    const { deleteMeasure } = this.props.actions;
+
+    const handleDeleteMeasure = (event) => {
+      deleteMeasure(id);
+      browserHistory.push('/measures');
+      event.preventDefault();
+    };
+
     if (measure) {
       return (
       <ReactCSSTransitionGroup
@@ -18,10 +27,11 @@ class Measure extends React.Component {
 
         <div className="measure">
           <h1>{measure.name}</h1>
-          <p>{measure.description}</p>
+          <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
           <Link to={`/measure/${measure.id}/edit`}>
             Bearbeiten
           </Link>
+          <a onClick={handleDeleteMeasure}>Löschen</a>
         </div>
 
       </ReactCSSTransitionGroup>
