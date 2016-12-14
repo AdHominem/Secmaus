@@ -32,11 +32,10 @@ class Measure extends React.Component {
           <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
           <Link to={`/measure/${measure.id}/edit`}>
             Bearbeiten
-          </Link>
-          <a onClick={handleDeleteMeasure}>Löschen</a>
+          </Link>&nbsp;
           <Link to={`/comments/${measure.id}`}>
             Kommentieren
-          </Link>
+          </Link>&nbsp;
           { measure.createdBy === Parse.User.current().id && <a onClick={handleDeleteMeasure}>Löschen</a> }
           <Comments comments={comments}/>
         </div>
