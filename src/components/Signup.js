@@ -7,7 +7,7 @@ class Signup extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const user = new Parse.User({
-      username: this.refs.email.value,
+      username: this.refs.username.value,
       email: this.refs.email.value,
       password: this.refs.password.value
     });
@@ -44,11 +44,17 @@ class Signup extends React.Component {
         <h1>Sign up</h1>
         <form>
           <label>
+            Username: <input ref="username" />
+          </label>
+          <br />
+          <label>
             Email: <input ref="email" />
           </label>
+          <br />
           <label>
             Password: <input type="password" ref="password" />
           </label>
+          <br />
           <input type="submit" onClick={this.handleSubmit.bind(this)}/>
         </form>    
       </Jumbotron>

@@ -7,7 +7,7 @@ class Login extends React.Component {
   render() {
     const handleSubmit = (event) => {
       event.preventDefault();
-      Parse.User.logIn(this.refs.email.value, this.refs.password.value).then(
+      Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
         function() {
           browserHistory.push('/');
         }, function(err) {
@@ -21,7 +21,7 @@ class Login extends React.Component {
         <h1>Login</h1>
         <form>
           <label>
-            Email: <input ref="email" />
+            Username: <input ref="username" />
           </label>
           <label>
             Password: <input type="password" ref="password" />

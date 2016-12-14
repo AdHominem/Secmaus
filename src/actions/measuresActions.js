@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
+import { browserHistory } from 'react-router';
 
 export function loadMeasures() {
   return function (dispatch) {
@@ -11,12 +12,11 @@ export function loadMeasures() {
         for (let i = 0; i < results.length; i++) {
           const result = results[i];
           // TODO: Remove this once all measures have an associated user
-          const id = result.get("user") ? result.get("user").id : undefined;
           dispatch(addMeasure(
             result.id,
             result.get("name"),
             result.get("description"),
-            id
+            result.get("user"),
           ));
         }
       },
@@ -40,7 +40,8 @@ export function saveMeasure(name, description) {
 
     measure.save(null, {
       success: function(measure) {
-        dispatch(addMeasure(measure.id, name, description, Parse.User.current().id));
+        dispatch(addMeasure(measure.id, name, description, Parse.User.current()));
+        browserHistory.push(`/measure/${measure.id}`);
       },
       error: function(measure, error) {
         console.log(error);
