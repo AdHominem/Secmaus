@@ -8,7 +8,7 @@ class Measure extends React.Component {
   render() {
     const id = this.props.params.measureId;
     const measure = find(propEq('id', id), this.props.measures);
-    const { deleteMeasure } = this.props.actions;
+    const { deleteMeasure } = this.props.measureActions;
 
     const handleDeleteMeasure = (event) => {
       deleteMeasure(id);
