@@ -33,7 +33,7 @@ class App extends React.Component {
       </Nav>;
     return (
       <div className="sidate">
-        <Navbar>
+        <Navbar className="navbar">
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">SIDATE SecMaus</Link>
@@ -41,19 +41,21 @@ class App extends React.Component {
           </Navbar.Header>
           {headerItems}
         </Navbar>
-        <aside className="sidebar-container">
-          <div className="sidebar-content">
-            <div className="sidebar-logo">
-              <a href="/">
-                <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
-              </a>
-              <img src="http://img.auctiva.com/imgdata/1/1/0/9/4/8/0/webimg/352982075_tp.jpg" alt="" />
+        <div className="main-container">
+          <aside className="sidebar-container">
+            <div className="sidebar-content">
+              <div className="sidebar-logo">
+                <a href="/">
+                  <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
+                </a>
+                <img src="http://img.auctiva.com/imgdata/1/1/0/9/4/8/0/webimg/352982075_tp.jpg" alt="" />
+              </div>
             </div>
-          </div>
-        </aside>
-        <main className="main-container">
-          {this.props.children}
-        </main>
+          </aside>
+          <main className="children-container">
+            {this.props.children}
+          </main>
+        </div>
       </div>
     );
   }

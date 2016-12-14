@@ -10,11 +10,8 @@ body {
 }
 
 .sidebar-container {
-  position: absolute;
   border-right: 1px solid rgba(0, 0, 0, 0.31);
-  top: 50px;
-  bottom: 0;
-  width: 240px;
+  // width: 240px;
   .sidebar-logo {
     padding: 20px 30px;
     text-align: center;
@@ -33,23 +30,7 @@ body {
   transition: opacity .5s ease-in;
 }
 
-.main-container {
-  padding: 10px;
-  margin-left: 240px;
-}
-
 .sidate {
-  .sidebar {
-    // position: fixed;
-    // top: 51px;
-    // bottom: 0;
-    // left: 0;
-    // z-index: 1000;
-    // display: block;
-    // padding: 20px;
-    // overflow-x: hidden;
-    // overflow-y: auto;
-  }
   .navbar {
     background-color: $blue;
   }

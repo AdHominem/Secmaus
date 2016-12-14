@@ -1,0 +1,48 @@
+$blue: rgba(0,86,136,1)
+$white: #fff
+$darkFontColor: rgb(79, 82, 86)
+$baseFontColor: #6C7177
+$font: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+
+.sidate
+  display: flex
+  flex-direction: column
+  height: 100vh
+
+.navbar
+  flex: 0 0 auto
+  margin-bottom: 0px
+
+.main-container
+  flex: 1
+  display: flex
+
+.children-container
+  flex: 1
+  overflow-y: scroll
+  padding: 10px
+  padding-top: 20px
+
+.sidebar-container
+  flex: 0 0 240px
+  padding-top: 20px
+
+.measures
+  display: flex
+  flex-wrap: wrap
+  margin-right: -1em
+  margin-bottom: -0.5em
+  .measure
+    flex: 1 0 20em
+    padding: 1em
+    margin-bottom: 0.5em
+    border: 1px solid $darkFontColor
+    border-radius: 0.2em
+    margin-right: 1em
+    font-size: 1.5em
+    color: $baseFontColor
+    &:hover
+      color: $darkFontColor
+      text-decoration: none
+      // background: rgb(220, 220, 220)
+

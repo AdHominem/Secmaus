@@ -13,21 +13,19 @@ class Measures extends React.Component {
     const { measureActions, measures } = this.props;
     console.dir(measures);
     const body = measures.map((measure, i) =>
-      <li key={i}>
-        <Link to={`/measure/${measure.id}`}>
-          {measure.name}
-        </Link>
-      </li>
+      <Link className="measure" to={`/measure/${measure.id}`}>
+        {measure.name}
+      </Link>
     );
     return (
       <div>
-        <ul>
+        <div className="measures">
           {body}
-        </ul>
-        <Jumbotron>
+        </div>
+        <div className="measures--form">
           <h2>Maßname hinzufügen</h2>
           <MeasureForm saveMeasure={measureActions.saveMeasure} />
-        </Jumbotron>
+        </div>
       </div>
     );
   }
