@@ -6,11 +6,11 @@ import { Jumbotron } from 'react-bootstrap';
 class Measures extends React.Component {
   static propTypes = {
     measures: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
-  }
+    measureActions: PropTypes.object.isRequired
+  };
 
   render() {
-    const { actions, measures } = this.props;
+    const { measureActions, measures } = this.props;
     console.dir(measures);
     const body = measures.map((measure, i) =>
       <li key={i}>
@@ -26,7 +26,7 @@ class Measures extends React.Component {
         </ul>
         <Jumbotron>
           <h2>Maßname hinzufügen</h2>
-          <MeasureForm saveMeasure={actions.saveMeasure} />
+          <MeasureForm saveMeasure={measureActions.saveMeasure} />
         </Jumbotron>
       </div>
     );
