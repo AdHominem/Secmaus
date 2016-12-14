@@ -1,6 +1,7 @@
 import React from 'react';
 import { find, propEq } from 'ramda';
 import { Link } from 'react-router';
+import Comments from './Comments';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Measure extends React.Component {
@@ -22,7 +23,13 @@ class Measure extends React.Component {
           <Link to={`/measure/${measure.id}/edit`}>
             Bearbeiten
           </Link>
+        <br/>
+          <Link to={`/measure/${measure.comments}/edit`}>
+            Kommentieren
+          </Link>
         </div>
+
+        <Comments measure={measure}/>
 
       </ReactCSSTransitionGroup>
       );
