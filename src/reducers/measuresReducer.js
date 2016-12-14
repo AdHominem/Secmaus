@@ -1,12 +1,12 @@
-import { ADD_MEASURE, EDIT_MEASURE } from '../constants/actionTypes';
-import { map } from 'ramda';
+import * as types from '../constants/actionTypes';
+import { map, filter } from 'ramda';
 
 // https://facebook.github.io/react/docs/update.html
 import update from 'immutability-helper';
 
 export default function measuresReducer(state = {measures: []}, action) {
   switch (action.type) {
-    case ADD_MEASURE:
+    case types.ADD_MEASURE:
       return update(state, {measures: {
         $push: [{
           name: action.name,
@@ -14,7 +14,7 @@ export default function measuresReducer(state = {measures: []}, action) {
           id: action.id
         }]
       }});
-    case EDIT_MEASURE:
+    case types.EDIT_MEASURE:
       return update(state, {measures: {
         $apply: map((measure) => 
           (measure.id === action.id ?
@@ -23,6 +23,10 @@ export default function measuresReducer(state = {measures: []}, action) {
               description: action.description,
               id: action.id
             } : measure))
+      }});
+    case types.DELETE_MEASURE:
+      return update(state, {measures: {
+        $apply: filter((measure) => measure.id !== action.id)
       }});
     default:
       return state;
