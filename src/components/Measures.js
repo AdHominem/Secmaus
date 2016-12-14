@@ -11,9 +11,8 @@ class Measures extends React.Component {
 
   render() {
     const { measureActions, measures } = this.props;
-    console.dir(measures);
     const body = measures.map((measure, i) =>
-      <Link className="measure" to={`/measure/${measure.id}`}>
+      <Link key={i} className="measure" to={`/measure/${measure.id}`}>
         {measure.name}
       </Link>
     );

@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/measuresActions';
+import * as measureActions from '../actions/measuresActions';
+import * as commentActions from '../actions/commentsActions';
 import App from '../components/App';
 
 function mapStateToProps(state) {
@@ -11,7 +12,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    measureActions: bindActionCreators(measureActions, dispatch),
+    commentActions: bindActionCreators(commentActions, dispatch)
   };
 }
 

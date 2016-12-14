@@ -25,7 +25,6 @@ export function loadComments() {
 }
 
 export function addComment(id, text, parentID) {
-  console.log(id, text, parentID);
   return {
     type: types.ADD_COMMENT,
     text: text,

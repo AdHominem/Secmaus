@@ -6,8 +6,9 @@ import { Link, browserHistory } from 'react-router';
 
 class App extends React.Component {
   componentDidMount() {
-    const { actions } = this.props;
-    actions.loadMeasures();
+    const { measureActions, commentActions } = this.props;
+    measureActions.loadMeasures();
+    commentActions.loadComments();
   }
 
   logOut() {

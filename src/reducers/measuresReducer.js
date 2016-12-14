@@ -11,12 +11,13 @@ export default function measuresReducer(state = {measures: []}, action) {
         $push: [{
           name: action.name,
           description: action.description,
-          id: action.id
+          id: action.id,
+          comments: []
         }]
       }});
     case types.EDIT_MEASURE:
       return update(state, {measures: {
-        $apply: map((measure) => 
+        $apply: map((measure) =>
           (measure.id === action.id ?
             {
               name: action.name,

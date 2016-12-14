@@ -1,21 +1,20 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/measuresActions';
-import EditMeasure from '../components/EditMeasure';
+import * as actions from '../actions/commentsActions';
+import Comments from '../components/Comments';
 
 function mapStateToProps(state) {
   return {
-    measures: state.measuresReducer.measures
+    comments: state.commentsReducer.comments
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    measureActions: bindActionCreators(actions, dispatch)
   };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditMeasure);
+)(Comments);
