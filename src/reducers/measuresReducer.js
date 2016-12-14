@@ -12,6 +12,8 @@ export default function measuresReducer(state = {measures: []}, action) {
           name: action.name,
           description: action.description,
           id: action.id,
+          createdBy: action.createdBy
+          id: action.id,
           comments: []
         }]
       }});
@@ -22,7 +24,8 @@ export default function measuresReducer(state = {measures: []}, action) {
             {
               name: action.name,
               description: action.description,
-              id: action.id
+              id: measure.id,
+              createdBy: measure.createdBy
             } : measure))
       }});
     case types.DELETE_MEASURE:

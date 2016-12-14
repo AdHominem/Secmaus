@@ -10,10 +10,13 @@ export function loadMeasures() {
       success: function (results) {
         for (let i = 0; i < results.length; i++) {
           const result = results[i];
+          // TODO: Remove this once all measures have an associated user
+          const id = result.get("user") ? result.get("user").id : undefined;
           dispatch(addMeasure(
             result.id,
             result.get("name"),
-            result.get("description")
+            result.get("description"),
+            id
           ));
         }
       },
@@ -31,10 +34,13 @@ export function saveMeasure(name, description) {
 
     measure.set('name', name);
     measure.set('description', description);
+    measure.set('user', Parse.User.current());
+
+    console.dir(Parse.User.current());
 
     measure.save(null, {
       success: function(measure) {
-        dispatch(addMeasure(measure.id, name, description));
+        dispatch(addMeasure(measure.id, name, description, Parse.User.current().id));
       },
       error: function(measure, error) {
         console.log(error);
@@ -94,11 +100,9 @@ export function editMeasure(id, name, description) {
   };
 }
 
-export function addMeasure(id, name, description) {
+export function addMeasure(id, name, description, createdBy) {
   return {
     type: types.ADD_MEASURE,
-    name: name,
-    description: description,
-    id: id
+    name, description, id, createdBy
   };
 }

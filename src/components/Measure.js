@@ -3,6 +3,7 @@ import { find, propEq } from 'ramda';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { browserHistory } from 'react-router';
+import { Parse } from 'parse';
 import Comments from './Comments'
 
 class Measure extends React.Component {
@@ -28,7 +29,7 @@ class Measure extends React.Component {
 
         <div className="measure">
           <h1>{measure.name}</h1>
-          <p dangerouslySetInnerHTML={{__html: measure.description}}/>
+          <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
           <Link to={`/measure/${measure.id}/edit`}>
             Bearbeiten
           </Link>
@@ -36,10 +37,9 @@ class Measure extends React.Component {
           <Link to={`/comments/${measure.id}`}>
             Kommentieren
           </Link>
+          { measure.createdBy === Parse.User.current().id && <a onClick={handleDeleteMeasure}>Löschen</a> }
           <Comments comments={comments}/>
         </div>
-
-
 
       </ReactCSSTransitionGroup>
       );
@@ -47,7 +47,7 @@ class Measure extends React.Component {
 
     return (
       // TODO: 404
-      <h1>Keine Maßnahme mit dieser ID gefunden {measure}</h1>
+      <h1>Keine Maßnahme mit dieser ID gefunden</h1>
     );
   }
 }
