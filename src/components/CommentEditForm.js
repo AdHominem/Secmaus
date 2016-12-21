@@ -11,7 +11,7 @@ class CommentEditForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: props.text };
+    this.state = { text: props.comment.text };
 
     this.onTextChange = this.onTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

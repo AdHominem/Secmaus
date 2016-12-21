@@ -21,13 +21,12 @@ export default function commentsReducer(state = {comments: []}, action) {
           (comment.id === action.id ?
             {
               text: action.text,
-              parentID: action.parentID,
-              id: action.id,
-              user: action.user
+              parentID: comment.parentID,
+              id: comment.id,
+              user: comment.user
             } : comment))
       }});
     case DELETE_COMMENT:
-      console.dir(state);
       return update(state, {comments: {
         $apply: filter((comment) => comment.id !== action.id)
       }});
