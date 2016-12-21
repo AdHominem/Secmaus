@@ -13,7 +13,7 @@ class Measure extends React.Component {
     const comments = this.props.comments.filter((comment) => (comment.parentID === measure.id));
 
     const handleDeleteMeasure = (event) => {
-      deleteMeasure(id);
+      deleteMeasure(measure.id);
       browserHistory.push('/measures');
       event.preventDefault();
     };
