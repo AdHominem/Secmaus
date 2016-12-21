@@ -4,7 +4,7 @@ import { Parse } from 'parse';
 export function loadComments() {
   return function (dispatch) {
     const Comment = Parse.Object.extend("Comment");
-    const query = new Parse.Query(Comment);
+    const query = new Parse.Query(Comment).include("user");
 
     query.find({
       success: function (results) {
@@ -14,6 +14,7 @@ export function loadComments() {
             result.id,
             result.get("text"),
             result.get("parentID"),
+            result.get("user")
           ));
         }
       },
@@ -24,11 +25,12 @@ export function loadComments() {
   };
 }
 
-export function addComment(id, text, parentID) {
+export function addComment(id, text, parentID, user) {
   return {
     type: types.ADD_COMMENT,
     text: text,
     parentID: parentID,
-    id: id
+    id: id,
+    user: user
   };
 }

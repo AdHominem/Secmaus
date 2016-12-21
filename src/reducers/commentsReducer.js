@@ -11,7 +11,8 @@ export default function commentsReducer(state = {comments: []}, action) {
         $push: [{
           text: action.text,
           parentID: action.parentID,
-          id: action.id
+          id: action.id,
+          user: action.user
         }]
       }});
     case EDIT_COMMENT:
@@ -21,7 +22,8 @@ export default function commentsReducer(state = {comments: []}, action) {
             {
               text: action.text,
               parentID: action.parentID,
-              id: action.id
+              id: action.id,
+              user: action.user
             } : comment))
       }});
     default:

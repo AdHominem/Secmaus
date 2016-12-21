@@ -7,6 +7,7 @@ export default class Comments extends React.Component {
       return (
         <div className="comment">
           <p>{comment.text}</p>
+          <p>{comment.user.username}</p>
           <p>{comment.parentID}</p>
         </div>
 
