@@ -4,12 +4,10 @@ export default class Comments extends React.Component {
   render() {
     const comment = this.props.comment;
     if (comment) {
-      console.dir(comment.user);
       return (
         <div className="comment">
+          <p>{comment.user.getUsername()}</p>
           <p>{comment.text}</p>
-          <p>{comment.user.attributes.username}</p>
-          <p>{comment.parentID}</p>
         </div>
 
       );
