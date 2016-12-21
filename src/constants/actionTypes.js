@@ -4,6 +4,7 @@ export const DELETE_MEASURE = 'DELETE_MEASURE';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const SET_IS_ADMIN = 'SET_IS_ADMIN';
 

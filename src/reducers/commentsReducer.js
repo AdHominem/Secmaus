@@ -1,4 +1,4 @@
-import { ADD_COMMENT, EDIT_COMMENT } from '../constants/actionTypes';
+import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../constants/actionTypes';
 import { map } from 'ramda';
 
 // https://facebook.github.io/react/docs/update.html
@@ -25,6 +25,11 @@ export default function commentsReducer(state = {comments: []}, action) {
               id: action.id,
               user: action.user
             } : comment))
+      }});
+    case DELETE_COMMENT:
+      console.dir(state);
+      return update(state, {comments: {
+        $apply: filter((comment) => comment.id !== action.id)
       }});
     default:
       return state;

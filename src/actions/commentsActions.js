@@ -1,5 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
+import Alert from 'react-s-alert';
+
 
 export function loadComments() {
   return function (dispatch) {
@@ -85,5 +87,25 @@ export function addComment(id, text, parentID, user) {
     parentID: parentID,
     id: id,
     user: user
+  };
+}
+
+export function deleteComment(id) {
+  return function (dispatch) {
+    const Comment = Parse.Object.extend("Comment");
+    const query = new Parse.Query(Comment);
+    query.get(id, {
+      success: function(comment) {
+        comment.destroy({});
+        dispatch({
+          type: types.DELETE_COMMENT,
+          id: id
+        });
+        Alert.success('Kommentar erfolgreich gelöscht');
+      },
+      error: function(comment, error) {
+        Alert.error('Kommentar konnte nicht gelöscht werden');
+      }
+    });
   };
 }

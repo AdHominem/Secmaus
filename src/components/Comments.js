@@ -35,7 +35,15 @@ class Comments extends React.Component {
     });
   }
 
+
   render() {
+
+    const handleDeleteComment = (id) => (event) => {
+      this.props.commentsActions.deleteComment(id);
+      event.preventDefault();
+    };
+
+
     const { commentsActions, comments, parentId } = this.props;
     const body = comments.map((comment, i) =>
         <div key={i} className="comment">
@@ -43,7 +51,11 @@ class Comments extends React.Component {
           <h4>{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
             {comment.user.createdAt.toLocaleTimeString()}</h4>
           <p dangerouslySetInnerHTML={{__html: comment.text}}></p>
-          { comment.user.id === Parse.User.current().id && <a onClick={this.onClick.bind(this)} >Bearbeiten</a>}
+          { comment.user.id === Parse.User.current().id &&
+            <div>
+              <a onClick={this.onClick.bind(this)} >Bearbeiten</a>
+              <a onClick={handleDeleteComment(comment.id)} >Löschen</a>
+            </div>}
           { this.state.toggleEdit && <CommentEditForm editComment={commentsActions.editComment} comment={comment} toggleEdit={this.toggleEdit.bind(this)} /> }
         </div>
     );
