@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/measuresActions';
+import * as measuresActions from '../actions/measuresActions';
+import * as commentsActions from '../actions/commentsActions';
 import Measure from '../components/Measure';
 import { find, propEq } from 'ramda';
 
@@ -13,7 +14,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    measureActions: bindActionCreators(actions, dispatch)
+    measureActions: bindActionCreators(measuresActions, dispatch),
+    commentsActions: bindActionCreators(commentsActions, dispatch)
   };
 }
 

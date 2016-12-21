@@ -25,6 +25,59 @@ export function loadComments() {
   };
 }
 
+export function saveComment(text, parentID) {
+  return function (dispatch) {
+    const Comment = Parse.Object.extend("Comment");
+    const comment = new Comment();
+
+    comment.set('text', text);
+    comment.set('user', Parse.User.current());
+    comment.set('parentID', parentID);
+
+    console.dir(Parse.User.current());
+
+    comment.save(null, {
+      success: function(comment) {
+        dispatch(addComment(comment.id, text, comment.parentID, Parse.User.current()));
+        browserHistory.push(`/measure/${comment.parentID}`);
+      },
+      error: function(comment, error) {
+        console.log(error);
+      }
+    });
+  };
+}
+
+export function editComment(id, text) {
+  return function (dispatch) {
+    const Comment = Parse.Object.extend("Comment");
+    const query = new Parse.Query(Comment);
+
+    query.get(id, {
+      success: function(comment) {
+        comment.set('text', text);
+        comment.save(null, {
+          success: function() {
+            dispatch(
+              {
+                type: types.EDIT_COMMENT,
+                text: text,
+                id: id
+              }
+            );
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  };
+}
+
 export function addComment(id, text, parentID, user) {
   return {
     type: types.ADD_COMMENT,

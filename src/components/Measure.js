@@ -4,11 +4,14 @@ import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { browserHistory } from 'react-router';
 import { Parse } from 'parse';
-import Comments from './Comments'
+import Comments from './Comments';
+
 
 class Measure extends React.Component {
   render() {
     const { deleteMeasure } = this.props.measureActions;
+    const measureActions = this.props.measureActions;
+    const commentsActions = this.props.commentsActions;
     const measure = this.props.measure;
     const comments = this.props.comments.filter((comment) => (comment.parentID === measure.id));
 
@@ -33,11 +36,8 @@ class Measure extends React.Component {
           <Link to={`/measure/${measure.id}/edit`}>
             Bearbeiten
           </Link>&nbsp;
-          <Link to={`/comments/${measure.id}`}>
-            Kommentieren
-          </Link>&nbsp;
           { measure.createdBy.id === Parse.User.current().measureID && <a onClick={handleDeleteMeasure}>Löschen</a> }
-          <Comments comments={comments}/>
+          <Comments comments={comments} commentsActions={commentsActions} parentId={measure.id}/>
         </div>
 
       </ReactCSSTransitionGroup>

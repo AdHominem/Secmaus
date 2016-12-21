@@ -15,7 +15,7 @@ class EditMeasure extends React.Component {
     const saveMeasure = (name, description) => {
       actions.editMeasure(id, name, description);
       browserHistory.push(`/measure/${measure.id}`);
-    }; 
+    };
 
     if (measure) {
       return (
