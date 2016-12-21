@@ -12,8 +12,7 @@ export default function measuresReducer(state = {measures: []}, action) {
           name: action.name,
           description: action.description,
           id: action.id,
-          createdBy: action.createdBy,
-          comments: []
+          createdBy: action.createdBy
         }]
       }});
     case types.EDIT_MEASURE:
