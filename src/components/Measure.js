@@ -36,7 +36,7 @@ class Measure extends React.Component {
           <Link to={`/comments/${measure.id}`}>
             Kommentieren
           </Link>&nbsp;
-          { measure.createdBy.id === Parse.User.current().id && <a onClick={handleDeleteMeasure}>Löschen</a> }
+          { measure.createdBy.id === Parse.User.current().measureID && <a onClick={handleDeleteMeasure}>Löschen</a> }
           <Comments comments={comments}/>
         </div>
 
