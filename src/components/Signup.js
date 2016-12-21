@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import { Parse } from 'parse';
 import { browserHistory } from 'react-router';
+import Alert from 'react-s-alert';
 
 class Signup extends React.Component {
   handleSubmit(event) {
@@ -25,9 +26,10 @@ class Signup extends React.Component {
             let role = results[0];
             role.getUsers().add(user);
             role.save();
+            Alert.success('Registrierung erfolgreich');
           },
           error: function (error) {
-            console.log(error);
+            Alert.error('Registrierung fehlgeschlagen');
           }
         });
 

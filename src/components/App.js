@@ -14,6 +14,14 @@ class App extends React.Component {
     measureActions.loadMeasures();
     commentActions.loadComments();
     userActions.loadUserPermissions();
+
+    // const query = new Parse.Query('Measure');
+    // const subscription = query.subscribe();
+
+    // subscription.on('create', (measure) => {
+    //   console.log(measure);
+    //   measureActions.addMeasure(measure.id, measure.name, measure.description, undefined);
+    // });
   }
 
   logOut() {

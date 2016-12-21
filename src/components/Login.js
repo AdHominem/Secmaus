@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import { Parse } from 'parse';
 import { browserHistory } from 'react-router';
+import Alert from 'react-s-alert';
 
 class Login extends React.Component {
   render() {
@@ -10,8 +11,11 @@ class Login extends React.Component {
       Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
         function() {
           browserHistory.push('/');
+          Alert.success('Login erfolgreich', {
+            beep: "/sounds/startup.mp3"
+          });
         }, function(err) {
-          alert(err.message);
+          Alert.error('Login fehlgeschlagen');
         } 
       );
     };
