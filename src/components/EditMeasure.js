@@ -10,12 +10,12 @@ class EditMeasure extends React.Component {
     const id = this.props.params.measureId;
     const measure = find(propEq('id', id), this.props.measures);
 
-    const { actions } = this.props;
+    const { measureActions } = this.props;
 
     const saveMeasure = (name, description) => {
-      actions.editMeasure(id, name, description);
+      measureActions.editMeasure(id, name, description);
       browserHistory.push(`/measure/${measure.id}`);
-    }; 
+    };
 
     if (measure) {
       return (
