@@ -38,10 +38,7 @@ class Comments extends React.Component {
 
   render() {
 
-    const handleDeleteComment = (id) => (event) => {
-      this.props.commentsActions.deleteComment(id);
-      event.preventDefault();
-    };
+
 
 
     const { commentsActions, comments, parentId } = this.props;
@@ -53,10 +50,11 @@ class Comments extends React.Component {
           <p dangerouslySetInnerHTML={{__html: comment.text}}></p>
           { comment.user.id === Parse.User.current().id &&
             <div>
-              <a onClick={this.onClick.bind(this)} >Bearbeiten</a>
-              <a onClick={handleDeleteComment(comment.id)} >Löschen</a>
+              <a onClick={this.onClick.bind(this)} >Bearbeiten</a>&nbsp;
+              <a onClick={() => this.props.commentsActions.deleteComment(comment.id)} >Löschen</a>
             </div>}
-          { this.state.toggleEdit && <CommentEditForm editComment={commentsActions.editComment} comment={comment} toggleEdit={this.toggleEdit.bind(this)} /> }
+          { this.state.toggleEdit && <CommentEditForm editComment={commentsActions.editComment} comment={comment}
+                                                      toggleEdit={this.toggleEdit.bind(this)} /> }
         </div>
     );
 

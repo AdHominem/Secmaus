@@ -1,5 +1,5 @@
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../constants/actionTypes';
-import { map } from 'ramda';
+import { map, filter } from 'ramda';
 
 // https://facebook.github.io/react/docs/update.html
 import update from 'immutability-helper';
