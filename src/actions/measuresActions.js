@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 import { browserHistory } from 'react-router';
+import Alert from 'react-s-alert';
 
 export function loadMeasures() {
   return function (dispatch) {
@@ -21,7 +22,7 @@ export function loadMeasures() {
         }
       },
       error: function (error) {
-        console.log(error);
+        Alert.error('Maßnahmen konnten nicht geladen werden');
       }
     });
   };
@@ -36,15 +37,14 @@ export function saveMeasure(name, description) {
     measure.set('description', description);
     measure.set('user', Parse.User.current());
 
-    console.dir(Parse.User.current());
-
     measure.save(null, {
       success: function(measure) {
         dispatch(addMeasure(measure.id, name, description, Parse.User.current()));
         browserHistory.push(`/measure/${measure.id}`);
+        Alert.success('Maßnahme erfolgreich angelegt');
       },
       error: function(measure, error) {
-        console.log(error);
+        Alert.error('Maßnahme konnten nicht angelegt werden');
       }
     });
   };
@@ -61,9 +61,10 @@ export function deleteMeasure(id) {
           type: types.DELETE_MEASURE,
           id: id
         });
+        Alert.success('Maßnahme erfolgreich gelöscht');
       },
       error: function(measure, error) {
-        console.log(error);
+        Alert.error('Maßnahme konnte nicht gelöscht werden');
       }
     });
   };
@@ -88,14 +89,15 @@ export function editMeasure(id, name, description) {
                 id: id
               }
             );
+            Alert.success('Maßnahme erfolgreich bearbeitet');
           },
           error: function(error) {
-            console.log(error);
+            Alert.error('Maßnahme konnte nicht bearbeitet werden');
           }
         });
       },
       error: function(error) {
-        console.log(error);
+        Alert.error('Zu bearbeitende Maßnahme konnte nicht gefunden werden');
       }
     });
   };

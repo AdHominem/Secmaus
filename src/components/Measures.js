@@ -10,7 +10,7 @@ class Measures extends React.Component {
   };
 
   render() {
-    const { measureActions, measures } = this.props;
+    const { measureActions, measures, isAdmin } = this.props;
     const body = measures.map((measure, i) =>
       <Link key={i} className="measure" to={`/measure/${measure.id}`}>
         {measure.name}
