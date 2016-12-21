@@ -3,6 +3,10 @@ import { Nav, Navbar, NavItem, Row, Col, Grid } from 'react-bootstrap';
 import { Parse } from 'parse';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, browserHistory } from 'react-router';
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
+
 
 class App extends React.Component {
   componentDidMount() {
@@ -58,6 +62,16 @@ class App extends React.Component {
             {this.props.children}
           </main>
         </div>
+        <Alert 
+          stack={{limit: 3}}
+          effect="bouncyflip"
+          beep={{
+            info: '/sounds/success.mp3',
+            error: '/sounds/error.mp3',
+            warning: '/sounds/warning.mp3',
+            success: '/sounds/success.mp3'
+           }}
+        />
       </div>
     );
   }
