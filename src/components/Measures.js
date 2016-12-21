@@ -17,7 +17,7 @@ class Measures extends React.Component {
       </Link>
     );
     return (
-      <div class="measures-container">
+      <div className="measures-container">
         {isAdmin && <Link to={'/measures/new'}>Neue Maßnahme</Link>}
         <div className="measures">
           {body}
