@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Jumbotron } from 'react-bootstrap';
-import CommentForm from './CommentForm'
+import CommentForm from './CommentForm';
+import { Parse } from 'parse';
+
 
 class Comments extends React.Component {
   static propTypes = {
@@ -12,14 +14,14 @@ class Comments extends React.Component {
 
   render() {
     const { commentsActions, comments, parentId } = this.props;
-    console.dir(comments);
     const body = comments.map((comment, i) =>
-      <li key={i}>
-        <div className="comment">
-          <p>{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.user.createdAt.toLocaleTimeString()}</p>
+        <div key={i} className="comment">
+          <br/>
+          <h4>{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
+            {comment.user.createdAt.toLocaleTimeString()}</h4>
           <p dangerouslySetInnerHTML={{__html: comment.text}}></p>
+          { comment.user.id === Parse.User.current().id && <p>Bearbeiten</p>}
         </div>
-      </li>
     );
 
     return (

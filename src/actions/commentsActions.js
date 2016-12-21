@@ -38,8 +38,8 @@ export function saveComment(text, parentID) {
 
     comment.save(null, {
       success: function(comment) {
-        dispatch(addComment(comment.id, text, comment.parentID, Parse.User.current()));
-        browserHistory.push(`/measure/${comment.parentID}`);
+        dispatch(addComment(comment.id, text, parentID, Parse.User.current()));
+        //browserHistory.push(`/measure/${comment.parentID}`);
       },
       error: function(comment, error) {
         console.log(error);
