@@ -5,7 +5,8 @@ import Measures from '../components/Measures';
 
 function mapStateToProps(state) {
   return {
-    measures: state.measuresReducer.measures
+    measures: state.measuresReducer.measures,
+    isAdmin: state.userReducer.isAdmin
   };
 }
 
