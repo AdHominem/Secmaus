@@ -2,6 +2,7 @@ import React from 'react';
 import { find, propEq } from 'ramda';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
 import { Parse } from 'parse';
 import Comments from './Comments';
@@ -31,12 +32,16 @@ class Measure extends React.Component {
         transitionAppearTimeout={3000}>
 
         <div className="measure">
-          <h1>{measure.name}</h1>
+          <h1>
+            {measure.name}
+            &nbsp;
+            { Parse.User.current() && measure.createdBy.id === Parse.User.current().id &&
+              <Link to={`/measure/${measure.id}/edit`}><FontAwesome name="edit"/></Link>}
+            &nbsp;
+            { Parse.User.current() && measure.createdBy.id === Parse.User.current().id &&
+              <a onClick={handleDeleteMeasure}><FontAwesome name="trash"/></a> }
+          </h1>
           <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
-          <Link to={`/measure/${measure.id}/edit`}>
-            Bearbeiten
-          </Link>&nbsp;
-          { measure.createdBy.id === Parse.User.current().id && <a onClick={handleDeleteMeasure}>Löschen</a> }
           <Comments comments={comments} commentsActions={commentsActions} parentId={measure.id}/>
         </div>
 
