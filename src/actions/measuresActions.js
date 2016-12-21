@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 export function loadMeasures() {
   return function (dispatch) {
     const Measure = Parse.Object.extend("Measure");
-    const query = new Parse.Query(Measure);
+    const query = new Parse.Query(Measure).include("user");
 
     query.find({
       success: function (results) {
