@@ -34,14 +34,15 @@ class Comment extends React.Component {
       this.setState({ toggleEdit: !this.state.toggleEdit });
     };
 
+    const timestamp = <h4>{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
+        {comment.user.createdAt.toLocaleTimeString()}</h4>;
+
     return (
       // TODO: hier bräuchten wir eigentlich createdAt vom comment,
       // das wird aber nicht gespeichert
       <div className="comment">
         <br/>
-        <UserWidget user={ comment.user }/>
-        <h4>{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
-            {comment.user.createdAt.toLocaleTimeString()}</h4>
+        <UserWidget user={ comment.user } comment={ timestamp }/>
       {comment.user.id === Parse.User.current().id &&
         <div>
           <a onClick={onClick} >Bearbeiten</a>
