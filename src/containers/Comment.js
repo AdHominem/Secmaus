@@ -42,13 +42,9 @@ class Comment extends React.Component {
 
       {this.state.toggleEdit ?
         <CommentEditForm editComment={commentsActions.editComment} comment={comment} toggleEdit={toggleEdit.bind(this)} />
-        : <UserWidget user={ comment.user } comment={ comment }/>}
+        : <UserWidget user={ comment.user } comment={ comment } callbacks= { {onClick, handleDeleteComment} }/>}
 
-      {comment.user.id === Parse.User.current().id &&
-      <div>
-        <a onClick={onClick} >Bearbeiten</a>
-        <a onClick={handleDeleteComment} >Löschen</a>
-      </div>}
+
       </div>
     );
   }
