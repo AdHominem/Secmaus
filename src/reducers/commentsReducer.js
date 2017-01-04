@@ -12,7 +12,8 @@ export default function commentsReducer(state = {polls: []}, action) {
           text: action.text,
           parentID: action.parentID,
           id: action.id,
-          user: action.user
+          user: action.user,
+          createdAt: action.createdAt
         }]
       }});
     case EDIT_COMMENT:
@@ -23,7 +24,8 @@ export default function commentsReducer(state = {polls: []}, action) {
               text: action.text,
               parentID: comment.parentID,
               id: comment.id,
-              user: comment.user
+              user: comment.user,
+              createdAt: comment.createdAt
             } : comment))
       }});
     case DELETE_COMMENT:

@@ -16,7 +16,8 @@ export function loadComments() {
             result.id,
             result.get("text"),
             result.get("parentID"),
-            result.get("user")
+            result.get("user"),
+            result.get("createdAt")
           ));
         }
       },
@@ -35,12 +36,12 @@ export function saveComment(text, parentID) {
     comment.set('text', text);
     comment.set('user', Parse.User.current());
     comment.set('parentID', parentID);
-
-    console.dir(Parse.User.current());
+    const now = new Date();
+    comment.set('createdAt', now);
 
     comment.save(null, {
       success: comment => {
-        dispatch(addComment(comment.id, text, parentID, Parse.User.current()));
+        dispatch(addComment(comment.id, text, parentID, Parse.User.current(), now));
         //browserHistory.push(`/measure/${comment.parentID}`);
       },
       error: (comment, error) => {
@@ -80,13 +81,10 @@ export function editComment(id, text) {
   };
 }
 
-export function addComment(id, text, parentID, user) {
+export function addComment(id, text, parentID, user, createdAt) {
   return {
     type: types.ADD_COMMENT,
-    text: text,
-    parentID: parentID,
-    id: id,
-    user: user
+    text, parentID, id, user, createdAt
   };
 }
 

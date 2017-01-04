@@ -5,16 +5,12 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
 import { Parse } from 'parse';
-import Comments from './Comments';
-
+import Comments from '../containers/Comments';
 
 class Measure extends React.Component {
   render() {
-    const { deleteMeasure } = this.props.measureActions;
-    const measureActions = this.props.measureActions;
-    const commentsActions = this.props.commentsActions;
-    const measure = this.props.measure;
-    const comments = this.props.comments.filter(comment => (comment.parentID === measure.id));
+    const { measureActions, commentsActions, measure } = this.props;
+    const { deleteMeasure } = measureActions;
 
     const handleDeleteMeasure = event => {
       deleteMeasure(measure.id);
@@ -42,7 +38,7 @@ class Measure extends React.Component {
               <a onClick={handleDeleteMeasure}><FontAwesome name="trash"/></a> }
           </h1>
           <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
-          <Comments comments={comments} commentsActions={commentsActions} parentId={measure.id}/>
+          <Comments commentsActions={commentsActions} parentId={measure.id}/>
         </div>
 
       </ReactCSSTransitionGroup>
