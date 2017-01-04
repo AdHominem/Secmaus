@@ -70,15 +70,9 @@ class App extends React.Component {
             {this.props.children}
           </main>
         </div>
-        <Alert 
+        <Alert
           stack={{limit: 3}}
           effect="bouncyflip"
-          beep={{
-            info: '/sounds/success.mp3',
-            error: '/sounds/error.mp3',
-            warning: '/sounds/warning.mp3',
-            success: '/sounds/success.mp3'
-           }}
         />
       </div>
     );
