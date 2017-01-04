@@ -44,7 +44,6 @@ class Comment extends React.Component {
         <CommentEditForm editComment={commentsActions.editComment} comment={comment} toggleEdit={toggleEdit.bind(this)} />
         : <UserWidget user={ comment.user } comment={ comment } callbacks= { {onClick, handleDeleteComment} }/>}
 
-
       </div>
     );
   }

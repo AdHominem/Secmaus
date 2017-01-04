@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 
 export function loadMeasures() {
-  console.log("Loading measures");
   return (dispatch, getState) => {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure).include("user");

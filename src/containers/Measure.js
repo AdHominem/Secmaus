@@ -8,7 +8,7 @@ import { find, propEq } from 'ramda';
 function mapStateToProps(state, ownProps) {
   return {
     measure: find(propEq('id', ownProps.params.measureId), state.measuresReducer.measures),
-    comments: state.commentsReducer.comments
+    comments: state.commentsReducer.polls
   };
 }
 

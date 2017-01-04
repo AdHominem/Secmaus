@@ -4,10 +4,10 @@ import { map, filter } from 'ramda';
 // https://facebook.github.io/react/docs/update.html
 import update from 'immutability-helper';
 
-export default function commentsReducer(state = {comments: []}, action) {
+export default function commentsReducer(state = {polls: []}, action) {
   switch (action.type) {
     case ADD_COMMENT:
-      return update(state, {comments: {
+      return update(state, {polls: {
         $push: [{
           text: action.text,
           parentID: action.parentID,
@@ -16,7 +16,7 @@ export default function commentsReducer(state = {comments: []}, action) {
         }]
       }});
     case EDIT_COMMENT:
-      return update(state, {comments: {
+      return update(state, {polls: {
         $apply: map((comment) =>
           (comment.id === action.id ?
             {
@@ -27,7 +27,7 @@ export default function commentsReducer(state = {comments: []}, action) {
             } : comment))
       }});
     case DELETE_COMMENT:
-      return update(state, {comments: {
+      return update(state, {polls: {
         $apply: filter((comment) => comment.id !== action.id)
       }});
     default:

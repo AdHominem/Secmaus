@@ -12,10 +12,11 @@ import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 class App extends React.Component {
   componentDidMount() {
     if (Parse.User.current()) {
-      const { measureActions, commentActions, userActions } = this.props;
+      const { measureActions, commentActions, userActions, pollsActions } = this.props;
       measureActions.loadMeasures();
       commentActions.loadComments();
       userActions.loadUserPermissions();
+      pollsActions.loadPolls();
     }
   }
 

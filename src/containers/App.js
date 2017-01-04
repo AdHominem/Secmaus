@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
+import * as pollsActions from '../actions/pollsActions';
 import App from '../components/App';
 
 function mapStateToProps(state) {
@@ -15,7 +16,8 @@ function mapDispatchToProps(dispatch) {
   return {
     measureActions: bindActionCreators(measureActions, dispatch),
     commentActions: bindActionCreators(commentActions, dispatch),
-    userActions: bindActionCreators(userActions, dispatch)
+    userActions: bindActionCreators(userActions, dispatch),
+    pollsActions: bindActionCreators(pollsActions, dispatch)
   };
 }
 

@@ -1,7 +1,6 @@
 import * as types from '../constants/actionTypes';
 import { map, filter } from 'ramda';
 
-// https://facebook.github.io/react/docs/update.html
 import update from 'immutability-helper';
 
 export default function measuresReducer(state = {loaded: false, measures: []}, action) {
