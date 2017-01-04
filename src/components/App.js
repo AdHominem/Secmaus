@@ -42,7 +42,7 @@ class App extends React.Component {
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <UserWidget user={ currentUser }/><span className="caret"></span>
+              <UserWidget user={ currentUser }/> <span className="caret"></span>
             </a>
             <ul className="dropdown-menu">
               <li><a onClick={this.logOut}>Log Out</a></li>
