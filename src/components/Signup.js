@@ -13,6 +13,8 @@ class Signup extends React.Component {
       password: this.refs.password.value
     });
 
+    const { measureActions, commentActions, userActions } = this.props;
+
     user.signUp().then(
       function() {
         console.log("Before Role update!");
@@ -32,6 +34,10 @@ class Signup extends React.Component {
             Alert.error('Registrierung fehlgeschlagen');
           }
         });
+
+        measureActions.loadMeasures();
+        commentActions.loadComments();
+        userActions.loadUserPermissions();
 
         browserHistory.push('/');
       }, function(err) {
@@ -65,7 +71,10 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  measureActions: PropTypes.object,
+  commentActions: PropTypes.object,
+  userActions: PropTypes.object
 };
 
 export default Signup;

@@ -6,12 +6,17 @@ import Alert from 'react-s-alert';
 
 class Login extends React.Component {
   render() {
-    const handleSubmit = event => {
+    const { measureActions, commentActions, userActions } = this.props;
+    const handleSubmit = (event) => {
       event.preventDefault();
       Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
         () => {
+          measureActions.loadMeasures();
+          commentActions.loadComments();
+          userActions.loadUserPermissions();
+
           browserHistory.push('/');
-          Alert.success('Login erfolgreich', {});
+          Alert.success('Login erfolgreich');
         }, err => {
           Alert.error('Login fehlgeschlagen');
         }
@@ -36,7 +41,10 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  measureActions: PropTypes.object,
+  commentActions: PropTypes.object,
+  userActions: PropTypes.object
 };
 
 export default Login;
