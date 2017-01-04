@@ -11,12 +11,10 @@ class Login extends React.Component {
       Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
         function() {
           browserHistory.push('/');
-          Alert.success('Login erfolgreich', {
-            beep: "/sounds/startup.mp3"
-          });
+          Alert.success('Login erfolgreich', {});
         }, function(err) {
           Alert.error('Login fehlgeschlagen');
-        } 
+        }
       );
     };
 
@@ -31,7 +29,7 @@ class Login extends React.Component {
             Password: <input type="password" ref="password" />
           </label>
           <input type="submit" onClick={handleSubmit}/>
-        </form>    
+        </form>
       </Jumbotron>
     );
   }
