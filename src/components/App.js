@@ -30,28 +30,42 @@ class App extends React.Component {
   render() {
     const currentUser = Parse.User.current();
     const headerItems = !currentUser ?
-      <Nav>
-        <LinkContainer to="login">
-          <NavItem>Log In</NavItem>
-        </LinkContainer>
-        <LinkContainer to="signup">
-          <NavItem>Sign up</NavItem>
-        </LinkContainer>
-      </Nav> :
-      <Nav>
-        <NavItem onClick={this.logOut}>Log Out</NavItem>
-        <NavItem><UserWidget user={ currentUser }/></NavItem>
-      </Nav>;
+      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul className="nav navbar-nav">
+          <li><Link to="login">Log In</Link></li>
+          <li><Link to="signup">Sign up</Link></li>
+        </ul>
+      </div>:
+      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul className="nav navbar-nav">
+        </ul>
+        <ul className="nav navbar-nav navbar-right">
+          <li className="dropdown">
+            <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <UserWidget user={ currentUser }/><span className="caret"></span>
+            </a>
+            <ul className="dropdown-menu">
+              <li><a onClick={this.logOut}>Log Out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     return (
       <div className="sidate">
-        <Navbar className="navbar">
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">SIDATE SecMaus</Link>
-            </Navbar.Brand>
-          </Navbar.Header>
-          {headerItems}
-        </Navbar>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="/">SIDATE SecMaus</Link>
+            </div>
+            {headerItems}
+          </div>
+        </nav>
         <div className="main-container">
           <aside className="sidebar-container">
             <div className="sidebar-content">
