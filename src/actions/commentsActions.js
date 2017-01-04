@@ -16,7 +16,8 @@ export function loadComments() {
             result.id,
             result.get("text"),
             result.get("parentID"),
-            result.get("user")
+            result.get("user"),
+            result.get("createdAt")
           ));
         }
       },
@@ -80,13 +81,10 @@ export function editComment(id, text) {
   };
 }
 
-export function addComment(id, text, parentID, user) {
+export function addComment(id, text, parentID, user, createdAt) {
   return {
     type: types.ADD_COMMENT,
-    text: text,
-    parentID: parentID,
-    id: id,
-    user: user
+    text, parentID, id, user, createdAt
   };
 }
 

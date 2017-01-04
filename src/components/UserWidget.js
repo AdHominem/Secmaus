@@ -19,7 +19,7 @@ class UserWidget extends Component {
             </div>
             <div className="media-body">
               <h4 className="media-heading">{ comment.user.getUsername() } schrieb am { comment.user.createdAt.toLocaleDateString() },
-                { comment.user.createdAt.toLocaleTimeString() }</h4>
+                { comment.createdAt.toLocaleTimeString() }</h4>
               <p dangerouslySetInnerHTML={{__html: comment.text}}/>
               {comment.user.id === Parse.User.current().id &&
               <div>
