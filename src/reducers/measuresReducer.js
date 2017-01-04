@@ -4,7 +4,7 @@ import { map, filter } from 'ramda';
 // https://facebook.github.io/react/docs/update.html
 import update from 'immutability-helper';
 
-export default function measuresReducer(state = {measures: []}, action) {
+export default function measuresReducer(state = {loaded: false, measures: []}, action) {
   switch (action.type) {
     case types.ADD_MEASURE:
       return update(state, {measures: {
