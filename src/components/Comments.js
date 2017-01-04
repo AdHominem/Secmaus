@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Modal from 'react-modal';
 import CommentForm from './CommentForm';
 import Comment from '../containers/Comment';
 
@@ -9,16 +10,55 @@ class Comments extends React.Component {
     parentId: PropTypes.string.isRequired
   };
 
+  constructor() {
+    super();
+    this.state = { modalIsOpen: false };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal() {
+    // TODO
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
+
   render() {
     const { commentsActions, comments, parentId } = this.props;
+    const ownComments = comments.filter(comment => (comment.parentID === parentId));
+
+    if (ownComments.size > 0) { return; }
 
     return (
       <div>
         <ul>
-          {comments.map((comment, i) => <Comment key={i} comment={comment} />)}
+          {ownComments.map((comment, i) => <Comment key={i} comment={comment} />)}
         </ul>
-        <h3>Kommmentar hinzufügen</h3>
-        <CommentForm saveComment={commentsActions.saveComment} parentID={parentId} />
+        <button onClick={this.openModal}>
+          Kommentar hinzufügen
+        </button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          contentLabel="Kommentar hinzufügen"
+        >
+          <CommentForm saveComment={
+            (text, parentId) => {
+              commentsActions.saveComment(text, parentId);
+              this.closeModal();
+            }
+          } parentID={parentId} />
+        </Modal>
       </div>
     );
   }

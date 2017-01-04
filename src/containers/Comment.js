@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/commentsActions';
 import { Parse } from 'parse';
 import UserWidget from '../components/UserWidget';
-
+import Comments from '../containers/Comments';
 
 class Comment extends React.Component {
   static propTypes = {
@@ -43,6 +43,7 @@ class Comment extends React.Component {
       {this.state.toggleEdit ?
         <CommentEditForm editComment={commentsActions.editComment} comment={comment} toggleEdit={toggleEdit.bind(this)} />
         : <UserWidget user={ comment.user } comment={ comment } callbacks= { {onClick, handleDeleteComment} }/>}
+        <Comments commentsActions={commentsActions} parentId={comment.id}/>
 
 
       </div>

@@ -36,12 +36,12 @@ export function saveComment(text, parentID) {
     comment.set('text', text);
     comment.set('user', Parse.User.current());
     comment.set('parentID', parentID);
-
-    console.dir(Parse.User.current());
+    const now = new Date();
+    comment.set('createdAt', now);
 
     comment.save(null, {
       success: comment => {
-        dispatch(addComment(comment.id, text, parentID, Parse.User.current()));
+        dispatch(addComment(comment.id, text, parentID, Parse.User.current(), now));
         //browserHistory.push(`/measure/${comment.parentID}`);
       },
       error: (comment, error) => {
