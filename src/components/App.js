@@ -25,9 +25,9 @@ class App extends React.Component {
   }
 
   logOut() {
-    Parse.User.logOut().then(function() {
+    Parse.User.logOut().then(() => {
       browserHistory.push('/login');
-    }, function(err) {
+    }, err => {
       alert(err.message);
     });
   }
