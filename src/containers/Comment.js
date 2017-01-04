@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/commentsActions';
 import { Parse } from 'parse';
+import UserWidget from '../components/UserWidget';
+
 
 class Comment extends React.Component {
   static propTypes = {
@@ -18,12 +20,12 @@ class Comment extends React.Component {
   render() {
     const { comment, commentsActions } = this.props;
 
-    const handleDeleteComment = (event) => {
+    const handleDeleteComment = event => {
       this.props.commentsActions.deleteComment(comment.id);
       event.preventDefault();
     };
 
-    const onClick = (event) => {
+    const onClick = event => {
       this.setState({ toggleEdit: !this.state.toggleEdit });
       event.preventDefault();
     };
@@ -37,6 +39,7 @@ class Comment extends React.Component {
       // das wird aber nicht gespeichert
       <div className="comment">
         <br/>
+        <UserWidget user={ comment.user }/>
         <h4>{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
             {comment.user.createdAt.toLocaleTimeString()}</h4>
       {comment.user.id === Parse.User.current().id &&

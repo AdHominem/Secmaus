@@ -4,6 +4,7 @@ import { Parse } from 'parse';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
+import UserWidget from '../components/UserWidget';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
@@ -25,7 +26,8 @@ class App extends React.Component {
   }
 
   render() {
-    const headerItems = !Parse.User.current() ?
+    const currentUser = Parse.User.current();
+    const headerItems = !currentUser ?
       <Nav>
         <LinkContainer to="login">
           <NavItem>Log In</NavItem>
@@ -36,6 +38,7 @@ class App extends React.Component {
       </Nav> :
       <Nav>
         <NavItem onClick={this.logOut}>Log Out</NavItem>
+        <NavItem><UserWidget user={ currentUser }/></NavItem>
       </Nav>;
     return (
       <div className="sidate">
