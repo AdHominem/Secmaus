@@ -17,7 +17,7 @@ export default function measuresReducer(state = {loaded: false, measures: []}, a
       }});
     case types.EDIT_MEASURE:
       return update(state, {measures: {
-        $apply: map((measure) =>
+        $apply: map(measure =>
           (measure.id === action.id ?
             {
               name: action.name,

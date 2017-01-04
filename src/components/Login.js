@@ -6,7 +6,7 @@ import Alert from 'react-s-alert';
 
 class Login extends React.Component {
   render() {
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
       event.preventDefault();
       Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
         () => {

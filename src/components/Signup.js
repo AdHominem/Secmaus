@@ -14,7 +14,7 @@ class Signup extends React.Component {
     });
 
     user.signUp().then(
-      function() {
+      () => {
         console.log("Before Role update!");
 
         const query = new Parse.Query(Parse.Role);
@@ -22,19 +22,19 @@ class Signup extends React.Component {
         query.equalTo("name", "Mitarbeiter");
 
         query.find({
-          success: function (results) {
+          success: results => {
             let role = results[0];
             role.getUsers().add(user);
             role.save();
             Alert.success('Registrierung erfolgreich');
           },
-          error: function (error) {
+          error: error => {
             Alert.error('Registrierung fehlgeschlagen');
           }
         });
 
         browserHistory.push('/');
-      }, function(err) {
+      }, err => {
         alert(err.message);
       }
     );
@@ -58,7 +58,7 @@ class Signup extends React.Component {
           </label>
           <br />
           <input type="submit" onClick={this.handleSubmit.bind(this)}/>
-        </form>    
+        </form>
       </Jumbotron>
     );
   }

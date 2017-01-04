@@ -4,12 +4,12 @@ import Alert from 'react-s-alert';
 
 
 export function loadComments() {
-  return function (dispatch) {
+  return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment).include("user");
 
     query.find({
-      success: function (results) {
+      success: results => {
         for (let i = 0; i < results.length; i++) {
           const result = results[i];
           dispatch(addComment(
@@ -20,7 +20,7 @@ export function loadComments() {
           ));
         }
       },
-      error: function (error) {
+      error: error => {
         console.log(error);
       }
     });
@@ -28,7 +28,7 @@ export function loadComments() {
 }
 
 export function saveComment(text, parentID) {
-  return function (dispatch) {
+  return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const comment = new Comment();
 
@@ -39,11 +39,11 @@ export function saveComment(text, parentID) {
     console.dir(Parse.User.current());
 
     comment.save(null, {
-      success: function(comment) {
+      success: comment => {
         dispatch(addComment(comment.id, text, parentID, Parse.User.current()));
         //browserHistory.push(`/measure/${comment.parentID}`);
       },
-      error: function(comment, error) {
+      error: (comment, error) => {
         console.log(error);
       }
     });
@@ -51,15 +51,15 @@ export function saveComment(text, parentID) {
 }
 
 export function editComment(id, text) {
-  return function (dispatch) {
+  return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment);
 
     query.get(id, {
-      success: function(comment) {
+      success: comment => {
         comment.set('text', text);
         comment.save(null, {
-          success: function() {
+          success: () => {
             dispatch(
               {
                 type: types.EDIT_COMMENT,
@@ -68,12 +68,12 @@ export function editComment(id, text) {
               }
             );
           },
-          error: function(error) {
+          error: error => {
             console.log(error);
           }
         });
       },
-      error: function(error) {
+      error: error => {
         console.log(error);
       }
     });
@@ -91,11 +91,11 @@ export function addComment(id, text, parentID, user) {
 }
 
 export function deleteComment(id) {
-  return function (dispatch) {
+  return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment);
     query.get(id, {
-      success: function(comment) {
+      success: comment => {
         comment.destroy({});
         dispatch({
           type: types.DELETE_COMMENT,
@@ -103,7 +103,7 @@ export function deleteComment(id) {
         });
         Alert.success('Kommentar erfolgreich gelöscht');
       },
-      error: function(comment, error) {
+      error: (comment, error) => {
         Alert.error('Kommentar konnte nicht gelöscht werden');
       }
     });

@@ -14,9 +14,9 @@ class Measure extends React.Component {
     const measureActions = this.props.measureActions;
     const commentsActions = this.props.commentsActions;
     const measure = this.props.measure;
-    const comments = this.props.comments.filter((comment) => (comment.parentID === measure.id));
+    const comments = this.props.comments.filter(comment => (comment.parentID === measure.id));
 
-    const handleDeleteMeasure = (event) => {
+    const handleDeleteMeasure = event => {
       deleteMeasure(measure.id);
       browserHistory.push('/measures');
       event.preventDefault();

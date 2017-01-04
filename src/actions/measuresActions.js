@@ -5,7 +5,7 @@ import Alert from 'react-s-alert';
 
 export function loadMeasures() {
   console.log("Loading measures");
-  return function (dispatch, getState) {
+  return (dispatch, getState) => {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure).include("user");
 
@@ -13,7 +13,7 @@ export function loadMeasures() {
 
     if (!measuresReducer.loaded) {
       query.find({
-        success: function (results) {
+        success: results => {
           for (let i = 0; i < results.length; i++) {
             const result = results[i];
             // TODO: Remove this once all measures have an associated user
@@ -25,7 +25,7 @@ export function loadMeasures() {
             ));
           }
         },
-        error: function (error) {
+        error: error => {
           Alert.error('Maßnahmen konnten nicht geladen werden');
         }
       });
@@ -34,7 +34,7 @@ export function loadMeasures() {
 }
 
 export function saveMeasure(name, description) {
-  return function (dispatch) {
+  return dispatch => {
     const Measure = Parse.Object.extend("Measure");
     const measure = new Measure();
 
@@ -43,12 +43,12 @@ export function saveMeasure(name, description) {
     measure.set('user', Parse.User.current());
 
     measure.save(null, {
-      success: function(measure) {
+      success: measure => {
         dispatch(addMeasure(measure.id, name, description, Parse.User.current()));
         browserHistory.push(`/measure/${measure.id}`);
         Alert.success('Maßnahme erfolgreich angelegt');
       },
-      error: function(measure, error) {
+      error: (measure, error) => {
         Alert.error('Maßnahme konnten nicht angelegt werden');
       }
     });
@@ -56,11 +56,11 @@ export function saveMeasure(name, description) {
 }
 
 export function deleteMeasure(id) {
-  return function (dispatch) {
+  return dispatch => {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure);
     query.get(id, {
-      success: function(measure) {
+      success: measure => {
         measure.destroy({});
         dispatch({
           type: types.DELETE_MEASURE,
@@ -68,7 +68,7 @@ export function deleteMeasure(id) {
         });
         Alert.success('Maßnahme erfolgreich gelöscht');
       },
-      error: function(measure, error) {
+      error: (measure, error) => {
         Alert.error('Maßnahme konnte nicht gelöscht werden');
       }
     });
@@ -76,16 +76,16 @@ export function deleteMeasure(id) {
 }
 
 export function editMeasure(id, name, description) {
-  return function (dispatch) {
+  return dispatch => {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure);
 
     query.get(id, {
-      success: function(measure) {
+      success: measure => {
         measure.set('name', name);
         measure.set('description', description);
         measure.save(null, {
-          success: function() {
+          success: () => {
             dispatch(
               {
                 type: types.EDIT_MEASURE,
@@ -96,12 +96,12 @@ export function editMeasure(id, name, description) {
             );
             Alert.success('Maßnahme erfolgreich bearbeitet');
           },
-          error: function(error) {
+          error: error => {
             Alert.error('Maßnahme konnte nicht bearbeitet werden');
           }
         });
       },
-      error: function(error) {
+      error: error => {
         Alert.error('Zu bearbeitende Maßnahme konnte nicht gefunden werden');
       }
     });

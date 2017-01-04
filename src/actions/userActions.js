@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 
 export function loadUserPermissions() {
-  return function (dispatch) {
+  return dispatch => {
     const query = (new Parse.Query(Parse.Role));
     query.equalTo("name", "Administrator");
     query.equalTo("users", Parse.User.current());
