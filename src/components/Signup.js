@@ -65,7 +65,10 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  measureActions: PropTypes.object,
+  commentActions: PropTypes.object,
+  userActions: PropTypes.object
 };
 
 export default Signup;

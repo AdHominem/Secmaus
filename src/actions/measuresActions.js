@@ -4,27 +4,32 @@ import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 
 export function loadMeasures() {
-  return function (dispatch) {
+  console.log("Loading measures");
+  return function (dispatch, getState) {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure).include("user");
 
-    query.find({
-      success: function (results) {
-        for (let i = 0; i < results.length; i++) {
-          const result = results[i];
-          // TODO: Remove this once all measures have an associated user
-          dispatch(addMeasure(
-            result.id,
-            result.get("name"),
-            result.get("description"),
-            result.get("user"),
-          ));
+    const {measuresReducer} = getState();
+
+    if (!measuresReducer.loaded) {
+      query.find({
+        success: function (results) {
+          for (let i = 0; i < results.length; i++) {
+            const result = results[i];
+            // TODO: Remove this once all measures have an associated user
+            dispatch(addMeasure(
+              result.id,
+              result.get("name"),
+              result.get("description"),
+              result.get("user"),
+            ));
+          }
+        },
+        error: function (error) {
+          Alert.error('Maßnahmen konnten nicht geladen werden');
         }
-      },
-      error: function (error) {
-        Alert.error('Maßnahmen konnten nicht geladen werden');
-      }
-    });
+      });
+    }
   };
 }
 

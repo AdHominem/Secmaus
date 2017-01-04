@@ -11,6 +11,8 @@ class Measures extends React.Component {
 
   render() {
     const { measureActions, measures, isAdmin } = this.props;
+    // measureActions.loadMeasures();
+
     const body = measures.map((measure, i) =>
       <Link key={i} className="measure" to={`/measure/${measure.id}`}>
         {measure.name}
@@ -18,7 +20,7 @@ class Measures extends React.Component {
     );
     return (
       <div className="measures-container">
-        <Link to={'/measures/new'}>Neue Maßnahme</Link>
+        <Link className="button" to={'/measures/new'}>Neue Maßnahme</Link>
         <div className="measures">
           {body}
         </div>

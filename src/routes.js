@@ -7,8 +7,8 @@ import Measures from './containers/Measures';
 import Measure from './containers/Measure';
 import EditMeasure from './containers/EditMeasure';
 import NewMeasure from './containers/NewMeasure';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Login from './containers/Login';
+import Signup from './containers/Signup';
 
 function requireAuth(nextState, replace) {
   // If the user is not logged in,
