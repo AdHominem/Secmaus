@@ -35,7 +35,7 @@ class CommentForm extends React.Component {
           onChange={this.onTextChange}
           theme="snow"
         />
-        <input type="submit" onClick={this.handleSubmit}/>
+        <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
       </form>
     );
   }

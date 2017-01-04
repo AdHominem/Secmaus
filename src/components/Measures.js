@@ -20,7 +20,7 @@ class Measures extends React.Component {
     );
     return (
       <div className="measures-container">
-        <Link className="button" to={'/measures/new'}>Neue Maßnahme</Link>
+        <Link className="btn btn-primary" to={'/measures/new'}>Neue Maßnahme</Link>
         <div className="measures">
           {body}
         </div>

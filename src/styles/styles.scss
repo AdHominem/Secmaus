@@ -39,13 +39,23 @@ body {
       color: $white;
     }
     .navbar-nav {
-      > li a {
+      li a {
         color: $white;
       }
-      > li.active a {
+      li.active a {
         background-color: darken($blue, 8);
         color: $white;
       }
     }
+    .dropdown-menu {
+      li a {
+        color: black;
+      }
+    }
   }
+}
+
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  background-color: darken($blue, 8);
 }
