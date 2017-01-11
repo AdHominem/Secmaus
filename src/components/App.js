@@ -7,6 +7,13 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
 class App extends React.Component {
+  static propTypes = {
+    measureActions: PropTypes.object.isRequired,
+    commentActions: PropTypes.object.isRequired,
+    userActions: PropTypes.object.isRequired,
+    pollsActions: PropTypes.object.isRequired
+  };
+
   componentDidMount() {
     if (Parse.User.current()) {
       const {measureActions, commentActions, userActions, pollsActions} = this.props;
@@ -41,7 +48,7 @@ class App extends React.Component {
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <UserWidget user={currentUser}/> <span className="caret"></span>
+              <UserWidget user={currentUser}/> <span className="caret"/>
             </a>
             <ul className="dropdown-menu">
               <li><a onClick={this.logOut}>Log Out</a></li>
@@ -56,9 +63,9 @@ class App extends React.Component {
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
+                <span className="icon-bar"/>
+                <span className="icon-bar"/>
+                <span className="icon-bar"/>
               </button>
               <Link className="navbar-brand" to="/">SIDATE SecMaus</Link>
             </div>

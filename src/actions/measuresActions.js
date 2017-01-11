@@ -25,7 +25,7 @@ export function loadMeasures() {
           }
         },
         error: error => {
-          Alert.error('Maßnahmen konnten nicht geladen werden');
+          Alert.error('Maßnahmen konnten nicht geladen werden: ' + error);
         }
       });
     }
@@ -48,7 +48,7 @@ export function saveMeasure(name, description) {
         Alert.success('Maßnahme erfolgreich angelegt');
       },
       error: (measure, error) => {
-        Alert.error('Maßnahme konnten nicht angelegt werden');
+        Alert.error('Maßnahme konnten nicht angelegt werden: ' + error);
       }
     });
   };
@@ -68,7 +68,7 @@ export function deleteMeasure(id) {
         Alert.success('Maßnahme erfolgreich gelöscht');
       },
       error: (measure, error) => {
-        Alert.error('Maßnahme konnte nicht gelöscht werden');
+        Alert.error('Maßnahme konnte nicht gelöscht werden: ' + error);
       }
     });
   };
@@ -96,12 +96,12 @@ export function editMeasure(id, name, description) {
             Alert.success('Maßnahme erfolgreich bearbeitet');
           },
           error: error => {
-            Alert.error('Maßnahme konnte nicht bearbeitet werden');
+            Alert.error('Maßnahme konnte nicht bearbeitet werden: ' + error);
           }
         });
       },
       error: error => {
-        Alert.error('Zu bearbeitende Maßnahme konnte nicht gefunden werden');
+        Alert.error('Zu bearbeitende Maßnahme konnte nicht gefunden werden: ' + error);
       }
     });
   };

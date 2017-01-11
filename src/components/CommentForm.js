@@ -5,7 +5,9 @@ import '../styles/quill.css';
 class CommentForm extends React.Component {
   static propTypes = {
     saveComment: PropTypes.func.isRequired,
-    parentID: PropTypes.string.isRequired
+    parentID: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -37,7 +39,7 @@ class CommentForm extends React.Component {
           theme="snow"
         />
         <div className="button-row">
-          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close()}}>
+          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
             Schließen
           </a>
           <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>

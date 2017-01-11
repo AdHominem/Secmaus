@@ -12,7 +12,7 @@ class Login extends React.Component {
         () => {
           browserHistory.push('/');
           Alert.success('Login erfolgreich');
-        }, err => {
+        }, () => {
           Alert.error('Login fehlgeschlagen');
         }
       );

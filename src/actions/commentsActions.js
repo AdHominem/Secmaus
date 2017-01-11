@@ -2,7 +2,6 @@ import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
-
 export function loadComments() {
   return dispatch => {
     const Comment = Parse.Object.extend("Comment");
@@ -22,7 +21,7 @@ export function loadComments() {
         }
       },
       error: error => {
-        console.log(error);
+        Alert.error('Kommentare konnten nicht geladen werden: ' + error);
       }
     });
   };
@@ -45,7 +44,7 @@ export function saveComment(text, parentID) {
         //browserHistory.push(`/measure/${comment.parentID}`);
       },
       error: (comment, error) => {
-        console.log(error);
+        Alert.error('Kommentar konnten nicht gespeichert werden: ' + error);
       }
     });
   };
@@ -70,12 +69,12 @@ export function editComment(id, text) {
             );
           },
           error: error => {
-            console.log(error);
+            Alert.error('Zu bearbeitender Kommentar konnten nicht geladen werden: ' + error);
           }
         });
       },
       error: error => {
-        console.log(error);
+        Alert.error('Zu bearbeitender Kommentar konnten nicht gespeichert werden: ' + error);
       }
     });
   };
@@ -102,7 +101,7 @@ export function deleteComment(id) {
         Alert.success('Kommentar erfolgreich gelöscht');
       },
       error: (comment, error) => {
-        Alert.error('Kommentar konnte nicht gelöscht werden');
+        Alert.error('Kommentar konnte nicht gelöscht werden: ' + error);
       }
     });
   };
