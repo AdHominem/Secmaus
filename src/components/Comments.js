@@ -51,7 +51,7 @@ class Comments extends React.Component {
           onRequestClose={this.closeModal}
           contentLabel="Kommentar hinzufügen"
         >
-          <CommentForm 
+          <CommentForm
             saveComment={
               (text, parentId) => {
                 commentsActions.saveComment(text, parentId);

@@ -5,7 +5,7 @@ class UserWidget extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     comment: PropTypes.string,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object
   };
 
   render() {
