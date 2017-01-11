@@ -10,7 +10,7 @@ import Comments from '../containers/Comments';
 class Comment extends React.Component {
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
-    comment: PropTypes.object.isRequried
+    comment: PropTypes.object.isRequired
   };
 
   constructor() {
