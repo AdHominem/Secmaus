@@ -1,18 +1,15 @@
 import React, { PropTypes } from 'react';
-import { Nav, Navbar, NavItem, Row, Col, Grid } from 'react-bootstrap';
 import { Parse } from 'parse';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Link, browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 import UserWidget from '../components/UserWidget';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
-
 class App extends React.Component {
   componentDidMount() {
     if (Parse.User.current()) {
-      const { measureActions, commentActions, userActions, pollsActions } = this.props;
+      const {measureActions, commentActions, userActions, pollsActions} = this.props;
       measureActions.loadMeasures();
       commentActions.loadComments();
       userActions.loadUserPermissions();
@@ -39,18 +36,19 @@ class App extends React.Component {
       </div>:
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul className="nav navbar-nav">
+          <li><Link to="measures">Maßnahmen</Link></li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <UserWidget user={ currentUser }/> <span className="caret"></span>
+              <UserWidget user={currentUser}/> <span className="caret"></span>
             </a>
             <ul className="dropdown-menu">
               <li><a onClick={this.logOut}>Log Out</a></li>
             </ul>
           </li>
         </ul>
-      </div>
+      </div>;
     return (
       <div className="sidate">
         <nav className="navbar navbar-default">
