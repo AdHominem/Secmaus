@@ -43,9 +43,9 @@ class Comments extends React.Component {
         <ul>
           {ownComments.map((comment, i) => <Comment key={i} comment={comment} />)}
         </ul>
-        <button onClick={this.openModal}>
+        <a onClick={this.openModal}>
           Kommentar hinzufügen
-        </button>
+        </a>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}

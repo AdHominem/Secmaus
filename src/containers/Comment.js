@@ -10,7 +10,7 @@ import Comments from '../containers/Comments';
 class Comment extends React.Component {
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
-    comment: PropTypes.string
+    comment: PropTypes.object.isRequried
   };
 
   constructor() {
@@ -48,7 +48,7 @@ class Comment extends React.Component {
       <div className="comment">
         <br/>
 
-        <UserWidget user={ comment.user } comment={ comment } callbacks= { { onClick: this.openModal, handleDeleteComment } }/>
+        <UserWidget user={comment.user} comment={comment} callbacks= {{ onClick: this.openModal, handleDeleteComment }}/>
         <Comments commentsActions={commentsActions} parentId={comment.id}/>
 
         <Modal
@@ -75,7 +75,7 @@ class Comment extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 
