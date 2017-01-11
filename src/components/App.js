@@ -21,13 +21,6 @@ class App extends React.Component {
       commentActions.loadComments();
       userActions.loadUserPermissions();
       pollsActions.loadPolls();
-
-      const measureQuery = new Parse.Query('Game');
-      const subscription = measureQuery.subscribe();
-
-      subscription.on('create', (object) => {
-        console.dir(object);
-      });
     }
   }
 
