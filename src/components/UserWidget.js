@@ -4,7 +4,7 @@ import Parse from 'parse';
 class UserWidget extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    comment: PropTypes.string,
+    comment: PropTypes.object,
     callbacks: PropTypes.object
   };
 

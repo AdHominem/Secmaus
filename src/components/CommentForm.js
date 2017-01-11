@@ -6,7 +6,7 @@ class CommentForm extends React.Component {
   static propTypes = {
     saveComment: PropTypes.func.isRequired,
     parentID: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     close: PropTypes.func.isRequired
   };
 
