@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/pollsActions';
+import { sum } from 'ramda';
 
 class Poll extends Component {
   static propTypes = {
@@ -9,18 +10,23 @@ class Poll extends Component {
     poll: PropTypes.object.isRequired
   };
 
-
   render() {
+    const { poll } = this.props;
+    const body = poll.answers.map((answer, i) =>
+      <div key={i} className="answer"> { answer } { poll.choices.filter((choice) => choice[1] == answer).length }</div>
+    );
+
     console.log(this.props);
     return (
       <div className="poll">
-        <p>{ this.props.poll.text }</p>
+        <p>{ poll.text }</p>
+        { body }
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 
