@@ -30,13 +30,13 @@ class App extends React.Component {
     const headerItems = !currentUser ?
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul className="nav navbar-nav">
-          <li><Link to="login">Log In</Link></li>
-          <li><Link to="signup">Sign up</Link></li>
+          <li><Link to="/login">Log In</Link></li>
+          <li><Link to="/signup">Sign up</Link></li>
         </ul>
       </div>:
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul className="nav navbar-nav">
-          <li><Link to="measures">Maßnahmen</Link></li>
+          <li><Link to="/measures">Maßnahmen</Link></li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
