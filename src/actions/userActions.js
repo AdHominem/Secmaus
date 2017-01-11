@@ -3,7 +3,7 @@ import { Parse } from 'parse';
 
 export function loadUserPermissions() {
   return dispatch => {
-    const query = (new Parse.Query(Parse.Role));
+    const query = new Parse.Query(Parse.Role);
     query.equalTo("name", "Administrator");
     query.equalTo("users", Parse.User.current());
     query.first().then(function(adminRole) {

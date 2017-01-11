@@ -37,6 +37,16 @@
     "no-alert": 0,
     "no-lone-blocks": 0,
     "jsx-quotes": 1,
+    "no-unreachable": 1, // disallow unreachable statements after a return, throw, continue, or break statement
+    "no-cond-assign": 1, // disallow assignment in conditional expressions
+    "no-dupe-args": 1, // disallow duplicate arguments in functions
+    "no-dupe-keys": 1, // disallow duplicate keys when creating object literals
+    "no-duplicate-case": 1, // disallow a duplicate case label.
+    "no-empty": 1, // disallow empty statements
+    "no-empty-character-class": 1, // disallow the use of empty character classes in regular expressions
+    "no-ex-assign": 1, // disallow assigning to the exception in a catch block
+    "no-extra-boolean-cast": 1, // disallow double-negation boolean casts in a boolean context
+    "no-extra-parens": 1, // disallow unnecessary parentheses (off by default)
     "react/display-name": [ 1, {"ignoreTranspilerName": false }],
     "react/forbid-prop-types": [1, {"forbid": ["any"]}],
     "react/jsx-boolean-value": 0,

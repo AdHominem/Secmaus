@@ -1,4 +1,4 @@
-import { React, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { find, propEq } from 'ramda';
 import MeasureForm from './MeasureForm';
 // import { Link } from 'react-router';
