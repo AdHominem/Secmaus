@@ -28,14 +28,20 @@ class CommentForm extends React.Component {
   }
 
   render() {
+    const { close } = this.props;
     return (
-      <form>
+      <form className="editor-form">
         <ReactQuill
           value={this.state.text}
           onChange={this.onTextChange}
           theme="snow"
         />
-        <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+        <div className="button-row">
+          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close()}}>
+            Schließen
+          </a>
+          <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+        </div>
       </form>
     );
   }

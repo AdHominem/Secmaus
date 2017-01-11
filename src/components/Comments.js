@@ -52,12 +52,16 @@ class Comments extends React.Component {
           onRequestClose={this.closeModal}
           contentLabel="Kommentar hinzufügen"
         >
-          <CommentForm saveComment={
-            (text, parentId) => {
-              commentsActions.saveComment(text, parentId);
-              this.closeModal();
+          <CommentForm 
+            saveComment={
+              (text, parentId) => {
+                commentsActions.saveComment(text, parentId);
+                this.closeModal();
+              }
             }
-          } parentID={parentId} />
+            parentID={parentId}
+            close={this.closeModal}
+          />
         </Modal>
       </div>
     );
