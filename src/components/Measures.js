@@ -24,7 +24,6 @@ const Measures = props => {
           {body}
       </div>
     </div>
-    <Polls measureId="REPLACEME"/>
   </ReactCSSTransitionGroup>
   );
 };
