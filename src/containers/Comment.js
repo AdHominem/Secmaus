@@ -3,13 +3,13 @@ import CommentEditForm from '../components/CommentEditForm';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/commentsActions';
-import { Parse } from 'parse';
 import UserWidget from '../components/UserWidget';
 import Comments from '../containers/Comments';
 
 class Comment extends React.Component {
   static propTypes = {
-    commentsActions: PropTypes.object.isRequired
+    commentsActions: PropTypes.object.isRequired,
+    comment: PropTypes.string
   };
 
   constructor(props) {
