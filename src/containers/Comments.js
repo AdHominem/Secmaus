@@ -5,7 +5,7 @@ import Comments from '../components/Comments';
 
 function mapStateToProps(state) {
   return {
-    comments: state.commentsReducer.polls
+    comments: state.commentsReducer.comments
   };
 }
 

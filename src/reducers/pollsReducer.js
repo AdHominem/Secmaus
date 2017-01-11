@@ -3,7 +3,7 @@ import { map, filter } from 'ramda';
 
 import update from 'immutability-helper';
 
-export default function commentsReducer(state = {polls: []}, action) {
+export default function pollsReducer(state = {polls: []}, action) {
   switch (action.type) {
     case ADD_POLL:
       return update(state, {polls: {

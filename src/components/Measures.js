@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import MeasureForm from './MeasureForm';
 import { Jumbotron } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Polls from '../containers/Polls'
 
 
 class Measures extends React.Component {
@@ -33,6 +34,7 @@ class Measures extends React.Component {
             {body}
         </div>
       </div>
+      <Polls measureId="REPLACEME"/>
     </ReactCSSTransitionGroup>
     );
   }

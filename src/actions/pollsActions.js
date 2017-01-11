@@ -129,7 +129,7 @@ export function editPoll(id, text, answers, choices, closed, measure) {
 
 export function addPoll(id, text, answers, choices, closed, measure) {
   return {
-    type: types.ADD_COMMENT,
+    type: types.ADD_POLL,
     text,
     id,
     answers,

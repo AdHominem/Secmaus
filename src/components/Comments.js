@@ -31,7 +31,6 @@ class Comments extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
-
   render() {
     const { commentsActions, comments, parentId } = this.props;
     const ownComments = comments.filter(comment => (comment.parentID === parentId));
