@@ -62,11 +62,11 @@ export function answerPoll(id, answer) {
 
     const userId = Parse.User.current().id;
     const choice = { answer, userId };
-    choices.push(choice);
 
     query.get(id, {
       success: poll => {
-        poll.set('choices', choices);
+        poll.choices.push(choice);
+        //poll.set('choices', poll.choices);
         poll.save(null, {
           success: () => {
             dispatch(
@@ -89,7 +89,7 @@ export function answerPoll(id, answer) {
   };
 }
 
-export function editComment(id, text, answers, choices, closed, measure) {
+export function editPoll(id, text, answers, choices, closed, measure) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
@@ -105,7 +105,7 @@ export function editComment(id, text, answers, choices, closed, measure) {
           success: () => {
             dispatch(
               {
-                type: types.EDIT_COMMENT,
+                type: types.EDIT_POLL,
                 text,
                 id,
                 answers,
