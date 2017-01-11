@@ -23,7 +23,7 @@ class UserWidget extends Component {
                 {comment.createdAt.toLocaleTimeString()}</h4>
                 <a onClick={onClick} >Bearbeiten</a>
                 <a onClick={handleDeleteComment} >Löschen</a>
-              <p setInnerHTML={{__html: comment.text}}/>
+              <p dangerouslySetInnerHTML={{__html: comment.text}}/>
               {comment.user.id === Parse.User.current().id &&
               <div>
               </div>}
