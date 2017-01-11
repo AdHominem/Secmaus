@@ -5,8 +5,8 @@ import '../styles/quill.css';
 class MeasureForm extends React.Component {
   static propTypes = {
     saveMeasure: PropTypes.func.isRequired,
-    description: PropTypes.name.isRequired,
-    name: PropTypes.name.isRequired
+    description: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
   };
 
   constructor(props) {

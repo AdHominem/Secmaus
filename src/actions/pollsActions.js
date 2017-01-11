@@ -15,10 +15,10 @@ export function loadPolls() {
           dispatch(addPoll(
             result.id,
             result.get("text"),
-            result.get("choices"),
             result.get("answers"),
-            result.get("measure"),
-            result.get("closed")
+            result.get("choices"),
+            result.get("closed"),
+            result.get("measure")
           ));
         }
       },
@@ -130,12 +130,12 @@ export function editPoll(id, text, answers, choices, closed, measure) {
 export function addPoll(id, text, answers, choices, closed, measure) {
   return {
     type: types.ADD_POLL,
-    text,
     id,
+    text,
     answers,
     choices,
-    closed,
-    measure
+    measure,
+    closed
   };
 }
 

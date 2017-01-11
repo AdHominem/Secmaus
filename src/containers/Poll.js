@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/pollsActions';
-import { sum } from 'ramda';
 
 class Poll extends Component {
   static propTypes = {
@@ -16,7 +15,6 @@ class Poll extends Component {
       <div key={i} className="answer"> { answer } { poll.choices.filter((choice) => choice[1] == answer).length }</div>
     );
 
-    console.log(this.props);
     return (
       <div className="poll">
         <p>{ poll.text }</p>

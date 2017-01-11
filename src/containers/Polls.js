@@ -1,29 +1,27 @@
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/pollsActions';
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import Poll from './Poll'
 
-class Polls extends Component {
-  static propTypes = {
-    measureId: PropTypes.string.isRequired,
-    polls: PropTypes.array.isRequired,
-    pollsActions: PropTypes.object.isRequired
-  };
+const Polls = props => {
+  const { polls, pollsActions } = props;
+  const body = polls.map((poll, i) =>
+    <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
+  );
 
-  render() {
-    const { polls, pollsActions } = this.props;
-    const body = polls.map((poll, i) =>
-      <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
-    );
+  return (
+    <div>
+      { body }
+    </div>
+  );
+};
 
-    return (
-      <div>
-        { body }
-      </div>
-    );
-  }
-}
+Polls.propTypes = {
+  measureId: PropTypes.string.isRequired,
+  polls: PropTypes.array.isRequired,
+  pollsActions: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {
