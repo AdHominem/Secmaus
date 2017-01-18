@@ -45,6 +45,17 @@ class PollForm extends React.Component {
           onChange={this.onTextChange}
           theme="snow"
         />
+        <select name="number_of_answers" size="1">
+          <option>2</option>
+          <option selected>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
         <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
       </form>
     );
