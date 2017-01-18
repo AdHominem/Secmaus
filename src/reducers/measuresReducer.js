@@ -17,13 +17,13 @@ export default function measuresReducer(state = {loaded: false, measures: []}, a
     case types.EDIT_MEASURE:
       return update(state, {measures: {
         $apply: map(measure =>
-          (measure.id === action.id ?
+          measure.id === action.id ?
             {
               name: action.name,
               description: action.description,
               id: measure.id,
               createdBy: measure.createdBy
-            } : measure))
+            } : measure)
       }});
     case types.DELETE_MEASURE:
       return update(state, {measures: {
