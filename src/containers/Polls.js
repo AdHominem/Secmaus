@@ -15,7 +15,7 @@ const Polls = props => {
 
   return (
     <div className="polls">
-      <Link className="btn btn-primary" to={'/polls/new'}>Neue Umfrage</Link>
+      <Link className="btn btn-primary" to="/SIDATESecMaus/polls/new">Neue Umfrage</Link>
       { body }
     </div>
   );

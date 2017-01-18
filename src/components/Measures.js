@@ -7,7 +7,7 @@ const Measures = props => {
   const { measures } = props;
 
   const body = measures.map((measure, i) =>
-    <Link key={i} className="measure" to={`/measure/${measure.id}`}>
+    <Link key={i} className="measure" to={`/SIDATESecMaus/measure/${measure.id}`}>
       {measure.name}
     </Link>
   );
@@ -19,7 +19,7 @@ const Measures = props => {
     transitionAppear={true}
     transitionAppearTimeout={3000}>
     <div className="measures-container">
-      <Link className="btn btn-primary" to={'/measures/new'}>Neue Maßnahme</Link>
+      <Link className="btn btn-primary" to="/SIDATESecMaus/measures/new">Neue Maßnahme</Link>
       <div className="measures">
           {body}
       </div>
