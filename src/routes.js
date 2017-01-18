@@ -42,9 +42,9 @@ export default (
       <Route path="measures" component={Measures} onEnter={requireAuth}/>
       <Route path="polls" component={Polls} onEnter={requireAuth}/>
       <Route path="measures/new" component={NewMeasure} onEnter={requireAuth}/>
-      <Route path="polls/new" component={NewPoll} onEnter={requireAuth}/>
       <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
       <Route path="measure/:measureId/edit" component={EditMeasure} onEnter={requireAuth}/>
+      <Route path="poll/:measureId/new" component={NewPoll} onEnter={requireAuth}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>
     </Route>

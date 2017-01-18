@@ -9,37 +9,29 @@ import { Link } from 'react-router';
 class Polls extends React.Component {
 
   static propTypes = {
-    measureId: PropTypes.string,
+    measureId: PropTypes.string.isRequired,
     polls: PropTypes.array.isRequired,
     pollsActions: PropTypes.object.isRequired
   };
 
   render() {
     const { polls, pollsActions, measureId } = this.props;
-
     const body = polls.filter(poll => (measureId ? poll.measure.id == measureId : poll))
                       .map((poll, i) => <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
     );
 
     return (
       <div className="polls">
-        <Link className="btn btn-primary" to="/SIDATESecMaus/polls/new">Neue Umfrage</Link>
+        <Link className="btn btn-primary" to={`/SIDATESecMaus/poll/${ measureId }/new`}>Neue Umfrage</Link>
         { body }
       </div>
     );
   }
 }
 
-Polls.propTypes = {
-  measureId: PropTypes.string,
-  polls: PropTypes.array.isRequired,
-  pollsActions: PropTypes.object.isRequired
-};
-
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    polls: state.pollsReducer.polls,
-    measureId: state.measureId
+    polls: state.pollsReducer.polls
   };
 }
 

@@ -6,12 +6,15 @@ import * as actions from '../actions/pollsActions';
 
 class NewPoll extends React.Component {
   static propTypes = {
-    pollsActions: PropTypes.object.isRequired,
-    measureId: PropTypes.string.isRequired
+    pollsActions: PropTypes.object.isRequired
   };
 
   render() {
-    const { pollsActions, measureId } = this.props;
+    const { pollsActions } = this.props;
+    const { measureId } = this.props.params;
+
+    
+
     return (
       <div className="new-poll">
         <h2>Umfrage hinzufügen</h2>
@@ -22,7 +25,8 @@ class NewPoll extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+  };
 }
 
 function mapDispatchToProps(dispatch) {

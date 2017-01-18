@@ -15,14 +15,14 @@ class PollForm extends React.Component {
     super(props);
     this.state = {
       text: props.description,
-      //answers: []
+      answers: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onChangeHandler(value) {
-    console.log(value);
+  onChangeHandler(event) {
+    console.log(event.target.value);
   }
 
   handleSubmit(event) {
@@ -52,9 +52,9 @@ class PollForm extends React.Component {
           theme="snow"
         />
 
-       {/* <select name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
+       <select defaultValue={3} name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
           <option>2</option>
-          <option selected>3</option>
+          <option>3</option>
           <option>4</option>
           <option>5</option>
           <option>6</option>
@@ -62,7 +62,7 @@ class PollForm extends React.Component {
           <option>8</option>
           <option>9</option>
           <option>10</option>
-        </select>*/}
+        </select>
 
         <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
       </form>
