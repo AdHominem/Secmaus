@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Redirect, Route, IndexRoute } from 'react-router';
 import { Parse } from 'parse';
 
 import App from './containers/App';
@@ -9,8 +9,8 @@ import EditMeasure from './containers/EditMeasure';
 import NewMeasure from './containers/NewMeasure';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
-import Polls from './containers/Polls'
-import NewPoll from './containers/NewPoll'
+import Polls from './containers/Polls';
+import NewPoll from './containers/NewPoll';
 
 function requireAuth(nextState, replace) {
   // If the user is not logged in,
@@ -19,7 +19,7 @@ function requireAuth(nextState, replace) {
   // so that we can return to it later
   if (!Parse.User.current()) {
     replace({
-      pathname: 'login',
+      pathname: '/SIDATESecMaus/login',
       query: { return_to: nextState.location.pathname }
     });
   }
@@ -35,16 +35,19 @@ function requireAuth(nextState, replace) {
 // }
 
 export default (
-  <Route path="/SIDATESecMaus/" component={App}>
-    <IndexRoute component={Measures} onEnter={requireAuth}/>
-    <Route path="measures" component={Measures} onEnter={requireAuth}/>
-    <Route path="polls" component={Polls} onEnter={requireAuth}/>
-    <Route path="measures/new" component={NewMeasure} onEnter={requireAuth}/>
-    <Route path="polls/new" component={NewPoll} onEnter={requireAuth}/>
-    <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
-    <Route path="measure/:measureId/edit" component={EditMeasure} onEnter={requireAuth}/>
-    <Route path="login" component={Login}/>
-    <Route path="signup" component={Signup}/>
+  <Route path="/" component={App}>
+    // <Redirect from="" to="/SIDATESecMaus/" />
+    <Route path="/SIDATESecMaus/" >
+      <IndexRoute component={Measures} onEnter={requireAuth}/>
+      <Route path="measures" component={Measures} onEnter={requireAuth}/>
+      <Route path="polls" component={Polls} onEnter={requireAuth}/>
+      <Route path="measures/new" component={NewMeasure} onEnter={requireAuth}/>
+      <Route path="polls/new" component={NewPoll} onEnter={requireAuth}/>
+      <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
+      <Route path="measure/:measureId/edit" component={EditMeasure} onEnter={requireAuth}/>
+      <Route path="login" component={Login}/>
+      <Route path="signup" component={Signup}/>
+    </Route>
   </Route>
   // <Route path="admin" component={AdminPage} onEnter={requireAdminAuth}/>
   // <Route path="*" component={NotFoundPage}/>
