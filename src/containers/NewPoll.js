@@ -13,8 +13,6 @@ class NewPoll extends React.Component {
     const { pollsActions } = this.props;
     const { measureId } = this.props.params;
 
-    
-
     return (
       <div className="new-poll">
         <h2>Umfrage hinzufügen</h2>

@@ -16,7 +16,7 @@ class Polls extends React.Component {
 
   render() {
     const { polls, pollsActions, measureId } = this.props;
-    const body = polls.filter(poll => (measureId ? poll.measure.id == measureId : poll))
+    const body = polls.filter(poll => (measureId ? poll.measureId == measureId : poll))
                       .map((poll, i) => <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
     );
 

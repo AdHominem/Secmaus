@@ -12,7 +12,7 @@ export default function pollsReducer(state = {polls: []}, action) {
           id: action.id,
           answers: action.answers,
           choices: action.choices,
-          measure: action.measure,
+          measureId: action.measureId,
           closed: action.closed
         }]
       }});
@@ -24,7 +24,7 @@ export default function pollsReducer(state = {polls: []}, action) {
               id: action.id,
               answers: action.answers,
               choices: action.choices,
-              measure: action.measure,
+              measureId: action.measureId,
               closed: action.closed
             } : poll))
       }});

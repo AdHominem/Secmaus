@@ -18,7 +18,7 @@ export function loadPolls() {
             result.get("answers"),
             result.get("choices"),
             result.get("closed"),
-            result.get("measure")
+            result.get("measureId")
           ));
         }
       },
@@ -29,21 +29,20 @@ export function loadPolls() {
   };
 }
 
-export function savePoll(text, answers, measure) {
+export function savePoll(text, answers, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const poll = new Poll();
 
     poll.set('text', text);
     poll.set('answers', answers);
-    poll.set('measure', measure);
-
-    console.dir(Parse.User.current());
+    poll.set('choices', []);
+    poll.set('closed', false);
+    poll.set('measureId', measureId);
 
     poll.save(null, {
       success: poll => {
-        dispatch(addPoll(poll.id, text, answers, {}, false, measure));
-        //browserHistory.push(`/measure/${comment.parentID}`);
+        dispatch(addPoll(poll.id, text, answers, [], false, measureId));
       },
       error: (comment, error) => {
         console.log(error);
@@ -89,7 +88,7 @@ export function answerPoll(id, answer) {
   };
 }
 
-export function editPoll(id, text, answers, choices, closed, measure) {
+export function editPoll(id, text, answers, choices, closed, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
@@ -127,14 +126,14 @@ export function editPoll(id, text, answers, choices, closed, measure) {
   };
 }
 
-export function addPoll(id, text, answers, choices, closed, measure) {
+export function addPoll(id, text, answers, choices, closed, measureId) {
   return {
     type: types.ADD_POLL,
     id,
     text,
     answers,
     choices,
-    measure,
+    measureId,
     closed
   };
 }
