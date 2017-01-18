@@ -49,7 +49,8 @@ export default {
       {test: /\.ico$/, loader: 'file?name=[name].[ext]'},
       {test: /(\.css|\.scss|\.sass)$/, loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']},
       {test: /\.json$/, loader: "json"},
-      {test: /\.html$/, loader: "html"}
+      // {test: /\.html$/, loader: "html"}
+      {test: /\.html$/, loader: 'file?name=[name].[ext]'}
     ]
   },
   postcss: ()=> [autoprefixer]
