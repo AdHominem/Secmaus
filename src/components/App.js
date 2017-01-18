@@ -37,14 +37,14 @@ class App extends React.Component {
     const headerItems = !currentUser ?
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul className="nav navbar-nav">
-          <li><Link to="/login">Log In</Link></li>
-          <li><Link to="/signup">Sign up</Link></li>
+          <li><Link to="/SIDATESecMaus/login">Log In</Link></li>
+          <li><Link to="/SIDATESecMaus/signup">Sign up</Link></li>
         </ul>
       </div>:
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul className="nav navbar-nav">
-          <li><Link to="/measures">Maßnahmen</Link></li>
-          <li><Link to="/polls">Umfragen</Link></li>
+          <li><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
+          <li><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
@@ -68,7 +68,7 @@ class App extends React.Component {
                 <span className="icon-bar"/>
                 <span className="icon-bar"/>
               </button>
-              <Link className="navbar-brand" to="/">SIDATE SecMaus</Link>
+              <Link className="navbar-brand" to="/SIDATESecMaus/">SIDATE SecMaus</Link>
             </div>
             {headerItems}
           </div>

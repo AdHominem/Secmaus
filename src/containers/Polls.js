@@ -23,14 +23,18 @@ class Polls extends React.Component {
 
     return (
       <div className="polls">
-        <Link className="btn btn-primary" to={'/polls/new'}>Neue Umfrage</Link>
+        <Link className="btn btn-primary" to="/SIDATESecMaus/polls/new">Neue Umfrage</Link>
         { body }
       </div>
     );
   }
 }
 
-
+Polls.propTypes = {
+  measureId: PropTypes.string,
+  polls: PropTypes.array.isRequired,
+  pollsActions: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {

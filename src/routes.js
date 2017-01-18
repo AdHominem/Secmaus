@@ -35,7 +35,7 @@ function requireAuth(nextState, replace) {
 // }
 
 export default (
-  <Route path="/" component={App}>
+  <Route path="/SIDATESecMaus/" component={App}>
     <IndexRoute component={Measures} onEnter={requireAuth}/>
     <Route path="measures" component={Measures} onEnter={requireAuth}/>
     <Route path="polls" component={Polls} onEnter={requireAuth}/>

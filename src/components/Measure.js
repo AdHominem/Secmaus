@@ -34,7 +34,7 @@ class Measure extends React.Component {
             {measure.name}
             &nbsp;
             { Parse.User.current() && measure.createdBy.id === Parse.User.current().id &&
-              <Link to={`/measure/${measure.id}/edit`}><FontAwesome name="edit"/></Link>}
+              <Link to={`SIDATESecMaus/measure/${measure.id}/edit`}><FontAwesome name="edit"/></Link>}
             &nbsp;
             { Parse.User.current() && measure.createdBy.id === Parse.User.current().id &&
               <a onClick={handleDeleteMeasure}><FontAwesome name="trash"/></a> }
