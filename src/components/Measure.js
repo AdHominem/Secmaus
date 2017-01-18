@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router';
 import { Parse } from 'parse';
 import Comments from '../containers/Comments';
 import Polls from '../containers/Polls'
+import NewPoll from '../containers/NewPoll'
 
 class Measure extends React.Component {
   render() {
@@ -41,6 +42,7 @@ class Measure extends React.Component {
           <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
           <Polls measureId={ measure.id } />
+          <NewPoll />
         </div>
 
       </ReactCSSTransitionGroup>

@@ -4,7 +4,7 @@ import '../styles/quill.css';
 
 class PollForm extends React.Component {
   static propTypes = {
-    savePoll: PropTypes.func.isRequired
+    //savePoll: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -16,12 +16,12 @@ class PollForm extends React.Component {
   }
 
   onTextChange(value) {
-    this.setState({ text: value });
+    this.setState({ answers_count: value });
   }
 
   handleSubmit(event) {
     const { savePoll } = this.props;
-    savePoll(this.refs.name.value, this.state.text);
+    //savePoll(this.refs.name.value, this.state.text);
     this.refs.name.value = '';
     this.setState({ text: '' });
     event.preventDefault();
@@ -30,11 +30,13 @@ class PollForm extends React.Component {
   render() {
     return (
       <form>
+
+        <input type="text" ref="answers_count" onChange={ this.onTextChange() }/>
         <label>
           Name:
-          <input type="text" ref="name" defaultValue={this.props.name} />
         </label>
         <br/>
+
         <label>
           Description:
         </label>

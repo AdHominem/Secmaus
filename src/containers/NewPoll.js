@@ -14,7 +14,7 @@ class NewPoll extends React.Component {
     return (
       <div className="poll--form">
         <h2>Umfrage hinzufügen</h2>
-        <PollForm savePoll={pollActions.savePoll} />
+        <PollForm savePoll={pollActions} />
       </div>
     );
   }
