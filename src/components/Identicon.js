@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { map, range, addIndex  } from 'ramda';
+import { join, map, range, addIndex  } from 'ramda';
 import crypto from 'crypto';
 
 const Identicon = props => {
@@ -8,9 +8,11 @@ const Identicon = props => {
 
   const color =
     "#" +
-    (hash.charCodeAt(0).toString(16) + '00').substr(0,2) +
-    (hash.charCodeAt(1).toString(16) + '00').substr(0,2) +
-    (hash.charCodeAt(2).toString(16) + '00').substr(0,2);
+    join("", map(
+      i => (hash.charCodeAt(i).toString(16) + '00').substr(0,2),
+      range(0, 3)
+    ));
+
 
   // Mirror the identicon in the middle
   const cols = map(
@@ -22,11 +24,8 @@ const Identicon = props => {
 
   const rects = mapIndexed(
     (col, x) => mapIndexed(
-      (value, y) => value ?
-        <rect x={x * size} y={y * size}
-              width={size} height={size}
-              fill={color}/> :
-        undefined,
+      (value, y) => <rect x={x * size} y={y * size} width={size} height={size}
+                          fill={value ? color : "white"}/>,
       col
     ),
     cols

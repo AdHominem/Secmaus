@@ -32,7 +32,7 @@ class UserWidget extends Component {
           </div>
         );
     } else {
-      return <img className="media-object" src="https://camo.githubusercontent.com/1852be4406db2d96a15a7098f8de8c19dcd2834d/68747470733a2f2f736967696c2e63757063616b652e696f2f536967696c3f696e7665727465643d31" />;
+      return <Identicon string={Parse.User.current().getUsername()} size={10}/>;
     }
   }
 }
