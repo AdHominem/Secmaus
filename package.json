@@ -19,7 +19,7 @@
     "remove-dist": "rimraf ./dist",
     "prebuild": "npm run clean-dist && npm run lint && npm run test",
     "build": "babel-node tools/build.js",
-    "github-pages": "gh-pages -d dist",
+    "github-pages": "cp src/404.html dist/ && touch dist/.nojekyll && gh-pages -d dist",
     "deploy": "npm run build && npm run github-pages",
     "test": "mocha tools/testSetup.js \"./{,!(node_modules)/**/}*.spec.js\" --reporter progress",
     "test:cover": "babel-node node_modules/isparta/bin/isparta cover --root src --report html node_modules/mocha/bin/_mocha -- --require ./tools/testSetup.js \"./{,!(node_modules)/**/}*.spec.js\" --reporter progress",
