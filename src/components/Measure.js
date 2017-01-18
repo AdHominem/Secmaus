@@ -11,7 +11,7 @@ import NewPoll from '../containers/NewPoll'
 
 class Measure extends React.Component {
   render() {
-    const { measureActions, commentsActions, measure } = this.props;
+    const { measureActions, commentsActions, pollsActions, measure } = this.props;
     const { deleteMeasure } = measureActions;
 
     const handleDeleteMeasure = event => {
@@ -41,8 +41,7 @@ class Measure extends React.Component {
           </h1>
           <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
-          <Polls measureId={ measure.id } />
-          <NewPoll />
+          <Polls measureId={ measure.id } pollsActions={ pollsActions }/>
         </div>
 
       </ReactCSSTransitionGroup>

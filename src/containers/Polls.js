@@ -6,30 +6,36 @@ import Poll from './Poll'
 import { Link } from 'react-router';
 
 
-const Polls = props => {
-  const { polls, pollsActions, measureId } = props;
+class Polls extends React.Component {
 
-  const body = polls.filter(poll => (measureId ? poll.measure.id == measureId : poll))
-                    .map((poll, i) => <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
-  );
+  static propTypes = {
+    measureId: PropTypes.string,
+    polls: PropTypes.array.isRequired,
+    pollsActions: PropTypes.object.isRequired
+  };
 
-  return (
-    <div className="polls">
-      <Link className="btn btn-primary" to={'/polls/new'}>Neue Umfrage</Link>
-      { body }
-    </div>
-  );
-};
+  render() {
+    const { polls, pollsActions, measureId } = this.props;
 
-Polls.propTypes = {
-  measureId: PropTypes.string,
-  polls: PropTypes.array.isRequired,
-  pollsActions: PropTypes.object.isRequired
-};
+    const body = polls.filter(poll => (measureId ? poll.measure.id == measureId : poll))
+                      .map((poll, i) => <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
+    );
+
+    return (
+      <div className="polls">
+        <Link className="btn btn-primary" to={'/polls/new'}>Neue Umfrage</Link>
+        { body }
+      </div>
+    );
+  }
+}
+
+
 
 function mapStateToProps(state) {
   return {
-    polls: state.pollsReducer.polls
+    polls: state.pollsReducer.polls,
+    measureId: state.measureId
   };
 }
 

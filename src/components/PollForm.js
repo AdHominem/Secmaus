@@ -1,22 +1,28 @@
 import React, { PropTypes } from 'react';
 import ReactQuill from 'react-quill';
 import '../styles/quill.css';
+import * as actions from '../actions/pollsActions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class PollForm extends React.Component {
   static propTypes = {
-    //savePoll: PropTypes.func.isRequired
+    savePoll: PropTypes.func.isRequired,
+    measureId: PropTypes.string.isRequired
   };
 
   constructor(props) {
     super(props);
-    this.state = { text: props.description };
+    this.state = {
+      text: props.description,
+      //answers: []
+    };
 
-    this.onTextChange = this.onTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onTextChange(value) {
-    this.setState({ answers_count: value });
+  onChangeHandler(value) {
+    console.log(value);
   }
 
   handleSubmit(event) {
@@ -31,7 +37,6 @@ class PollForm extends React.Component {
     return (
       <form>
 
-        <input type="text" ref="answers_count" onChange={ this.onTextChange() }/>
         <label>
           Name:
         </label>
@@ -40,12 +45,14 @@ class PollForm extends React.Component {
         <label>
           Description:
         </label>
+
         <ReactQuill
           value={this.state.text}
           onChange={this.onTextChange}
           theme="snow"
         />
-        <select name="number_of_answers" size="1">
+
+       {/* <select name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
           <option>2</option>
           <option selected>3</option>
           <option>4</option>
@@ -55,7 +62,8 @@ class PollForm extends React.Component {
           <option>8</option>
           <option>9</option>
           <option>10</option>
-        </select>
+        </select>*/}
+
         <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
       </form>
     );

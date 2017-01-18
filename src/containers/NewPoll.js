@@ -6,27 +6,28 @@ import * as actions from '../actions/pollsActions';
 
 class NewPoll extends React.Component {
   static propTypes = {
-    pollActions: PropTypes.object.isRequired
+    pollsActions: PropTypes.object.isRequired,
+    measureId: PropTypes.string.isRequired
   };
 
   render() {
-    const { pollActions } = this.props;
+    const { pollsActions, measureId } = this.props;
     return (
-      <div className="poll--form">
+      <div className="new-poll">
         <h2>Umfrage hinzufügen</h2>
-        <PollForm savePoll={pollActions} />
+        <PollForm savePoll={ pollsActions.savePoll } measureId={ measureId } />
       </div>
     );
   }
 }
 
-function mapStateToProps() {
+function mapStateToProps(state) {
   return {};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    measureActions: bindActionCreators(actions, dispatch)
+    pollsActions: bindActionCreators(actions, dispatch)
   };
 }
 

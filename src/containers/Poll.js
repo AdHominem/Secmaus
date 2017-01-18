@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/pollsActions';
 
 class Poll extends Component {
+
   static propTypes = {
     pollsActions: PropTypes.object.isRequired,
     poll: PropTypes.object.isRequired
