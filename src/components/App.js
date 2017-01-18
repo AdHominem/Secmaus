@@ -26,7 +26,7 @@ class App extends React.Component {
 
   logOut() {
     Parse.User.logOut().then(() => {
-      browserHistory.push('/login');
+      browserHistory.push('/SIDATESecMaus/login');
     }, err => {
       alert(err.message);
     });
