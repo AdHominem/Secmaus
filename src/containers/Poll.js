@@ -11,6 +11,16 @@ class Poll extends Component {
   };
 
   render() {
+    const { editPoll, deletePoll, answerPoll } = this.props.pollsActions;
+    const { id, text, answers, choices, closed, measureId } = this.props.poll;
+
+    const toggleClose = event => {
+
+      editPoll(id, text, answers, choices, !closed, measureId);
+      event.preventDefault();
+      console.log(this.props);
+    };
+
     const { poll } = this.props;
     const body = poll.answers.map((answer, i) =>
       <div key={i} className="answer"> { answer } { poll.choices.filter((choice) => choice[1] == answer).length }</div>
@@ -20,6 +30,10 @@ class Poll extends Component {
       <div className="poll">
         <p>{ poll.text }</p>
         { body }
+        <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
+       {/* <a onClick={ }>Abstimmen</a>
+        <a onClick={ }>Bearbeiten</a>
+        <a onClick={ }>Löschen</a>*/}
       </div>
     );
   }
