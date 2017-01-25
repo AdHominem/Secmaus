@@ -14,10 +14,10 @@
   <script>window._trackJs = {token: "<%= htmlWebpackPlugin.options.trackJSToken %>"};</script>
   <script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
   <% } %>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"> -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,6 +53,40 @@
       }
     }
   }(window.location))
+  </script>
+  <script type="text/javascript">
+  $(window).resize(function() {
+    var more = document.getElementById("js-navigation-more");
+    if ($(more).length > 0) {
+      var windowWidth = $(window).width();
+      var moreLeftSideToPageLeftSide = $(more).offset().left;
+      var moreLeftSideToPageRightSide = windowWidth - moreLeftSideToPageLeftSide;
+
+      if (moreLeftSideToPageRightSide < 330) {
+        $("#js-navigation-more .submenu .submenu").removeClass("fly-out-right");
+        $("#js-navigation-more .submenu .submenu").addClass("fly-out-left");
+      }
+
+      if (moreLeftSideToPageRightSide > 330) {
+        $("#js-navigation-more .submenu .submenu").removeClass("fly-out-left");
+        $("#js-navigation-more .submenu .submenu").addClass("fly-out-right");
+      }
+    }
+  });
+
+  $(document).ready(function() {
+    var menuToggle = $("#js-mobile-menu").unbind();
+    $("#js-navigation-menu").removeClass("show");
+
+    menuToggle.on("click", function(e) {
+      e.preventDefault();
+      $("#js-navigation-menu").slideToggle(function(){
+        if($("#js-navigation-menu").is(":hidden")) {
+          $("#js-navigation-menu").removeAttr("style");
+        }
+      });
+    });
+  });
   </script>
   <div id="app"></div>
 </body>

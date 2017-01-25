@@ -33,62 +33,44 @@ class App extends React.Component {
   }
 
   render() {
-    const currentUser = Parse.User.current();
-    const headerItems = !currentUser ?
-      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul className="nav navbar-nav">
-          <li><Link to="/SIDATESecMaus/login">Log In</Link></li>
-          <li><Link to="/SIDATESecMaus/signup">Sign up</Link></li>
-        </ul>
-      </div>:
-      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul className="nav navbar-nav">
-          <li><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
-          <li><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
-        </ul>
-        <ul className="nav navbar-nav navbar-right">
-          <li className="dropdown">
-            <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <Identicon string={Parse.User.current().getUsername()} size={10}/>
-              <span className="caret"/>
-            </a>
-            <ul className="dropdown-menu">
-              <li><a onClick={this.logOut}>Log Out</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>;
     return (
       <div className="sidate">
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"/>
-                <span className="icon-bar"/>
-                <span className="icon-bar"/>
-              </button>
-              <Link className="navbar-brand" to="/SIDATESecMaus/">SIDATE SecMaus</Link>
-            </div>
-            {headerItems}
-          </div>
-        </nav>
-        <div className="main-container">
-          <aside className="sidebar-container">
-            <div className="sidebar-content">
-              <div className="sidebar-logo">
-                <a href="/">
-                  <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
-                </a>
-                <img src="http://img.auctiva.com/imgdata/1/1/0/9/4/8/0/webimg/352982075_tp.jpg" alt="" />
+        <header className="navigation" role="banner">
+          <div className="navigation-wrapper">
+            <a href="javascript:void(0)" className="logo">
+
+              <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
+            </a>
+            <a href="javascript:void(0)" className="navigation-menu-button" id="js-mobile-menu">MENU</a>
+            <nav role="navigation">
+              {
+                Parse.User.current() ? 
+                <ul id="js-navigation-menu" className="navigation-menu show">
+                  <li className="nav-link"><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
+                  <li className="nav-link"><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
+                  <li className="nav-link"><a onClick={this.logOut}>Log Out</a></li>
+                </ul> :
+                <ul id="js-navigation-menu" className="navigation-menu show">
+                  <li className="nav-link"><Link to="/SIDATESecMaus/login">Log In</Link></li>
+                  <li className="nav-link"><Link to="/SIDATESecMaus/signup">Sign up</Link></li>
+                </ul>
+              }
+            </nav>
+            <div className="navigation-tools">
+              <div className="search-bar">
+                <form role="search">
+                  <input type="search" placeholder="Enter Search" />
+                  <button type="submit">
+                    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon" />
+                  </button>
+                </form>
               </div>
             </div>
-          </aside>
-          <main className="children-container">
-            {this.props.children}
-          </main>
-        </div>
+          </div>
+        </header>
+        <main>
+          {this.props.children}
+        </main>
         <Alert
           stack={{limit: 3}}
           effect="bouncyflip"

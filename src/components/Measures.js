@@ -24,8 +24,8 @@ class Measures extends React.Component {
     const { saveMeasure } = measureActions;
 
     const body = measures.map((measure, i) =>
-      <Link key={i} className="measure" to={`/SIDATESecMaus/measure/${measure.id}`}>
-        {measure.name}
+      <Link key={i} className="flex-box" to={`/SIDATESecMaus/measure/${measure.id}`}>
+        <h1 className="flex-title">{measure.name}</h1>
       </Link>
     );
 
@@ -34,36 +34,36 @@ class Measures extends React.Component {
       event.preventDefault();
     };
 
+    // <ReactCSSTransitionGroup
+    //   transitionName="example"
+    //   transitionEnterTimeout={0}
+    //   transitionLeaveTimeout={0}
+    //   transitionAppear={true}
+    //   transitionAppearTimeout={3000}>
+    // </ReactCSSTransitionGroup>
     return (
-      <ReactCSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={0}
-        transitionLeaveTimeout={0}
-        transitionAppear={true}
-        transitionAppearTimeout={3000}>
-        <div className="measures-container">
-          <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a>
-          <div className="measures">
-              {body}
-          </div>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            contentLabel="Maßnahme hinzufügen"
-          >
-            <MeasureForm
-              saveMeasure={
-                (name, description) => {
-                  saveMeasure(name, description);
-                  this.closeModal();
-                }
-              }
-              close={this.closeModal}
-            />
-          </Modal>
+      <div className="measures-container">
+        <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a>
+        <div className="flex-boxes">
+            {body}
         </div>
-      </ReactCSSTransitionGroup>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          contentLabel="Maßnahme hinzufügen"
+        >
+          <MeasureForm
+            saveMeasure={
+              (name, description) => {
+                saveMeasure(name, description);
+                this.closeModal();
+              }
+            }
+            close={this.closeModal}
+          />
+        </Modal>
+      </div>
     );
   }
 }

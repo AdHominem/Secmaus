@@ -38,7 +38,7 @@ class Comments extends React.Component {
     if (ownComments.size > 0) { return; }
 
     return (
-      <div>
+      <div className="comments">
         <ul>
           {ownComments.map((comment, i) => <Comment key={i} comment={comment} />)}
         </ul>

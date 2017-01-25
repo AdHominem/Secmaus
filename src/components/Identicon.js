@@ -6,13 +6,13 @@ const Identicon = props => {
   const { size, string } = props;
   const hash = crypto.createHash('md5').update(string).digest().toString('binary');
 
-  // Color = first 3 bytes of the hash
   const color =
     "#" +
     join("", map(
       i => (hash.charCodeAt(i).toString(16) + '00').substr(0,2),
       range(0, 3)
     ));
+
 
   // Mirror the identicon in the middle
   const cols = map(
@@ -32,7 +32,7 @@ const Identicon = props => {
   );
 
   return (
-    <svg className="media-object" xmlns="http://www.w3.org/2000/svg" width={size * 5} height={size * 5}>  
+    <svg xmlns="http://www.w3.org/2000/svg" width={size * 5} height={size * 5}>  
       {rects}
     </svg>
   );

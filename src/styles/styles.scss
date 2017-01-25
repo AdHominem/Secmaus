@@ -4,23 +4,6 @@ $darkFontColor: rgb(79, 82, 86);
 $baseFontColor: #6C7177;
 $font: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-body {
-  font-family: $font;
-  color: $baseFontColor;
-}
-
-.sidebar-container {
-  border-right: 1px solid rgba(0, 0, 0, 0.31);
-  // width: 240px;
-  .sidebar-logo {
-    padding: 20px 30px;
-    text-align: center;
-    img {
-      width: 96px;
-    }
-  }
-}
-
 .example-appear {
   opacity: 0.01;
 }
@@ -28,34 +11,4 @@ body {
 .example-appear.example-appear-active {
   opacity: 1;
   transition: opacity .5s ease-in;
-}
-
-.sidate {
-  .navbar {
-    background-color: $blue;
-  }
-  .navbar-default {
-    .navbar-brand{
-      color: $white;
-    }
-    .navbar-nav {
-      li a {
-        color: $white;
-      }
-      li.active a {
-        background-color: darken($blue, 8);
-        color: $white;
-      }
-    }
-    .dropdown-menu {
-      li a {
-        color: black;
-      }
-    }
-  }
-}
-
-
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-  background-color: darken($blue, 8);
 }

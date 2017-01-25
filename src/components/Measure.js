@@ -43,14 +43,14 @@ class Measure extends React.Component {
     };
 
     if (measure) {
+      // <ReactCSSTransitionGroup
+      //   transitionName="example"
+      //   transitionEnterTimeout={0}
+      //   transitionLeaveTimeout={0}
+      //   transitionAppear={true}
+      //   transitionAppearTimeout={3000}>
+      // </ReactCSSTransitionGroup>
       return (
-      <ReactCSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={0}
-        transitionLeaveTimeout={0}
-        transitionAppear={true}
-        transitionAppearTimeout={3000}>
-
         <div className="measure">
           <h1>
             {measure.name}
@@ -63,7 +63,11 @@ class Measure extends React.Component {
              <a onClick={handleDeleteMeasure}><FontAwesome name="trash"/></a>}
           </h1>
           <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
+
+          <h2>Kommentare</h2>
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
+
+          <h2>Umfragen</h2>
           <Polls measureId={ measure.id } pollsActions={ pollsActions }/>
 
         <Modal
@@ -85,8 +89,6 @@ class Measure extends React.Component {
           />
         </Modal>
         </div>
-
-      </ReactCSSTransitionGroup>
       );
     }
 

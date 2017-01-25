@@ -52,25 +52,25 @@ class Comment extends React.Component {
       // parentId is set to the id of the current comment,
       // so we can reuse the normal CommentForm
       <div className="comment">
-        <br/>
-
-        <div className="media">
-          <div className="media-left" >
-            <Identicon string={comment.user.getUsername()} size={10}/>
-          </div>
-          <div className="media-body">
-            <h4 className="media-heading">{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
-              {comment.createdAt.toLocaleTimeString()}</h4>
-              <a onClick={onClick} >Bearbeiten</a>
-              <a onClick={handleDeleteComment} >Löschen</a>
-            <p dangerouslySetInnerHTML={{__html: comment.text}}/>
-            {comment.user.id === Parse.User.current().id &&
-            <div>
-            </div>}
+        <div className="comment__image">
+          <Identicon string={comment.user.getUsername()} size={10}/>
+        </div>
+        <div className="comment__content">
+          <h1 className="media-heading">
+            {comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.createdAt.toLocaleTimeString()}
+          </h1>
+          {
+            comment.user.id === Parse.User.current().id ?
+            <p className="comment__detail">
+              <a onClick={onClick} >Bearbeiten</a> \ <a onClick={handleDeleteComment} >Löschen</a>
+            </p> :
+            null
+          }
+          <p dangerouslySetInnerHTML={{__html: comment.text}}/>
+          <div className="comment__children">
+            <Comments commentsActions={commentsActions} parentId={comment.id}/>
           </div>
         </div>
-
-        <Comments commentsActions={commentsActions} parentId={comment.id}/>
 
         <Modal
           isOpen={this.state.modalIsOpen}
