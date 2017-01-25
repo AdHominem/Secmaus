@@ -4,8 +4,9 @@ import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/commentsActions';
-import UserWidget from '../components/UserWidget';
+import Parse from 'parse';
 import Comments from '../containers/Comments';
+import Identicon from '../components/Identicon';
 
 class Comment extends React.Component {
   static propTypes = {
@@ -43,12 +44,12 @@ class Comment extends React.Component {
     };
 
     const onClick = event => {
-      this.setState({ toggleEdit: !this.state.toggleEdit });
+      this.setState({ modalIsOpen: !this.state.modalIsOpen });
       event.preventDefault();
     };
 
     const toggleEdit = () => {
-      this.setState({ toggleEdit: !this.state.toggleEdit });
+      this.setState({ modalIsOpen: !this.state.modalIsOpen });
     };
 
     return (
@@ -57,7 +58,22 @@ class Comment extends React.Component {
       <div className="comment">
         <br/>
 
-        <UserWidget user={comment.user} comment={comment} callbacks= {{ onClick: this.openModal, handleDeleteComment }}/>
+        <div className="media">
+          <div className="media-left" >
+            <Identicon string={comment.user.getUsername()} size={10}/>
+          </div>
+          <div className="media-body">
+            <h4 className="media-heading">{comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()},
+              {comment.createdAt.toLocaleTimeString()}</h4>
+              <a onClick={onClick} >Bearbeiten</a>
+              <a onClick={handleDeleteComment} >Löschen</a>
+            <p dangerouslySetInnerHTML={{__html: comment.text}}/>
+            {comment.user.id === Parse.User.current().id &&
+            <div>
+            </div>}
+          </div>
+        </div>
+
         <Comments commentsActions={commentsActions} parentId={comment.id}/>
 
         <Modal

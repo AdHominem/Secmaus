@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Parse } from 'parse';
 import { Link, browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
-import UserWidget from '../components/UserWidget';
+import Identicon from './Identicon';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 
@@ -49,7 +49,8 @@ class App extends React.Component {
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <UserWidget user={currentUser}/> <span className="caret"/>
+              <Identicon string={Parse.User.current().getUsername()} size={10}/>
+              <span className="caret"/>
             </a>
             <ul className="dropdown-menu">
               <li><a onClick={this.logOut}>Log Out</a></li>
