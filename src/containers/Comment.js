@@ -48,10 +48,6 @@ class Comment extends React.Component {
       event.preventDefault();
     };
 
-    const toggleEdit = () => {
-      this.setState({ modalIsOpen: !this.state.modalIsOpen });
-    };
-
     return (
       // parentId is set to the id of the current comment,
       // so we can reuse the normal CommentForm

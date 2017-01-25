@@ -2,34 +2,71 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Polls from '../containers/Polls';
+import Modal from 'react-modal';
+import MeasureForm from '../components/MeasureForm';
 
-const Measures = props => {
-  const { measures } = props;
+class Measures extends React.Component {
+  constructor() {
+    super();
+    this.state = { modalIsOpen: false };
 
-  const body = measures.map((measure, i) =>
-    <Link key={i} className="measure" to={`/SIDATESecMaus/measure/${measure.id}`}>
-      {measure.name}
-    </Link>
-  );
-  return (
-  <ReactCSSTransitionGroup
-    transitionName="example"
-    transitionEnterTimeout={0}
-    transitionLeaveTimeout={0}
-    transitionAppear={true}
-    transitionAppearTimeout={3000}>
-    <div className="measures-container">
-      <Link className="btn btn-primary" to="/SIDATESecMaus/measures/new">Neue Maßnahme</Link>
-      <div className="measures">
-          {body}
-      </div>
-    </div>
-  </ReactCSSTransitionGroup>
-  );
-};
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
 
-Measures.propTypes = {
-  measures: PropTypes.array.isRequired
-};
+  openModal() { this.setState({ modalIsOpen: true }); }
+  afterOpenModal() { }
+  closeModal() { this.setState({ modalIsOpen: false }); }
+
+  render() {
+    const { measures, measureActions } = this.props;
+    const { saveMeasure } = measureActions;
+
+    const body = measures.map((measure, i) =>
+      <Link key={i} className="measure" to={`/SIDATESecMaus/measure/${measure.id}`}>
+        {measure.name}
+      </Link>
+    );
+
+    const onClick = event => {
+      this.setState({ modalIsOpen: !this.state.modalIsOpen });
+      event.preventDefault();
+    };
+
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="example"
+        transitionEnterTimeout={0}
+        transitionLeaveTimeout={0}
+        transitionAppear={true}
+        transitionAppearTimeout={3000}>
+        <div className="measures-container">
+          <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a>
+          <div className="measures">
+              {body}
+          </div>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            contentLabel="Maßnahme hinzufügen"
+          >
+            <MeasureForm
+              saveMeasure={
+                (name, description) => {
+                  saveMeasure(name, description);
+                  this.closeModal();
+                }
+              }
+              close={this.closeModal}
+            />
+          </Modal>
+        </div>
+      </ReactCSSTransitionGroup>
+    );
+  }
+}
+
 
 export default Measures;

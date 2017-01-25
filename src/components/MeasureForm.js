@@ -30,22 +30,26 @@ class MeasureForm extends React.Component {
   }
 
   render() {
+    const { close } = this.props;
     return (
-      <form>
-        <label>
-          Name:
-          <input type="text" ref="name" defaultValue={this.props.name} />
-        </label>
-        <br/>
-        <label>
-          Description:
-        </label>
+      <form className="editor-form">
+        <div className="editor-form--header">
+          <label>
+            Name:
+            <input type="text" ref="name" defaultValue={this.props.name} />
+          </label>
+        </div>
         <ReactQuill
           value={this.state.text}
           onChange={this.onTextChange}
           theme="snow"
         />
-        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+        <div className="button-row">
+          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
+            Schließen
+          </a>
+          <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+        </div>
       </form>
     );
   }

@@ -5,8 +5,6 @@ import { Parse } from 'parse';
 import App from './containers/App';
 import Measures from './containers/Measures';
 import Measure from './containers/Measure';
-import EditMeasure from './containers/EditMeasure';
-import NewMeasure from './containers/NewMeasure';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import Polls from './containers/Polls';
@@ -41,10 +39,8 @@ export default (
       <IndexRoute component={Measures} onEnter={requireAuth}/>
       <Route path="measures" component={Measures} onEnter={requireAuth}/>
       <Route path="polls" component={Polls} onEnter={requireAuth}/>
-      <Route path="measures/new" component={NewMeasure} onEnter={requireAuth}/>
+      <Route path="polls/new" component={NewPoll} onEnter={requireAuth}/>
       <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
-      <Route path="measure/:measureId/edit" component={EditMeasure} onEnter={requireAuth}/>
-      <Route path="poll/:measureId/new" component={NewPoll} onEnter={requireAuth}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>
     </Route>
