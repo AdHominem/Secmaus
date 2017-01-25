@@ -10,30 +10,52 @@ class Poll extends Component {
     poll: PropTypes.object.isRequired
   };
 
+  constructor() {
+    super();
+    this.state = { choice: 0 };
+  }
+
   render() {
+    const { poll } = this.props;
     const { editPoll, deletePoll, answerPoll } = this.props.pollsActions;
-    const { id, text, answers, choices, closed, measureId } = this.props.poll;
+    const { id, text, answers, choices, closed, measureId } = poll;
 
     const toggleClose = event => {
-
       editPoll(id, text, answers, choices, !closed, measureId);
       event.preventDefault();
-      console.log(this.props);
     };
 
-    const { poll } = this.props;
+    const choseAnswer = id => event => {
+      console.log(id);
+
+      this.setState({
+        choice: id
+      });
+    };
+
+    // TODO: Filter by user
+    const vote = event => {
+      answerPoll(id, this.state.choice)
+    };
+
     const body = poll.answers.map((answer, i) =>
-      <div key={i} className="answer"> { answer } { poll.choices.filter((choice) => choice[1] == answer).length }</div>
+      <div key={i} className="answer">
+        <input checked={ i === this.state.choice } type="radio" name="answer-choice" id={i} onClick={ choseAnswer(i) } value={ true }/>
+        <label htmlFor={i}> { answer } { poll.choices.filter(choice => choice[1] == i).length } </label><br/>
+      </div>
     );
+
 
     return (
       <div className="poll">
         <p>{ poll.text }</p>
-        { body }
+
+        <fieldset>
+          { body }
+        </fieldset>
+
         <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
-       {/* <a onClick={ }>Abstimmen</a>
-        <a onClick={ }>Bearbeiten</a>
-        <a onClick={ }>Löschen</a>*/}
+        <a onClick={ vote }>Abstimmen</a>
       </div>
     );
   }
