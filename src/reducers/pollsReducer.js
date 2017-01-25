@@ -1,4 +1,4 @@
-import { ADD_POLL, ANSWER_POLL, DELETE_POLL, EDIT_POLL } from '../constants/actionTypes';
+import { ADD_POLL, DELETE_POLL, EDIT_POLL } from '../constants/actionTypes';
 import { map, filter } from 'ramda';
 
 import update from 'immutability-helper';
@@ -10,8 +10,6 @@ export default function pollsReducer(state = {polls: []}, action) {
         $push: [{
           text: action.text,
           id: action.id,
-          answers: action.answers,
-          choices: action.choices,
           measureId: action.measureId,
           closed: action.closed
         }]
@@ -22,22 +20,9 @@ export default function pollsReducer(state = {polls: []}, action) {
           (poll.id === action.id ? {
               text: action.text,
               id: action.id,
-              answers: action.answers,
-              choices: action.choices,
               measureId: action.measureId,
               closed: action.closed
             } : poll))
-      }});
-    case ANSWER_POLL:
-      return update(state, {polls: {
-        $apply: map(poll =>
-          (poll.id === action.id ?
-              update(poll, {choices: {
-                $push: [[
-                  action.userId,
-                  action.answerIndex
-                ]]
-              }}) : poll))
       }});
     case DELETE_POLL:
       return update(state, {polls: {

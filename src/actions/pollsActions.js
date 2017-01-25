@@ -2,7 +2,6 @@ import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
-
 export function loadPolls() {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
@@ -15,8 +14,6 @@ export function loadPolls() {
           dispatch(addPoll(
             result.id,
             result.get("text"),
-            result.get("answers"),
-            result.get("choices"),
             result.get("closed"),
             result.get("measureId")
           ));
@@ -29,20 +26,18 @@ export function loadPolls() {
   };
 }
 
-export function savePoll(text, answers, measureId) {
+export function savePoll(text, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const poll = new Poll();
 
     poll.set('text', text);
-    poll.set('answers', answers);
-    poll.set('choices', []);
     poll.set('closed', false);
     poll.set('measureId', measureId);
 
     poll.save(null, {
       success: poll => {
-        dispatch(addPoll(poll.id, text, answers, [], false, measureId));
+        dispatch(addPoll(poll.id, text, false, measureId));
       },
       error: (comment, error) => {
         console.log(error);
@@ -51,44 +46,7 @@ export function savePoll(text, answers, measureId) {
   };
 }
 
-/*
-This method assumes that the user has not already answered!
- */
-export function answerPoll(id, answerIndex) {
-  return dispatch => {
-    const Poll = Parse.Object.extend("Poll");
-    const query = new Parse.Query(Poll);
-
-    const userId = Parse.User.current().id;
-    const choice = [ userId, answerIndex ];
-
-    query.get(id, {
-      success: poll => {
-        poll.add("choices", choice);
-        poll.save(null, {
-          success: () => {
-            dispatch(
-              {
-                type: types.ANSWER_POLL,
-                id,
-                answerIndex,
-                userId
-              }
-            );
-          },
-          error: error => {
-            console.log(error);
-          }
-        });
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
-  };
-}
-
-export function editPoll(id, text, answers, choices, closed, measureId) {
+export function editPoll(id, text, closed, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
@@ -96,8 +54,6 @@ export function editPoll(id, text, answers, choices, closed, measureId) {
     query.get(id, {
       success: poll => {
         poll.set('text', text);
-        poll.set('answers', answers);
-        poll.set('choices', choices);
         poll.set('closed', closed);
         poll.set('measureId', measureId);
         poll.save(null, {
@@ -126,13 +82,11 @@ export function editPoll(id, text, answers, choices, closed, measureId) {
   };
 }
 
-export function addPoll(id, text, answers, choices, closed, measureId) {
+export function addPoll(id, text, closed, measureId) {
   return {
     type: types.ADD_POLL,
     id,
     text,
-    answers,
-    choices,
     measureId,
     closed
   };

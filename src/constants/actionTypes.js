@@ -9,7 +9,11 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_POLL = 'ADD_POLL';
 export const EDIT_POLL = 'EDIT_POLL';
 export const DELETE_POLL = 'DELETE_POLL';
-export const ANSWER_POLL = 'ANSWER_POLL';
+
+export const ADD_QUESTION = 'ADD_QUESTION';
+export const EDIT_QUESTION = 'EDIT_QUESTION';
+export const DELETE_QUESTION = 'DELETE_QUESTION';
+export const ANSWER_QUESTION = 'ANSWER_QUESTION';
 
 export const SET_IS_ADMIN = 'SET_IS_ADMIN';
 
