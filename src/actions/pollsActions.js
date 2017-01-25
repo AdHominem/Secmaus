@@ -54,25 +54,25 @@ export function savePoll(text, answers, measureId) {
 /*
 This method assumes that the user has not already answered!
  */
-export function answerPoll(id, answer) {
+export function answerPoll(id, answerIndex) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
 
     const userId = Parse.User.current().id;
-    const choice = { answer, userId };
+    const choice = [ userId, answerIndex ];
 
     query.get(id, {
       success: poll => {
-        poll.choices.push(choice);
-        //poll.set('choices', poll.choices);
+        poll.add("choices", choice);
         poll.save(null, {
           success: () => {
             dispatch(
               {
                 type: types.ANSWER_POLL,
                 id,
-                answer
+                answerIndex,
+                userId
               }
             );
           },
@@ -99,7 +99,7 @@ export function editPoll(id, text, answers, choices, closed, measureId) {
         poll.set('answers', answers);
         poll.set('choices', choices);
         poll.set('closed', closed);
-        poll.set('measure', measure);
+        poll.set('measureId', measureId);
         poll.save(null, {
           success: () => {
             dispatch(
@@ -110,7 +110,7 @@ export function editPoll(id, text, answers, choices, closed, measureId) {
                 answers,
                 choices,
                 closed,
-                measure
+                measureId
               }
             );
           },

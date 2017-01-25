@@ -26,8 +26,6 @@ class Poll extends Component {
     };
 
     const choseAnswer = id => event => {
-      console.log(id);
-
       this.setState({
         choice: id
       });
@@ -35,24 +33,26 @@ class Poll extends Component {
 
     // TODO: Filter by user
     const vote = event => {
-      answerPoll(id, this.state.choice)
+      answerPoll(id, this.state.choice);
+      event.preventDefault();
     };
 
     const body = poll.answers.map((answer, i) =>
       <div key={i} className="answer">
-        <input checked={ i === this.state.choice } type="radio" name="answer-choice" id={i} onClick={ choseAnswer(i) } value={ true }/>
-        <label htmlFor={i}> { answer } { poll.choices.filter(choice => choice[1] == i).length } </label><br/>
+        <label>
+          <input type="radio" onChange={ choseAnswer(i) } checked={ i === this.state.choice }/>
+          { answer } { poll.choices.filter(choice => choice[1] == i).length }
+        </label><br/>
       </div>
     );
-
 
     return (
       <div className="poll">
         <p>{ poll.text }</p>
 
-        <fieldset>
+        <form>
           { body }
-        </fieldset>
+        </form>
 
         <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
         <a onClick={ vote }>Abstimmen</a>
