@@ -66,6 +66,7 @@ export function deleteMeasure(id) {
           id: id
         });
         Alert.success('Maßnahme erfolgreich gelöscht');
+        browserHistory.push('/SIDATESecMaus/measures');
       },
       error: (measure, error) => {
         Alert.error('Maßnahme konnte nicht gelöscht werden: ' + error);
@@ -111,5 +112,22 @@ export function addMeasure(id, name, description, createdBy) {
   return {
     type: types.ADD_MEASURE,
     name, description, id, createdBy
+  };
+}
+
+export function addMeasureFromCatalog(id) {
+  console.log(id);
+  return dispatch => {
+    const CatalogMeasure = Parse.Object.extend("CatalogMeasure");
+    const query = new Parse.Query(CatalogMeasure);
+
+    query.get(id, {
+      success: measure => {
+        dispatch(saveMeasure(measure.get("name"), measure.get("description")));
+      },
+      error: error => {
+        Alert.error('Zu importierende Maßnahme konnte nicht gefunden werden: ' + error);
+      }
+    });
   };
 }

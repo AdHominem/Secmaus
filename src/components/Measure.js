@@ -29,7 +29,7 @@ class Measure extends React.Component {
 
     const handleDeleteMeasure = event => {
       deleteMeasure(measure.id);
-      browserHistory.push('/measures');
+      browserHistory.push('/SIDATESecMaus/measures');
       event.preventDefault();
     };
 

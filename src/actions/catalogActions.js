@@ -28,7 +28,7 @@ export function loadMeasures() {
               const result = results[i];
               dispatch({
                 type: types.ADD_CATALOG_MEASURE,
-                id: result.get("id"),
+                id: result.id,
                 name: result.get("name"),
                 category: result.get("category")
               });
