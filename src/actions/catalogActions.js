@@ -6,34 +6,44 @@ export function loadMeasures() {
   return (dispatch, getState) => {
     const CatalogMeasure = Parse.Object.extend("CatalogMeasure");
     const query = new Parse.Query(CatalogMeasure);
-    // Don't load the description of the measures here,
-    // because amount of data would be to high
-
-    // The default limit is 100, but there are ~1.4k measures in the catalog
-    // TODO: for some reason using `ascending` overwrites the limit w/ 1000
-    query.limit(10000).select("id", "name", "category");//.ascending("name");
-
     const {catalogReducer} = getState();
 
-    if (!catalogReducer.loaded) {
-      console.log("Starting catalog query");
-      query.find({
-        success: results => {
-          console.log(results.length);
-          for (let i = 0; i < results.length; i++) {
-            const result = results[i];
-            dispatch({
-              type: types.ADD_CATALOG_MEASURE,
-              id: result.get("id"),
-              name: result.get("name"),
-              category: result.get("category")
-            });
+    const chunk_size = 50;
+    const chunk_count = 30;
+
+    // Don't load the description of the measures here,
+    // because amount of data would be to high
+    // query.ascending("name").select("id", "name", "category");
+    query.select("id", "name", "category");
+      
+    
+    const loadChunk = (i, max) => {
+      if (i < max) {
+        console.log("Loading chunk " + (i + 1) + " of " + max);
+        query.skip(chunk_size * i).limit(chunk_size);
+        query.find({
+          success: results => {
+            console.log(results.length);
+            for (let i = 0; i < results.length; i++) {
+              const result = results[i];
+              dispatch({
+                type: types.ADD_CATALOG_MEASURE,
+                id: result.get("id"),
+                name: result.get("name"),
+                category: result.get("category")
+              });
+            }
+            loadChunk(i + 1, max);
+          },
+          error: error => {
+            Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error);
           }
-        },
-        error: error => {
-          Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error);
-        }
-      });
+        });
+      }
+    };
+
+    if (!catalogReducer.loaded) {
+      loadChunk(0, chunk_count);
     }
   };
 }
