@@ -4,6 +4,7 @@ import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
 import * as pollsActions from '../actions/pollsActions';
+import * as catalogActions from '../actions/catalogActions';
 import App from '../components/App';
 
 function mapStateToProps(state) {
@@ -17,7 +18,8 @@ function mapDispatchToProps(dispatch) {
     measureActions: bindActionCreators(measureActions, dispatch),
     commentActions: bindActionCreators(commentActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch),
-    pollsActions: bindActionCreators(pollsActions, dispatch)
+    pollsActions: bindActionCreators(pollsActions, dispatch),
+    catalogActions: bindActionCreators(catalogActions, dispatch)
   };
 }
 

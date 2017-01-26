@@ -16,11 +16,12 @@ class App extends React.Component {
 
   componentDidMount() {
     if (Parse.User.current()) {
-      const {measureActions, commentActions, userActions, pollsActions} = this.props;
+      const {measureActions, commentActions, userActions, pollsActions, catalogActions} = this.props;
       measureActions.loadMeasures();
       commentActions.loadComments();
       userActions.loadUserPermissions();
       pollsActions.loadPolls();
+      catalogActions.loadMeasures();
     }
   }
 
@@ -48,6 +49,7 @@ class App extends React.Component {
                 <ul id="js-navigation-menu" className="navigation-menu show">
                   <li className="nav-link"><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
                   <li className="nav-link"><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
+                  <li className="nav-link"><Link to="/SIDATESecMaus/catalog">Maßnahmenkatalog</Link></li>
                   <li className="nav-link"><a onClick={this.logOut}>Log Out</a></li>
                 </ul> :
                 <ul id="js-navigation-menu" className="navigation-menu show">

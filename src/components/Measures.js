@@ -60,6 +60,8 @@ class Measures extends React.Component {
                 this.closeModal();
               }
             }
+            name=""
+            description=""
             close={this.closeModal}
           />
         </Modal>
