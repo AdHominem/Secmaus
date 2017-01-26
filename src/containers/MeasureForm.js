@@ -1,5 +1,9 @@
 import React, { PropTypes } from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import ReactQuill from 'react-quill';
+import Autocomplete from 'react-autocomplete';
+import * as actions from '../actions/measuresActions';
 import '../styles/quill.css';
 
 class MeasureForm extends React.Component {
@@ -11,7 +15,7 @@ class MeasureForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: props.description };
+    this.state = { text: props.description, search_text: '' };
 
     this.onTextChange = this.onTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,11 +33,34 @@ class MeasureForm extends React.Component {
     event.preventDefault();
   }
 
+
+
   render() {
-    const { close } = this.props;
+    const { close, catalogMeasures } = this.props;
+
+    const matchItemToValue = (item, value) => {
+      return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+    };
+
     return (
       <form className="editor-form">
         <div className="editor-form--header">
+          <label>
+            Import:
+            <div className="search-form">
+              <Autocomplete
+                value={this.state.search_text}
+                onChange={(event, value) => this.setState({ search_text: value })}
+                onSelect={value => this.setState({ search_text: value })}
+                shouldItemRender={matchItemToValue}
+                items={catalogMeasures}
+                getItemValue={item => item.name}
+                renderItem={(item, isHighlighted) => (
+                  <div className="search-item">{item.name}</div>
+                )}
+              />
+            </div>
+          </label>
           <label>
             Name:
             <input type="text" ref="name" defaultValue={this.props.name} />
@@ -55,4 +82,19 @@ class MeasureForm extends React.Component {
   }
 }
 
-export default MeasureForm;
+function mapStateToProps(state) {
+  return {
+    catalogMeasures: state.catalogReducer.measures
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    measureActions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MeasureForm);

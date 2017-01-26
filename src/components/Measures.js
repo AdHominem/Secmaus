@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Polls from '../containers/Polls';
 import Modal from 'react-modal';
-import MeasureForm from '../components/MeasureForm';
+import MeasureForm from '../containers/MeasureForm';
 
 class Measures extends React.Component {
   constructor() {
