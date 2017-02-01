@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import Autocomplete from 'react-autocomplete';
+import { Typeahead } from 'react-typeahead';
 import * as actions from '../actions/measuresActions';
 
 class MeasureForm extends React.Component {
@@ -13,10 +13,6 @@ class MeasureForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      search_text: ''
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -40,16 +36,11 @@ class MeasureForm extends React.Component {
           <label>
             Import:
             <div className="search-form">
-              <Autocomplete
-                value={this.state.search_text}
-                onChange={(event, value) => this.setState({ search_text: value })}
-                onSelect={(value, item) => this.setState({ search_text: value, item: item })}
-                shouldItemRender={matchItemToValue}
-                items={catalogMeasures}
-                getItemValue={item => item.name}
-                renderItem={(item, isHighlighted) => (
-                  <div className="search-item">{item.name}</div>
-                )}
+              <Typeahead
+                options={catalogMeasures}
+                filterOption='name'
+                displayOption='name'
+                onOptionSelected={ opt => this.setState({ item: opt })}
               />
             </div>
           </label>
