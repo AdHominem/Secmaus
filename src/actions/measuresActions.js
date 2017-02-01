@@ -44,7 +44,7 @@ export function saveMeasure(name, description) {
     measure.save(null, {
       success: measure => {
         dispatch(addMeasure(measure.id, name, description, Parse.User.current()));
-        browserHistory.push(`/measure/${measure.id}`);
+        browserHistory.push(`/SIDATESecMaus/measure/${measure.id}`);
         Alert.success('Maßnahme erfolgreich angelegt');
       },
       error: (measure, error) => {

@@ -11,6 +11,8 @@ export default function catalogReducer(state = {loaded: false, measures: []}, ac
           id: action.id
         }]
       }});
+    case types.ADD_CATALOG_MEASURES:
+      return update(state, {measures: { $push: action.measures }});
     default:
       return state;
   }
