@@ -75,7 +75,6 @@ class Measure extends React.Component {
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
 
           <h2>Umfragen</h2>
-          { console.log(this.props) }
           <Polls measureId={ measure.id } pollsActions={ pollsActions }/>
 
         <Modal
