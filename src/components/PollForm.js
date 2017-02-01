@@ -50,9 +50,11 @@ class PollForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const { savePoll } = this.props;
-    savePoll(this.state.text, this.state.answers, this.props.measureId);
     event.preventDefault();
+
+    const { savePoll } = this.props;
+    savePoll(this.state.text, this.state.questions, this.props.measureId);
+
     browserHistory.push(`/SIDATESecMaus/measure/${ this.props.measureId }`);
   }
 
@@ -73,8 +75,6 @@ class PollForm extends React.Component {
         }]}
       }))
     };
-
-    console.log(this.state.questions);
 
     return (
       <form>

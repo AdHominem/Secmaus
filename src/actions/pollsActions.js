@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+import saveQuestion from './questionsActions';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
@@ -26,7 +27,7 @@ export function loadPolls() {
   };
 }
 
-export function savePoll(text, measureId) {
+export function savePoll(text, questions, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const poll = new Poll();
@@ -37,6 +38,8 @@ export function savePoll(text, measureId) {
 
     poll.save(null, {
       success: poll => {
+
+        questions.forEach(question => dispatch(saveQuestion(question.answers, question.questionType, question.text, poll.id)));
         dispatch(addPoll(poll.id, text, false, measureId));
       },
       error: (comment, error) => {
