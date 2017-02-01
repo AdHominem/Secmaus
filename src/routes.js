@@ -44,9 +44,9 @@ export default (
       <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>
-      <Route path="catalog" component={Catalog} onEnter={requireAuth}/>
     </Route>
   </Route>
+  // <Route path="catalog" component={Catalog} onEnter={requireAuth}/>
   // <Route path="admin" component={AdminPage} onEnter={requireAdminAuth}/>
   // <Route path="*" component={NotFoundPage}/>
 );

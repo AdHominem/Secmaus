@@ -53,7 +53,6 @@ class App extends React.Component {
                 <ul id="js-navigation-menu" className="navigation-menu show">
                   <li className="nav-link"><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
                   <li className="nav-link"><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
-                  <li className="nav-link"><Link to="/SIDATESecMaus/catalog">Maßnahmenkatalog</Link></li>
                   <li className="nav-link"><a onClick={this.logOut}>Log Out</a></li>
                 </ul> :
                 <ul id="js-navigation-menu" className="navigation-menu show">
