@@ -8,9 +8,9 @@ export function loadMeasures() {
     const query = new Parse.Query(CatalogMeasure);
     const {catalogReducer} = getState();
 
-    const chunk_size = 50;
-    // const chunk_count = 30;
-    const chunk_count = 2;
+    const chunk_size = 200;
+    const chunk_count = 10;
+    // const chunk_count = 2;
 
     // Don't load the description of the measures here,
     // because amount of data would be to high
@@ -23,17 +23,18 @@ export function loadMeasures() {
         console.log("Loading chunk " + (i + 1) + " of " + max);
         query.skip(chunk_size * i).limit(chunk_size);
         query.find({
-          success: results => {
-            console.log(results.length);
-            for (let i = 0; i < results.length; i++) {
-              const result = results[i];
+          success: measures => {
+            console.log(measures.length);
+            // for (let i = 0; i < results.length; i++) {
+            //   const result = results[i];
               dispatch({
-                type: types.ADD_CATALOG_MEASURE,
-                id: result.id,
-                name: result.get("name"),
-                category: result.get("category")
+                type: types.ADD_CATALOG_MEASURES,
+                measures: measures.map( m => ({id: m.id, name: m.get("name"), category: m.get("category")}))
+                // id: result.id,
+                // name: result.get("name"),
+                // category: result.get("category")
               });
-            }
+            // }
             loadChunk(i + 1, max);
           },
           error: error => {

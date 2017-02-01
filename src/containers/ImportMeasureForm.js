@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import ReactQuill from 'react-quill';
+import Autocomplete from 'react-autocomplete';
 import * as actions from '../actions/measuresActions';
-import '../styles/quill.css';
 
 class MeasureForm extends React.Component {
   static propTypes = {
@@ -15,26 +14,15 @@ class MeasureForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: props.description,
-      name: props.name,
+      search_text: ''
     };
 
-    this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    this.onNameChange = this.onNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onDescriptionChange(value) {
-    this.setState({ description: value });
-  }
-
-  onNameChange(event) {
-    this.setState({ name: event.target.value });
-  }
-
   handleSubmit(event) {
-    const { saveMeasure } = this.props;
-    saveMeasure(this.state.name, this.state.description);
+    const { importMeasure } = this.props;
+    importMeasure(this.state.item.id);
     this.setState({ description: '', name: '' });
     event.preventDefault();
   }
@@ -50,20 +38,27 @@ class MeasureForm extends React.Component {
       <form className="editor-form">
         <div className="editor-form--header">
           <label>
-            Name:
-            <input type="text" ref="name" value={this.state.name} onChange={this.onNameChange} />
+            Import:
+            <div className="search-form">
+              <Autocomplete
+                value={this.state.search_text}
+                onChange={(event, value) => this.setState({ search_text: value })}
+                onSelect={(value, item) => this.setState({ search_text: value, item: item })}
+                shouldItemRender={matchItemToValue}
+                items={catalogMeasures}
+                getItemValue={item => item.name}
+                renderItem={(item, isHighlighted) => (
+                  <div className="search-item">{item.name}</div>
+                )}
+              />
+            </div>
           </label>
-        </div>
-        <ReactQuill
-          value={this.state.description}
-          onChange={this.onDescriptionChange}
-          theme="snow"
-        />
-        <div className="button-row">
           <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
             Schließen
           </a>
           <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+        </div>
+        <div className="button-row">
         </div>
       </form>
     );
