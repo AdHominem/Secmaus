@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import saveQuestion from './questionsActions';
+import { saveQuestion } from './questionsActions';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
@@ -38,7 +38,6 @@ export function savePoll(text, questions, measureId) {
 
     poll.save(null, {
       success: poll => {
-
         questions.forEach(question => dispatch(saveQuestion(question.answers, question.questionType, question.text, poll.id)));
         dispatch(addPoll(poll.id, text, false, measureId));
       },
