@@ -84,7 +84,7 @@ main
 .poll
   margin-bottom: 20px
 
-.comment 
+.comment
   $base-border-radius: 3px !default
   $base-spacing: 1.5em !default
   $action-color: #477DCA !default
@@ -105,12 +105,12 @@ main
   width: 100%
 
   .comment__image,
-  .comment__content 
+  .comment__content
     display: table-cell
     vertical-align: $comment-image-vert-alignment
-  .comment__image 
+  .comment__image
     padding-right: $comment-gutter
-    > img 
+    > img
       background: $comment-background
       border-radius: $base-border-radius
       display: block
@@ -118,21 +118,21 @@ main
       max-width: none
       padding: $comment-image-padding
       width: $comment-image-width
-  .comment__content 
+  .comment__content
     width: 100%
-    h1 
+    h1
       font-size: 1em
       margin: 0 0 0.5em 0
-    p 
+    p
       line-height: 1.5em
       margin-bottom: 0.5em
-    p.comment__detail 
+    p.comment__detail
       color: $comment-detail-color
       font-size: 0.9em
       font-style: italic
 
 
-header.navigation 
+header.navigation
   $base-border-color: gainsboro !default
   $base-border-radius: 3px !default
   $action-color: #477DCA !default
@@ -159,22 +159,22 @@ header.navigation
   width: 100%
   z-index: 999
 
-  .navigation-wrapper 
+  .navigation-wrapper
     @include clearfix
     position: relative
     z-index: 9999
-  .logo 
+  .logo
     float: left
     max-height: $navigation-height
     padding-left: $navigation-padding
     padding-right: 2em
-    img 
+    img
       max-height: $navigation-height
       padding: 0.8em 0
-  
+
   // Mobile view
 
-  .navigation-menu-button 
+  .navigation-menu-button
     color: $navigation-color
     display: block
     float: right
@@ -183,21 +183,21 @@ header.navigation
     padding-right: 1em
     text-decoration: none
     text-transform: uppercase
-    @include media ($horizontal-bar-mode) 
+    @include media ($horizontal-bar-mode)
       display: none
     &:focus,
-    &:hover 
+    &:hover
       color: $navigation-color-hover
-    
+
   // Nav menu
 
-  nav 
+  nav
     float: none
     min-height: $navigation-height
     z-index: 9999999
-    @include media ($horizontal-bar-mode) 
+    @include media ($horizontal-bar-mode)
       float: left
-  ul.navigation-menu 
+  ul.navigation-menu
     clear: both
     display: none
     margin: 0 auto
@@ -205,16 +205,16 @@ header.navigation
     padding: 0
     width: 100%
     z-index: 9999
-    &.show 
+    &.show
       display: block
-    @include media ($horizontal-bar-mode) 
+    @include media ($horizontal-bar-mode)
       display: inline
       margin: 0
       padding: 0
-  
+
   // The nav items
 
-  ul li.nav-link 
+  ul li.nav-link
     background: $navigation-background
     display: block
     line-height: $navigation-height
@@ -223,128 +223,128 @@ header.navigation
     text-align: right
     width: 100%
     z-index: 9999
-    @include media ($horizontal-bar-mode) 
+    @include media ($horizontal-bar-mode)
       background: transparent
       display: inline
       line-height: $navigation-height
       text-decoration: none
       width: auto
-    a 
+    a
       color: $navigation-color
       display: inline-block
       text-decoration: none
-      @include media ($horizontal-bar-mode) 
+      @include media ($horizontal-bar-mode)
         padding-right: 1em
       &:focus,
-      &:hover 
+      &:hover
         color: $navigation-color-hover
-  .active-nav-item a 
+  .active-nav-item a
     border-bottom: 1px solid $navigation-active-link-color
     padding-bottom: 3px
 
   // Sub menus
 
-  li.more.nav-link 
+  li.more.nav-link
     padding-right: 0
-    @include media($horizontal-bar-mode) 
+    @include media($horizontal-bar-mode)
       padding-right: $navigation-submenu-padding
-    > ul > li:first-child a  
+    > ul > li:first-child a
       padding-top: 1em
-    a 
+    a
       margin-right: $navigation-submenu-padding
-    > a 
+    > a
       padding-right: 0.6em
-    > a::after 
+    > a::after
       @include position(absolute, auto -0.4em auto auto)
       color: $navigation-color
       content: "\25BE"
-  li.more 
+  li.more
     overflow: visible
     padding-right: 0
-    a 
+    a
       padding-right: 0.8em
-    > a 
+    > a
       padding-right: 1.6em
       position: relative
-      @include media($horizontal-bar-mode) 
+      @include media($horizontal-bar-mode)
         margin-right: $navigation-submenu-padding
-      &::after 
+      &::after
         content: "›"
         font-size: 1.2em
         position: absolute
         right: $navigation-submenu-padding / 2
     &:focus > .submenu,
-    &:hover > .submenu 
+    &:hover > .submenu
       display: block
-    @include media($horizontal-bar-mode) 
+    @include media($horizontal-bar-mode)
       padding-right: 0.8em
       position: relative
-  ul.submenu 
+  ul.submenu
     display: none
     padding-left: 0
-    @include media($horizontal-bar-mode) 
+    @include media($horizontal-bar-mode)
       left: -$navigation-submenu-padding
       position: absolute
       top: 1.5em
-    .submenu.fly-out-right 
-      @include media($horizontal-bar-mode) 
+    .submenu.fly-out-right
+      @include media($horizontal-bar-mode)
         left: $navigation-submenu-width - 0.2em
         top: 0
-    .submenu.fly-out-left 
-      @include media($horizontal-bar-mode) 
+    .submenu.fly-out-left
+      @include media($horizontal-bar-mode)
         left: -$navigation-submenu-width + 0.2em
         top: 0
-    .submenu 
-      @include media($horizontal-bar-mode) 
+    .submenu
+      @include media($horizontal-bar-mode)
         left: $navigation-submenu-width - 0.2em
         top: 0
-    li 
+    li
       display: block
       padding-right: 0
-      @include media($horizontal-bar-mode) 
+      @include media($horizontal-bar-mode)
         line-height: $navigation-height / 1.3
-        &:first-child > a 
+        &:first-child > a
           border-top-left-radius: $base-border-radius
           border-top-right-radius: $base-border-radius
-        &:last-child > a 
+        &:last-child > a
           border-bottom-left-radius: $base-border-radius
           border-bottom-right-radius: $base-border-radius
           padding-bottom: 0.7em
-      a 
+      a
         background-color: darken($navigation-background, 3%)
         display: inline-block
         text-align: right
         width: 100%
-        @include media($horizontal-bar-mode) 
+        @include media($horizontal-bar-mode)
           background-color: $navigation-background
           padding-left: $navigation-submenu-padding
           text-align: left
           width: $navigation-submenu-width
-  
+
   // Elements on the far right
 
-  .navigation-tools 
+  .navigation-tools
     background: #505050
     clear: both
     display: block
     height: $navigation-height
-    @include media($horizontal-bar-mode) 
+    @include media($horizontal-bar-mode)
       background: transparent
       clear: none
       float: right
-  
+
   // Search bar
 
-  .search-bar 
+  .search-bar
     $search-bar-border-color: $base-border-color
     $search-bar-border: 1px solid $search-bar-border-color
     $search-bar-background: lighten($search-bar-border-color, 10%)
     float: left
     padding: 0.85em 0.85em 0.7em 0.6em
     width: 60%
-    form 
+    form
       position: relative
-      input[type=search] 
+      input[type=search]
         background: $navigation-search-background
         border: $navigation-search-border
         border-radius: $base-border-radius * 2
@@ -355,9 +355,9 @@ header.navigation
         margin: 0
         padding: 0.5em 0.8em
         width: 100%
-        @include media($horizontal-bar-mode) 
+        @include media($horizontal-bar-mode)
           width: 100%
-      button[type=submit] 
+      button[type=submit]
         background: $navigation-search-background
         border: 0
         bottom: 0.3em
@@ -367,19 +367,19 @@ header.navigation
         position: absolute
         right: 0.3em
         top: 0.3em
-        img 
+        img
           height: 12px
           opacity: 0.7
           padding: 1px
-    @include media($horizontal-bar-mode) 
+    @include media($horizontal-bar-mode)
       display: inline-block
       position: relative
       width: 16em
-      input 
+      input
         box-sizing: border-box
         display: block
 
-.flex-boxes 
+.flex-boxes
   $base-border-radius: 3px !default
   $base-background-color: white !default
   $dark-gray: #333 !default
@@ -399,7 +399,7 @@ header.navigation
   flex-wrap: wrap
   justify-content: center
   text-align: center
-  .flex-box 
+  .flex-box
     align-self: stretch
     background: $flex-box-background
     border-radius: $base-border-radius
@@ -412,26 +412,26 @@ header.navigation
     transition: all 0.2s ease-in-out
 
     // assign colors from $flex-box-top-colors list
-    @for $i from 1 to 7  
-      &:nth-child(6n + #{$i}) 
+    @for $i from 1 to 7
+      &:nth-child(6n + #{$i})
         $color-from-list: nth($flex-box-top-colors, $i)
         border-top: 6px solid $color-from-list
-        &:focus, &:hover 
+        &:focus, &:hover
           background-color: transparentize($color-from-list, 0.9)
-    img 
+    img
       display: block
       height: 3em
       margin: 0 auto 1em
       opacity: 0.4
-    .flex-title 
+    .flex-title
       color: $flex-box-color
       font-size: 1.2em
       margin-bottom: 0.5em
-    p 
+    p
       color: transparentize($flex-box-color, 0.1)
       line-height: 1.5em
       margin: auto
-  .flex-box-big 
+  .flex-box-big
     flex: 1 1 40em
 
 .search-item
@@ -440,3 +440,7 @@ header.navigation
 // w/o this, the editor menu will render above the drop down list
 .search-form *
   z-index: 999
+
+.question-form
+  margin-top: 30px
+  margin-bottom: 30px

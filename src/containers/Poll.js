@@ -26,7 +26,6 @@ class Poll extends Component {
       event.preventDefault();
     };
 
-
     return (
       <div className="poll">
         <p>{ poll.text }</p>

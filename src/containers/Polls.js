@@ -22,7 +22,7 @@ class Polls extends React.Component {
 
     return (
       <div className="polls">
-        <Link className="btn btn-primary" to={`/SIDATESecMaus/poll/${ measureId }/new`}>Neue Umfrage</Link>
+        <Link className="btn btn-primary" to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}>Neue Umfrage</Link>
         { body }
       </div>
     );

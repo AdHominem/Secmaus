@@ -6,6 +6,7 @@ import * as actions from '../actions/pollsActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { __, range, curry } from 'ramda';
+import QuestionForm from '../containers/QuestionForm';
 
 class PollForm extends React.Component {
   static propTypes = {
@@ -17,13 +18,13 @@ class PollForm extends React.Component {
     super(props);
     this.state = {
       text: props.description,
-      answers: [],
-      count: 3
+      questions: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.onTextChange = this.onTextChange.bind(this);
+    this.onPollTextChange = this.onPollTextChange.bind(this);
+    this.newBinaryQuestion = this.newBinaryQuestion.bind(this);
   }
 
   onChangeHandler(event) {
@@ -33,7 +34,7 @@ class PollForm extends React.Component {
     });
   }
 
-  onTextChange(value) {
+  onPollTextChange(value) {
     this.setState({
       text: value
     })
@@ -47,6 +48,10 @@ class PollForm extends React.Component {
     })
   }
 
+  removeQuestion(event) {
+
+  }
+
   handleSubmit(event) {
     const { savePoll } = this.props;
     savePoll(this.state.text, this.state.answers, this.props.measureId);
@@ -54,12 +59,31 @@ class PollForm extends React.Component {
     browserHistory.push(`/SIDATESecMaus/measure/${ this.props.measureId }`);
   }
 
+  newBinaryQuestion(event) {
+    event.preventDefault();
+    let temp = this.state.questions;
+    temp.push({
+      text: '',
+      questionType: 'binary',
+      answers: []
+    });
+    this.setState({
+      questions: temp
+    })
+  }
+
   render() {
-    const body = range(1, 1 + +this.state.count).map((number, i) =>
+    const body = range(1, 1 + this.state.count).map((number, i) =>
       <div key={i}>
         <label className="answer-label">Antwort {i + 1}</label>
         <input className="answer-input" onChange={ event => this.onAnswerChange(i, event) }/>
       </div>);
+
+    const questions = this.state.questions.map((question, i) =>
+      <div key={ i }>
+        <QuestionForm question={ question } index={ i } />
+      </div>
+    );
 
     return (
       <form>
@@ -69,28 +93,15 @@ class PollForm extends React.Component {
 
         <ReactQuill
           value={this.state.text}
-          onChange={this.onTextChange}
+          onChange={this.onPollTextChange}
           theme="snow"
         />
 
-       <select defaultValue={3} name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-        </select>
+        <button type="submit" className="btn btn-primary" onClick={ this.newBinaryQuestion }>Neue binäre Frage</button>
 
-        <div className="answers-selector">
-          { body }
-        </div>
+        { questions }
 
-
-        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Umfrage hinzufügen</button>
       </form>
     );
   }
