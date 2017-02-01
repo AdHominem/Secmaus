@@ -5,6 +5,7 @@ import Polls from '../containers/Polls';
 import Modal from 'react-modal';
 import MeasureForm from '../containers/MeasureForm';
 import ImportMeasureForm from '../containers/ImportMeasureForm';
+import { reverse } from 'ramda';
 
 class Measures extends React.Component {
   constructor() {
@@ -32,7 +33,7 @@ class Measures extends React.Component {
     const { measures, measureActions } = this.props;
     const { addMeasureFromCatalog, saveMeasure } = measureActions;
 
-    const body = measures.map((measure, i) =>
+    const body = reverse(measures).map((measure, i) =>
       <Link key={i} className="flex-box" to={`/SIDATESecMaus/measure/${measure.id}`}>
         <h1 className="flex-title">{measure.name}</h1>
       </Link>
