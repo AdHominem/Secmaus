@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import MeasureForm from './MeasureForm';
+import MeasureForm from '../containers/MeasureForm';
 import Modal from 'react-modal';
 import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';

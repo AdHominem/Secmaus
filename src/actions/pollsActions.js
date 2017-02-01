@@ -63,8 +63,6 @@ export function editPoll(id, text, closed, measureId) {
                 type: types.EDIT_POLL,
                 text,
                 id,
-                answers,
-                choices,
                 closed,
                 measureId
               }

@@ -34,15 +34,15 @@ export function saveQuestion(answers, questionType, text, pollId) {
     const Question = Parse.Object.extend("Question");
     const question = new Question();
 
-    poll.set('answers', answers);
-    poll.set('choices', []);
-    poll.set('questionType', questionType);
-    poll.set('text', text);
-    poll.set('pollId', pollId);
+    question.set('answers', answers);
+    question.set('choices', []);
+    question.set('questionType', questionType);
+    question.set('text', text);
+    question.set('pollId', pollId);
 
-    poll.save(null, {
-      success: poll => {
-        dispatch(addQuestion(poll.id, answers, [], text, pollId, questionType));
+    question.save(null, {
+      success: question => {
+        dispatch(addQuestion(question.id, answers, [], text, pollId, questionType));
       },
       error: (comment, error) => {
         console.log(error);
