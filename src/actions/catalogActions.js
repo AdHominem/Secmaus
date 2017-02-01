@@ -10,7 +10,7 @@ export function loadMeasures() {
 
     const chunk_size = 50;
     // const chunk_count = 30;
-    const chunk_count = 1;
+    const chunk_count = 2;
 
     // Don't load the description of the measures here,
     // because amount of data would be to high
