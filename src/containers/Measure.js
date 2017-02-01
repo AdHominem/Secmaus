@@ -11,7 +11,7 @@ function mapStateToProps(state, ownProps) {
   return {
     measure: find(propEq('id', ownProps.params.measureId), state.measuresReducer.measures),
     comments: state.commentsReducer.comments,
-    polls: state.pollsReducer.questions
+    polls: state.pollsReducer.polls
   };
 }
 

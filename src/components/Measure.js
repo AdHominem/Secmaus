@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import MeasureForm from '../containers/MeasureForm';
 import Modal from 'react-modal';
@@ -18,6 +18,13 @@ class Measure extends React.Component {
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
+  static propTypes = {
+    measureActions: PropTypes.object.isRequired,
+    commentsActions: PropTypes.object.isRequired,
+    pollsActions: PropTypes.object.isRequired,
+    measure: PropTypes.object.isRequired
+  };
 
   openModal() { this.setState({ modalIsOpen: true }); }
   afterOpenModal() { }
@@ -68,6 +75,7 @@ class Measure extends React.Component {
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
 
           <h2>Umfragen</h2>
+          { console.log(this.props) }
           <Polls measureId={ measure.id } pollsActions={ pollsActions }/>
 
         <Modal

@@ -5,6 +5,7 @@ import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
 import * as pollsActions from '../actions/pollsActions';
 import * as catalogActions from '../actions/catalogActions';
+import * as questionActions from '../actions/questionsActions';
 import App from '../components/App';
 
 function mapStateToProps(state) {
@@ -19,7 +20,8 @@ function mapDispatchToProps(dispatch) {
     commentActions: bindActionCreators(commentActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch),
     pollsActions: bindActionCreators(pollsActions, dispatch),
-    catalogActions: bindActionCreators(catalogActions, dispatch)
+    catalogActions: bindActionCreators(catalogActions, dispatch),
+    questionActions: bindActionCreators(questionActions, dispatch)
   };
 }
 

@@ -11,16 +11,20 @@ class App extends React.Component {
     measureActions: PropTypes.object.isRequired,
     commentActions: PropTypes.object.isRequired,
     userActions: PropTypes.object.isRequired,
-    pollsActions: PropTypes.object.isRequired
+    pollsActions: PropTypes.object.isRequired,
+    questionActions: PropTypes.object.isRequired,
+    catalogActions: PropTypes.object.isRequired
+
   };
 
   componentDidMount() {
     if (Parse.User.current()) {
-      const {measureActions, commentActions, userActions, pollsActions, catalogActions} = this.props;
+      const { measureActions, commentActions, userActions, pollsActions, catalogActions, questionActions } = this.props;
       measureActions.loadMeasures();
       commentActions.loadComments();
       userActions.loadUserPermissions();
       pollsActions.loadPolls();
+      questionActions.loadQuestions();
       catalogActions.loadMeasures();
     }
   }
@@ -45,7 +49,7 @@ class App extends React.Component {
             <a href="javascript:void(0)" className="navigation-menu-button" id="js-mobile-menu">MENU</a>
             <nav role="navigation">
               {
-                Parse.User.current() ? 
+                Parse.User.current() ?
                 <ul id="js-navigation-menu" className="navigation-menu show">
                   <li className="nav-link"><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
                   <li className="nav-link"><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
