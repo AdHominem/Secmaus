@@ -22,7 +22,6 @@ class Measure extends React.Component {
   static propTypes = {
     measureActions: PropTypes.object.isRequired,
     commentsActions: PropTypes.object.isRequired,
-    pollsActions: PropTypes.object.isRequired,
     measure: PropTypes.object.isRequired
   };
 
@@ -31,7 +30,7 @@ class Measure extends React.Component {
   closeModal() { this.setState({ modalIsOpen: false }); }
 
   render() {
-    const { measureActions, commentsActions, pollsActions, measure } = this.props;
+    const { measureActions, commentsActions, measure } = this.props;
     const { deleteMeasure } = measureActions;
 
     const handleDeleteMeasure = event => {
@@ -75,7 +74,7 @@ class Measure extends React.Component {
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
 
           <h2>Umfragen</h2>
-          <Polls measureId={ measure.id } pollsActions={ pollsActions }/>
+          <Polls measureId={ measure.id } />
 
         <Modal
           isOpen={this.state.modalIsOpen}

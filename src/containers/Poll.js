@@ -31,8 +31,6 @@ class Poll extends Component {
       <div className="poll">
         <p>{ poll.text }</p>
 
-        <PollVote />
-
         <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
         <a>Bearbeiten</a>
         <a>Löschen</a>

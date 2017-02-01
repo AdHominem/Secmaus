@@ -10,16 +10,14 @@ import { find, propEq } from 'ramda';
 function mapStateToProps(state, ownProps) {
   return {
     measure: find(propEq('id', ownProps.params.measureId), state.measuresReducer.measures),
-    comments: state.commentsReducer.comments,
-    polls: state.pollsReducer.polls
+    comments: state.commentsReducer.comments
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     measureActions: bindActionCreators(measuresActions, dispatch),
-    commentsActions: bindActionCreators(commentsActions, dispatch),
-    pollsActions: bindActionCreators(pollsActions, dispatch)
+    commentsActions: bindActionCreators(commentsActions, dispatch)
   };
 }
 

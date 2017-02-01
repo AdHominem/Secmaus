@@ -31,7 +31,7 @@ class Polls extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    polls: state.pollsReducer.questions
+    polls: state.pollsReducer.polls
   };
 }
 
