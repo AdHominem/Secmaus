@@ -5,8 +5,9 @@ import { browserHistory } from 'react-router';
 import * as actions from '../actions/pollsActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { __, range, curry } from 'ramda';
+import { __, range, curry, clone } from 'ramda';
 import QuestionForm from '../containers/QuestionForm';
+import update from 'immutability-helper';
 
 class PollForm extends React.Component {
   static propTypes = {
@@ -24,7 +25,7 @@ class PollForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onPollTextChange = this.onPollTextChange.bind(this);
-    this.newBinaryQuestion = this.newBinaryQuestion.bind(this);
+    this.changeQuestionText = this.changeQuestionText.bind(this);
   }
 
   onChangeHandler(event) {
@@ -40,16 +41,12 @@ class PollForm extends React.Component {
     })
   }
 
-  onAnswerChange(i, event) {
-    let temp = this.state.answers;
-    temp[i] = event.target.value;
+  changeQuestionText(event, index) {
+    const temp = clone(this.state.questions);
+    temp[index].text = event.target.value;
     this.setState({
-      answers:  temp
+      questions: temp
     })
-  }
-
-  removeQuestion(event) {
-
   }
 
   handleSubmit(event) {
@@ -59,31 +56,25 @@ class PollForm extends React.Component {
     browserHistory.push(`/SIDATESecMaus/measure/${ this.props.measureId }`);
   }
 
-  newBinaryQuestion(event) {
-    event.preventDefault();
-    let temp = this.state.questions;
-    temp.push({
-      text: '',
-      questionType: 'binary',
-      answers: []
-    });
-    this.setState({
-      questions: temp
-    })
-  }
-
   render() {
-    const body = range(1, 1 + this.state.count).map((number, i) =>
-      <div key={i}>
-        <label className="answer-label">Antwort {i + 1}</label>
-        <input className="answer-input" onChange={ event => this.onAnswerChange(i, event) }/>
-      </div>);
-
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
-        <QuestionForm question={ question } index={ i } />
+        <QuestionForm changeQuestionText={ event => this.changeQuestionText(event, i) } question={ question } index={ i } />
       </div>
     );
+
+    const newQuestion = type => event => {
+      event.preventDefault();
+      this.setState( update(this.state, {
+        questions: { $push: [{
+          text: '',
+          questionType: type,
+          answers: []
+        }]}
+      }))
+    };
+
+    console.log(this.state.questions);
 
     return (
       <form>
@@ -97,11 +88,14 @@ class PollForm extends React.Component {
           theme="snow"
         />
 
-        <button type="submit" className="btn btn-primary" onClick={ this.newBinaryQuestion }>Neue binäre Frage</button>
+        <div className="button-row">
+          <button type="submit" className="btn btn-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
+          <button type="submit" className="btn btn-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
+          <button type="submit" className="btn btn-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
+          <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Umfrage hinzufügen</button>
+        </div>
 
         { questions }
-
-        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Umfrage hinzufügen</button>
       </form>
     );
   }
