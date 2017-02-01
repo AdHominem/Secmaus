@@ -53,10 +53,12 @@ class MeasureForm extends React.Component {
               />
             </div>
           </label>
-          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
-            Schließen
-          </a>
-          <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+          <div className="button-row--left">
+            <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
+              Schließen
+            </a>
+            <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+          </div>
         </div>
         <div className="button-row">
         </div>
