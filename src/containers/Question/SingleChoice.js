@@ -1,15 +1,21 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/pollsActions';
+import * as actions from '../../actions/pollsActions';
 
-class LikertQuestion extends Component {
+class SingleChoiceQuestion extends Component {
   render() {
     const { question } = this.props;
     return (
       <div className="question">
         <h1>{question.text}</h1>
-        <p>;( ... :( ... :| ... :) ... :D</p>
+        <ul>
+        {
+          question.choices.map(choice =>
+            <li>{choice}</li>
+          )
+        }
+        </ul>
       </div>
     );
   }
@@ -28,4 +34,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LikertQuestion);
+)(SingleChoiceQuestion);

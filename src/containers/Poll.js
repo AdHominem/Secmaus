@@ -41,15 +41,17 @@ class Poll extends Component {
           className="flex-title"
           dangerouslySetInnerHTML={{__html: text}}
         />
-        <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
-        <a>Bearbeiten</a>
-        <a>Löschen</a>
+        <div className="flex-content">
+          <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
+          <a>Bearbeiten</a>
+          <a>Löschen</a>
 
-        {
-          questions.map(question =>
-            <Question question={question} />
-          )
-        }
+          {
+            questions.map(question =>
+              <Question question={question} />
+            )
+          }
+        </div>
       </div>
     );
   }
