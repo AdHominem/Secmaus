@@ -36,17 +36,13 @@ class PollForm extends React.Component {
   }
 
   onPollTextChange(value) {
-    this.setState({
-      text: value
-    })
+    this.setState({ text: value });
   }
 
   changeQuestionText(event, index) {
     const temp = clone(this.state.questions);
     temp[index].text = event.target.value;
-    this.setState({
-      questions: temp
-    })
+    this.setState({ questions: temp });
   }
 
   handleSubmit(event) {
