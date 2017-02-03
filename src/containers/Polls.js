@@ -5,7 +5,6 @@ import React, { PropTypes } from 'react';
 import Poll from './Poll'
 import { Link } from 'react-router';
 
-
 class Polls extends React.Component {
 
   static propTypes = {
@@ -15,15 +14,20 @@ class Polls extends React.Component {
   };
 
   render() {
-    const { polls, pollsActions, measureId } = this.props;
-    const body = polls.filter(poll => (measureId ? poll.measureId == measureId : poll))
-                      .map((poll, i) => <Poll key={i} pollsActions={ pollsActions } poll={ poll }/>
-    );
+    const { measureId } = this.props;
+    const polls = this.props.polls.filter(poll => (poll.measureId == measureId));
 
     return (
       <div className="polls">
-        <Link className="btn btn-primary" to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}>Neue Umfrage</Link>
-        { body }
+        <Link
+          className="btn btn-primary"
+          to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
+        >
+          Neue Umfrage
+        </Link>
+        <div className="flex-boxes">
+          {polls.map((poll, i) => ( <Poll poll={ poll } />))}
+        </div>
       </div>
     );
   }
