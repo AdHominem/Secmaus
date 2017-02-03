@@ -4,20 +4,8 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/pollsActions';
 
 class SingleChoiceForm extends Component {
-  constructor() {
-    super();
-    this.state = { answer: 2 };
-  }
-
   render() {
-    const { question } = this.props;
-    const labels = [
-      "trifft zu",
-      "trifft eher zu",
-      "teils-teils",
-      "trifft eher nicht zu",
-      "trifft nicht zu"
-    ]
+    const { question, value, onChange } = this.props;
 
     return (
       <div className="question">
@@ -27,8 +15,8 @@ class SingleChoiceForm extends Component {
             <label>
               <input
                 type="radio" name={choice}
-                checked={this.state.answer === i}
-                onChange={event => this.setState({answer: i})}
+                checked={value === i}
+                onChange={onChange(i)}
               />
               {choice}
             </label>

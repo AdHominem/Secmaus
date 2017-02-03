@@ -4,13 +4,8 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/pollsActions';
 
 class LikertForm extends Component {
-  constructor() {
-    super();
-    this.state = { answer: 2 };
-  }
-
   render() {
-    const { question } = this.props;
+    const { question, value, onChange } = this.props;
     const labels = [
       "trifft zu",
       "trifft eher zu",
@@ -27,8 +22,8 @@ class LikertForm extends Component {
             <label>
               <input
                 type="radio" name={label}
-                checked={this.state.answer === i}
-                onChange={event => this.setState({answer: i})}
+                checked={value === i}
+                onChange={onChange(i)}
               />
               {label}
             </label>

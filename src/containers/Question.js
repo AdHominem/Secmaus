@@ -1,3 +1,4 @@
+// TODO: Is this file needed anymore?
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import Parse from 'parse';
@@ -20,15 +21,21 @@ class Question extends Component {
       case "binary":
         return alreadyAnswered ? 
                <BinaryQuestion question={question} /> :
-               <BinaryForm question={question} />;
+               <BinaryForm
+                 question={question}
+               />;
       case "likert":
         return alreadyAnswered ? 
                <LikertQuestion question={question} /> :
-               <LikertForm question={question} />;
+               <LikertForm
+                 question={question}
+               />;
       case "single choice":
         return alreadyAnswered ? 
                <SingleChoiceQuestion question={question} /> :
-               <SingleChoiceForm question={question} />;
+               <SingleChoiceForm
+                 question={question}
+               />;
       default:
         return <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>;
     }

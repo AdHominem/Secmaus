@@ -6,11 +6,10 @@ import * as actions from '../../actions/pollsActions';
 class BinaryForm extends Component {
   constructor() {
     super();
-    this.state = { answer: 0 };
   }
 
   render() {
-    const { question } = this.props;
+    const { question, value, onChange } = this.props;
     return (
       <div className="question">
         <h1>{question.text}</h1>
@@ -19,16 +18,17 @@ class BinaryForm extends Component {
             <label>
               <input
                 type="radio" name="yes"
-                checked={this.state.answer === 0}
-                onChange={event => this.setState({answer: 0})}
+                checked={value === 0}
+                onChange={onChange(0)}
               />
               <span className="button-group-item button-group-item--yes">Ja</span>
             </label>
             <label>
               <input
                 type="radio"
-                name="no" checked={this.state.answer === 1}
-                onChange={event => this.setState({answer: 1})}
+                name="no"
+                checked={value === 1}
+                onChange={onChange(1)}
               />
               <span className="button-group-item button-group-item--no">Nein</span>
             </label>
