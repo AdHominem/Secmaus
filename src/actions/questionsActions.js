@@ -16,9 +16,9 @@ export function loadQuestions() {
             result.id,
             result.get("answers"),
             result.get("choices"),
-            result.get("questionType"),
             result.get("text"),
-            result.get("pollId")
+            result.get("pollId"),
+            result.get("questionType")
           ));
         }
       },
@@ -29,20 +29,20 @@ export function loadQuestions() {
   };
 }
 
-export function saveQuestion(answers, questionType, text, pollId) {
+export function saveQuestion(choices, questionType, text, pollId) {
   return dispatch => {
     const Question = Parse.Object.extend("Question");
     const question = new Question();
 
-    question.set('answers', answers);
-    question.set('choices', []);
+    question.set('answers', []);
+    question.set('choices', choices);
     question.set('questionType', questionType);
     question.set('text', text);
     question.set('pollId', pollId);
 
     question.save(null, {
       success: question => {
-        dispatch(addQuestion(question.id, answers, [], text, pollId, questionType));
+        dispatch(addQuestion(question.id, [], choices, text, pollId, questionType));
       },
       error: (comment, error) => {
         console.log(error);
