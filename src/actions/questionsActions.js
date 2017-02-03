@@ -60,11 +60,11 @@ export function answerQuestion(id, answerIndex) {
     const query = new Parse.Query(Question);
 
     const userId = Parse.User.current().id;
-    const choice = [ userId, answerIndex ];
+    const answer = [ userId, answerIndex ];
 
     query.get(id, {
       success: question => {
-        question.add("choices", choice);
+        question.add("answers", answer);
         question.save(null, {
           success: () => {
             dispatch(

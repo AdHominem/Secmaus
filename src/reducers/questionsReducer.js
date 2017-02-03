@@ -32,7 +32,7 @@ export default function questionsReducer(state = {questions: []}, action) {
       return update(state, {questions: {
         $apply: map(question =>
           (question.id === action.id ?
-              update(question, {choices: {
+              update(question, {answers: {
                 $push: [[
                   action.userId,
                   action.answerIndex
