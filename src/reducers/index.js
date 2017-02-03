@@ -4,10 +4,12 @@ import measuresReducer from './measuresReducer';
 import commentsReducer from './commentsReducer';
 import userReducer from './userReducer';
 import pollsReducer from './pollsReducer';
+import questionsReducer from './questionsReducer';
 import catalogReducer from './catalogReducer';
 
 const rootReducer = combineReducers({
   pollsReducer,
+  questionsReducer,
   measuresReducer,
   commentsReducer,
   userReducer,
