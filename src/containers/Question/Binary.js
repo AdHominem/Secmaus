@@ -5,11 +5,20 @@ import * as actions from '../../actions/pollsActions';
 
 class BinaryQuestion extends Component {
   render() {
-    const { question } = this.props;
+    const { question, question: { choices, answers } } = this.props;
+
+    const stats = ["Ja", "Nein"].map((choice, i) => (
+      [choice, answers.filter(answer => answer[1] === i).length]
+    ));
+
     return (
       <div className="question">
         <h1>{question.text}</h1>
-        <p>JA / NEIN</p>
+        <ul>
+          { stats.map((stat, i) =>
+              <li>{stat[0]}: {stat[1]}</li>
+          )}
+        </ul>
       </div>
     );
   }

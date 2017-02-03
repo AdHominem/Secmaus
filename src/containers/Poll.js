@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/pollsActions';
+import * as pollsActions from '../actions/pollsActions';
+import * as questionsActions from '../actions/questionsActions';
 import PollVote from './PollVote';
+import Parse from 'parse';
 import BinaryQuestion from './Question/Binary';
 import LikertQuestion from './Question/Likert';
 import SingleChoiceQuestion from './Question/SingleChoice';
@@ -33,24 +35,31 @@ class Poll extends Component {
         id, text, closed, measureId
       },
       pollsActions: { editPoll, deletePoll, answerPoll },
+      questionsActions: { answerQuestion },
       questions
-    } = this.props
+    } = this.props;
 
-    const { answers } = this.state
+    const { answers } = this.state;
 
     const selectAnswer = index => value => event => {
       const temp = clone(answers);
       temp[index] = value;
       this.setState({ answers: temp });
-    }
+    };
+
+    const submitAnswers = event => {
+      questions.forEach((question, i) => {
+        answerQuestion(question.id, answers[i]);
+      });
+    };
 
     const toggleClose = event => {
       // TODO: The action takes a different number of params
-      editPoll(id, text, answers, choices, !closed, measureId);
+      editPoll(id, text, !closed, measureId);
       event.preventDefault();
     };
 
-    console.log(questions);
+
     const alreadyAnswered = any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
 
     return (
@@ -95,7 +104,8 @@ class Poll extends Component {
                 }
             })
           }
-    </div>
+        { alreadyAnswered ? null : <input type="submit" onClick={submitAnswers} /> }
+        </div>
       </div>
       );
   }
@@ -112,7 +122,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    pollsActions: bindActionCreators(actions, dispatch),
+    pollsActions: bindActionCreators(pollsActions, dispatch),
+    questionsActions: bindActionCreators(questionsActions, dispatch)
   };
 }
 
