@@ -2,6 +2,9 @@ import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/pollsActions';
+import { Bar } from 'react-chartjs-2';
+import { map, nth } from 'ramda';
+import { likertColors } from '../../constants/colors';
 
 class LikertQuestion extends Component {
   render() {
@@ -18,14 +21,35 @@ class LikertQuestion extends Component {
       [choice, answers.filter(answer => answer[1] === i).length]
     ));
 
+    const data = {
+      labels: map(nth(0), stats),
+      datasets: [
+      {
+        data: map(nth(1), stats),
+        backgroundColor: likertColors,
+        hoverBackgroundColor: likertColors
+      }]
+    };
+
+    const options = {
+      legend: {
+        display: false,
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            min: 0,
+            stepSize: 1.0
+          }
+        }]
+      }
+    };
+       
+
     return (
       <div className="question">
         <h1>{question.text}</h1>
-        <ul>
-          { stats.map((stat, i) =>
-              <li>{stat[0]}: {stat[1]}</li>
-          )}
-        </ul>
+        <Bar data={data} options={options} />
       </div>
     );
   }

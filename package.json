@@ -31,6 +31,7 @@
   "author": "Cory House",
   "license": "MIT",
   "dependencies": {
+    "chart.js": "2.4.0",
     "immutability-helper": "2.0.0",
     "object-assign": "4.1.0",
     "parse": "1.9.2",
@@ -38,6 +39,7 @@
     "react": "15.3.2",
     "react-addons-css-transition-group": "15.4.1",
     "react-bootstrap": "0.30.7",
+    "react-chartjs-2": "2.0.0",
     "react-dom": "15.3.2",
     "react-fontawesome": "1.5.0",
     "react-initicon": "0.2.1",
