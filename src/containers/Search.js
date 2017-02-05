@@ -1,13 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as pollsActions from '../actions/pollsActions';
-import * as questionsActions from '../actions/questionsActions';
 import Parse from 'parse';
 import { uniq, update, any, clone, append } from 'ramda';
 import Alert from 'react-s-alert';
 import Measures from '../containers/Measures'
-import Polls from '../containers/Polls'
+import Poll from '../containers/Poll'
 
 class Search extends Component {
   constructor(props) {
@@ -15,7 +13,6 @@ class Search extends Component {
     this.state = {
       measures: [],
       polls: [],
-      // catalog: [],
     };
   }
 
@@ -24,7 +21,10 @@ class Search extends Component {
 
     const Measure = Parse.Object.extend("Measure");
     const query1 = new Parse.Query(Measure);
-    query1.contains("description", keyword) || query1.contains("name", keyword);
+    // Case sensitive
+    // query1.contains("description", keyword) || query1.contains("name", keyword);
+    // Case insensitive:
+    query1.matches("description", keyword, "i") || query1.matches("name", keyword, "i");
 
     query1.find(
       {
@@ -45,13 +45,20 @@ class Search extends Component {
 
     const Poll = Parse.Object.extend("Poll");
     const query2 = new Parse.Query(Poll);
-    query2.contains("text", keyword).select("measureId");
+    // Case sensitive
+    // query2.contains("text", keyword);
+    // Case insensitive:
+    query2.matches("text", keyword, "i");
 
     query2.find(
       {
         success: results => {
-          const polls = results.map(result => result.get("measureId"))
-          console.log(results);
+          const polls = results.map(result => ({
+            id: result.id,
+            measureId: result.get("measureId"),
+            text: result.get("text"),
+            closed: result.get("closed"),
+          }));
           this.setState({polls: polls});
         },
         error: error => {
@@ -71,21 +78,16 @@ class Search extends Component {
         <h2>Maßnahmen</h2>
         <Measures measures={measures} showButtons={false} />
         <h2>Umfragen</h2>
-        { uniq(polls).map(measureId => 
-          <Polls measureId={measureId} showButtons={false} />
-        )}
+        <div className="flex-boxes">
+          {polls.map(poll => <Poll poll={ poll } />)}
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return { };
-}
-
-function mapDispatchToProps(dispatch) {
-  return { };
-}
+function mapStateToProps(state, ownProps) { return { }; }
+function mapDispatchToProps(dispatch) { return { }; }
 
 export default connect(
   mapStateToProps,
