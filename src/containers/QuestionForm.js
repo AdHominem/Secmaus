@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import * as actions from '../actions/pollsActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { __, range, curry } from 'ramda';
+import { __, range, curry, update } from 'ramda';
 
 class QuestionForm extends React.Component {
 
@@ -44,11 +44,7 @@ class QuestionForm extends React.Component {
   }
 
   onAnswerChange(i, event) {
-    let temp = this.props.question.answers;
-    temp[i] = event.target.value;
-    this.setState({
-      answers:  temp
-    })
+    this.setState({ answers: update(i, event.target.value, answers) });
   }
 
   handleSubmit(event) {
