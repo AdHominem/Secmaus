@@ -17,6 +17,11 @@ class App extends React.Component {
 
   };
 
+  constructor() {
+    super();
+    this.state = {search: ""};
+  }
+
   componentDidMount() {
     if (Parse.User.current()) {
       const { measureActions, commentActions, userActions, pollsActions, catalogActions, questionActions } = this.props;
@@ -38,12 +43,21 @@ class App extends React.Component {
   }
 
   render() {
+
+    const { search } = this.state;
+    const updateSearch = event => {
+      this.setState({search: event.target.value})
+    };
+
+    const startSearch = event => {
+      browserHistory.push(`/SIDATESecMaus/search/${search}`);
+    };
+
     return (
       <div className="sidate">
         <header className="navigation" role="banner">
           <div className="navigation-wrapper">
             <a href="javascript:void(0)" className="logo">
-
               <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
             </a>
             <a href="javascript:void(0)" className="navigation-menu-button" id="js-mobile-menu">MENU</a>
@@ -64,8 +78,13 @@ class App extends React.Component {
             <div className="navigation-tools">
               <div className="search-bar">
                 <form role="search">
-                  <input type="search" placeholder="Enter Search" />
-                  <button type="submit">
+                  <input
+                    type="search"
+                    placeholder="Suchbegriff"
+                    value={search}
+                    onChange={updateSearch}
+                  />
+                  <button type="submit" onClick={startSearch}>
                     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon" />
                   </button>
                 </form>

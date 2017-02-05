@@ -10,6 +10,7 @@ import Signup from './containers/Signup';
 import Polls from './containers/Polls';
 import NewPoll from './containers/NewPoll';
 import Catalog from './containers/Catalog';
+import Search from './containers/Search';
 
 function requireAuth(nextState, replace) {
   // If the user is not logged in,
@@ -44,6 +45,7 @@ export default (
       <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>
+      <Route path="search/:keyword" component={Search} onEnter={requireAuth}/>
     </Route>
   </Route>
   // <Route path="catalog" component={Catalog} onEnter={requireAuth}/>

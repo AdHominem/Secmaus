@@ -11,7 +11,7 @@ import SingleChoiceQuestion from './Question/SingleChoice';
 import BinaryForm from './Question/BinaryForm';
 import LikertForm from './Question/LikertForm';
 import SingleChoiceForm from './Question/SingleChoiceForm';
-import { any, clone } from 'ramda';
+import { update, any, clone } from 'ramda';
 
 class Poll extends Component {
 
@@ -42,9 +42,7 @@ class Poll extends Component {
     const { answers } = this.state;
 
     const selectAnswer = index => value => event => {
-      const temp = clone(answers);
-      temp[index] = value;
-      this.setState({ answers: temp });
+      this.setState({ answers: update(index, value, answers) });
     };
 
     const submitAnswers = event => {

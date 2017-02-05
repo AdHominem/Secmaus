@@ -30,7 +30,7 @@ class Measures extends React.Component {
   closeModal2() { this.setState({ modalIsOpen2: false }); }
 
   render() {
-    const { measures, measureActions } = this.props;
+    const { measures, measureActions, showButtons } = this.props;
     const { addMeasureFromCatalog, saveMeasure } = measureActions;
 
     const body = reverse(measures).map((measure, i) =>
@@ -58,7 +58,12 @@ class Measures extends React.Component {
     // </ReactCSSTransitionGroup>
     return (
       <div className="measures-container">
-        <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={onClick2} >Maßnahme importieren</a>
+        {
+          showButtons ?
+          <p>
+            <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={onClick2} >Maßnahme importieren</a>
+          </p> : null
+        }
         <div className="flex-boxes">
             {body}
         </div>
