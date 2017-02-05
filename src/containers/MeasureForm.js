@@ -42,10 +42,6 @@ class MeasureForm extends React.Component {
   render() {
     const { close, catalogMeasures } = this.props;
 
-    const matchItemToValue = (item, value) => {
-      return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-    };
-
     return (
       <form className="editor-form">
         <div className="editor-form--header">
