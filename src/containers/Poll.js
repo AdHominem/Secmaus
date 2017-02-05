@@ -11,7 +11,7 @@ import SingleChoiceQuestion from './Question/SingleChoice';
 import BinaryForm from './Question/BinaryForm';
 import LikertForm from './Question/LikertForm';
 import SingleChoiceForm from './Question/SingleChoiceForm';
-import { update, any, clone } from 'ramda';
+import { propEq, update, any, clone } from 'ramda';
 
 class Poll extends Component {
 
@@ -58,7 +58,7 @@ class Poll extends Component {
     };
 
 
-    const alreadyAnswered = any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
+    const alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
 
     return (
       <div className="flex-box poll">
@@ -112,9 +112,7 @@ class Poll extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     isAdmin: state.userReducer.isAdmin,
-    questions: state.questionsReducer.questions.filter(
-        question => question.pollId === ownProps.poll.id
-        )
+    questions: state.questionsReducer.questions.filter(propEq("pollId", ownProps.poll.id))
   };
 }
 
@@ -126,6 +124,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-    )(Poll);
+  mapStateToProps,
+  mapDispatchToProps
+)(Poll);

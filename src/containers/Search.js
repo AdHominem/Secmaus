@@ -13,6 +13,8 @@ class Search extends Component {
     this.state = {
       measures: [],
       polls: [],
+      doneLoadingMeasures: false,
+      doneLoadingPolls: false,
     };
   }
 
@@ -35,7 +37,7 @@ class Search extends Component {
             description: result.get("description"),
             createdBy: result.get("createdBy"),
           }));
-          this.setState({measures: measures});
+          this.setState({measures: measures, doneLoadingMeasures: true});
         },
         error: error => {
           Alert.error('Suche fehlgeschlagen: ' + error);
@@ -59,7 +61,7 @@ class Search extends Component {
             text: result.get("text"),
             closed: result.get("closed"),
           }));
-          this.setState({polls: polls});
+          this.setState({polls: polls, doneLoadingPolls: true});
         },
         error: error => {
           Alert.error('Suche fehlgeschlagen: ' + error);
@@ -70,19 +72,27 @@ class Search extends Component {
 
   render() {
     const keyword = this.props.params.keyword;
-    const { measures, polls } = this.state;
+    const { measures, polls, doneLoadingMeasures, doneLoadingPolls } = this.state;
 
-    return (
-      <div>
-        <h1>Suche nach "{keyword}"</h1>
-        <h2>Maßnahmen</h2>
-        <Measures measures={measures} showButtons={false} />
-        <h2>Umfragen</h2>
-        <div className="flex-boxes">
-          {polls.map(poll => <Poll poll={ poll } />)}
+    if (doneLoadingPolls && doneLoadingMeasures) {
+      return (
+        <div>
+          <h1>Ergebnisse für "{keyword}"</h1>
+          <h2>Maßnahmen</h2>
+          <Measures measures={measures} showButtons={false} />
+          <h2>Umfragen</h2>
+          <div className="flex-boxes">
+            {polls.map(poll => <Poll poll={ poll } />)}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div>
+          <h1>Suche nach "{keyword}"...</h1>
+        </div>
+      )
+    }
   }
 }
 
