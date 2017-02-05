@@ -4,6 +4,7 @@ import * as actions from '../actions/pollsActions';
 import React, { PropTypes } from 'react';
 import Poll from './Poll'
 import { Link } from 'react-router';
+import { propEq } from 'ramda';
 
 class Polls extends React.Component {
 
@@ -37,7 +38,7 @@ class Polls extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    polls: state.pollsReducer.polls.filter(poll => poll.measureId == ownProps.measureId),
+    polls: state.pollsReducer.polls.filter(propEq("measureId", ownProps.measureId)),
     showButtons: ownProps.showButtons !== false
   };
 }
