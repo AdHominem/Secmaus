@@ -32,7 +32,7 @@ class PollForm extends React.Component {
   onChangeHandler(event) {
     this.setState({
       count: event.target.value,
-      answers: this.state.answers.slice(0, event.target.value)
+      choices: this.state.choices.slice(0, event.target.value)
     });
   }
 
@@ -72,7 +72,7 @@ class PollForm extends React.Component {
         questions: { $push: [{
           text: '',
           questionType: type,
-          answers: []
+          choices: []
         }]}
       }))
     };

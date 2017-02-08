@@ -86,10 +86,7 @@ class Poll extends Component {
 
     return (
       <div className="flex-box poll">
-        <h1
-          className="flex-title"
-          dangerouslySetInnerHTML={{__html: text}}
-        />
+        <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
         <div className="flex-content">
           <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
           <a>Bearbeiten</a>

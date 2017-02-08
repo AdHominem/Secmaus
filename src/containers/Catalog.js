@@ -7,7 +7,7 @@ class Catalog extends React.Component {
   render() {
     const { measures, measureActions } = this.props;
     const { addMeasureFromCatalog } = measureActions;
-    
+
     return (
       <div>
         <h1>Maßnahmenkatalog</h1>
