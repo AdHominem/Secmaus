@@ -16,10 +16,16 @@ class Search extends Component {
       doneLoadingMeasures: false,
       doneLoadingPolls: false,
     };
+
+    this.loadResults(props.params.keyword);
   }
 
-  componentDidMount() {
-    const keyword = this.props.params.keyword;
+  componentWillReceiveProps(nextProps) {
+    this.loadResults(nextProps.params.keyword);
+  }
+
+  loadResults(keyword) {
+    this.setState({doneLoadingPolls: false, doneLoadingMeasures: false});
 
     const Measure = Parse.Object.extend("Measure");
     const query1 = new Parse.Query(Measure);
@@ -71,19 +77,29 @@ class Search extends Component {
   }
 
   render() {
+    // this.loadResults();
+
     const keyword = this.props.params.keyword;
     const { measures, polls, doneLoadingMeasures, doneLoadingPolls } = this.state;
 
     if (doneLoadingPolls && doneLoadingMeasures) {
       return (
         <div>
-          <h1>Ergebnisse für "{keyword}"</h1>
-          <h2>Maßnahmen</h2>
-          <Measures measures={measures} showButtons={false} />
-          <h2>Umfragen</h2>
-          <div className="flex-boxes">
-            {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
-          </div>
+          { measures.length + polls.length > 0 ?
+            <h1>Ergebnisse für "{keyword}"</h1> :
+            <h1>Keine Ergebnisse für "{keyword}"</h1> }
+          { measures.length > 0 &&
+            <div>
+              <h2>Maßnahmen</h2>
+              <Measures measures={measures} showButtons={false} />
+            </div> }
+          { polls.length > 0 &&
+            <div>
+              <h2>Umfragen</h2>
+              <div className="flex-boxes">
+                {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
+              </div>
+            </div> }
         </div>
       );
     } else {

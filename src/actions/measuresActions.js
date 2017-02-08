@@ -13,8 +13,9 @@ export function loadMeasures() {
     if (!measuresReducer.loaded) {
       query.find({
         success: results => {
-          for (let i = 0; i < results.length; i++) {
-            const result = results[i];
+          console.log(results)
+          results.forEach(result => {
+            console.log(result)
             // TODO: Remove this once all measures have an associated user
             dispatch(addMeasure(
               result.id,
@@ -22,7 +23,7 @@ export function loadMeasures() {
               result.get("description"),
               result.get("user"),
             ));
-          }
+          })
         },
         error: error => {
           Alert.error('Maßnahmen konnten nicht geladen werden: ' + error);
