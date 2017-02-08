@@ -19,7 +19,7 @@ class LikertForm extends Component {
         <h1>{question.text}</h1>
         <form>
         { labels.map((label, i) => (
-            <label>
+            <label key={i}>
               <input
                 type="radio" name={label}
                 checked={value === i}

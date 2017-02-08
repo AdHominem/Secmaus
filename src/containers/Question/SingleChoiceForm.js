@@ -12,7 +12,7 @@ class SingleChoiceForm extends Component {
         <h1>{question.text}</h1>
         <form>
         { question.choices.map((choice, i) => (
-            <label>
+            <label key={i}>
               <input
                 type="radio" name={choice}
                 checked={value === i}
