@@ -20,16 +20,18 @@ class Polls extends React.Component {
     return (
       <div className="polls">
         {
-          showButtons ? 
+          showButtons &&
           <Link
             className="btn btn-primary"
             to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
           >
             Neue Umfrage
-          </Link> : null
+          </Link>
         }
         <div className="flex-boxes">
-          {polls.map((poll, i) => ( <Poll poll={ poll } />))}
+          {polls.map((poll, i) => (
+              <Poll poll={ poll } />
+          ))}
         </div>
       </div>
     );
@@ -39,7 +41,7 @@ class Polls extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     polls: state.pollsReducer.polls.filter(propEq("measureId", ownProps.measureId)),
-    showButtons: ownProps.showButtons !== false
+    showButtons: ownProps.showButtons
   };
 }
 
