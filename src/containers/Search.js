@@ -42,7 +42,7 @@ class Search extends Component {
         error: error => {
           Alert.error('Suche fehlgeschlagen: ' + error);
         }
-      }    
+      }
     );
 
     const Poll = Parse.Object.extend("Poll");
@@ -66,7 +66,7 @@ class Search extends Component {
         error: error => {
           Alert.error('Suche fehlgeschlagen: ' + error);
         }
-      }    
+      }
     );
   }
 
@@ -82,7 +82,7 @@ class Search extends Component {
           <Measures measures={measures} showButtons={false} />
           <h2>Umfragen</h2>
           <div className="flex-boxes">
-            {polls.map(poll => <Poll poll={ poll } />)}
+            {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
           </div>
         </div>
       );

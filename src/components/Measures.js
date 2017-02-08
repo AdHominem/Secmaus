@@ -67,6 +67,7 @@ class Measures extends React.Component {
         <div className="flex-boxes">
             {body}
         </div>
+
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}

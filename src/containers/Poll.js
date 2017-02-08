@@ -74,24 +74,24 @@ class Poll extends Component {
             questions.map((question, i) => {
                 switch (question.questionType) {
                   case "binary":
-                    return alreadyAnswered ? 
-                      <BinaryQuestion question={question} /> :
+                    return alreadyAnswered ?
+                      <BinaryQuestion key={i} question={question} /> :
                       <BinaryForm
                         question={question}
                         value={answers[i]}
                         onChange={selectAnswer(i)}
                       />;
                   case "likert":
-                    return alreadyAnswered ? 
-                      <LikertQuestion question={question} /> :
+                    return alreadyAnswered ?
+                      <LikertQuestion key={i} question={question} /> :
                       <LikertForm
                         question={question}
                         value={answers[i]}
                         onChange={selectAnswer(i)}
                       />;
                   case "single choice":
-                    return alreadyAnswered ? 
-                      <SingleChoiceQuestion question={question} /> :
+                    return alreadyAnswered ?
+                      <SingleChoiceQuestion key={i} question={question} /> :
                       <SingleChoiceForm
                         question={question}
                         value={answers[i]}

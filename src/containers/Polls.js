@@ -20,8 +20,7 @@ class Polls extends React.Component {
     return (
       <div className="polls">
         {
-          showButtons &&
-          <Link
+          showButtons &&  <Link
             className="btn btn-primary"
             to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
           >
@@ -30,7 +29,7 @@ class Polls extends React.Component {
         }
         <div className="flex-boxes">
           {polls.map((poll, i) => (
-              <Poll poll={ poll } />
+              <Poll key={i} poll={ poll } />
           ))}
         </div>
       </div>
