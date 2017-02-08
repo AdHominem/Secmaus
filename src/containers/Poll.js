@@ -11,7 +11,7 @@ import SingleChoiceQuestion from './Question/SingleChoice';
 import BinaryForm from './Question/BinaryForm';
 import LikertForm from './Question/LikertForm';
 import SingleChoiceForm from './Question/SingleChoiceForm';
-import { propEq, update, any, clone } from 'ramda';
+import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from 'ramda';
 
 class Poll extends Component {
 
@@ -57,8 +57,37 @@ class Poll extends Component {
       event.preventDefault();
     };
 
-
     const alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
+
+    const selectQuestionForm = (question, i) =>
+      (question.questionType === "binary") ?
+        <div>
+          { alreadyAnswered ? <BinaryQuestion key={i} question={question}/>
+          : <BinaryForm
+            question={question}
+            value={answers[i]}
+            onChange={selectAnswer(i)}
+          /> }
+        </div>
+      : (question.questionType === "likert") ?
+          <div>
+            { alreadyAnswered ? <LikertQuestion key={i} question={question}/>
+            : <LikertForm
+              question={question}
+              value={answers[i]}
+              onChange={selectAnswer(i)}
+            /> }
+          </div>
+      : (question.questionType === "single choice") ?
+          <div>
+            { alreadyAnswered ? <SingleChoiceQuestion key={i} question={question}/>
+            : <SingleChoiceForm
+              question={question}
+              value={answers[i]}
+              onChange={selectAnswer(i)}
+            /> }
+          </div>
+      : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>;
 
     return (
       <div className="flex-box poll">
@@ -70,39 +99,8 @@ class Poll extends Component {
           <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
           <a>Bearbeiten</a>
           <a>Löschen</a>
-          {
-            questions.map((question, i) => {
-                switch (question.questionType) {
-                  case "binary":
-                    return alreadyAnswered ?
-                      <BinaryQuestion key={i} question={question} /> :
-                      <BinaryForm
-                        question={question}
-                        value={answers[i]}
-                        onChange={selectAnswer(i)}
-                      />;
-                  case "likert":
-                    return alreadyAnswered ?
-                      <LikertQuestion key={i} question={question} /> :
-                      <LikertForm
-                        question={question}
-                        value={answers[i]}
-                        onChange={selectAnswer(i)}
-                      />;
-                  case "single choice":
-                    return alreadyAnswered ?
-                      <SingleChoiceQuestion key={i} question={question} /> :
-                      <SingleChoiceForm
-                        question={question}
-                        value={answers[i]}
-                        onChange={selectAnswer(i)}
-                      />;
-                  default:
-                    return <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>;
-                }
-            })
-          }
-        { alreadyAnswered ? null : <input type="submit" onClick={submitAnswers} /> }
+          { pipe(sortBy(prop('index')), map(selectQuestionForm))(questions) }
+          {  !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
         </div>
       </div>
       );
