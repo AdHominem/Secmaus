@@ -17,18 +17,15 @@ class Search extends Component {
       doneLoadingPolls: false,
     };
 
-    this.loadResults();
+    this.loadResults(props.params.keyword);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.loadResults();
+    this.loadResults(nextProps.params.keyword);
   }
 
-  loadResults() {
+  loadResults(keyword) {
     this.setState({doneLoadingPolls: false, doneLoadingMeasures: false});
-  // loadResults() {
-    console.log("loading");
-    const keyword = this.props.params.keyword;
 
     const Measure = Parse.Object.extend("Measure");
     const query1 = new Parse.Query(Measure);
