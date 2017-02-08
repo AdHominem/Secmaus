@@ -90,9 +90,9 @@ class Poll extends Component {
         <div className="flex-content">
           {
             this.props.isAdmin && <div className="button-row">
-              <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
-              <a>Bearbeiten</a>
-              <a>Löschen</a>
+              <button className="button" onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</button>
+              <button className="button">Bearbeiten</button>
+              <button className="button">Löschen</button>
             </div>
           }
           { pipe(sortBy(prop('index')), map(selectQuestionForm))(questions) }
