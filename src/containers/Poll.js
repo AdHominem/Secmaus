@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as pollsActions from '../actions/pollsActions';
 import * as questionsActions from '../actions/questionsActions';
-import PollVote from './PollVote';
 import Parse from 'parse';
 import BinaryQuestion from './Question/Binary';
 import LikertQuestion from './Question/Likert';
