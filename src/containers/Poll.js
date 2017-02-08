@@ -59,34 +59,30 @@ class Poll extends Component {
     const alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
 
     const selectQuestionForm = (question, i) =>
-      (question.questionType === "binary") ?
-        <div>
-          { alreadyAnswered ? <BinaryQuestion key={i} question={question}/>
-          : <BinaryForm
+      <div key={i}>
+        { (question.questionType === "binary") ?
+          alreadyAnswered ? <BinaryQuestion question={question}/>
+            : <BinaryForm
+                question={question}
+                value={answers[i]}
+                onChange={selectAnswer(i)}
+              />
+        : (question.questionType === "likert") ?
+          alreadyAnswered ? <LikertQuestion question={question}/>
+            : <LikertForm
             question={question}
             value={answers[i]}
             onChange={selectAnswer(i)}
-          /> }
-        </div>
-      : (question.questionType === "likert") ?
-          <div>
-            { alreadyAnswered ? <LikertQuestion key={i} question={question}/>
-            : <LikertForm
-              question={question}
-              value={answers[i]}
-              onChange={selectAnswer(i)}
-            /> }
-          </div>
-      : (question.questionType === "single choice") ?
-          <div>
-            { alreadyAnswered ? <SingleChoiceQuestion key={i} question={question}/>
+          />
+        : (question.questionType === "single choice") ?
+          alreadyAnswered ? <SingleChoiceQuestion question={question}/>
             : <SingleChoiceForm
-              question={question}
-              value={answers[i]}
-              onChange={selectAnswer(i)}
-            /> }
-          </div>
-      : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>;
+            question={question}
+            value={answers[i]}
+            onChange={selectAnswer(i)}
+          />
+        : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
+      </div>;
 
     return (
       <div className="flex-box poll">
@@ -99,7 +95,7 @@ class Poll extends Component {
           <a>Bearbeiten</a>
           <a>Löschen</a>
           { pipe(sortBy(prop('index')), map(selectQuestionForm))(questions) }
-          {  !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
+          { !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
         </div>
       </div>
       );
