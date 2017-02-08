@@ -9,8 +9,7 @@ export function loadComments() {
 
     query.find({
       success: results => {
-        for (let i = 0; i < results.length; i++) {
-          const result = results[i];
+        for (const result in results) {
           dispatch(addComment(
             result.id,
             result.get("text"),

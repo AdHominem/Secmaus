@@ -10,8 +10,7 @@ export function loadQuestions() {
 
     query.find({
       success: results => {
-        for (let i = 0; i < results.length; i++) {
-          const result = results[i];
+        results.forEach(result => {
           dispatch(addQuestion(
             result.id,
             result.get("answers"),
@@ -20,7 +19,7 @@ export function loadQuestions() {
             result.get("pollId"),
             result.get("questionType")
           ));
-        }
+        })
       },
       error: error => {
         console.log(error);

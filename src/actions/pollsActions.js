@@ -10,16 +10,14 @@ export function loadPolls() {
 
     query.find({
       success: results => {
-        for (let i = 0; i < results.length; i++) {
-          const result = results[i];
+        results.forEach(results => 
           dispatch(addPoll(
             result.id,
             result.get("text"),
             result.get("closed"),
             result.get("measureId")
-          ));
-        }
-      },
+          ))
+        )},
       error: error => {
         console.log(error);
       }
