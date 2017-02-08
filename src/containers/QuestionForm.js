@@ -23,7 +23,6 @@ class QuestionForm extends React.Component {
       answersCount: 0
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
   }
@@ -47,18 +46,13 @@ class QuestionForm extends React.Component {
     this.setState({ answers: update(i, event.target.value, this.state.answers) });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    browserHistory.push(`/SIDATESecMaus/measure/${ this.props.measureId }`);
-  }
-
   render() {
     const { changeQuestionText, removeQuestion, question: { questionType, answers }} = this.props;
     const translations = { 'binary' : 'binären', 'single choice' : 'Single Choice', 'likert' : 'Likert'};
     const { answersCount } = this.state;
 
     return (
-      <form className="question-form">
+      <div className="question-form">
         <br/>
 
         <label>Text der { translations[questionType] } Frage:</label>
@@ -89,10 +83,9 @@ class QuestionForm extends React.Component {
 
 
         <div className="button-row">
-          <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Frage hinzufügen</button>
-          <button type="submit" className="btn btn-primary" onClick={ removeQuestion }>Frage löschen</button>
+          <button className="btn btn-primary" onClick={ removeQuestion }>Frage löschen</button>
         </div>
-      </form>
+      </div>
     );
   }
 }

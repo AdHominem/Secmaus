@@ -21,7 +21,7 @@ class Login extends React.Component {
     return (
       <Jumbotron>
         <h1>Login</h1>
-        <form>
+        <div>
           <label>
             Username: <input ref="username" />
           </label>
@@ -29,7 +29,7 @@ class Login extends React.Component {
             Password: <input type="password" ref="password" />
           </label>
           <input type="submit" onClick={handleSubmit}/>
-        </form>
+        </div>
       </Jumbotron>
     );
   }

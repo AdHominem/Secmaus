@@ -11,7 +11,8 @@ class Polls extends React.Component {
   static propTypes = {
     measureId: PropTypes.string.isRequired,
     polls: PropTypes.array.isRequired,
-    pollsActions: PropTypes.object.isRequired
+    pollsActions: PropTypes.object.isRequired,
+    showButtons: PropTypes.bool.isRequired
   };
 
   render() {
@@ -20,7 +21,7 @@ class Polls extends React.Component {
     return (
       <div className="polls">
         {
-          showButtons &&  <Link
+          showButtons && <Link
             className="btn btn-primary"
             to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
           >
@@ -40,7 +41,6 @@ class Polls extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     polls: state.pollsReducer.polls.filter(propEq("measureId", ownProps.measureId)),
-    showButtons: ownProps.showButtons
   };
 }
 

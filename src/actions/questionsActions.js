@@ -18,7 +18,8 @@ export function loadQuestions() {
             result.get("choices"),
             result.get("text"),
             result.get("pollId"),
-            result.get("questionType")
+            result.get("questionType"),
+            result.get("index")
           ));
         }
       },
@@ -29,7 +30,7 @@ export function loadQuestions() {
   };
 }
 
-export function saveQuestion(choices, questionType, text, pollId) {
+export function saveQuestion(choices, questionType, text, pollId, index) {
   return dispatch => {
     const Question = Parse.Object.extend("Question");
     const question = new Question();
@@ -39,10 +40,11 @@ export function saveQuestion(choices, questionType, text, pollId) {
     question.set('questionType', questionType);
     question.set('text', text);
     question.set('pollId', pollId);
+    question.set('index', index);
 
     question.save(null, {
       success: question => {
-        dispatch(addQuestion(question.id, [], choices, text, pollId, questionType));
+        dispatch(addQuestion(question.id, [], choices, text, pollId, questionType, index));
       },
       error: (comment, error) => {
         console.log(error);
@@ -126,7 +128,7 @@ export function editQuestion(id, text, answers, choices, questionType, pollId) {
   };
 }
 
-export function addQuestion(id, answers, choices, text, pollId, questionType) {
+export function addQuestion(id, answers, choices, text, pollId, questionType, index) {
   return {
     type: types.ADD_QUESTION,
     id,
@@ -134,7 +136,8 @@ export function addQuestion(id, answers, choices, text, pollId, questionType) {
     choices,
     text,
     pollId,
-    questionType
+    questionType,
+    index
   };
 }
 

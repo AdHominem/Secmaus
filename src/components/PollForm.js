@@ -26,6 +26,7 @@ class PollForm extends React.Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onPollTextChange = this.onPollTextChange.bind(this);
     this.changeQuestionText = this.changeQuestionText.bind(this);
+    this.removeQuestion = this.removeQuestion.bind(this);
   }
 
   onChangeHandler(event) {
@@ -33,6 +34,12 @@ class PollForm extends React.Component {
       count: event.target.value,
       answers: this.state.answers.slice(0, event.target.value)
     });
+  }
+
+  removeQuestion(event, index) {
+    const temp = clone(this.state.questions);
+    temp.splice(index, 1);
+    this.setState({ questions: temp });
   }
 
   onPollTextChange(value) {
@@ -46,8 +53,6 @@ class PollForm extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-
     const { savePoll } = this.props;
     savePoll(this.state.text, this.state.questions, this.props.measureId);
 
@@ -55,14 +60,15 @@ class PollForm extends React.Component {
   }
 
   render() {
+    console.log(this.state.questions);
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
-        <QuestionForm changeQuestionText={ event => this.changeQuestionText(event, i) } question={ question } index={ i } />
+        <QuestionForm changeQuestionText={ event => this.changeQuestionText(event, i) } question={ question }
+                      index={ i } removeQuestion={ event => this.removeQuestion(event, i) }/>
       </div>
     );
 
     const newQuestion = type => event => {
-      event.preventDefault();
       this.setState( update(this.state, {
         questions: { $push: [{
           text: '',
@@ -72,8 +78,9 @@ class PollForm extends React.Component {
       }))
     };
 
+
     return (
-      <form>
+      <div>
         <br/>
 
         <label>Text der Umfrage:</label>
@@ -85,14 +92,14 @@ class PollForm extends React.Component {
         />
 
         <div className="button-row">
-          <button type="submit" className="btn btn-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
-          <button type="submit" className="btn btn-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
-          <button type="submit" className="btn btn-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
-          <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Umfrage hinzufügen</button>
+          <button className="btn btn-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
+          <button className="btn btn-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
+          <button className="btn btn-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
+          <button className="btn btn-primary" onClick={this.handleSubmit}>Umfrage hinzufügen</button>
         </div>
 
         { questions }
-      </form>
+      </div>
     );
   }
 }

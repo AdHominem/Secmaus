@@ -13,7 +13,8 @@ export default function questionsReducer(state = {questions: []}, action) {
           answers: action.answers,
           choices: action.choices,
           pollId: action.pollId,
-          questionType: action.questionType
+          questionType: action.questionType,
+          index: action.index
         }]
       }});
     case EDIT_QUESTION:

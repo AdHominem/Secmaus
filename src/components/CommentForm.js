@@ -32,7 +32,7 @@ class CommentForm extends React.Component {
   render() {
     const { close } = this.props;
     return (
-      <form className="editor-form">
+      <div className="editor-form">
         <ReactQuill
           value={this.state.text}
           onChange={this.onTextChange}
@@ -44,7 +44,7 @@ class CommentForm extends React.Component {
           </a>
           <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
         </div>
-      </form>
+      </div>
     );
   }
 }

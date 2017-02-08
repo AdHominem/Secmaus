@@ -37,8 +37,8 @@ export function savePoll(text, questions, measureId) {
     poll.set('measureId', measureId);
 
     poll.save(null, {
-      success: poll => {
-        questions.forEach(question => dispatch(saveQuestion(question.answers, question.questionType, question.text, poll.id)));
+      success: (poll,i) => {
+        questions.forEach(question => dispatch(saveQuestion(question.answers, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
       },
       error: (comment, error) => {
