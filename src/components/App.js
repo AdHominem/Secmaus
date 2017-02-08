@@ -51,6 +51,7 @@ class App extends React.Component {
 
     const startSearch = event => {
       browserHistory.push(`/SIDATESecMaus/search/${search}`);
+      event.preventDefault();
     };
 
     return (
