@@ -77,13 +77,21 @@ class Search extends Component {
     if (doneLoadingPolls && doneLoadingMeasures) {
       return (
         <div>
-          <h1>Ergebnisse für "{keyword}"</h1>
-          <h2>Maßnahmen</h2>
-          <Measures measures={measures} showButtons={false} />
-          <h2>Umfragen</h2>
-          <div className="flex-boxes">
-            {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
-          </div>
+          { measures.length + polls.length > 0 ?
+            <h1>Ergebnisse für "{keyword}"</h1> :
+            <h1>Keine Ergebnisse für "{keyword}"</h1> }
+          { measures.length > 0 &&
+            <div>
+              <h2>Maßnahmen</h2>
+              <Measures measures={measures} showButtons={false} />
+            </div> }
+          { polls.length > 0 &&
+            <div>
+              <h2>Umfragen</h2>
+              <div className="flex-boxes">
+                {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
+              </div>
+            </div> }
         </div>
       );
     } else {
