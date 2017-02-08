@@ -21,7 +21,7 @@ class Polls extends React.Component {
     return (
       <div className="polls">
         {
-          showButtons && <Link
+          showButtons && this.props.isAdmin && <Link
             className="btn btn-primary"
             to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
           >
@@ -40,7 +40,8 @@ class Polls extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    polls: state.pollsReducer.polls.filter(propEq("measureId", ownProps.measureId)),
+    isAdmin: state.userReducer.isAdmin,
+    polls: state.pollsReducer.polls.filter(propEq("measureId", ownProps.measureId))
   };
 }
 
