@@ -15,8 +15,6 @@ class Signup extends React.Component {
 
     user.signUp().then(
       () => {
-        console.log("Before Role update!");
-
         const query = new Parse.Query(Parse.Role);
 
         query.equalTo("name", "Mitarbeiter");

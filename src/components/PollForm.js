@@ -32,7 +32,7 @@ class PollForm extends React.Component {
   onChangeHandler(event) {
     this.setState({
       count: event.target.value,
-      answers: this.state.answers.slice(0, event.target.value)
+      choices: this.state.choices.slice(0, event.target.value)
     });
   }
 
@@ -60,7 +60,6 @@ class PollForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.questions);
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
         <QuestionForm changeQuestionText={ event => this.changeQuestionText(event, i) } question={ question }
@@ -73,7 +72,7 @@ class PollForm extends React.Component {
         questions: { $push: [{
           text: '',
           questionType: type,
-          answers: []
+          choices: []
         }]}
       }))
     };

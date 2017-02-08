@@ -13,9 +13,7 @@ export function loadMeasures() {
     if (!measuresReducer.loaded) {
       query.find({
         success: results => {
-          console.log(results)
           results.forEach(result => {
-            console.log(result)
             // TODO: Remove this once all measures have an associated user
             dispatch(addMeasure(
               result.id,
@@ -117,7 +115,6 @@ export function addMeasure(id, name, description, createdBy) {
 }
 
 export function addMeasureFromCatalog(id) {
-  console.log(id);
   return dispatch => {
     const CatalogMeasure = Parse.Object.extend("CatalogMeasure");
     const query = new Parse.Query(CatalogMeasure);
