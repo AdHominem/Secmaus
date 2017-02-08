@@ -59,10 +59,10 @@ class Measures extends React.Component {
     return (
       <div className="measures-container">
         {
-          showButtons ?
+          showButtons === undefined && this.props.isAdmin &&
           <p>
             <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={onClick2} >Maßnahme importieren</a>
-          </p> : null
+          </p>
         }
         <div className="flex-boxes">
             {body}

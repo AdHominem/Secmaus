@@ -6,7 +6,6 @@ import Measures from '../components/Measures';
 function mapStateToProps(state, ownProps) {
   return {
     measures: ownProps.measures || state.measuresReducer.measures,
-    showButtons: ownProps.showButtons !== false,
     isAdmin: state.userReducer.isAdmin
   };
 }
