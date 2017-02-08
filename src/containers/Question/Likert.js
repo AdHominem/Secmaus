@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/pollsActions';
 import { Bar } from 'react-chartjs-2';
-import { map, nth } from 'ramda';
+import { map, nth, compose, pipe, equals, filter } from 'ramda';
 import { likertColors } from '../../constants/colors';
+import { count } from '../../utils/count';
 
 class LikertQuestion extends Component {
   render() {
@@ -18,7 +19,7 @@ class LikertQuestion extends Component {
       "trifft nicht zu"
     ]
     const stats = labels.map((choice, i) => (
-      [choice, answers.filter(answer => answer[1] === i).length]
+      [choice, count(pipe(nth(1), equals(i)), answers)]
     ));
 
     const data = {
