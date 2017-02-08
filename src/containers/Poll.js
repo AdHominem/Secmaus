@@ -88,9 +88,13 @@ class Poll extends Component {
       <div className="flex-box poll">
         <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
         <div className="flex-content">
-          <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
-          <a>Bearbeiten</a>
-          <a>Löschen</a>
+          {
+            this.props.isAdmin && <div className="button-row">
+              <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
+              <a>Bearbeiten</a>
+              <a>Löschen</a>
+            </div>
+          }
           { pipe(sortBy(prop('index')), map(selectQuestionForm))(questions) }
           { !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
         </div>
