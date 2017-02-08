@@ -3,15 +3,16 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/pollsActions';
 import { Pie } from 'react-chartjs-2';
-import { map, nth } from 'ramda';
+import { map, nth, pipe, equals } from 'ramda';
 import { binaryColors } from '../../constants/colors';
+import { count } from '../../utils/count';
 
 class BinaryQuestion extends Component {
   render() {
     const { question, question: { choices, answers } } = this.props;
 
     const stats = ["Ja", "Nein"].map((choice, i) => (
-      [choice, answers.filter(answer => answer[1] === i).length]
+      [choice, count(pipe(nth(1), equals(i)), answers)]
     ));
 
     const data = {
