@@ -60,7 +60,7 @@ class Poll extends Component {
 
     const selectQuestionForm = (question, i) =>
       <div key={i}>
-        { (question.questionType === "binary") ?
+        {(question.questionType === "binary") ?
           alreadyAnswered ? <BinaryQuestion question={question}/>
             : <BinaryForm
                 question={question}
@@ -88,14 +88,10 @@ class Poll extends Component {
       <div className="flex-box poll">
         <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
         <div className="flex-content">
-          {
-            this.props.isAdmin && <div className="button-row">
-              <button className="button" onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</button>
-              <button className="button">Bearbeiten</button>
-              <button className="button">Löschen</button>
-            </div>
-          }
-          { pipe(sortBy(prop('index')), map(selectQuestionForm))(questions) }
+          <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
+          <a>Bearbeiten</a>
+          <a>Löschen</a>
+          { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
           { !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
         </div>
       </div>
