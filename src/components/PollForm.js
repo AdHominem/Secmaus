@@ -60,7 +60,6 @@ class PollForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.questions);
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
         <QuestionForm changeQuestionText={ event => this.changeQuestionText(event, i) } question={ question }
