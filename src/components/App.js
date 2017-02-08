@@ -23,8 +23,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const { measureActions, commentActions, userActions, pollsActions, catalogActions, questionActions } = this.props;
     if (Parse.User.current()) {
-      const { measureActions, commentActions, userActions, pollsActions, catalogActions, questionActions } = this.props;
       measureActions.loadMeasures();
       commentActions.loadComments();
       userActions.loadUserPermissions();

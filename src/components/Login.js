@@ -6,10 +6,19 @@ import Alert from 'react-s-alert';
 
 class Login extends React.Component {
   render() {
+    const { measureActions, commentActions, userActions, pollsActions, catalogActions, questionActions } = this.props;
+
     const handleSubmit = event => {
       event.preventDefault();
       Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
         () => {
+          measureActions.loadMeasures();
+          commentActions.loadComments();
+          userActions.loadUserPermissions();
+          pollsActions.loadPolls();
+          questionActions.loadQuestions();
+          catalogActions.loadMeasures();
+
           browserHistory.push('/');
           Alert.success('Login erfolgreich');
         }, () => {
