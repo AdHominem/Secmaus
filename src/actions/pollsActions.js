@@ -10,7 +10,7 @@ export function loadPolls() {
 
     query.find({
       success: results => {
-        results.forEach(results => 
+        results.forEach(result => 
           dispatch(addPoll(
             result.id,
             result.get("text"),
