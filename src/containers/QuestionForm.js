@@ -44,7 +44,7 @@ class QuestionForm extends React.Component {
   }
 
   onAnswerChange(i, event) {
-    this.setState({ answers: update(i, event.target.value, answers) });
+    this.setState({ answers: update(i, event.target.value, this.state.answers) });
   }
 
   handleSubmit(event) {
