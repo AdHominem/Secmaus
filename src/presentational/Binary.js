@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { map, nth, pipe, equals } from 'ramda';
 
-import { binaryColors } from '../../constants/colors';
-import { count } from '../../utils/count';
+import { binaryColors } from '../constants/colors';
+import { count } from '../utils/count';
 
 const binaryQuestionRequiredProps = {
   question: PropTypes.object.isRequired
