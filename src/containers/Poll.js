@@ -45,8 +45,6 @@ class Poll extends Component {
       questions
     } = this.props;
 
-    console.log("questions", questions);
-
     const { answers } = this.state;
 
     const selectAnswer = index => value => event => {
@@ -66,7 +64,6 @@ class Poll extends Component {
     };
 
     const handleDeletePoll = event => {
-      console.log("Deleting poll " + id);
       deletePoll(id, questions);
       event.preventDefault();
     };

@@ -1,7 +1,7 @@
-import * as types from '../constants/actionTypes';
-import { saveQuestion, deleteQuestion } from './questionsActions';
-import { Parse } from 'parse';
-import Alert from 'react-s-alert';
+import * as types from "../constants/actionTypes";
+import { saveQuestion, deleteQuestion } from "./questionsActions";
+import { Parse } from "parse";
+import Alert from "react-s-alert";
 
 export function loadPolls() {
   return dispatch => {
@@ -105,9 +105,11 @@ export function deletePoll(id, questions) {
           id: id
         });
         Alert.success("Umfrage erfolgreich gelöscht");
+        console.log("Poll " + id + " has been deleted");
       },
       error: (comment, error) => {
         Alert.error("Umfrage konnte nicht gelöscht werden");
+        console.log("Poll " + id + " could not be deleted");
       }
     });
   };

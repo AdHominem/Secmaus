@@ -151,10 +151,10 @@ export function deleteQuestion(id) {
           type: types.DELETE_QUESTION,
           id: id
         });
-        Alert.success('Frage erfolgreich gelöscht');
+        console.log("Question " + id + " has been deleted");
       },
       error: (comment, error) => {
-        Alert.error('Frage konnte nicht gelöscht werden');
+        console.log("Question " + id + " could not be deleted");
       }
     });
   };
