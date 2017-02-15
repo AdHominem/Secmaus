@@ -103,3 +103,34 @@ export function deletePoll(id, questions) {
     });
   };
 }
+
+export function closePoll(id, closed) {
+  return dispatch => {
+    const Poll = Parse.Object.extend("Poll");
+    const query = new Parse.Query(Poll);
+
+    query.get(id, {
+      success: poll => {
+        poll.set('closed', closed);
+        poll.save(null, {
+          success: () => {
+            dispatch(
+              {
+                type: types.CLOSE_POLL,
+                id,
+                closed,
+              }
+            );
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  };
+}
+
