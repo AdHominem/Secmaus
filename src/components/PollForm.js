@@ -38,10 +38,10 @@ class PollForm extends React.Component {
   }
   handleSubmit(event) {
     let { savePoll, editPoll } = this.props.pollsActions;
-    let { measureId, id } = this.props;
+    let { measureId, poll: { id } } = this.props;
     let { text, questions } = this.state;
 
-    if ("id" in this.props) {
+    if (id) {
       console.log("edit");
       editPoll(id, text, questions, measureId);
     } else {
