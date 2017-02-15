@@ -8,6 +8,10 @@ import Parse from 'parse';
 import Comments from '../containers/Comments';
 import Identicon from '../components/Identicon';
 
+const closeModal = () => {
+  this.setState({ modalIsOpen: false });
+};
+
 class Comment extends React.Component {
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
@@ -17,22 +21,6 @@ class Comment extends React.Component {
   constructor() {
     super();
     this.state = { modalIsOpen: false };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // TODO
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
   }
 
   render() {
@@ -74,7 +62,6 @@ class Comment extends React.Component {
 
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           contentLabel="Kommentar hinzufügen"
         >
@@ -87,7 +74,7 @@ class Comment extends React.Component {
             }
             text={comment.text}
             parentID={comment.id}
-            close={this.closeModal}
+            close={closeModal}
           />
         </Modal>
 

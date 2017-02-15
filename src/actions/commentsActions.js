@@ -9,15 +9,15 @@ export function loadComments() {
 
     query.find({
       success: results => {
-        for (const result in results) {
+        results.forEach(result => {
           dispatch(addComment(
             result.id,
             result.get("text"),
             result.get("parentID"),
             result.get("user"),
             result.get("createdAt")
-          ));
-        }
+          ))
+        })
       },
       error: error => {
         Alert.error('Kommentare konnten nicht geladen werden: ' + error);
