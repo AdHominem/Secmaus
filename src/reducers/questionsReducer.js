@@ -1,5 +1,5 @@
 import { ADD_QUESTION, ANSWER_QUESTION, DELETE_QUESTION, EDIT_QUESTION } from '../constants/actionTypes';
-import { map, filter } from 'ramda';
+import { map, filter, omit, propEq, reject } from 'ramda';
 
 import update from 'immutability-helper';
 
@@ -19,12 +19,7 @@ export default function questionsReducer(state = {questions: []}, action) {
       }});
     case EDIT_QUESTION:
       return update(state, {questions: {
-        $apply: map(question =>
-          (question.id === action.id ? {
-              text: action.text,
-              id: action.id,
-              choices: action.choices
-            } : question))
+        $apply: map(question => question.id === action.id ? omit(['type'], action) : question)
       }});
     case ANSWER_QUESTION:
       return update(state, {questions: {
@@ -39,7 +34,7 @@ export default function questionsReducer(state = {questions: []}, action) {
       }});
     case DELETE_QUESTION:
       return update(state, {questions: {
-        $apply: filter(question => question.id !== action.id)
+        $apply: reject(propEq('id', action.id))
       }});
     default:
       return state;
