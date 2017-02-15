@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { saveQuestion } from './questionsActions';
+import { saveQuestion, deleteQuestion } from './questionsActions';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
@@ -10,7 +10,7 @@ export function loadPolls() {
 
     query.find({
       success: results => {
-        results.forEach(result => 
+        results.forEach(result =>
           dispatch(addPoll(
             result.id,
             result.get("text"),
@@ -98,6 +98,7 @@ export function deletePoll(id) {
     const query = new Parse.Query(Poll);
     query.get(id, {
       success: poll => {
+        questions.forEach(question => dispatch(deleteQuestion(question.id)));
         poll.destroy({});
         dispatch({
           type: types.DELETE_POLL,
