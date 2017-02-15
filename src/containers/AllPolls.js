@@ -1,28 +1,24 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
-import { uniq, update, any, clone, append } from 'ramda';
+
 import Poll from '../containers/Poll'
 
-class AllPolls extends Component {
+const allPollsRequiredProps = {
+  polls: PropTypes.array.isRequired
+};
 
-  static propTypes = {
-    polls: PropTypes.array.isRequired,
-  };
-
-  render() {
-    const {polls} = this.props;
+function AllPolls() {
     return (
       <div>
         <h2>Umfragen</h2>
         <div className="flex-boxes">
-          {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
+          {this.props.map((poll,i) => <Poll key={i} poll={ poll } />)}
         </div>
       </div>
     );
-  }
-
-
 }
+
+AllPolls.propTypes = allPollsRequiredProps;
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -30,8 +26,8 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return { };
+function mapDispatchToProps() {
+  return {};
 }
 
 export default connect(
