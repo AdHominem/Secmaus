@@ -26,7 +26,6 @@ class Comment extends React.Component {
   afterOpenModal() { }
   closeModal() {this.setState({ modalIsOpen: false });}
 
-  
   render() {
     const { comment, commentsActions } = this.props;
 

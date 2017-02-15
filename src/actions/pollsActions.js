@@ -47,7 +47,7 @@ export function savePoll(text, questions, measureId) {
   };
 }
 
-export function editPoll(id, text, closed, measureId) {
+export function editPoll(id, text, questions, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
@@ -55,7 +55,7 @@ export function editPoll(id, text, closed, measureId) {
     query.get(id, {
       success: poll => {
         poll.set('text', text);
-        poll.set('closed', closed);
+        poll.set('questions', questions);
         poll.set('measureId', measureId);
         poll.save(null, {
           success: () => {
@@ -63,8 +63,7 @@ export function editPoll(id, text, closed, measureId) {
               {
                 type: types.EDIT_POLL,
                 text,
-                id,
-                closed,
+                questions,
                 measureId
               }
             );

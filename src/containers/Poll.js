@@ -27,7 +27,8 @@ class Poll extends Component {
     super(props);
     this.state = {
       // default to 0 for all answers
-      answers: props.questions.map(q => 0)
+      answers: props.questions.map(q => 0),
+      modalIsOpen: false
     };
 
     this.openModal = this.openModal.bind(this);
@@ -49,14 +50,15 @@ class Poll extends Component {
   render() {
     const {
       isAdmin,
+      poll,
       poll: {
         id, text, closed, measureId
       },
+      pollsActions,
       pollsActions: { editPoll, deletePoll, answerPoll },
       questionsActions: { answerQuestion },
       questions
     } = this.props;
-
     const { answers } = this.state;
 
     const selectAnswer = index => value => event => {
@@ -81,7 +83,13 @@ class Poll extends Component {
       event.preventDefault();
     };
 
+    const onClick = event => {
+      this.setState({ modalIsOpen: !this.state.modalIsOpen });
+      event.preventDefault();
+    };
+
     let alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
+
 
     const selectQuestionForm = (question, i) =>
       <div key={i}>
@@ -122,10 +130,17 @@ class Poll extends Component {
             onRequestClose={this.closeModal}
             contentLabel="Umfrage editieren"
           >
-            <PollForm savePoll={ editPoll } measureId={ measureId }/>
+            <PollForm
+              pollsActions={ pollsActions }
+              measureId={ measureId }
+              poll={ poll }
+              questions={ questions }
+              text = { text }
+            />
           </Modal>
 
-          <a><FontAwesome name="edit" size="2x"/></a>
+          <a onClick={ onClick }><FontAwesome name="edit" size="2x"/></a>
+
           &nbsp;&nbsp;
           <a onClick={ handleDeletePoll }><FontAwesome name="trash" size="2x"/></a>
           &nbsp;&nbsp;
