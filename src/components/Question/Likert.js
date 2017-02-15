@@ -1,16 +1,10 @@
-
 import React, { PropTypes, Component } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/pollsActions';
 import { Bar } from 'react-chartjs-2';
 import { map, nth, compose, pipe, equals, filter } from 'ramda';
 import { likertColors } from '../../constants/colors';
 import { count } from '../../utils/count';
 
-const LikertQuestion = props => {
-  const { question, question: { choices, answers } } = props;
-
+const LikertQuestion = ({ question, question: { choices, answers } }) => {
   const labels = [
     "trifft zu",
     "trifft eher zu",

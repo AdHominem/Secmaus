@@ -1,15 +1,10 @@
 import React, { PropTypes, Component } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/pollsActions';
 import { Pie } from 'react-chartjs-2';
 import { map, nth, pipe, equals } from 'ramda';
 import { singleChoiceColors } from '../../constants/colors';
 import { count } from '../../utils/count';
 
-const SingleChoiceQuestion = props => {
-  const { question, question: { choices, answers } } = props;
-
+const SingleChoiceQuestion = ({ question, question: { choices, answers } }) => {
   const stats = choices.map((choice, i) => (
     [choice, count(pipe(nth(1), equals(i)), answers)]
   ));
