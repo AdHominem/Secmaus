@@ -37,7 +37,7 @@ class Login extends React.Component {
           <label>
             Password: <input type="password" ref="password" />
           </label>
-          <input type="submit" onClick={handleSubmit}/>
+          <button onClick={handleSubmit}>Log In</button>
         </div>
       </Jumbotron>
     );

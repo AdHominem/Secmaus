@@ -55,7 +55,7 @@ class Signup extends React.Component {
             Password: <input type="password" ref="password" />
           </label>
           <br />
-          <input type="submit" onClick={this.handleSubmit.bind(this)}/>
+          <button onClick={this.handleSubmit.bind(this)}>Sing Up</button>
         </form>
       </Jumbotron>
     );
