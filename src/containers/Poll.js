@@ -27,6 +27,13 @@ class Poll extends Component {
     };
   }
 
+  componentWillReceiveProps(props) {
+    this.state = {
+      // default to 0 for all answers
+      answers: props.questions.map(q => 0)
+    };
+  }
+
   render() {
     const {
       isAdmin,
@@ -37,6 +44,8 @@ class Poll extends Component {
       questionsActions: { answerQuestion },
       questions
     } = this.props;
+
+    console.log("questions", questions);
 
     const { answers } = this.state;
 
