@@ -52,7 +52,6 @@ class PollForm extends React.Component {
     };
 
     const changeQuestionChoices = index => choices => {
-      console.log("foo", choices)
       const temp = clone(this.state.questions);
       temp[index].choices = choices;
       this.setState({ questions: temp });
@@ -61,19 +60,32 @@ class PollForm extends React.Component {
     // TODO: Clean up
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
-        <QuestionForm changeQuestionText={ changeQuestionText(i) } changeQuestionChoices={changeQuestionChoices(i)} question={ question }
-                      index={ i } removeQuestion={ event => this.removeQuestion(event, i) }/>
+        <QuestionForm
+          changeQuestionText={ changeQuestionText(i) }
+          changeQuestionChoices={changeQuestionChoices(i)} question={ question }
+          index={ i } removeQuestion={ event => this.removeQuestion(event, i) }
+        />
       </div>
     );
 
     const newQuestion = type => event => {
-      this.setState( update(this.state, {
-        questions: { $push: [{
-          text: '',
-          questionType: type,
-          choices: []
-        }]}
-      }))
+      if (type === 'single choice') {
+        this.setState( update(this.state, {
+          questions: { $push: [{
+            text: '',
+            questionType: type,
+            choices: ['', '', '']
+          }]}
+        }))
+      } else {
+        this.setState( update(this.state, {
+          questions: { $push: [{
+            text: '',
+            questionType: type,
+            choices: []
+          }]}
+        }))
+      }
     };
 
 
