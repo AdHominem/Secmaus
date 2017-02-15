@@ -7,40 +7,39 @@ import Alert from 'react-s-alert';
 const Login = ({ measureActions, commentActions,
                  userActions, pollsActions,
                  catalogActions, questionActions }) => {
-    const handleSubmit = event => {
-      event.preventDefault();
-      Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
-        () => {
-          measureActions.loadMeasures();
-          commentActions.loadComments();
-          userActions.loadUserPermissions();
-          pollsActions.loadPolls();
-          questionActions.loadQuestions();
-          catalogActions.loadMeasures();
+  const handleSubmit = event => {
+    event.preventDefault();
+    Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
+      () => {
+        measureActions.loadMeasures();
+        commentActions.loadComments();
+        userActions.loadUserPermissions();
+        pollsActions.loadPolls();
+        questionActions.loadQuestions();
+        catalogActions.loadMeasures();
 
-          browserHistory.push('/');
-          Alert.success('Login erfolgreich');
-        }, () => {
-          Alert.error('Login fehlgeschlagen');
-        }
-      );
-    };
-
-    return (
-      <Jumbotron>
-        <h1>Login</h1>
-        <div>
-          <label>
-            Username: <input ref="username" />
-          </label>
-          <label>
-            Password: <input type="password" ref="password" />
-          </label>
-          <button onClick={handleSubmit}>Log In</button>
-        </div>
-      </Jumbotron>
+        browserHistory.push('/');
+        Alert.success('Login erfolgreich');
+      }, () => {
+        Alert.error('Login fehlgeschlagen');
+      }
     );
-  }
+  };
+
+  return (
+    <Jumbotron>
+      <h1>Login</h1>
+      <div>
+        <label>
+          Username: <input ref="username" />
+        </label>
+        <label>
+          Password: <input type="password" ref="password" />
+        </label>
+        <button onClick={handleSubmit}>Log In</button>
+      </div>
+    </Jumbotron>
+  );
 }
 
 Login.propTypes = {
