@@ -36,7 +36,7 @@ class App extends React.Component {
 
   logOut() {
     Parse.User.logOut().then(() => {
-      browserHistory.push('/SIDATESecMaus/login');
+      browserHistory.push("/SIDATESecMaus/login");
     }, err => {
       alert(err.message);
     });
@@ -69,6 +69,7 @@ class App extends React.Component {
                   <li className="nav-link"><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
                   <li className="nav-link"><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
                   <li className="nav-link"><a onClick={this.logOut}>Log Out</a></li>
+                  <li className="nav-link"><Link to="/SIDATESecMaus/user">{ Parse.User.current().getUsername() }</Link></li>
                 </ul> :
                 <ul id="js-navigation-menu" className="navigation-menu show">
                   <li className="nav-link"><Link to="/SIDATESecMaus/login">Log In</Link></li>
