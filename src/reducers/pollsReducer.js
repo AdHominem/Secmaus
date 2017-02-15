@@ -1,4 +1,4 @@
-import { ADD_POLL, DELETE_POLL, EDIT_POLL } from '../constants/actionTypes';
+import { ADD_POLL, DELETE_POLL, EDIT_POLL, CLOSE_POLL } from '../constants/actionTypes';
 import { map, filter } from 'ramda';
 
 import update from 'immutability-helper';
@@ -27,6 +27,13 @@ export default function pollsReducer(state = {polls: []}, action) {
     case DELETE_POLL:
       return update(state, {polls: {
         $apply: filter(poll => poll.id !== action.id)
+      }});
+    case CLOSE_POLL:
+      return update(state, {polls: {
+        $apply: map(poll =>
+          (poll.id === action.id ? {
+              closed: action.closed
+            } : poll))
       }});
     default:
       return state;
