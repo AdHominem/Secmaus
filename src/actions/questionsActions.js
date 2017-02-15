@@ -23,7 +23,7 @@ export function loadQuestions() {
         })
       },
       error: error => {
-        console.log(error);
+        Alert.error("Fragen konnten nicht geladen werden");
       }
     });
   };
@@ -46,7 +46,7 @@ export function saveQuestion(choices, questionType, text, pollId, index) {
         dispatch(addQuestion(question.id, [], choices, text, pollId, questionType, index));
       },
       error: (comment, error) => {
-        console.log(error);
+        Alert.error("Frage konnte nicht gespeichert werden");
       }
     });
   };
@@ -77,14 +77,10 @@ export function answerQuestion(id, answerIndex) {
               }
             );
           },
-          error: error => {
-            console.log(error);
-          }
+          error: error => Alert.error("Zu beantwortende Frage konnte nicht geladen werden")
         });
       },
-      error: error => {
-        console.log(error);
-      }
+      error: error => Alert.error("Frage konnte nicht beantwortet werden")
     });
   };
 }
@@ -115,14 +111,10 @@ export function editQuestion(id, text, answers, choices, questionType, pollId) {
               }
             );
           },
-          error: error => {
-            console.log(error);
-          }
+          error: error => Alert.error("Zu bearbeitende Frage konnte nicht geladen werden")
         });
       },
-      error: error => {
-        console.log(error);
-      }
+      error: error => Alert.error("Frage konnte nicht bearbeitet werden")
     });
   };
 }
@@ -151,11 +143,8 @@ export function deleteQuestion(id) {
           type: types.DELETE_QUESTION,
           id: id
         });
-        console.log("Question " + id + " has been deleted");
       },
-      error: (comment, error) => {
-        console.log("Question " + id + " could not be deleted");
-      }
+      error: error => Alert.error("Frage konnte nicht gelöscht werden")
     });
   };
 }

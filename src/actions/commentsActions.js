@@ -19,9 +19,7 @@ export function loadComments() {
           ))
         })
       },
-      error: error => {
-        Alert.error('Kommentare konnten nicht geladen werden: ' + error);
-      }
+      error: () => Alert.error('Kommentare konnten nicht geladen werden')
     });
   };
 }
@@ -41,9 +39,7 @@ export function saveComment(text, parentID) {
       success: comment => {
         dispatch(addComment(comment.id, text, parentID, Parse.User.current(), now));
       },
-      error: (comment, error) => {
-        Alert.error('Kommentar konnten nicht gespeichert werden: ' + error);
-      }
+      error: () => Alert.error('Kommentar konnten nicht gespeichert werden')
     });
   };
 }
@@ -66,14 +62,10 @@ export function editComment(id, text) {
               }
             );
           },
-          error: error => {
-            Alert.error('Zu bearbeitender Kommentar konnten nicht geladen werden: ' + error);
-          }
+          error: () => Alert.error('Zu bearbeitender Kommentar konnten nicht geladen werden')
         });
       },
-      error: error => {
-        Alert.error('Zu bearbeitender Kommentar konnten nicht gespeichert werden: ' + error);
-      }
+      error: () => Alert.error('Zu bearbeitender Kommentar konnten nicht gespeichert werden')
     });
   };
 }
@@ -98,9 +90,7 @@ export function deleteComment(id) {
         });
         Alert.success('Kommentar erfolgreich gelöscht');
       },
-      error: (comment, error) => {
-        Alert.error('Kommentar konnte nicht gelöscht werden: ' + error);
-      }
+      error: () => Alert.error('Kommentar konnte nicht gelöscht werden')
     });
   };
 }

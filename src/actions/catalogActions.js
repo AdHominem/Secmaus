@@ -28,9 +28,7 @@ export function loadMeasures() {
             });
             loadChunk(i + 1, max);
           },
-          error: error => {
-            Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error);
-          }
+          error: error => Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error)
         });
       }
     };
