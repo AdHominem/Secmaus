@@ -23,17 +23,8 @@ class PollForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onPollTextChange = this.onPollTextChange.bind(this);
-    this.changeQuestionText = this.changeQuestionText.bind(this);
     this.removeQuestion = this.removeQuestion.bind(this);
-  }
-
-  onChangeHandler(event) {
-    this.setState({
-      count: event.target.value,
-      choices: this.state.choices.slice(0, event.target.value)
-    });
   }
 
   removeQuestion(event, index) {
@@ -46,12 +37,6 @@ class PollForm extends React.Component {
     this.setState({ text: value });
   }
 
-  changeQuestionText(event, index) {
-    const temp = clone(this.state.questions);
-    temp[index].text = event.target.value;
-    this.setState({ questions: temp });
-  }
-
   handleSubmit(event) {
     const { savePoll } = this.props;
     savePoll(this.state.text, this.state.questions, this.props.measureId);
@@ -60,9 +45,23 @@ class PollForm extends React.Component {
   }
 
   render() {
+    const changeQuestionText = index => event => {
+      const temp = clone(this.state.questions);
+      temp[index].text = event.target.value;
+      this.setState({ questions: temp });
+    }
+
+    const changeQuestionChoices = index => choices => {
+      console.log("foo", choices)
+      const temp = clone(this.state.questions);
+      temp[index].choices = choices;
+      this.setState({ questions: temp });
+    }
+
+    // TODO: Clean up
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
-        <QuestionForm changeQuestionText={ event => this.changeQuestionText(event, i) } question={ question }
+        <QuestionForm changeQuestionText={ changeQuestionText(i) } changeQuestionChoices={changeQuestionChoices(i)} question={ question }
                       index={ i } removeQuestion={ event => this.removeQuestion(event, i) }/>
       </div>
     );

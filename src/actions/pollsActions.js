@@ -34,9 +34,11 @@ export function savePoll(text, questions, measureId) {
     poll.set('closed', false);
     poll.set('measureId', measureId);
 
+    console.log(questions);
+
     poll.save(null, {
       success: (poll,i) => {
-        questions.forEach(question => dispatch(saveQuestion(question.answers, question.questionType, question.text, poll.id, i)));
+        questions.forEach(question => dispatch(saveQuestion(question.choices, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
       },
       error: (comment, error) => {

@@ -12,15 +12,16 @@ class QuestionForm extends React.Component {
   static propTypes = {
     question: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    changeQuestionText: PropTypes.func.isRequired
+    changeQuestionText: PropTypes.func.isRequired,
+    changeQuestionChoices: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       text: props.question.text,
-      answers: props.question.answers,
-      answersCount: 0
+      choices: props.question.choices,
+      choicesCount: props.question.choices.length,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -28,10 +29,18 @@ class QuestionForm extends React.Component {
   }
 
   onChangeHandler(event) {
+
+    const { changeQuestionChoices } = this.props;
+    const count = +event.target.value;
+
+    // .fill(null) is necessary because js arrays are broken
+    const newChoices = (new Array(count)).fill(null).map((e, i) => this.state.choices[i] || "");
     this.setState({
-      answersCount: +event.target.value,
-      answers: this.props.question.answers.slice(0, event.target.value)
+      choicesCount: count,
+      choices: newChoices,
     });
+
+    changeQuestionChoices(newChoices)
   }
 
   onTextChange(event) {
@@ -43,13 +52,18 @@ class QuestionForm extends React.Component {
   }
 
   onAnswerChange(i, event) {
-    this.setState({ answers: update(i, event.target.value, this.state.answers) });
+    const { changeQuestionChoices } = this.props;
+    console.log(this.state)
+    this.setState({ choices: update(i, event.target.value, this.state.choices) });
+
+    // TODO: Clean up
+    changeQuestionChoices(this.state.choices);
   }
 
   render() {
-    const { changeQuestionText, removeQuestion, question: { questionType, answers }} = this.props;
+    const { changeQuestionText, removeQuestion, question: { questionType, choices }} = this.props;
     const translations = { 'binary' : 'binären', 'single choice' : 'Single Choice', 'likert' : 'Likert'};
-    const { answersCount } = this.state;
+    const { choicesCount } = this.state;
 
     return (
       <div className="question-form">
@@ -73,9 +87,9 @@ class QuestionForm extends React.Component {
                 <option>10</option>
               </select>
 
-              { range(1, 1 + answersCount).map(i =>
+              { range(0, choicesCount).map(i =>
                   <div key={ i }>
-                    <label className="answer-label">Antwort {i + 1}</label>
+                    <label className="answer-label">Antwort {i+1}</label>
                     <input className="answer-input" onChange={ event => this.onAnswerChange(i, event) }/>
                   </div>)
               }
