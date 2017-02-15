@@ -1,18 +1,22 @@
 import React, { PropTypes } from 'react';
-import ReactQuill from 'react-quill';
-import '../styles/quill.css';
-import { browserHistory } from 'react-router';
-import * as actions from '../actions/pollsActions';
 import { connect } from 'react-redux';
+import ReactQuill from 'react-quill';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { __, range, curry, clone } from 'ramda';
-import QuestionForm from '../containers/QuestionForm';
+import { clone } from 'ramda';
 import update from 'immutability-helper';
+
+import * as actions from '../actions/pollsActions';
+import '../styles/quill.css';
+import QuestionForm from '../containers/QuestionForm';
 
 class PollForm extends React.Component {
   static propTypes = {
     pollsActions: PropTypes.object.isRequired,
-    measureId: PropTypes.string.isRequired
+    measureId: PropTypes.string.isRequired,
+    text: PropTypes.string,
+    description: PropTypes.string,
+    questions: PropTypes.object
   };
 
   constructor(props) {
@@ -42,8 +46,6 @@ class PollForm extends React.Component {
     let { text, questions } = this.state;
 
     if (this.props.poll) {
-      console.log(this.props);
-      console.log(this.state);
       editPoll(this.props.poll.id, text, questions, measureId);
     } else {
       savePoll(text, questions, measureId);
@@ -83,7 +85,7 @@ class PollForm extends React.Component {
             questionType: type,
             choices: ['', '', '']
           }]}
-        }))
+        }));
       } else {
         this.setState( update(this.state, {
           questions: { $push: [{
@@ -91,7 +93,7 @@ class PollForm extends React.Component {
             questionType: type,
             choices: []
           }]}
-        }))
+        }));
       }
     };
 
@@ -124,9 +126,8 @@ class PollForm extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-  };
+function mapStateToProps() {
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
