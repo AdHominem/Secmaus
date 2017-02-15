@@ -30,7 +30,9 @@ export default function pollsReducer(state = {polls: []}, action) {
       }});
     case CLOSE_POLL:
       return update(state, {polls: {
-        $apply: map(poll => (poll.id === action.id ? update(poll, {closed: {$set: action.closed}}) : poll))
+        $apply: map(poll => (poll.id === action.id
+            ? update(poll, {closed: {$set: action.closed}})
+            : poll))
       }});
     default:
       return state;

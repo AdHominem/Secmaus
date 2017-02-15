@@ -20,11 +20,11 @@ export default function questionsReducer(state = {questions: []}, action) {
     case EDIT_QUESTION:
       return update(state, {questions: {
         $apply: map(question =>
-          (question.id === action.id ? {
-              text: action.text,
-              id: action.id,
-              choices: action.choices
-            } : question))
+          (question.id === action.id ? update(question, {
+              id: {$set: action.id},
+              text:{$set: action.text},
+              choices: {$set: action.choices}
+            }) : question))
       }});
     case ANSWER_QUESTION:
       return update(state, {questions: {

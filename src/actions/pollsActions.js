@@ -1,5 +1,5 @@
 import * as types from "../constants/actionTypes";
-import { saveQuestion, deleteQuestion } from "./questionsActions";
+import { saveQuestion, deleteQuestion, editQuestion } from "./questionsActions";
 import { Parse } from "parse";
 import Alert from "react-s-alert";
 

@@ -92,16 +92,16 @@ export function editQuestion(id, choices, text) {
 
     query.get(id, {
       success: question => {
-        question.set('text', text);
         question.set('choices', choices);
+        question.set('text', text);
         question.save(null, {
           success: () => {
             dispatch(
               {
                 type: types.EDIT_QUESTION,
-                text,
                 id,
-                choices
+                choices,
+                text
               }
             );
           },
