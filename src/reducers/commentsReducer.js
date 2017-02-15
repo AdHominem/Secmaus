@@ -19,14 +19,8 @@ export default function commentsReducer(state = {comments: []}, action) {
     case EDIT_COMMENT:
       return update(state, {comments: {
         $apply: map((comment) =>
-          comment.id === action.id ?
-            {
-              text: action.text,
-              parentID: comment.parentID,
-              id: comment.id,
-              user: comment.user,
-              createdAt: comment.createdAt
-            } : comment)
+          comment.id === action.id ? update(comment, {text: {$set: action.text}}) : comment
+        )
       }});
     case DELETE_COMMENT:
       return update(state, {comments: {

@@ -11,15 +11,15 @@ import update from 'immutability-helper';
 
 class PollForm extends React.Component {
   static propTypes = {
-    savePoll: PropTypes.func.isRequired,
+    pollsActions: PropTypes.object.isRequired,
     measureId: PropTypes.string.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      text: props.description,
-      questions: []
+      text: props.text ? props.text : props.description,
+      questions: props.questions ? props.questions : []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,12 +36,18 @@ class PollForm extends React.Component {
   onPollTextChange(value) {
     this.setState({ text: value });
   }
-
   handleSubmit(event) {
-    const { savePoll } = this.props;
-    savePoll(this.state.text, this.state.questions, this.props.measureId);
+    let { savePoll, editPoll } = this.props.pollsActions;
+    let { text, questions, measureId} = this.props;
 
-    browserHistory.push(`/SIDATESecMaus/measure/${ this.props.measureId }`);
+    console.log(this.props);
+
+    if ("id" in this.props) {
+      editPoll(this.props.id, text, questions, measureId);
+    } else {
+      savePoll(text, questions, measureId);
+    }
+    browserHistory.push(`/SIDATESecMaus/measure/${ measureId }`);
   }
 
   render() {
@@ -117,4 +123,18 @@ class PollForm extends React.Component {
   }
 }
 
-export default PollForm;
+function mapStateToProps(state, ownProps) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    pollsActions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PollForm);

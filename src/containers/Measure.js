@@ -16,6 +16,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    pollsActions: bindActionCreators(pollsActions, dispatch),
     measureActions: bindActionCreators(measuresActions, dispatch),
     commentsActions: bindActionCreators(commentsActions, dispatch)
   };

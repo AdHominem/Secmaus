@@ -17,9 +17,7 @@ export function loadPolls() {
             result.get("measureId")
           ))
         )},
-      error: error => {
-        Alert.error("Umfragen konnten nicht geladen werden");
-      }
+      error: error => Alert.error("Umfragen konnten nicht geladen werden")
     });
   };
 }
@@ -38,14 +36,12 @@ export function savePoll(text, questions, measureId) {
         questions.forEach(question => dispatch(saveQuestion(question.choices, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
       },
-      error: (comment, error) => {
-        Alert.error("Umfrage konnte nicht gespeichert werden");
-      }
+      error: error => Alert.error("Umfrage konnte nicht gespeichert werden")
     });
   };
 }
 
-export function editPoll(id, text, closed, measureId) {
+export function editPoll(id, text, questions, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
@@ -53,7 +49,7 @@ export function editPoll(id, text, closed, measureId) {
     query.get(id, {
       success: poll => {
         poll.set('text', text);
-        poll.set('closed', closed);
+        poll.set('questions', questions);
         poll.set('measureId', measureId);
         poll.save(null, {
           success: () => {
@@ -61,50 +57,15 @@ export function editPoll(id, text, closed, measureId) {
               {
                 type: types.EDIT_POLL,
                 text,
-                id,
-                closed,
+                questions,
                 measureId
               }
             );
           },
-          error: error => {
-            console.log(error);
-          }
+          error: error => Alert.error("Zu bearbeitende Umfrage konnte nicht geladen werden")
         });
       },
-      error: error => {
-        console.log(error);
-      }
-    });
-  };
-}
-
-export function closePoll(id, closed) {
-  return dispatch => {
-    const Poll = Parse.Object.extend("Poll");
-    const query = new Parse.Query(Poll);
-
-    query.get(id, {
-      success: poll => {
-        poll.set('closed', closed);
-        poll.save(null, {
-          success: () => {
-            dispatch(
-              {
-                type: types.CLOSE_POLL,
-                id,
-                closed,
-              }
-            );
-          },
-          error: error => {
-            console.log(error);
-          }
-        });
-      },
-      error: error => {
-        console.log(error);
-      }
+      error: error => Alert.error("Umfrage konnte nicht gespeichert werden")
     });
   };
 }
@@ -134,9 +95,7 @@ export function deletePoll(id, questions) {
         });
         Alert.success("Umfrage erfolgreich gelöscht");
       },
-      error: (comment, error) => {
-        Alert.error("Umfrage konnte nicht gelöscht werden");
-      }
+      error: error => Alert.error("Umfrage konnte nicht gelöscht werden")
     });
   };
 }
