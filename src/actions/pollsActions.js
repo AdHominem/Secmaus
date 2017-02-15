@@ -1,7 +1,7 @@
-import * as types from '../constants/actionTypes';
-import { saveQuestion } from './questionsActions';
-import { Parse } from 'parse';
-import Alert from 'react-s-alert';
+import * as types from "../constants/actionTypes";
+import { saveQuestion } from "./questionsActions";
+import { Parse } from "parse";
+import Alert from "react-s-alert";
 
 export function loadPolls() {
   return dispatch => {
@@ -10,8 +10,7 @@ export function loadPolls() {
 
     query.find({
       success: results => {
-        results.forEach(result => 
-          dispatch(addPoll(
+        results.forEach(result => dispatch(addPoll(
             result.id,
             result.get("text"),
             result.get("closed"),

@@ -49,14 +49,14 @@ class PollForm extends React.Component {
       const temp = clone(this.state.questions);
       temp[index].text = event.target.value;
       this.setState({ questions: temp });
-    }
+    };
 
     const changeQuestionChoices = index => choices => {
       console.log("foo", choices)
       const temp = clone(this.state.questions);
       temp[index].choices = choices;
       this.setState({ questions: temp });
-    }
+    };
 
     // TODO: Clean up
     const questions = this.state.questions.map((question, i) =>

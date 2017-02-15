@@ -65,6 +65,12 @@ class Poll extends Component {
       event.preventDefault();
     };
 
+    const handleDeletePoll = event => {
+      console.log("Deleting poll " + id);
+      //deletePoll(id);
+      event.preventDefault();
+    };
+
     const alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
 
     const selectQuestionForm = (question, i) =>
@@ -99,7 +105,7 @@ class Poll extends Component {
         <div className="flex-content">
           <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
           <a>Bearbeiten</a>
-          <a>Löschen</a>
+          <a onClick={ handleDeletePoll }>Löschen</a>
           { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
           { !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
         </div>
