@@ -16,6 +16,7 @@ class Comment extends React.Component {
   constructor() {
     super();
     this.state = { modalIsOpen: false };
+
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -23,10 +24,7 @@ class Comment extends React.Component {
 
   openModal() { this.setState({ modalIsOpen: true }); }
   afterOpenModal() { }
-  closeModal() {
-    console.log(this);
-    this.setState({ modalIsOpen: false });
-  }
+  closeModal() {this.setState({ modalIsOpen: false });}
 
   render() {
     const { comment, commentsActions } = this.props;
