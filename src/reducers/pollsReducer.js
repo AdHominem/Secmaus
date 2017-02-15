@@ -18,10 +18,10 @@ export default function pollsReducer(state = {polls: []}, action) {
       return update(state, {polls: {
         $apply: map(poll =>
           (poll.id === action.id ? {
-              text: action.text,
               id: action.id,
-              measureId: action.measureId,
-              closed: action.closed
+              text: action.text,
+              questions: action.questions,
+              measureId: action.measureId
             } : poll))
       }});
     case DELETE_POLL:

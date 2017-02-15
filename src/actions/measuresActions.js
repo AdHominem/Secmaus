@@ -23,7 +23,7 @@ export function loadMeasures() {
           })
         },
         error: error => {
-          Alert.error('Maßnahmen konnten nicht geladen werden: ' + error);
+          Alert.error("Maßnahmen konnten nicht geladen werden: " + error);
         }
       });
     }

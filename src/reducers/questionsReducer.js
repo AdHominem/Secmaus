@@ -23,10 +23,7 @@ export default function questionsReducer(state = {questions: []}, action) {
           (question.id === action.id ? {
               text: action.text,
               id: action.id,
-              answers: action.answers,
-              choices: action.choices,
-              pollId: action.pollId,
-              questionType: action.questionType
+              choices: action.choices
             } : question))
       }});
     case ANSWER_QUESTION:

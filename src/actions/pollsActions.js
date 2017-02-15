@@ -52,16 +52,17 @@ export function editPoll(id, text, questions, measureId) {
 
     query.get(id, {
       success: poll => {
+        poll.set('id'. id);
         poll.set('text', text);
-        poll.set('questions', questions);
         poll.set('measureId', measureId);
         poll.save(null, {
           success: () => {
+            questions.forEach(question => dispatch(editQuestion(question.id, question.choices, question.text)));
             dispatch(
               {
                 type: types.EDIT_POLL,
+                id,
                 text,
-                questions,
                 measureId
               }
             );

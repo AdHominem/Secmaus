@@ -85,7 +85,7 @@ export function answerQuestion(id, answerIndex) {
   };
 }
 
-export function editQuestion(id, text, answers, choices, questionType, pollId) {
+export function editQuestion(id, choices, text) {
   return dispatch => {
     const Question = Parse.Object.extend("Question");
     const query = new Parse.Query(Question);
@@ -93,10 +93,7 @@ export function editQuestion(id, text, answers, choices, questionType, pollId) {
     query.get(id, {
       success: question => {
         question.set('text', text);
-        question.set('answers', answers);
         question.set('choices', choices);
-        question.set('questionType', questionType);
-        question.set('pollId', pollId);
         question.save(null, {
           success: () => {
             dispatch(
@@ -104,10 +101,7 @@ export function editQuestion(id, text, answers, choices, questionType, pollId) {
                 type: types.EDIT_QUESTION,
                 text,
                 id,
-                answers,
-                choices,
-                questionType,
-                pollId
+                choices
               }
             );
           },
