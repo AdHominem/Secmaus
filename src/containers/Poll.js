@@ -1,16 +1,16 @@
-import React, { PropTypes, Component } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as pollsActions from '../actions/pollsActions';
-import * as questionsActions from '../actions/questionsActions';
-import Parse from 'parse';
-import BinaryQuestion from './Question/Binary';
-import LikertQuestion from './Question/Likert';
-import SingleChoiceQuestion from './Question/SingleChoice';
-import BinaryForm from './Question/BinaryForm';
-import LikertForm from './Question/LikertForm';
-import SingleChoiceForm from './Question/SingleChoiceForm';
-import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from 'ramda';
+import React, { PropTypes, Component } from "react";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as pollsActions from "../actions/pollsActions";
+import * as questionsActions from "../actions/questionsActions";
+import Parse from "parse";
+import BinaryQuestion from "./Question/Binary";
+import LikertQuestion from "./Question/Likert";
+import SingleChoiceQuestion from "./Question/SingleChoice";
+import BinaryForm from "./Question/BinaryForm";
+import LikertForm from "./Question/LikertForm";
+import SingleChoiceForm from "./Question/SingleChoiceForm";
+import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from "ramda";
 
 class Poll extends Component {
 

@@ -68,7 +68,7 @@ class Measure extends React.Component {
             {Parse.User.current() && measure.createdBy.id === Parse.User.current().id &&
              <a onClick={handleDeleteMeasure}><FontAwesome name="trash"/></a>}
           </h1>
-          <p dangerouslySetInnerHTML={{__html: measure.description}}></p>
+          <p dangerouslySetInnerHTML={{__html: measure.description}}/>
 
           <h2>Kommentare</h2>
           <Comments commentsActions={commentsActions} parentId={measure.id}/>
