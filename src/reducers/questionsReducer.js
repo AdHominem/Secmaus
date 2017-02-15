@@ -19,12 +19,7 @@ export default function questionsReducer(state = {questions: []}, action) {
       }});
     case EDIT_QUESTION:
       return update(state, {questions: {
-        $apply: map(question =>
-          (question.id === action.id ? update(question, {
-              id: {$set: action.id},
-              text:{$set: action.text},
-              choices: {$set: action.choices}
-            }) : question))
+        $apply: map(question => question.id === action.id ? omit(['type'], action) : question)
       }});
     case ANSWER_QUESTION:
       return update(state, {questions: {
@@ -39,7 +34,7 @@ export default function questionsReducer(state = {questions: []}, action) {
       }});
     case DELETE_QUESTION:
       return update(state, {questions: {
-        $apply: filter(question => question.id !== action.id)
+        $apply: reject(propEq('id', action.id))
       }});
     default:
       return state;

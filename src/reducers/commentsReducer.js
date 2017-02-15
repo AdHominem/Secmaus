@@ -1,5 +1,5 @@
 import { ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../constants/actionTypes';
-import { map, filter } from 'ramda';
+import { reject, propEq, map } from 'ramda';
 
 // https://facebook.github.io/react/docs/update.html
 import update from 'immutability-helper';
@@ -24,7 +24,7 @@ export default function commentsReducer(state = {comments: []}, action) {
       }});
     case DELETE_COMMENT:
       return update(state, {comments: {
-        $apply: filter((comment) => comment.id !== action.id)
+        $apply: reject(propEq('id', action.id))
       }});
     default:
       return state;

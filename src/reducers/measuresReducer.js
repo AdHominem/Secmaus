@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { map, filter } from 'ramda';
+import { reject, propEq, map, filter } from 'ramda';
 
 import update from 'immutability-helper';
 
@@ -23,7 +23,7 @@ export default function measuresReducer(state = {loaded: false, measures: []}, a
       }});
     case types.DELETE_MEASURE:
       return update(state, {measures: {
-        $apply: filter((measure) => measure.id !== action.id)
+        $apply: reject(propEq('id', action.id))
       }});
     default:
       return state;
