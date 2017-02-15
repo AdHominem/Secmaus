@@ -26,7 +26,7 @@ class AllPolls extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    polls: state.pollsReducer.polls,
+    polls: ownProps.polls || state.pollsReducer.polls,
   };
 }
 

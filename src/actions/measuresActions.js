@@ -14,7 +14,6 @@ export function loadMeasures() {
       query.find({
         success: results => {
           results.forEach(result => {
-            // TODO: Remove this once all measures have an associated user
             dispatch(addMeasure(
               result.id,
               result.get("name"),

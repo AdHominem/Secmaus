@@ -59,7 +59,7 @@ class MeasureForm extends React.Component {
           <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
             Schließen
           </a>
-          <input type="submit" className="btn btn-primary" onClick={this.handleSubmit}/>
+          <button onClick={this.handleSubmit}>Speichern</button>
         </div>
       </form>
     );
