@@ -18,12 +18,8 @@ export default function measuresReducer(state = {loaded: false, measures: []}, a
       return update(state, {measures: {
         $apply: map(measure =>
           measure.id === action.id ?
-            {
-              name: action.name,
-              description: action.description,
-              id: measure.id,
-              createdBy: measure.createdBy
-            } : measure)
+          update(measure, {name: {$set: action.name}, description: {$set: action.description}}) :
+          measure)
       }});
     case types.DELETE_MEASURE:
       return update(state, {measures: {
