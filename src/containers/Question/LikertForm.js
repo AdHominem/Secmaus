@@ -18,17 +18,21 @@ class LikertForm extends Component {
     return (
       <div className="question">
         <h1>{question.text}</h1>
-        <form className="likert-buttons">
+        <form>
+          <ul className="likert">
           { labels.map((label, i) => (
-            <label key={i}>
-              <input
-                type="radio" name={label}
-                checked={value === i}
-                onChange={onChange(i)}
-              />
-              {label}
-            </label>
-          )) }
+              <li key={i}>
+                <label>
+                  <input
+                    type="radio" name={label}
+                    checked={value === i}
+                    onChange={onChange(i)}
+                  />
+                  {label}
+                </label>
+              </li>
+            )) }
+          </ul>
         </form>
       </div>
     );
