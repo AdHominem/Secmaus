@@ -75,7 +75,7 @@ class Poll extends Component {
 
     const selectQuestionForm = (question, i) =>
       <div key={i}>
-        { alreadyAnswered = closed }
+        { alreadyAnswered = closed || alreadyAnswered }
         {(question.questionType === "binary") ?
           alreadyAnswered ? <BinaryQuestion question={question}/>
             : <BinaryForm
