@@ -18,7 +18,7 @@ export function loadPolls() {
           ))
         )},
       error: error => {
-        console.log(error);
+        Alert.error("Umfragen konnten nicht geladen werden");
       }
     });
   };
@@ -33,15 +33,13 @@ export function savePoll(text, questions, measureId) {
     poll.set('closed', false);
     poll.set('measureId', measureId);
 
-    console.log(questions);
-
     poll.save(null, {
       success: (poll,i) => {
         questions.forEach(question => dispatch(saveQuestion(question.choices, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
       },
       error: (comment, error) => {
-        console.log(error);
+        Alert.error("Umfrage konnte nicht gespeichert werden");
       }
     });
   };
@@ -135,11 +133,9 @@ export function deletePoll(id, questions) {
           id: id
         });
         Alert.success("Umfrage erfolgreich gelöscht");
-        console.log("Poll " + id + " has been deleted");
       },
       error: (comment, error) => {
         Alert.error("Umfrage konnte nicht gelöscht werden");
-        console.log("Poll " + id + " could not be deleted");
       }
     });
   };

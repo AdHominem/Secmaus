@@ -40,7 +40,6 @@ export function saveComment(text, parentID) {
     comment.save(null, {
       success: comment => {
         dispatch(addComment(comment.id, text, parentID, Parse.User.current(), now));
-        //browserHistory.push(`/measure/${comment.parentID}`);
       },
       error: (comment, error) => {
         Alert.error('Kommentar konnten nicht gespeichert werden: ' + error);
