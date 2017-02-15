@@ -27,7 +27,7 @@ class Poll extends Component {
     };
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(props) {
     this.state = {
       // default to 0 for all answers
       answers: props.questions.map(q => 0)
