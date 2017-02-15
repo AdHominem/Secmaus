@@ -97,7 +97,7 @@ class QuestionForm extends React.Component {
 
 
         <div className="button-row">
-          <button className="btn btn-primary" onClick={ removeQuestion }>Frage löschen</button>
+          <button className="button-danger" onClick={ removeQuestion }>Frage löschen</button>
         </div>
       </div>
     );

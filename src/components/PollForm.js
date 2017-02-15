@@ -40,6 +40,7 @@ class PollForm extends React.Component {
   handleSubmit(event) {
     const { savePoll } = this.props;
     savePoll(this.state.text, this.state.questions, this.props.measureId);
+
     browserHistory.push(`/SIDATESecMaus/measure/${ this.props.measureId }`);
   }
 
@@ -101,15 +102,15 @@ class PollForm extends React.Component {
         />
 
         <div className="button-row">
-          <button className="btn btn-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
-          <button className="btn btn-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
-          <button className="btn btn-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
+          <button className="button-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
+          <button className="button-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
+          <button className="button-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
         </div>
 
         { questions }
 
         <div className="button-row">
-          <button className="btn btn-primary" onClick={this.handleSubmit}>Speichern</button>
+          <button className="button-success" onClick={this.handleSubmit}>Speichern</button>
         </div>
       </div>
     );
