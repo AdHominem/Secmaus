@@ -67,7 +67,7 @@ class Poll extends Component {
 
     const handleDeletePoll = event => {
       console.log("Deleting poll " + id);
-      //deletePoll(id);
+      deletePoll(id, questions);
       event.preventDefault();
     };
 

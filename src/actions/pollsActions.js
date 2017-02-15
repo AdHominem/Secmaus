@@ -1,7 +1,3 @@
-import * as types from "../constants/actionTypes";
-import { saveQuestion } from "./questionsActions";
-import { Parse } from "parse";
-import Alert from "react-s-alert";
 import * as types from '../constants/actionTypes';
 import { saveQuestion, deleteQuestion } from './questionsActions';
 import { Parse } from 'parse';
@@ -95,10 +91,11 @@ export function addPoll(id, text, closed, measureId) {
   };
 }
 
-export function deletePoll(id) {
+export function deletePoll(id, questions) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
+
     query.get(id, {
       success: poll => {
         questions.forEach(question => dispatch(deleteQuestion(question.id)));
@@ -107,10 +104,10 @@ export function deletePoll(id) {
           type: types.DELETE_POLL,
           id: id
         });
-        Alert.success('Umfrage erfolgreich gelöscht');
+        Alert.success("Umfrage erfolgreich gelöscht");
       },
       error: (comment, error) => {
-        Alert.error('Umfrage konnte nicht gelöscht werden');
+        Alert.error("Umfrage konnte nicht gelöscht werden");
       }
     });
   };
