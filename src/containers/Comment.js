@@ -1,27 +1,26 @@
-import React, { PropTypes } from 'react';
-import CommentForm from '../components/CommentForm';
-import Modal from 'react-modal';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as actions from '../actions/commentsActions';
-import Parse from 'parse';
-import Comments from '../containers/Comments';
-import Identicon from '../components/Identicon';
-
-const closeModal = () => {
-  this.setState({ modalIsOpen: false });
-};
+import React, { PropTypes } from "react";
+import CommentForm from "../components/CommentForm";
+import Modal from "react-modal";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as actions from "../actions/commentsActions";
+import Parse from "parse";
+import Comments from "../containers/Comments";
+import Identicon from "../components/Identicon";
 
 class Comment extends React.Component {
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
     comment: PropTypes.object.isRequired
   };
-
   constructor() {
     super();
     this.state = { modalIsOpen: false };
   }
+
+  openModal() { this.setState({ modalIsOpen: true }); }
+  afterOpenModal() { }
+  closeModal() { this.setState({ modalIsOpen: false }); }
 
   render() {
     const { comment, commentsActions } = this.props;
@@ -62,6 +61,7 @@ class Comment extends React.Component {
 
         <Modal
           isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           contentLabel="Kommentar hinzufügen"
         >
@@ -74,7 +74,7 @@ class Comment extends React.Component {
             }
             text={comment.text}
             parentID={comment.id}
-            close={closeModal}
+            close={this.closeModal}
           />
         </Modal>
 

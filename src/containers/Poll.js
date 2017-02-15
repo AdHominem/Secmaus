@@ -12,6 +12,8 @@ import LikertForm from "./Question/LikertForm";
 import SingleChoiceForm from "./Question/SingleChoiceForm";
 import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from "ramda";
 import FontAwesome from 'react-fontawesome';
+import Modal from 'react-modal';
+import PollForm from '../components/PollForm';
 
 
 class Poll extends Component {
@@ -106,6 +108,15 @@ class Poll extends Component {
         <div className="flex-content">
           <a onClick={ toggleClose }>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
           &nbsp;&nbsp;
+
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            contentLabel="Umfrage editieren"
+          >
+            <PollForm savePoll="" measureId=""/>
+          </Modal>
+
           <a><FontAwesome name="edit" size="2x"/></a>
           &nbsp;&nbsp;
           <a onClick={ handleDeletePoll }><FontAwesome name="trash" size="2x"/></a>

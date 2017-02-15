@@ -20,7 +20,7 @@ function requireAuth(nextState, replace) {
   // so that we can return to it later
   if (!Parse.User.current()) {
     replace({
-      pathname: '/SIDATESecMaus/login',
+      pathname: "/SIDATESecMaus/login",
       query: { return_to: nextState.location.pathname }
     });
   }
