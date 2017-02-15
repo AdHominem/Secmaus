@@ -29,6 +29,10 @@ class Poll extends Component {
       // default to 0 for all answers
       answers: props.questions.map(q => 0)
     };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -37,6 +41,10 @@ class Poll extends Component {
       answers: props.questions.map(q => 0)
     };
   }
+
+  openModal() { this.setState({ modalIsOpen: true }); }
+  afterOpenModal() { }
+  closeModal() {this.setState({ modalIsOpen: false });}
 
   render() {
     const {
@@ -114,7 +122,7 @@ class Poll extends Component {
             onRequestClose={this.closeModal}
             contentLabel="Umfrage editieren"
           >
-            <PollForm savePoll="" measureId=""/>
+            <PollForm savePoll={ editPoll } measureId={ measureId }/>
           </Modal>
 
           <a><FontAwesome name="edit" size="2x"/></a>
