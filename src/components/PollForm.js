@@ -104,10 +104,13 @@ class PollForm extends React.Component {
           <button className="btn btn-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
           <button className="btn btn-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
           <button className="btn btn-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
-          <button className="btn btn-primary" onClick={this.handleSubmit}>Umfrage hinzufügen</button>
         </div>
 
         { questions }
+
+        <div className="button-row">
+          <button className="btn btn-primary" onClick={this.handleSubmit}>Speichern</button>
+        </div>
       </div>
     );
   }

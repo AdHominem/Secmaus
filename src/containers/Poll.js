@@ -8,7 +8,7 @@ import BinaryQuestion from "./Question/Binary";
 import LikertQuestion from "./Question/Likert";
 import SingleChoiceQuestion from "./Question/SingleChoice";
 import BinaryForm from "./Question/BinaryForm";
-import LikertForm from "./Question/LikertForm";
+import LikertForm from "../components/Question/LikertForm";
 import SingleChoiceForm from "./Question/SingleChoiceForm";
 import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from "ramda";
 import FontAwesome from 'react-fontawesome';
