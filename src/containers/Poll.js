@@ -11,6 +11,8 @@ import BinaryForm from "./Question/BinaryForm";
 import LikertForm from "./Question/LikertForm";
 import SingleChoiceForm from "./Question/SingleChoiceForm";
 import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from "ramda";
+import FontAwesome from 'react-fontawesome';
+
 
 class Poll extends Component {
 
@@ -100,9 +102,12 @@ class Poll extends Component {
       <div className="flex-box poll">
         <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
         <div className="flex-content">
-          <a onClick={ toggleClose }>{ closed ? "Öffnen" : "Schließen" }</a>
-          <a>Bearbeiten</a>
-          <a onClick={ handleDeletePoll }>Löschen</a>
+          <a onClick={ toggleClose }>{ closed ? <FontAwesome name="unlock-alt" size="2x"/> : <FontAwesome name="lock" size="2x"/> }</a>
+          &nbsp;&nbsp;
+          <a><FontAwesome name="edit" size="2x"/></a>
+          &nbsp;&nbsp;
+          <a onClick={ handleDeletePoll }><FontAwesome name="trash" size="2x"/></a>
+          &nbsp;&nbsp;
           { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
           { !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
         </div>
