@@ -52,7 +52,7 @@ class Poll extends Component {
       poll: {
         id, text, closed, measureId
       },
-      pollsActions: { editPoll, deletePoll, answerPoll },
+      pollsActions: { closePoll, editPoll, deletePoll, answerPoll },
       questionsActions: { answerQuestion },
       questions
     } = this.props;
@@ -71,7 +71,7 @@ class Poll extends Component {
 
     const toggleClose = event => {
       // TODO: The action takes a different number of params
-      editPoll(id, text, !closed, measureId);
+      closePoll(id, !closed);
       console.log(closed ? "Poll " + id + " has been opened" : "Poll " + id + " has been closed");
       event.preventDefault();
     };
