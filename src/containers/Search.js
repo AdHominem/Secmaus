@@ -5,7 +5,7 @@ import Parse from 'parse';
 import { uniq, update, any, clone, append } from 'ramda';
 import Alert from 'react-s-alert';
 import Measures from '../containers/Measures'
-import Poll from '../containers/Poll'
+import AllPolls from '../containers/AllPolls'
 
 class Search extends Component {
   constructor(props) {
@@ -93,13 +93,7 @@ class Search extends Component {
               <h2>Maßnahmen</h2>
               <Measures measures={measures} showButtons={false} />
             </div> }
-          { polls.length > 0 &&
-            <div>
-              <h2>Umfragen</h2>
-              <div className="flex-boxes">
-                {polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
-              </div>
-            </div> }
+          { polls.length > 0 && <AllPolls polls={polls}/> }
         </div>
       );
     } else {
