@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import PollForm from '../components/PollForm';
+import PollForm from './PollForm';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/pollsActions';

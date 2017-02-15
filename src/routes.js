@@ -9,7 +9,7 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import Polls from './containers/Polls';
 import NewPoll from './containers/NewPoll';
-import Catalog from './containers/Catalog';
+import Catalog from './presentational/Catalog';
 import Search from './containers/Search';
 import AllPolls from './containers/AllPolls';
 

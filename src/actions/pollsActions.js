@@ -27,10 +27,6 @@ export function savePoll(text, questions, measureId) {
     const Poll = Parse.Object.extend("Poll");
     const poll = new Poll();
 
-    console.log(text);
-    console.log(questions);
-    console.log(measureId);
-
     poll.set('text', text);
     poll.set('closed', false);
     poll.set('measureId', measureId);

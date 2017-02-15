@@ -9,7 +9,7 @@ const catalogRequiredProps = {
   measureActions: PropTypes.object.isRequired
 };
 
-function Catalog(props) {
+function Catalog() {
   const { measures, measureActions: { addMeasureFromCatalog} } = this.props;
 
   return (

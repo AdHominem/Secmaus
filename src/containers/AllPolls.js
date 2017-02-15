@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 
-import Poll from '../containers/Poll'
+import Poll from '../containers/Poll';
 
 const allPollsRequiredProps = {
   polls: PropTypes.array.isRequired
 };
 
-function AllPolls() {
+function AllPolls(props) {
     return (
       <div>
         <h2>Umfragen</h2>
         <div className="flex-boxes">
-          {this.props.map((poll,i) => <Poll key={i} poll={ poll } />)}
+          {props.polls.map((poll,i) => <Poll key={i} poll={ poll } />)}
         </div>
       </div>
     );

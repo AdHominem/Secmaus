@@ -4,16 +4,16 @@ import {bindActionCreators} from "redux";
 import * as pollsActions from "../actions/pollsActions";
 import * as questionsActions from "../actions/questionsActions";
 import Parse from "parse";
-import BinaryQuestion from "../components/Question/Binary";
-import LikertQuestion from "../components/Question/Likert";
-import SingleChoiceQuestion from "../components/Question/SingleChoice";
-import BinaryForm from "../components/Question/BinaryForm";
-import LikertForm from "../components/Question/LikertForm";
-import SingleChoiceForm from "../components/Question/SingleChoiceForm";
+import BinaryQuestion from "./Question/Binary";
+import LikertQuestion from "./Question/Likert";
+import SingleChoiceQuestion from "./Question/SingleChoice";
+import BinaryForm from "./Question/BinaryForm";
+import LikertForm from "./Question/LikertForm";
+import SingleChoiceForm from "./Question/SingleChoiceForm";
 import { sortBy, pipe, sort, prop, propEq, map, update, any, clone } from "ramda";
 import FontAwesome from 'react-fontawesome';
 import Modal from 'react-modal';
-import PollForm from '../components/PollForm';
+import PollForm from './PollForm';
 
 
 class Poll extends Component {

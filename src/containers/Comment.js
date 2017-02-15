@@ -1,12 +1,12 @@
 import React, { PropTypes } from "react";
-import CommentForm from "../components/CommentForm";
+import CommentForm from "./CommentForm";
 import Modal from "react-modal";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as actions from "../actions/commentsActions";
 import Parse from "parse";
 import Comments from "../containers/Comments";
-import Identicon from "../components/Identicon";
+import Identicon from "./Identicon";
 
 class Comment extends React.Component {
   static propTypes = {

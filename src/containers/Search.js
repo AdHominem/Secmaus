@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import Parse from 'parse';
 import { uniq, update, any, clone, append } from 'ramda';
 import Alert from 'react-s-alert';
@@ -106,8 +105,10 @@ class Search extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) { return { }; }
-function mapDispatchToProps(dispatch) { return { }; }
+function mapStateToProps() {
+  return {};
+}
+function mapDispatchToProps() { return { }; }
 
 export default connect(
   mapStateToProps,
