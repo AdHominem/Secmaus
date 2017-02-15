@@ -97,6 +97,7 @@
     "open": "0.0.5",
     "postcss-loader": "1.0.0",
     "prompt": "1.0.0",
+    "react-radio-button": "latest",
     "react-addons-test-utils": "15.3.2",
     "redux-immutable-state-invariant": "1.2.4",
     "replace": "0.3.0",

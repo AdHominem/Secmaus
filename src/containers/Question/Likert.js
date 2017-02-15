@@ -17,7 +17,7 @@ class LikertQuestion extends Component {
       "teils-teils",
       "trifft eher nicht zu",
       "trifft nicht zu"
-    ]
+    ];
     const stats = labels.map((choice, i) => (
       [choice, count(pipe(nth(1), equals(i)), answers)]
     ));
@@ -45,7 +45,7 @@ class LikertQuestion extends Component {
         }]
       }
     };
-       
+
 
     return (
       <div className="question">

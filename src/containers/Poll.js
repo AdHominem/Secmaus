@@ -62,6 +62,7 @@ class Poll extends Component {
     const toggleClose = event => {
       // TODO: The action takes a different number of params
       editPoll(id, text, !closed, measureId);
+      console.log(closed ? "Poll " + id + " has been opened" : "Poll " + id + " has been closed");
       event.preventDefault();
     };
 
@@ -70,10 +71,11 @@ class Poll extends Component {
       event.preventDefault();
     };
 
-    const alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
+    let alreadyAnswered = questions.length > 0 && any(answer => (answer[0] === Parse.User.current().id), questions[0].answers);
 
     const selectQuestionForm = (question, i) =>
       <div key={i}>
+        { alreadyAnswered = closed }
         {(question.questionType === "binary") ?
           alreadyAnswered ? <BinaryQuestion question={question}/>
             : <BinaryForm
@@ -102,7 +104,7 @@ class Poll extends Component {
       <div className="flex-box poll">
         <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
         <div className="flex-content">
-          <a onClick={ toggleClose }>{ closed ? <FontAwesome name="unlock-alt" size="2x"/> : <FontAwesome name="lock" size="2x"/> }</a>
+          <a onClick={ toggleClose }>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
           &nbsp;&nbsp;
           <a><FontAwesome name="edit" size="2x"/></a>
           &nbsp;&nbsp;

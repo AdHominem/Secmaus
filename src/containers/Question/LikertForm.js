@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import * as actions from '../../actions/pollsActions';
 
 class LikertForm extends Component {
@@ -12,13 +13,13 @@ class LikertForm extends Component {
       "teils-teils",
       "trifft eher nicht zu",
       "trifft nicht zu"
-    ]
+    ];
 
     return (
       <div className="question">
         <h1>{question.text}</h1>
-        <form>
-        { labels.map((label, i) => (
+        <form className="likert-buttons">
+          { labels.map((label, i) => (
             <label key={i}>
               <input
                 type="radio" name={label}
