@@ -122,7 +122,7 @@ class Poll extends Component {
           <a onClick={ handleDeletePoll }><FontAwesome name="trash" size="2x"/></a>
           &nbsp;&nbsp;
           { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
-          { !alreadyAnswered && <input type="submit" onClick={submitAnswers} /> }
+          { !alreadyAnswered && <button onClick={submitAnswers} >Antworten</button> }
         </div>
       </div>
       );
