@@ -23,7 +23,7 @@ class Poll extends Component {
     poll: PropTypes.object.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     questionsActions: PropTypes.object.isRequired,
-    questions: PropTypes.object.isRequired
+    questions: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -142,8 +142,7 @@ class Poll extends Component {
             />
           </Modal>
 
-          <a onClick={onClick}><FontAwesome name="edit" size="2x"/></a>
-
+          { isAdmin && <a onClick={onClick}><FontAwesome name="edit" size="2x"/></a> }
           &nbsp;&nbsp;
           { isAdmin && <a onClick={handleDeletePoll}><FontAwesome name="trash" size="2x"/></a> }
           &nbsp;&nbsp;
