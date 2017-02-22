@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ReactQuill from 'react-quill';
-import * as actions from '../actions/measuresActions';
 import '../styles/quill.css';
+
+import * as actions from '../actions/measuresActions';
 
 class MeasureForm extends React.Component {
   static propTypes = {

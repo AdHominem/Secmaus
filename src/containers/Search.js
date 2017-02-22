@@ -1,12 +1,17 @@
 import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import Parse from 'parse';
-import { uniq, update, any, clone, append } from 'ramda';
 import Alert from 'react-s-alert';
-import Measures from '../containers/Measures'
-import AllPolls from '../containers/AllPolls'
+
+import Measures from '../containers/Measures';
+import AllPolls from '../presentational/AllPolls';
 
 class Search extends Component {
+
+  static propTypes = {
+    params: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -100,7 +105,7 @@ class Search extends Component {
         <div>
           <h1>Suche nach "{keyword}"...</h1>
         </div>
-      )
+      );
     }
   }
 }

@@ -10,7 +10,7 @@ import Signup from './containers/Signup';
 import Polls from './presentational/Polls';
 import NewPoll from './containers/NewPoll';
 import Search from './containers/Search';
-import AllPolls from './containers/AllPolls';
+import AllPolls from './presentational/AllPolls';
 
 function requireAuth(nextState, replace) {
   // If the user is not logged in,
