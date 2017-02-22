@@ -3,7 +3,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Modal from 'react-modal';
 import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
-import { Parse } from 'parse';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { find, propEq } from 'ramda';
@@ -19,7 +18,8 @@ class Measure extends React.Component {
   static propTypes = {
     measureActions: PropTypes.object.isRequired,
     commentsActions: PropTypes.object.isRequired,
-    measure: PropTypes.object.isRequired
+    measure: PropTypes.object.isRequired,
+    isAdmin: PropTypes.bool.isRequired
   };
 
   constructor() {
@@ -51,7 +51,8 @@ class Measure extends React.Component {
   };
 
   render() {
-    const { measure, measure: { name, createdBy, description, id }, measureActions: { editMeasure } }  = this.props;
+    const { measure, measure: { name, description, id }, isAdmin }  = this.props;
+
     if (measure) {
       // <ReactCSSTransitionGroup
       //   transitionName="example"
@@ -64,12 +65,12 @@ class Measure extends React.Component {
         <div className="measure">
           <h1>
             {name}
-            &nbsp;
-            {Parse.User.current() && createdBy.id === Parse.User.current().id &&
-             <a onClick={this.onClick} ><FontAwesome name="edit"/></a>}
-            &nbsp;
-            {Parse.User.current() && createdBy.id === Parse.User.current().id &&
-             <a onClick={this.handleDeleteMeasure}><FontAwesome name="trash"/></a>}
+            { isAdmin && <span>
+              &nbsp;
+              <a onClick={this.onClick} ><FontAwesome name="edit"/></a>
+              &nbsp;
+              <a onClick={this.handleDeleteMeasure}><FontAwesome name="trash"/></a>
+            </span> }
           </h1>
           <p dangerouslySetInnerHTML={{__html: description}}/>
 
@@ -111,7 +112,8 @@ class Measure extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     measure: find(propEq('id', ownProps.params.measureId), state.measuresReducer.measures),
-    comments: state.commentsReducer.comments
+    comments: state.commentsReducer.comments,
+    isAdmin: state.userReducer.isAdmin
   };
 }
 
