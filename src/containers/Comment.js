@@ -7,7 +7,7 @@ import Parse from "parse";
 import CommentForm from "./CommentForm";
 import * as actions from "../actions/commentsActions";
 import Comments from "../containers/Comments";
-import Identicon from "./Identicon";
+import Identicon from "../presentational/Identicon";
 
 class Comment extends React.Component {
   static propTypes = {
