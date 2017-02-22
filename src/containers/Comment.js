@@ -11,7 +11,8 @@ import Identicon from "./Identicon";
 class Comment extends React.Component {
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
-    comment: PropTypes.object.isRequired
+    comment: PropTypes.object.isRequired,
+    comments: PropTypes.array.isRequired
   };
   constructor() {
     super();
@@ -30,7 +31,8 @@ class Comment extends React.Component {
     const { comment, commentsActions } = this.props;
 
     const handleDeleteComment = event => {
-      this.props.commentsActions.deleteComment(comment.id);
+      const { comments } = this.props;
+      this.props.commentsActions.deleteComment(comment.id, comments);
       event.preventDefault();
     };
 
@@ -87,8 +89,8 @@ class Comment extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {comments: state.commentsReducer.comments};
 }
 
 function mapDispatchToProps(dispatch) {

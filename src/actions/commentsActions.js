@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
+import {filter} from 'ramda';
 
 export function loadComments() {
   return dispatch => {
@@ -77,12 +78,13 @@ export function addComment(id, text, parentID, user, createdAt) {
   };
 }
 
-export function deleteComment(id) {
+export function deleteComment(id, comments) {
   return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment);
     query.get(id, {
       success: comment => {
+        filter((childComment) => (comment.id == childComment.parentID), comments).forEach(childComment => dispatch(deleteComment(childComment.id, comments)));
         comment.destroy({});
         dispatch({
           type: types.DELETE_COMMENT,
