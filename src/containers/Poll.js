@@ -51,85 +51,89 @@ class Poll extends Component {
   afterOpenModal() { }
   closeModal() {this.setState({ modalIsOpen: false });}
 
+  toggleShowResults = (event) => {
+    this.setState({
+      showResults: !this.state.showResults
+    });
+    event.preventDefault();
+  };
+
+  selectAnswer = (index) => (value) => () => {
+    this.setState({ answers: update(index, value, this.state.answers) });
+  };
+
+  submitAnswers = () => {
+    const { questionsActions: { answerQuestion } } = this.props;
+    this.props.questions.forEach((question, i) => {
+      answerQuestion(question.id, this.state.answers[i]);
+    });
+  };
+
+  toggleClose = (event) => {
+    const { poll: { id, closed }, pollsActions: { closePoll } } = this.props;
+    // TODO: The action takes a different number of params
+    closePoll(id, !closed);
+    console.log(closed ? "Poll " + id + " has been opened" : "Poll " + id + " has been closed");
+    event.preventDefault();
+  };
+
+  handleDeletePoll = event => {
+    const { poll: { id }, questions, pollsActions: { deletePoll } } = this.props;
+    deletePoll(id, questions);
+    event.preventDefault();
+  };
+
+  onClick = event => {
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+    event.preventDefault();
+  };
+
+  selectQuestionForm = (question, i) => {
+
+    const { poll: { closed }, questions } = this.props;
+    const { answers, showResults } = this.state;
+
+    let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
+
+    return <div key={i}>
+      { alreadyAnswered = closed || alreadyAnswered || showResults }
+      {question.questionType === "binary" ?
+        alreadyAnswered ? <BinaryQuestion question={question}/>
+          : <BinaryForm
+            question={question}
+            value={answers[i]}
+            onChange={this.selectAnswer(i)}
+          />
+        : question.questionType === "likert" ?
+          alreadyAnswered ? <LikertQuestion question={question}/>
+            : <LikertForm
+              question={question}
+              value={answers[i]}
+              onChange={this.selectAnswer(i)}
+            />
+          : question.questionType === "single choice" ?
+            alreadyAnswered ? <SingleChoiceQuestion question={question}/>
+              : <SingleChoiceForm
+                question={question}
+                value={answers[i]}
+                onChange={this.selectAnswer(i)}
+              />
+            : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
+    </div>;
+  };
 
   render() {
     const {
       isAdmin,
       poll,
       poll: {
-        id, text, closed, measureId
+        text, closed, measureId
       },
-      pollsActions: { closePoll, deletePoll },
-      questionsActions: { answerQuestion },
       questions
     } = this.props;
 
-    const { answers, showResults } = this.state;
-
-    const toggleShowResults = (event) => {
-      this.setState({
-        showResults: !this.state.showResults
-      });
-      event.preventDefault();
-    };
-
-    const selectAnswer = (index) => value => () => {
-      this.setState({ answers: update(index, value, answers) });
-    };
-
-    const submitAnswers = () => {
-      questions.forEach((question, i) => {
-        answerQuestion(question.id, answers[i]);
-      });
-    };
-
-    const toggleClose = (event) => {
-      // TODO: The action takes a different number of params
-      closePoll(id, !closed);
-      console.log(closed ? "Poll " + id + " has been opened" : "Poll " + id + " has been closed");
-      event.preventDefault();
-    };
-
-    const handleDeletePoll = event => {
-      deletePoll(id, questions);
-      event.preventDefault();
-    };
-
-    const onClick = event => {
-      this.setState({ modalIsOpen: !this.state.modalIsOpen });
-      event.preventDefault();
-    };
-
-    let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
-
-    const selectQuestionForm = (question, i) =>
-      <div key={i}>
-        { alreadyAnswered = closed || alreadyAnswered || showResults }
-        {question.questionType === "binary" ?
-          alreadyAnswered ? <BinaryQuestion question={question}/>
-            : <BinaryForm
-                question={question}
-                value={answers[i]}
-                onChange={selectAnswer(i)}
-              />
-        : question.questionType === "likert" ?
-          alreadyAnswered ? <LikertQuestion question={question}/>
-            : <LikertForm
-            question={question}
-            value={answers[i]}
-            onChange={selectAnswer(i)}
-          />
-        : question.questionType === "single choice" ?
-          alreadyAnswered ? <SingleChoiceQuestion question={question}/>
-            : <SingleChoiceForm
-            question={question}
-            value={answers[i]}
-            onChange={selectAnswer(i)}
-          />
-        : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
-      </div>;
-
     const unanswered = isEmpty(questions) || isEmpty(questions[0].answers);
+    let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
     return (
       <div className="flex-box poll">
@@ -151,18 +155,18 @@ class Poll extends Component {
           </Modal>
 
           { isAdmin && <div>
-            <a onClick={toggleClose}>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
+            <a onClick={this.toggleClose}>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
             &nbsp;&nbsp;
-            { unanswered && <a onClick={onClick}><FontAwesome name="edit" size="2x"/>&nbsp;&nbsp;</a> }
-            <a onClick={handleDeletePoll}><FontAwesome name="trash" size="2x"/></a>
+            { unanswered && <a onClick={this.onClick}><FontAwesome name="edit" size="2x"/>&nbsp;&nbsp;</a> }
+            <a onClick={this.handleDeletePoll}><FontAwesome name="trash" size="2x"/></a>
             &nbsp;&nbsp;
-            { !alreadyAnswered && <a onClick={ toggleShowResults }><FontAwesome name="bar-chart" size="2x"/></a> }
+            { !alreadyAnswered && <a onClick={ this.toggleShowResults }><FontAwesome name="bar-chart" size="2x"/></a> }
             &nbsp;&nbsp;
           </div> }
 
-          { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
+          { pipe(sortBy(prop('index')))(questions).map(this.selectQuestionForm) }
 
-          { !alreadyAnswered && <button onClick={submitAnswers} >Antworten</button> }
+          { !alreadyAnswered && <button onClick={this.submitAnswers} >Antworten</button> }
         </div>
       </div>
       );
