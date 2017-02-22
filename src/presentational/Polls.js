@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/pollsActions';
 import React, { PropTypes } from 'react';
-import Poll from './Poll'
+import Poll from '../containers/Poll'
 import { Link } from 'react-router';
 import { propEq } from 'ramda';
 

@@ -9,7 +9,7 @@ import { find, propEq, isNil } from 'ramda';
 
 import MeasureForm from './MeasureForm';
 import Comments from './Comments';
-import Polls from './Polls';
+import Polls from '../presentational/Polls';
 import * as measuresActions from '../actions/measuresActions';
 import * as commentsActions from '../actions/commentsActions';
 import * as pollsActions from '../actions/pollsActions';
