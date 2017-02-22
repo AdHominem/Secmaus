@@ -53,25 +53,26 @@ class PollForm extends React.Component {
     browserHistory.push(`/SIDATESecMaus/measure/${ measureId }`);
   }
 
-  render() {
-    const changeQuestionText = index => event => {
-      const temp = clone(this.state.questions);
-      temp[index].text = event.target.value;
-      this.setState({ questions: temp });
-    };
+  changeQuestionText(index) { return event=> {
+    const temp = clone(this.state.questions);
+    temp[index].text = event.target.value;
+    this.setState({ questions: temp });
+  }};
 
-    const changeQuestionChoices = index => choices => {
-      const temp = clone(this.state.questions);
-      temp[index].choices = choices;
-      this.setState({ questions: temp });
-    };
+  changeQuestionChoices(index) {return choices => {
+    const temp = clone(this.state.questions);
+    temp[index].choices = choices;
+    this.setState({ questions: temp });
+  }};
+
+  render() {
 
     // TODO: Clean up
     const questions = this.state.questions.map((question, i) =>
       <div key={ i }>
         <QuestionForm
-          changeQuestionText={ changeQuestionText(i) }
-          changeQuestionChoices={changeQuestionChoices(i)} question={ question }
+          changeQuestionText={ this.changeQuestionText(i) }
+          changeQuestionChoices={this.changeQuestionChoices(i)} question={ question }
           index={ i } removeQuestion={ event => this.removeQuestion(event, i) }
         />
       </div>

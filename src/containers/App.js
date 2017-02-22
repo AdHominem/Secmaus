@@ -51,17 +51,19 @@ class App extends React.Component {
     });
   };
 
+  updateSearch(event) {
+    this.setState({search: event.target.value});
+    event.preventDefault();
+  };
+
+  startSearch(event) {
+    browserHistory.push(`/SIDATESecMaus/search/${this.state.search}`);
+    event.preventDefault();
+  };
+
   render() {
 
     const { search } = this.state;
-    const updateSearch = event => {
-      this.setState({search: event.target.value});
-    };
-
-    const startSearch = event => {
-      browserHistory.push(`/SIDATESecMaus/search/${search}`);
-      event.preventDefault();
-    };
 
     return (
       <div className="sidate">
@@ -93,9 +95,9 @@ class App extends React.Component {
                     type="search"
                     placeholder="Suchbegriff"
                     value={search}
-                    onChange={updateSearch}
+                    onChange={this.updateSearch}
                   />
-                  <button type="submit" onClick={startSearch}>
+                  <button type="submit" onClick={this.startSearch}>
                     <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon" />
                   </button>
                 </form>

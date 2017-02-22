@@ -28,19 +28,20 @@ class Comment extends React.Component {
   afterOpenModal() { }
   closeModal() {this.setState({ modalIsOpen: false });}
 
+  handleDeleteComment(event) {
+  const { comment, comments } = this.props;
+    this.props.commentsActions.deleteComment(comment.id, comments);
+    event.preventDefault();
+  };
+
+  onClick(event) {
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+    event.preventDefault();
+  };
+
   render() {
+
     const { comment, commentsActions } = this.props;
-
-    const handleDeleteComment = event => {
-      const { comments } = this.props;
-      this.props.commentsActions.deleteComment(comment.id, comments);
-      event.preventDefault();
-    };
-
-    const onClick = event => {
-      this.setState({ modalIsOpen: !this.state.modalIsOpen });
-      event.preventDefault();
-    };
 
     return (
       // parentId is set to the id of the current comment,
@@ -56,7 +57,7 @@ class Comment extends React.Component {
           {
             comment.user.id === Parse.User.current().id ?
             <p className="comment__detail">
-              <a onClick={onClick} >Bearbeiten</a> \ <a onClick={handleDeleteComment} >Löschen</a>
+              <a onClick={this.onClick} >Bearbeiten</a> \ <a onClick={this.handleDeleteComment} >Löschen</a>
             </p> :
             null
           }
