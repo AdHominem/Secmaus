@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Modal from 'react-modal';
 import { reverse } from 'ramda';
 import {connect} from 'react-redux';
@@ -40,8 +39,19 @@ class Measures extends Component {
   afterOpenModal2() { }
   closeModal2() { this.setState({ modalIsOpen2: false }); }
 
+  newMeasure = event => {
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+    event.preventDefault();
+  };
+
+  importMeasure = event => {
+    this.setState({ modalIsOpen2: !this.state.modalIsOpen2 });
+    event.preventDefault();
+  };
+
   render() {
     const { measures, measureActions, showButtons, isAdmin } = this.props;
+
     const { addMeasureFromCatalog, saveMeasure } = measureActions;
 
     const body = reverse(measures).map((measure, i) =>
@@ -49,16 +59,6 @@ class Measures extends Component {
         <h1 className="flex-title">{measure.name}</h1>
       </Link>
     );
-
-    const onClick = event => {
-      this.setState({ modalIsOpen: !this.state.modalIsOpen });
-      event.preventDefault();
-    };
-
-    const onClick2 = event => {
-      this.setState({ modalIsOpen2: !this.state.modalIsOpen2 });
-      event.preventDefault();
-    };
 
     // <ReactCSSTransitionGroup
     //   transitionName="example"
@@ -72,7 +72,7 @@ class Measures extends Component {
         {
           showButtons === undefined && isAdmin &&
           <p>
-            <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={onClick2} >Maßnahme importieren</a>
+            <a className="btn btn-primary" onClick={this.newMeasure} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={this.importMeasure} >Maßnahme importieren</a>
           </p>
         }
         <div className="flex-boxes">
