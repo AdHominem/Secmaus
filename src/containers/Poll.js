@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
-import { sortBy, pipe, prop, propEq, update, any } from "ramda";
+import { sortBy, pipe, prop, propEq, update, any, isEmpty } from "ramda";
 import FontAwesome from 'react-fontawesome';
 import Modal from 'react-modal';
 
@@ -91,8 +91,7 @@ class Poll extends Component {
       event.preventDefault();
     };
 
-    let alreadyAnswered = questions.length > 0 && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
-
+    let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
     const selectQuestionForm = (question, i) =>
       <div key={i}>
@@ -121,6 +120,8 @@ class Poll extends Component {
         : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
       </div>;
 
+    const unanswered = isEmpty(questions) || isEmpty(questions[0].answers);
+
     return (
       <div className="flex-box poll">
         <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
@@ -143,8 +144,7 @@ class Poll extends Component {
           { isAdmin && <div>
             <a onClick={toggleClose}>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
             &nbsp;&nbsp;
-            <a onClick={onClick}><FontAwesome name="edit" size="2x"/></a>
-            &nbsp;&nbsp;
+            { unanswered && <a onClick={onClick}><FontAwesome name="edit" size="2x"/>&nbsp;&nbsp;</a> }
             <a onClick={handleDeletePoll}><FontAwesome name="trash" size="2x"/></a>
             &nbsp;&nbsp;
           </div> }
