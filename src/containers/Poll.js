@@ -31,7 +31,8 @@ class Poll extends Component {
     this.state = {
       // default to 0 for all answers
       answers: props.questions.map(q => 0),
-      modalIsOpen: false
+      modalIsOpen: false,
+      showResults: false
     };
 
     this.openModal = this.openModal.bind(this);
@@ -42,13 +43,14 @@ class Poll extends Component {
   componentWillReceiveProps(props) {
     this.state = {
       // default to 0 for all answers
-      answers: props.questions.map(q => 0)
+      answers: props.questions.map(() => 0)
     };
   }
 
   openModal() { this.setState({ modalIsOpen: true }); }
   afterOpenModal() { }
   closeModal() {this.setState({ modalIsOpen: false });}
+
 
   render() {
     const {
@@ -62,9 +64,16 @@ class Poll extends Component {
       questions
     } = this.props;
 
-    const { answers } = this.state;
+    const { answers, showResults } = this.state;
 
-    const selectAnswer = index => value => () => {
+    const toggleShowResults = (event) => {
+      this.setState({
+        showResults: !this.state.showResults
+      });
+      event.preventDefault();
+    };
+
+    const selectAnswer = (index) => value => () => {
       this.setState({ answers: update(index, value, answers) });
     };
 
@@ -74,7 +83,7 @@ class Poll extends Component {
       });
     };
 
-    const toggleClose = event => {
+    const toggleClose = (event) => {
       // TODO: The action takes a different number of params
       closePoll(id, !closed);
       console.log(closed ? "Poll " + id + " has been opened" : "Poll " + id + " has been closed");
@@ -95,7 +104,7 @@ class Poll extends Component {
 
     const selectQuestionForm = (question, i) =>
       <div key={i}>
-        { alreadyAnswered = closed || alreadyAnswered }
+        { alreadyAnswered = closed || alreadyAnswered || showResults }
         {question.questionType === "binary" ?
           alreadyAnswered ? <BinaryQuestion question={question}/>
             : <BinaryForm
@@ -147,9 +156,12 @@ class Poll extends Component {
             { unanswered && <a onClick={onClick}><FontAwesome name="edit" size="2x"/>&nbsp;&nbsp;</a> }
             <a onClick={handleDeletePoll}><FontAwesome name="trash" size="2x"/></a>
             &nbsp;&nbsp;
+            { !alreadyAnswered && <a onClick={ toggleShowResults }><FontAwesome name="bar-chart" size="2x"/></a> }
+            &nbsp;&nbsp;
           </div> }
 
           { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
+
           { !alreadyAnswered && <button onClick={submitAnswers} >Antworten</button> }
         </div>
       </div>
