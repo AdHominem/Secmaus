@@ -125,8 +125,6 @@ class Poll extends Component {
       <div className="flex-box poll">
         <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
         <div className="flex-content">
-          <a onClick={toggleClose}>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
-          &nbsp;&nbsp;
 
           <Modal
             isOpen={this.state.modalIsOpen}
@@ -142,10 +140,15 @@ class Poll extends Component {
             />
           </Modal>
 
-          { isAdmin && <a onClick={onClick}><FontAwesome name="edit" size="2x"/></a> }
-          &nbsp;&nbsp;
-          { isAdmin && <a onClick={handleDeletePoll}><FontAwesome name="trash" size="2x"/></a> }
-          &nbsp;&nbsp;
+          { isAdmin && <div>
+            <a onClick={toggleClose}>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
+            &nbsp;&nbsp;
+            <a onClick={onClick}><FontAwesome name="edit" size="2x"/></a>
+            &nbsp;&nbsp;
+            <a onClick={handleDeletePoll}><FontAwesome name="trash" size="2x"/></a>
+            &nbsp;&nbsp;
+          </div> }
+
           { pipe(sortBy(prop('index')))(questions).map(selectQuestionForm) }
           { !alreadyAnswered && <button onClick={submitAnswers} >Antworten</button> }
         </div>
