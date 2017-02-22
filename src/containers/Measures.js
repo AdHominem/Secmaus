@@ -14,7 +14,7 @@ class Measures extends Component {
 
   static propTypes = {
     isAdmin: PropTypes.bool,
-    measures: PropTypes.object.isRequired,
+    measures: PropTypes.array.isRequired,
     measureActions: PropTypes.object.isRequired,
     showButtons: PropTypes.bool
   };
