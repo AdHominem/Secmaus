@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { map, nth, pipe, equals } from 'ramda';
-import { singleChoiceColors } from '../../constants/colors';
-import { count } from '../../utils/count';
+import { singleChoiceColors } from '../constants/colors';
+import { count } from '../utils/count';
 
 const SingleChoiceQuestion = ({ question, question: { choices, answers } }) => {
   const stats = choices.map((choice, i) => (

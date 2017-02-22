@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { map, nth, compose, pipe, equals, filter } from 'ramda';
-import { likertColors } from '../../constants/colors';
-import { count } from '../../utils/count';
+import { likertColors } from '../constants/colors';
+import { count } from '../utils/count';
 
 const LikertQuestion = ({ question, question: { choices, answers } }) => {
   const labels = [

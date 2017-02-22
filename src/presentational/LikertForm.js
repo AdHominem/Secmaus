@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { likertLabels } from '../../constants/labels.js';
+import { likertLabels } from '../constants/labels.js';
 
-const LikertForm = ({ question, value, onChange }) => 
+const LikertForm = ({ question, value, onChange }) =>
   <div className="question">
       <h1>{question.text}</h1>
       <form>

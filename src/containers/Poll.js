@@ -9,11 +9,11 @@ import Modal from 'react-modal';
 import * as pollsActions from "../actions/pollsActions";
 import * as questionsActions from "../actions/questionsActions";
 import BinaryQuestion from "../presentational/Binary";
-import LikertQuestion from "../presentational/Question/Likert";
-import SingleChoiceQuestion from "../presentational/Question/SingleChoice";
+import LikertQuestion from "../presentational/Likert";
+import SingleChoiceQuestion from "../presentational/SingleChoice";
 import BinaryForm from "../presentational/BinaryForm";
-import LikertForm from "../presentational/Question/LikertForm";
-import SingleChoiceForm from "../presentational/Question/SingleChoiceForm";
+import LikertForm from "../presentational/LikertForm";
+import SingleChoiceForm from "../presentational/SingleChoiceForm";
 import PollForm from './PollForm';
 
 class Poll extends Component {
