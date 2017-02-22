@@ -1,10 +1,11 @@
 import React, { PropTypes } from "react";
-import CommentForm from "./CommentForm";
 import Modal from "react-modal";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import * as actions from "../actions/commentsActions";
 import Parse from "parse";
+
+import CommentForm from "./CommentForm";
+import * as actions from "../actions/commentsActions";
 import Comments from "../containers/Comments";
 import Identicon from "./Identicon";
 
