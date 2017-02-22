@@ -34,10 +34,6 @@ class Poll extends Component {
       modalIsOpen: false,
       showResults: false
     };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -47,9 +43,9 @@ class Poll extends Component {
     };
   }
 
-  openModal() { this.setState({ modalIsOpen: true }); }
-  afterOpenModal() { }
-  closeModal() {this.setState({ modalIsOpen: false });}
+  openModal = () => { this.setState({ modalIsOpen: true }); };
+  afterOpenModal = () => { };
+  closeModal = () => {this.setState({ modalIsOpen: false });};
 
   toggleShowResults = (event) => {
     this.setState({
