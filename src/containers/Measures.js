@@ -6,12 +6,19 @@ import { reverse } from 'ramda';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import Polls from './Polls';
 import MeasureForm from './MeasureForm';
 import ImportMeasureForm from './ImportMeasureForm';
 import * as actions from '../actions/measuresActions';
 
 class Measures extends Component {
+
+  static propTypes = {
+    isAdmin: PropTypes.bool,
+    measures: PropTypes.array.isRequired,
+    measureActions: PropTypes.object.isRequired,
+    showButtons: PropTypes.bool
+  };
+
   constructor() {
     super();
     this.state = { modalIsOpen: false, modalIsOpen2: false };
@@ -34,7 +41,7 @@ class Measures extends Component {
   closeModal2() { this.setState({ modalIsOpen2: false }); }
 
   render() {
-    const { measures, measureActions, showButtons } = this.props;
+    const { measures, measureActions, showButtons, isAdmin } = this.props;
     const { addMeasureFromCatalog, saveMeasure } = measureActions;
 
     const body = reverse(measures).map((measure, i) =>
@@ -63,7 +70,7 @@ class Measures extends Component {
     return (
       <div className="measures-container">
         {
-          showButtons === undefined && this.props.isAdmin &&
+          showButtons === undefined && isAdmin &&
           <p>
             <a className="btn btn-primary" onClick={onClick} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={onClick2} >Maßnahme importieren</a>
           </p>

@@ -15,6 +15,7 @@ import * as commentsActions from '../actions/commentsActions';
 import * as pollsActions from '../actions/pollsActions';
 
 class Measure extends React.Component {
+
   static propTypes = {
     measureActions: PropTypes.object.isRequired,
     commentsActions: PropTypes.object.isRequired,
