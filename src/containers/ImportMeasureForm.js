@@ -5,14 +5,11 @@ import {bindActionCreators} from 'redux';
 import { Typeahead } from 'react-typeahead';
 import * as actions from '../actions/measuresActions';
 
-class MeasureForm extends React.Component {
+class ImportMeasureForm extends React.Component {
   static propTypes = {
-    saveMeasure: PropTypes.func.isRequired,
     importMeasure: PropTypes.func.isRequired,
-    description: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
-    catalogMeasures: PropTypes.object
+    catalogMeasures: PropTypes.array
   };
 
   constructor(props) {
@@ -75,4 +72,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MeasureForm);
+)(ImportMeasureForm);
