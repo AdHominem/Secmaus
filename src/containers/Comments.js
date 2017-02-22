@@ -2,11 +2,10 @@ import React, { PropTypes } from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-
+import { propEq } from 'ramda';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
 import * as actions from '../actions/commentsActions';
-
 
 class Comments extends React.Component {
   static propTypes = {
@@ -38,14 +37,10 @@ class Comments extends React.Component {
 
   render() {
     const { commentsActions, comments, parentId } = this.props;
-    const ownComments = comments.filter(comment => (comment.parentID === parentId));
-
-    if (ownComments.size > 0) { return; }
-
     return (
       <div className="comments">
         <ul>
-          {ownComments.map((comment, i) => <Comment key={i} comment={comment} />)}
+          {comments.map((comment, i) => <Comment key={i} comment={comment} />)}
         </ul>
         <a onClick={this.openModal}>
           Kommentar hinzufügen
@@ -72,9 +67,9 @@ class Comments extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    comments: state.commentsReducer.comments
+    comments: state.commentsReducer.comments.filter(propEq('parentID', ownProps.parentId))
   };
 }
 
