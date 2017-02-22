@@ -135,9 +135,21 @@ class Poll extends Component {
     const unanswered = isEmpty(questions) || isEmpty(questions[0].answers);
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
+    const buttons = isAdmin && <span>
+      <a onClick={this.toggleClose}>{ closed ? <FontAwesome name="lock"/> : <FontAwesome name="unlock-alt"/> }</a>
+      &nbsp;&nbsp;
+      { unanswered && <a onClick={this.onClick}><FontAwesome name="edit"/>&nbsp;&nbsp;</a> }
+      { !alreadyAnswered && <a onClick={ this.toggleShowResults }><FontAwesome name="bar-chart"/></a> }
+      &nbsp;&nbsp;
+      <a onClick={this.handleDeletePoll}><FontAwesome name="trash"/></a>
+      &nbsp;&nbsp;
+    </span>;
+
     return (
       <div className="flex-box poll">
-        <h1 className="flex-title" dangerouslySetInnerHTML={{__html: text}}/>
+        <h1 className="flex-title">
+          <span className="inline" dangerouslySetInnerHTML={{__html: text}}/> &nbsp; {buttons}
+        </h1>
         <div className="flex-content">
 
           <Modal
@@ -154,18 +166,7 @@ class Poll extends Component {
             />
           </Modal>
 
-          { isAdmin && <div>
-            <a onClick={this.toggleClose}>{ closed ? <FontAwesome name="lock" size="2x"/> : <FontAwesome name="unlock-alt" size="2x"/> }</a>
-            &nbsp;&nbsp;
-            { unanswered && <a onClick={this.onClick}><FontAwesome name="edit" size="2x"/>&nbsp;&nbsp;</a> }
-            <a onClick={this.handleDeletePoll}><FontAwesome name="trash" size="2x"/></a>
-            &nbsp;&nbsp;
-            { !alreadyAnswered && <a onClick={ this.toggleShowResults }><FontAwesome name="bar-chart" size="2x"/></a> }
-            &nbsp;&nbsp;
-          </div> }
-
           { pipe(sortBy(prop('index')))(questions).map(this.selectQuestionForm) }
-
           { !alreadyAnswered && <button onClick={this.submitAnswers} >Antworten</button> }
         </div>
       </div>
