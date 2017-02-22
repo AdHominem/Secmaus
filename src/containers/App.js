@@ -15,6 +15,7 @@ import * as catalogActions from '../actions/catalogActions';
 import * as questionActions from '../actions/questionsActions';
 
 class App extends React.Component {
+
   static propTypes = {
     measureActions: PropTypes.object.isRequired,
     commentActions: PropTypes.object.isRequired,

@@ -1,14 +1,17 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
 import { Typeahead } from 'react-typeahead';
 import * as actions from '../actions/measuresActions';
 
 class MeasureForm extends React.Component {
   static propTypes = {
     saveMeasure: PropTypes.func.isRequired,
+    importMeasure: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -17,19 +20,17 @@ class MeasureForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const { importMeasure } = this.props;
-    importMeasure(this.state.item.id);
+    this.props.importMeasure(this.state.item.id);
     this.setState({ description: '', name: '' });
     event.preventDefault();
   }
 
+  handleOnClick(event) {
+    this.props.close();
+    event.preventDefault();
+  }
+
   render() {
-    const { close, catalogMeasures } = this.props;
-
-    const matchItemToValue = (item, value) => {
-      return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-    };
-
     return (
       <form className="editor-form">
         <div className="editor-form--header">
@@ -37,15 +38,15 @@ class MeasureForm extends React.Component {
             Import:
             <div className="search-form">
               <Typeahead
-                options={catalogMeasures}
-                filterOption='name'
-                displayOption='name'
-                onOptionSelected={ opt => this.setState({ item: opt })}
+                options={this.props.catalogMeasures}
+                filterOption="name"
+                displayOption="name"
+                onOptionSelected={ (opt) => this.setState({ item: opt })}
               />
             </div>
           </label>
           <div className="button-row--left">
-            <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
+            <a className="btn btn-danger" onClick={ this.handleOnClick }>
               Schließen
             </a>
             <button onClick={this.handleSubmit}>Importieren</button>
