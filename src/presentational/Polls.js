@@ -1,16 +1,18 @@
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/pollsActions';
 import React, { PropTypes } from 'react';
-import Poll from '../containers/Poll'
 import { Link } from 'react-router';
 import { propEq } from 'ramda';
+
+import * as actions from '../actions/pollsActions';
+import Poll from '../containers/Poll';
 
 const pollRequiredProps = {
   measureId: PropTypes.string.isRequired,
   polls: PropTypes.array.isRequired,
   pollsActions: PropTypes.object.isRequired,
-  showButtons: PropTypes.bool.isRequired
+  showButtons: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired
 };
 
 function Polls({ polls, showButtons, measureId, isAdmin }) {

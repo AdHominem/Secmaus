@@ -30,7 +30,7 @@ class Poll extends Component {
     super(props);
     this.state = {
       // default to 0 for all answers
-      answers: props.questions.map(q => 0),
+      answers: props.questions.map(() => 0),
       modalIsOpen: false,
       showResults: false
     };
