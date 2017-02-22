@@ -5,7 +5,7 @@ import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { find, propEq } from 'ramda';
+import { find, propEq, isNil } from 'ramda';
 
 import MeasureForm from './MeasureForm';
 import Comments from './Comments';
@@ -52,8 +52,11 @@ class Measure extends React.Component {
   };
 
   render() {
-    const { measure, measure: { name, description, id }, isAdmin }  = this.props;
+    if (isNil(this.props.measure)) {
+      return <p>Maßnahme wurde noch nicht geladen</p>;
+    }
 
+    const { measure, measure: { name, description, id }, isAdmin }  = this.props;
     if (measure) {
       // <ReactCSSTransitionGroup
       //   transitionName="example"
