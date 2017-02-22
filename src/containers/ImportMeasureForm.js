@@ -11,7 +11,8 @@ class MeasureForm extends React.Component {
     importMeasure: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
+    catalogMeasures: PropTypes.object
   };
 
   constructor(props) {
