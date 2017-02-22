@@ -78,19 +78,19 @@ export function addComment(id, text, parentID, user, createdAt) {
   };
 }
 
-export function deleteComment(id, comments) {
+export function deleteComment(id, comments, isNotRecursive = true) {
   return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment);
     query.get(id, {
       success: comment => {
-        filter((childComment) => comment.id == childComment.parentID, comments).forEach(childComment => dispatch(deleteComment(childComment.id, comments)));
+        filter((childComment) => comment.id == childComment.parentID, comments).forEach(childComment => dispatch(deleteComment(childComment.id, comments, false)));
         comment.destroy({});
         dispatch({
           type: types.DELETE_COMMENT,
           id: id
         });
-        Alert.success('Kommentar erfolgreich gelöscht');
+        isNotRecursive && Alert.success('Kommentar erfolgreich gelöscht');
       },
       error: () => Alert.error('Kommentar konnte nicht gelöscht werden')
     });
