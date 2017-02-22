@@ -84,7 +84,7 @@ export function deleteComment(id, comments) {
     const query = new Parse.Query(Comment);
     query.get(id, {
       success: comment => {
-        filter((childComment) => (comment.id == childComment.parentID), comments).forEach(childComment => dispatch(deleteComment(childComment.id, comments)));
+        filter((childComment) => comment.id == childComment.parentID, comments).forEach(childComment => dispatch(deleteComment(childComment.id, comments)));
         comment.destroy({});
         dispatch({
           type: types.DELETE_COMMENT,

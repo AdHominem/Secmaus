@@ -1,20 +1,20 @@
 import React, { PropTypes, Component } from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import Parse from "parse";
+import { sortBy, pipe, prop, propEq, update, any } from "ramda";
+import FontAwesome from 'react-fontawesome';
+import Modal from 'react-modal';
+
 import * as pollsActions from "../actions/pollsActions";
 import * as questionsActions from "../actions/questionsActions";
-import Parse from "parse";
 import BinaryQuestion from "../presentational/Binary";
 import LikertQuestion from "../presentational/Question/Likert";
 import SingleChoiceQuestion from "../presentational/Question/SingleChoice";
 import BinaryForm from "../presentational/BinaryForm";
 import LikertForm from "../presentational/Question/LikertForm";
 import SingleChoiceForm from "../presentational/Question/SingleChoiceForm";
-import { sortBy, pipe, prop, propEq, update, any } from "ramda";
-import FontAwesome from 'react-fontawesome';
-import Modal from 'react-modal';
 import PollForm from './PollForm';
-
 
 class Poll extends Component {
 
