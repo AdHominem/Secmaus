@@ -16,7 +16,8 @@ class PollForm extends React.Component {
     measureId: PropTypes.string.isRequired,
     text: PropTypes.string,
     description: PropTypes.string,
-    questions: PropTypes.object
+    questions: PropTypes.array,
+    poll: PropTypes.object
   };
 
   constructor(props) {
@@ -42,11 +43,11 @@ class PollForm extends React.Component {
   }
   handleSubmit(event) {
     let { savePoll, editPoll } = this.props.pollsActions;
-    let { measureId } = this.props;
+    let { measureId, poll } = this.props;
     let { text, questions } = this.state;
 
-    if (this.props.poll) {
-      editPoll(this.props.poll.id, text, questions, measureId);
+    if (poll) {
+      editPoll(poll.id, text, questions, measureId);
     } else {
       savePoll(text, questions, measureId);
     }
@@ -78,7 +79,7 @@ class PollForm extends React.Component {
       </div>
     );
 
-    const newQuestion = type => event => {
+    const newQuestion = type => () => {
       if (type === 'single choice') {
         this.setState( update(this.state, {
           questions: { $push: [{
@@ -97,7 +98,6 @@ class PollForm extends React.Component {
         }));
       }
     };
-
 
     return (
       <div>
