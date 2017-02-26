@@ -26,22 +26,19 @@ class PollForm extends React.Component {
       text: props.text ? props.text : props.description,
       questions: props.questions ? props.questions : []
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onPollTextChange = this.onPollTextChange.bind(this);
-    this.removeQuestion = this.removeQuestion.bind(this);
   }
 
-  removeQuestion(event, index) {
+  removeQuestion = (event, index) => {
     const temp = clone(this.state.questions);
     temp.splice(index, 1);
     this.setState({ questions: temp });
-  }
+  };
 
-  onPollTextChange(value) {
+  onPollTextChange = (value) => {
     this.setState({ text: value });
-  }
-  handleSubmit(event) {
+  };
+
+  handleSubmit = () => {
     let { savePoll, editPoll } = this.props.pollsActions;
     let { measureId, poll } = this.props;
     let { text, questions } = this.state;
@@ -52,19 +49,43 @@ class PollForm extends React.Component {
       savePoll(text, questions, measureId);
     }
     browserHistory.push(`/SIDATESecMaus/measure/${ measureId }`);
+  };
+
+  changeQuestionText = (index) => {
+    return event=> {
+      const temp = clone(this.state.questions);
+      temp[index].text = event.target.value;
+      this.setState({ questions: temp});
+    };
+  };
+
+  changeQuestionChoices = (index) => {
+    return choices => {
+      const temp = clone(this.state.questions);
+      temp[index].choices = choices;
+      this.setState({ questions: temp });
+    };
+  };
+
+  newQuestion = type => () => {
+  if (type === 'single choice') {
+    this.setState( update(this.state, {
+      questions: { $push: [{
+        text: '',
+        questionType: type,
+        choices: ['', '', '']
+      }]}
+    }));
+  } else {
+    this.setState( update(this.state, {
+      questions: { $push: [{
+        text: '',
+        questionType: type,
+        choices: []
+      }]}
+    }));
   }
-
-  changeQuestionText(index) { return event=> {
-    const temp = clone(this.state.questions);
-    temp[index].text = event.target.value;
-    this.setState({ questions: temp });
-  }};
-
-  changeQuestionChoices(index) {return choices => {
-    const temp = clone(this.state.questions);
-    temp[index].choices = choices;
-    this.setState({ questions: temp });
-  }};
+};
 
   render() {
 
@@ -79,26 +100,6 @@ class PollForm extends React.Component {
       </div>
     );
 
-    const newQuestion = type => () => {
-      if (type === 'single choice') {
-        this.setState( update(this.state, {
-          questions: { $push: [{
-            text: '',
-            questionType: type,
-            choices: ['', '', '']
-          }]}
-        }));
-      } else {
-        this.setState( update(this.state, {
-          questions: { $push: [{
-            text: '',
-            questionType: type,
-            choices: []
-          }]}
-        }));
-      }
-    };
-
     return (
       <div>
         <br/>
@@ -112,9 +113,9 @@ class PollForm extends React.Component {
         />
 
         <div className="button-row">
-          <button className="button-primary" onClick={ newQuestion('binary') }>Neue binäre Frage</button>
-          <button className="button-primary" onClick={ newQuestion('likert') }>Neue Likert Frage</button>
-          <button className="button-primary" onClick={ newQuestion('single choice') }>Neue Single Choice Frage</button>
+          <button className="button-primary" onClick={ this.newQuestion('binary') }>Neue binäre Frage</button>
+          <button className="button-primary" onClick={ this.newQuestion('likert') }>Neue Likert Frage</button>
+          <button className="button-primary" onClick={ this.newQuestion('single choice') }>Neue Single Choice Frage</button>
         </div>
 
         { questions }
