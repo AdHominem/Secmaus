@@ -19,9 +19,9 @@ function LikertQuestion({ question, question: { answers } }) {
     "trifft nicht zu"
   ];
 
-  const stats = labels.map((choice, i) => (
+  const stats = labels.map((choice, i) =>
     [choice, count(pipe(nth(1), equals(i)), answers)]
-  ));
+  );
 
   const data = {
     labels: map(nth(0), stats),
