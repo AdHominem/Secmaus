@@ -1,13 +1,18 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { map, nth, pipe, equals } from 'ramda';
+
 import { singleChoiceColors } from '../constants/colors';
 import { count } from '../utils/count';
 
-const SingleChoiceQuestion = ({ question, question: { choices, answers } }) => {
-  const stats = choices.map((choice, i) => (
+const singleChoiceQuestionRequiredProps = {
+  question: PropTypes.object.isRequired
+};
+
+function SingleChoiceQuestion({ question, question: { choices, answers } }) {
+  const stats = choices.map((choice, i) =>
     [choice, count(pipe(nth(1), equals(i)), answers)]
-  ));
+  );
 
   const data = {
     labels: map(nth(0), stats),
@@ -26,5 +31,7 @@ const SingleChoiceQuestion = ({ question, question: { choices, answers } }) => {
     </div>
   );
 }
+
+SingleChoiceQuestion.propTypes = singleChoiceQuestionRequiredProps;
 
 export default SingleChoiceQuestion;
