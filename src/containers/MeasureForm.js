@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ReactQuill from 'react-quill';
+
 import '../styles/quill.css';
 
 import * as actions from '../actions/measuresActions';
@@ -19,30 +20,24 @@ class MeasureForm extends React.Component {
       description: props.description,
       name: props.name,
     };
-
-    this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    this.onNameChange = this.onNameChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onDescriptionChange(value) {
+  onDescriptionChange = (value) => {
     this.setState({ description: value });
-  }
+  };
 
-  onNameChange(event) {
+  onNameChange = (event) => {
     this.setState({ name: event.target.value });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     const { saveMeasure } = this.props;
     saveMeasure(this.state.name, this.state.description);
     this.setState({ description: '', name: '' });
     event.preventDefault();
-  }
+  };
 
   render() {
-    const { close, catalogMeasures } = this.props;
-
     return (
       <form className="editor-form">
         <div className="editor-form--header">
