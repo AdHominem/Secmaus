@@ -10,34 +10,34 @@ import Comments from "../containers/Comments";
 import Identicon from "../presentational/Identicon";
 
 class Comment extends React.Component {
+
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
     comment: PropTypes.object.isRequired,
     comments: PropTypes.array.isRequired
   };
+
   constructor() {
     super();
     this.state = { modalIsOpen: false };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal() { this.setState({ modalIsOpen: true }); }
-  afterOpenModal() { }
-  closeModal() {this.setState({ modalIsOpen: false });}
+  openModal = () => { this.setState({ modalIsOpen: true }); };
+
+  afterOpenModal = () => { };
+
+  closeModal = () => {this.setState({ modalIsOpen: false });};
 
   handleDeleteComment(event) {
   const { comment, comments } = this.props;
     this.props.commentsActions.deleteComment(comment.id, comments);
     event.preventDefault();
-  };
+  }
 
   onClick(event) {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
     event.preventDefault();
-  };
+  }
 
   render() {
 
