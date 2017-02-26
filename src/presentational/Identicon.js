@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { join, map, range, addIndex  } from 'ramda';
 import crypto from 'crypto';
 
-const Identicon = ({ size, string }) => {
+function Identicon({ size, string }) {
   const hash = crypto.createHash('md5').update(string).digest().toString('binary');
 
   const color =
@@ -30,11 +30,11 @@ const Identicon = ({ size, string }) => {
   );
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size * 5} height={size * 5}>  
+    <svg xmlns="http://www.w3.org/2000/svg" width={size * 5} height={size * 5}>
       {rects}
     </svg>
   );
-};
+}
 
 Identicon.propTypes = {
   size: PropTypes.number.isRequired,
