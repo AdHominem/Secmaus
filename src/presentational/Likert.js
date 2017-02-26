@@ -1,10 +1,16 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { map, nth, compose, pipe, equals, filter } from 'ramda';
+import { map, nth, pipe, equals } from 'ramda';
+
 import { likertColors } from '../constants/colors';
 import { count } from '../utils/count';
 
-const LikertQuestion = ({ question, question: { choices, answers } }) => {
+const likertQuestionRequiredProps = {
+  question: PropTypes.object
+};
+
+function LikertQuestion({ question, question: { answers } }) {
+
   const labels = [
     "trifft zu",
     "trifft eher zu",
@@ -12,6 +18,7 @@ const LikertQuestion = ({ question, question: { choices, answers } }) => {
     "trifft eher nicht zu",
     "trifft nicht zu"
   ];
+
   const stats = labels.map((choice, i) => (
     [choice, count(pipe(nth(1), equals(i)), answers)]
   ));
@@ -40,7 +47,6 @@ const LikertQuestion = ({ question, question: { choices, answers } }) => {
     }
   };
 
-
   return (
     <div className="question">
       <h1>{question.text}</h1>
@@ -48,5 +54,7 @@ const LikertQuestion = ({ question, question: { choices, answers } }) => {
     </div>
   );
 }
+
+LikertQuestion.propTypes = likertQuestionRequiredProps;
 
 export default LikertQuestion;
