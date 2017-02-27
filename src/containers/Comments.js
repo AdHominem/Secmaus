@@ -1,13 +1,15 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { propEq } from 'ramda';
+
 import CommentForm from './CommentForm';
 import Comment from './Comment';
 import * as actions from '../actions/commentsActions';
 
-class Comments extends React.Component {
+class Comments extends Component {
+
   static propTypes = {
     comments: PropTypes.array.isRequired,
     commentsActions: PropTypes.object.isRequired,
@@ -17,23 +19,19 @@ class Comments extends React.Component {
   constructor() {
     super();
     this.state = { modalIsOpen: false };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal() {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
-  }
+  };
 
-  afterOpenModal() {
+  afterOpenModal = () => {
     // TODO
-  }
+  };
 
-  closeModal() {
+  closeModal = () => {
     this.setState({ modalIsOpen: false });
-  }
+  };
 
   render() {
     const { commentsActions, comments, parentId } = this.props;
