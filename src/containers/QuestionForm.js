@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react';
-import ReactQuill from 'react-quill';
+import { range, update } from 'ramda';
+
 import '../styles/quill.css';
-import { browserHistory } from 'react-router';
-import * as actions from '../actions/pollsActions';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { __, range, curry, update } from 'ramda';
 
 class QuestionForm extends React.Component {
 
@@ -14,6 +10,7 @@ class QuestionForm extends React.Component {
     index: PropTypes.number.isRequired,
     changeQuestionText: PropTypes.func.isRequired,
     changeQuestionChoices: PropTypes.func.isRequired,
+    removeQuestion: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -23,12 +20,9 @@ class QuestionForm extends React.Component {
       choices: props.question.choices,
       choicesCount: props.question.choices.length,
     };
-
-    this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.onTextChange = this.onTextChange.bind(this);
   }
 
-  onChangeHandler(event) {
+  onChangeHandler = (event) => {
     const { changeQuestionChoices } = this.props;
     const count = +event.target.value;
 
@@ -39,30 +33,31 @@ class QuestionForm extends React.Component {
       choices: newChoices,
     });
 
-    changeQuestionChoices(newChoices)
-  }
+    changeQuestionChoices(newChoices);
+  };
 
-  onTextChange(event) {
+  onTextChange = (event) => {
     this.setState({
       question: {
         text: event.target.value
       }
-    })
-  }
+    });
+  };
 
-  onChoicesChange(i) {return event => {
-    this.setState(
-      { choices: update(i, event.target.value, this.state.choices) }
-    );
-    this.props.changeQuestionChoices(
-      update(i, event.target.value, this.state.choices)
-    );
-  }};
+  onChoicesChange = (i) => {
+    return event => {
+      this.setState(
+        { choices: update(i, event.target.value, this.state.choices) }
+      );
+      this.props.changeQuestionChoices(
+        update(i, event.target.value, this.state.choices)
+      );
+    };
+  };
 
   render() {
     const { changeQuestionText, removeQuestion, question: { questionType, choices, text }} = this.props;
     const translations = { 'binary' : 'binären', 'single choice' : 'Single Choice', 'likert' : 'Likert'};
-
     const { choicesCount } = this.state;
 
     return (
