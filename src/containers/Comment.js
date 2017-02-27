@@ -28,16 +28,16 @@ class Comment extends React.Component {
 
   closeModal = () => {this.setState({ modalIsOpen: false });};
 
-  handleDeleteComment(event) {
+  handleDeleteComment = (event) => {
   const { comment, comments } = this.props;
     this.props.commentsActions.deleteComment(comment.id, comments);
     event.preventDefault();
-  }
+  };
 
-  onClick(event) {
+  onClick = (event) => {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
     event.preventDefault();
-  }
+  };
 
   render() {
 
