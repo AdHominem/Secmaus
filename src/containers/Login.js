@@ -14,6 +14,7 @@ import * as catalogActions from '../actions/catalogActions';
 import * as questionActions from '../actions/questionsActions';
 
 class Login extends Component {
+
   static propTypes = {
     children: PropTypes.element,
     measureActions: PropTypes.object,
