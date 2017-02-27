@@ -44,7 +44,9 @@ class Poll extends Component {
   }
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
+
   afterOpenModal = () => { };
+
   closeModal = () => {this.setState({ modalIsOpen: false });};
 
   toggleShowResults = (event) => {
