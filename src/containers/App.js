@@ -51,12 +51,12 @@ class App extends React.Component {
     });
   };
 
-  updateSearch(event) {
+  updateSearch = (event) => {
     this.setState({search: event.target.value});
     event.preventDefault();
   };
 
-  startSearch(event) {
+  startSearch = (event) => {
     browserHistory.push(`/SIDATESecMaus/search/${this.state.search}`);
     event.preventDefault();
   };
