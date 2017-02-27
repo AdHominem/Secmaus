@@ -21,23 +21,19 @@ class Measures extends Component {
   constructor() {
     super();
     this.state = { modalIsOpen: false, modalIsOpen2: false };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
-    this.openModal2 = this.openModal2.bind(this);
-    this.afterOpenModal2 = this.afterOpenModal2.bind(this);
-    this.closeModal2 = this.closeModal2.bind(this);
   }
 
-  openModal() { this.setState({ modalIsOpen: true }); }
-  afterOpenModal() { }
-  closeModal() { this.setState({ modalIsOpen: false }); }
+  openModal = () => { this.setState({ modalIsOpen: true }); };
 
-  openModal2() { this.setState({ modalIsOpen2: true }); }
-  afterOpenModal2() { }
-  closeModal2() { this.setState({ modalIsOpen2: false }); }
+  afterOpenModal = () => { };
+
+  closeModal = () => { this.setState({ modalIsOpen: false }); };
+
+  openModal2 = () => { this.setState({ modalIsOpen2: true }); };
+
+  afterOpenModal2 = () => { };
+
+  closeModal2 = () => { this.setState({ modalIsOpen2: false }); };
 
   newMeasure = event => {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
@@ -50,9 +46,7 @@ class Measures extends Component {
   };
 
   render() {
-    const { measures, measureActions, showButtons, isAdmin } = this.props;
-
-    const { addMeasureFromCatalog, saveMeasure } = measureActions;
+    const { measures, measureActions: { addMeasureFromCatalog, saveMeasure }, showButtons, isAdmin } = this.props;
 
     const body = reverse(measures).map((measure, i) =>
       <Link key={i} className="flex-box" to={`/SIDATESecMaus/measure/${measure.id}`}>
