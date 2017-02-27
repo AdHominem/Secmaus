@@ -24,6 +24,10 @@ class ImportMeasureForm extends React.Component {
     event.preventDefault();
   };
 
+  handleOnOptionSelected = (opt) => {
+    this.setState({ item: opt });
+  };
+
   render() {
     return (
       <form className="editor-form">
@@ -35,7 +39,7 @@ class ImportMeasureForm extends React.Component {
                 options={this.props.catalogMeasures}
                 filterOption="name"
                 displayOption="name"
-                onOptionSelected={ (opt) => this.setState({ item: opt })}
+                onOptionSelected={ this.handleOnOptionSelected }
               />
             </div>
           </label>
