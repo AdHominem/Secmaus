@@ -1,17 +1,17 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ReactQuill from 'react-quill';
 
 import '../styles/quill.css';
-
 import * as actions from '../actions/measuresActions';
 
-class MeasureForm extends React.Component {
+class MeasureForm extends Component {
   static propTypes = {
     saveMeasure: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -37,6 +37,12 @@ class MeasureForm extends React.Component {
     event.preventDefault();
   };
 
+  handleClose = (event) => {
+    const {close} = this.props;
+    close();
+    event.preventDefault();
+  };
+
   render() {
     return (
       <form className="editor-form">
@@ -52,7 +58,7 @@ class MeasureForm extends React.Component {
           theme="snow"
         />
         <div className="button-row">
-          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
+          <a className="btn btn-danger" onClick={this.handleClose}>
             Schließen
           </a>
           <button onClick={this.handleSubmit}>Speichern</button>
