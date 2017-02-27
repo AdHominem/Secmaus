@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactQuill from 'react-quill';
+
 import '../styles/quill.css';
 
 class CommentForm extends React.Component {
@@ -13,24 +14,26 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: props.text };
-
-    this.onTextChange = this.onTextChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onTextChange(value) {
+  onTextChange = (value) => {
     this.setState({ text: value });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     const { saveComment } = this.props;
     saveComment(this.state.text, this.props.parentID);
     this.setState({ text: '' });
     event.preventDefault();
-  }
+  };
+
+  handleClose = (event) => {
+    const {close} = this.props;
+    close();
+    event.preventDefault();
+  };
 
   render() {
-    const { close } = this.props;
     return (
       <div className="editor-form">
         <ReactQuill
@@ -39,7 +42,7 @@ class CommentForm extends React.Component {
           theme="snow"
         />
         <div className="button-row">
-          <a className="btn btn-danger" onClick={(event) => {event.preventDefault; close();}}>
+          <a className="btn btn-danger" onClick={this.handleClose}>
             Schließen
           </a>
           <button onClick={this.handleSubmit}>Speichern</button>
