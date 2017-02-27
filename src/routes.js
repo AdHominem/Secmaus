@@ -8,7 +8,7 @@ import Measure from './containers/Measure';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import Polls from './presentational/Polls';
-import NewPoll from './containers/NewPoll';
+import NewPoll from './presentational/NewPoll';
 import Search from './containers/Search';
 import AllPolls from './presentational/AllPolls';
 
