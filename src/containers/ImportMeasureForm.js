@@ -6,27 +6,23 @@ import { Typeahead } from 'react-typeahead';
 import * as actions from '../actions/measuresActions';
 
 class ImportMeasureForm extends React.Component {
+
   static propTypes = {
     importMeasure: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     catalogMeasures: PropTypes.array
   };
 
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     this.props.importMeasure(this.state.item.id);
     this.setState({ description: '', name: '' });
     event.preventDefault();
-  }
+  };
 
-  handleOnClick(event) {
+  handleOnClick = (event) => {
     this.props.close();
     event.preventDefault();
-  }
+  };
 
   render() {
     return (
