@@ -93,31 +93,33 @@ class Poll extends Component {
 
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
-    return <div key={i}>
-      { alreadyAnswered = closed || alreadyAnswered || showResults }
-      {question.questionType === "binary" ?
-        alreadyAnswered ? <BinaryQuestion question={question}/>
-          : <BinaryForm
-            question={question}
-            value={answers[i]}
-            onChange={this.selectAnswer(i)}
-          />
-        : question.questionType === "likert" ?
-          alreadyAnswered ? <LikertQuestion question={question}/>
-            : <LikertForm
+    return (
+      <div key={i}>
+        { alreadyAnswered = closed || alreadyAnswered || showResults }
+        {question.questionType === "binary" ?
+          alreadyAnswered ? <BinaryQuestion question={question}/>
+            : <BinaryForm
               question={question}
               value={answers[i]}
               onChange={this.selectAnswer(i)}
             />
-          : question.questionType === "single choice" ?
-            alreadyAnswered ? <SingleChoiceQuestion question={question}/>
-              : <SingleChoiceForm
+          : question.questionType === "likert" ?
+            alreadyAnswered ? <LikertQuestion question={question}/>
+              : <LikertForm
                 question={question}
                 value={answers[i]}
                 onChange={this.selectAnswer(i)}
               />
-            : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
-    </div>;
+            : question.questionType === "single choice" ?
+              alreadyAnswered ? <SingleChoiceQuestion question={question}/>
+                : <SingleChoiceForm
+                  question={question}
+                  value={answers[i]}
+                  onChange={this.selectAnswer(i)}
+                />
+              : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
+      </div>
+      )
   };
 
   render() {
