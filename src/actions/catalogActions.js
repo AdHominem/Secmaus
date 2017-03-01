@@ -15,10 +15,9 @@ export function loadMeasures() {
     // because amount of data would be to high
     // query.ascending("name").select("id", "name", "category");
     query.select("id", "name", "category");
-    
+
     const loadChunk = (i, max) => {
       if (i < max) {
-        console.log("Loading chunk " + (i + 1) + " of " + max);
         query.skip(chunk_size * i).limit(chunk_size);
         query.find({
           success: measures => {
