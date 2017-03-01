@@ -27,7 +27,7 @@ class QuestionForm extends React.Component {
     const count = +event.target.value;
 
     // .fill(null) is necessary because js arrays are broken
-    const newChoices = (new Array(count)).fill(null).map((e, i) => this.state.choices[i] || "");
+    const newChoices = (new Array(count)).fill().map((e, i) => this.state.choices[i] || "");
     this.setState({
       choicesCount: count,
       choices: newChoices,

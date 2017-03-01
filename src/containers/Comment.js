@@ -55,11 +55,10 @@ class Comment extends React.Component {
             {comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.createdAt.toLocaleTimeString()}
           </h1>
           {
-            comment.user.id === Parse.User.current().id ?
+            comment.user.id === Parse.User.current().id &&
             <p className="comment__detail">
               <a onClick={this.onClick} >Bearbeiten</a> \ <a onClick={this.handleDeleteComment} >Löschen</a>
-            </p> :
-            null
+            </p>
           }
           <p dangerouslySetInnerHTML={{__html: comment.text}}/>
           <div className="comment__children">
