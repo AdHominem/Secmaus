@@ -18,10 +18,10 @@ class Measures extends Component {
     showButtons: PropTypes.bool
   };
 
-  constructor() {
-    super();
-    this.state = { modalIsOpen: false, modalIsOpen2: false };
-  }
+  state = {
+    modalIsOpen: false,
+    modalIsOpen2: false
+  };
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
 
