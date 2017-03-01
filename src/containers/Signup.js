@@ -10,7 +10,6 @@ import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
 
-// TODO: Avoid using refs
 class Signup extends Component {
 
   static propTypes = {
