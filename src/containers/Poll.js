@@ -27,14 +27,11 @@ class Poll extends Component {
     questions: PropTypes.array.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      // default to 0 for all answers
-      answers: props.questions.map(() => 0),
-      showResults: false
-    };
-  }
+  state = {
+    // default to 0 for all answers
+    answers: this.props.questions.map(() => 0),
+    showResults: false
+  };
 
   componentWillReceiveProps(props) {
     this.state = {
@@ -132,7 +129,7 @@ class Poll extends Component {
     const buttons = isAdmin && <span>
       <a onClick={this.toggleClose}>{ closed ? <FontAwesome name="lock"/> : <FontAwesome name="unlock-alt"/> }</a>
       &nbsp;&nbsp;
-      { unanswered && 
+      { unanswered &&
         <Link to={`/SIDATESecMaus/measure/${ measureId }/polls/${ id }/edit`} >
           <FontAwesome name="edit"/>
         </Link>
