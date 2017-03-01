@@ -20,8 +20,10 @@ class Search extends Component {
       doneLoadingMeasures: false,
       doneLoadingPolls: false,
     };
+  }
 
-    this.loadResults(props.params.keyword);
+  componentDidMount() {
+    this.loadResults(this.props.params.keyword);
   }
 
   componentWillReceiveProps(nextProps) {
