@@ -17,6 +17,7 @@ class Comment extends React.Component {
     comment: PropTypes.object.isRequired,
     comments: PropTypes.array.isRequired,
     isAdmin: PropTypes.bool.isRequired,
+    depth: PropTypes.bool.isRequired,
   };
 
   state = { modalIsOpen: false };
@@ -40,7 +41,7 @@ class Comment extends React.Component {
 
   render() {
 
-    const { comment, commentsActions,isAdmin } = this.props;
+    const { comment, commentsActions, isAdmin, depth } = this.props;
 
     return (
       // parentId is set to the id of the current comment,
@@ -62,7 +63,7 @@ class Comment extends React.Component {
 
           <p dangerouslySetInnerHTML={{__html: comment.text}}/>
           <div className="comment__children">
-            <Comments commentsActions={commentsActions} parentId={comment.id}/>
+            <Comments commentsActions={commentsActions} parentId={comment.id} depth={depth}/>
           </div>
         </div>
 

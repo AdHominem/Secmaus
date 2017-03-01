@@ -26,6 +26,9 @@ main
   margin: auto
   padding-top: 1em
 
+h2
+  margin-top: 1.5em
+
 .ReactModal__Overlay
   z-index: 999999999999
 
@@ -134,8 +137,8 @@ main
 
   border-bottom: 1px solid transparentize($comment-color, 0.9)
   display: table
-  margin-bottom: $base-spacing
-  padding-bottom: 1em
+  margin-bottom: 0.5em
+  padding-bottom: 0.5em
   width: 100%
 
   .comment__image,
@@ -164,6 +167,8 @@ main
       color: $comment-detail-color
       font-size: 0.9em
       font-style: italic
+  .comment__children:empty
+    padding-top: 1em
 
 
 header.navigation

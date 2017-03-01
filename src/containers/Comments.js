@@ -31,15 +31,17 @@ class Comments extends Component {
   };
 
   render() {
-    const { commentsActions, comments, parentId } = this.props;
+    const { commentsActions, comments, parentId, depth = 0 } = this.props;
     return (
       <div className="comments">
         <ul>
-          {comments.map((comment, i) => <Comment key={i} comment={comment} />)}
+          {comments.map((comment, i) => <Comment key={i} comment={comment} depth={depth + 1}/>)}
         </ul>
-        <a onClick={this.openModal}>
-          Antworten
-        </a>
+        { depth < 5 && (
+            depth == 0 ?
+              <button onClick={this.openModal}>Kommentar hinzufügen</button> :
+              <a onClick={this.openModal}>Antworten</a>
+        ) }
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
