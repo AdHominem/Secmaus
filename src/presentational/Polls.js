@@ -19,12 +19,12 @@ function Polls({ polls, showButtons, measureId, isAdmin }) {
   return (
     <div className="polls">
       {
-        showButtons && isAdmin && <button
-          className="btn btn-primary"
+        showButtons && isAdmin && <Link
+          className="button"
           to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
         >
           Neue Umfrage
-        </button>
+        </Link>
       }
       <div className="flex-boxes">
         {polls.map((poll, i) => (
