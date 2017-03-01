@@ -52,8 +52,8 @@ class Poll extends Component {
   };
 
   submitAnswers = () => {
-    const { questionsActions: { answerQuestion } } = this.props;
-    this.props.questions.forEach((question, i) => {
+    const { questions, questionsActions: { answerQuestion } } = this.props;
+    questions.forEach((question, i) => {
       answerQuestion(question.id, this.state.answers[i]);
     });
   };
