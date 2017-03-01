@@ -10,6 +10,7 @@ import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
 
+// TODO: Avoid using refs
 class Signup extends Component {
 
   static propTypes = {
@@ -19,14 +20,24 @@ class Signup extends Component {
     userActions: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      email: "",
+      password: ""
+    };
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
     const user = new Parse.User({
-      username: this.refs.username.value,
-      email: this.refs.email.value,
-      password: this.refs.password.value
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
     });
 
+    // TODO: This is a user action, should probably be in userActions instead
     user.signUp().then(
       () => {
         const query = new Parse.Query(Parse.Role);
@@ -41,6 +52,8 @@ class Signup extends Component {
             Alert.success('Registrierung erfolgreich');
           },
           error: () => {
+            console.log(this.state);
+            console.log(this.props);
             Alert.error('Registrierung fehlgeschlagen');
           }
         });
@@ -52,21 +65,35 @@ class Signup extends Component {
     );
   };
 
+  onUsernameChange = (event) => {
+    this.setState({ username: event.target.value });
+  };
+
+  onEmailChange = (event) => {
+    this.setState({ email: event.target.value });
+  };
+
+  onPasswordChange = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
   render() {
+    const { username, email, password } = this.state;
+
       return (
         <Jumbotron>
           <h1>Sign up</h1>
           <form>
             <label>
-              Username: <input ref="username" />
+              Username: <input value={username} onChange={this.onUsernameChange}/>
             </label>
             <br />
             <label>
-              Email: <input ref="email" />
+              Email: <input value={email} onChange={this.onEmailChange}/>
             </label>
             <br />
             <label>
-              Password: <input type="password" ref="password" />
+              Password: <input type="password" value={password} onChange={this.onPasswordChange} />
             </label>
             <br />
             <button onClick={this.handleSubmit}>Sign Up</button>

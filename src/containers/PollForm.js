@@ -11,6 +11,7 @@ import '../styles/quill.css';
 import QuestionForm from '../containers/QuestionForm';
 
 class PollForm extends React.Component {
+
   static propTypes = {
     pollsActions: PropTypes.object.isRequired,
     measureId: PropTypes.string.isRequired,
