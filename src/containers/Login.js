@@ -25,9 +25,27 @@ class Login extends Component {
     questionActions: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
+  onUsernameChange = (event) => {
+    this.setState({ username: event.target.value });
+  };
+
+  onPasswordChange = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
   handleSubmit = (event) => {
+    const { username, password } = this.state;
+
     event.preventDefault();
-    Parse.User.logIn(this.refs.username.value, this.refs.password.value).then(
+    Parse.User.logIn(username, password).then(
       () => {
         measureActions.loadMeasures();
         commentActions.loadComments();
@@ -45,15 +63,16 @@ class Login extends Component {
   };
 
   render() {
+    const { username, password } = this.state;
     return (
       <Jumbotron>
       <h1>Login</h1>
       <div>
         <label>
-          Username: <input ref="username" />
+          Username: <input value={username} onChange={this.onUsernameChange}/>
         </label>
         <label>
-          Password: <input type="password" ref="password" />
+          Password: <input type="password" value={password} onChange={this.onPasswordChange} />
         </label>
         <button onClick={this.handleSubmit}>Log In</button>
       </div>
