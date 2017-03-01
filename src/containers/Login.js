@@ -25,13 +25,10 @@ class Login extends Component {
     questionActions: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: ""
-    };
-  }
+  state = {
+    username: "",
+    password: ""
+  };
 
   onUsernameChange = (event) => {
     this.setState({ username: event.target.value });
@@ -47,7 +44,7 @@ class Login extends Component {
       measureActions, commentActions,
       userActions, pollsActions,
       questionActions, catalogActions,
-    } = this.props; 
+    } = this.props;
 
     event.preventDefault();
     Parse.User.logIn(username, password).then(
