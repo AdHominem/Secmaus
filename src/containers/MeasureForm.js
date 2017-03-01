@@ -14,13 +14,10 @@ class MeasureForm extends Component {
     close: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      description: props.description,
-      name: props.name,
-    };
-  }
+  state = {
+    description: this.props.description,
+    name: this.props.name,
+  };
 
   onDescriptionChange = (value) => {
     this.setState({ description: value });
