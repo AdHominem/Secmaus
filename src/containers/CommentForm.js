@@ -11,10 +11,7 @@ class CommentForm extends React.Component {
     close: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { text: props.text };
-  }
+  state = { text: this.props.text };
 
   onTextChange = (value) => {
     this.setState({ text: value });
