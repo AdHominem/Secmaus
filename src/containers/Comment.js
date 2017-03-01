@@ -19,10 +19,7 @@ class Comment extends React.Component {
     isAdmin: PropTypes.bool.isRequired,
   };
 
-  constructor() {
-    super();
-    this.state = { modalIsOpen: false };
-  }
+  state = { modalIsOpen: false };
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
 
