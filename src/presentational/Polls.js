@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import { propEq } from 'ramda';
 
 import * as actions from '../actions/pollsActions';
@@ -19,12 +18,12 @@ function Polls({ polls, showButtons, measureId, isAdmin }) {
   return (
     <div className="polls">
       {
-        showButtons && isAdmin && <button
+        showButtons && isAdmin && <a
           className="btn btn-primary"
           to={`/SIDATESecMaus/measure/${ measureId }/polls/new`}
         >
           Neue Umfrage
-        </button>
+        </a>
       }
       <div className="flex-boxes">
         {polls.map((poll, i) => (
