@@ -26,10 +26,7 @@ class App extends React.Component {
     children: PropTypes.element
   };
 
-  constructor() {
-    super();
-    this.state = {search: ""};
-  }
+  state = {search: ""};
 
   componentDidMount() {
     const { measureActions, commentActions, userActions, pollsActions, catalogActions, questionActions } = this.props;
