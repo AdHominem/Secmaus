@@ -55,13 +55,14 @@ class Comment extends React.Component {
         <div className="comment__content">
           <h1 className="media-heading">
             {comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.createdAt.toLocaleTimeString()}
+            {
+              (comment.user.id === Parse.User.current().id || isAdmin) &&
+              <span className="comment__detail">
+                <a onClick={this.onClick} ><FontAwesome name="edit"/></a> <a onClick={this.handleDeleteComment} ><FontAwesome name="trash"/></a>
+              </span>
+            }
           </h1>
-          {
-            (comment.user.id === Parse.User.current().id || isAdmin) &&
-            <p className="comment__detail">
-              <a onClick={this.onClick} ><FontAwesome name="edit"/></a> \ <a onClick={this.handleDeleteComment} ><FontAwesome name="trash"/></a>
-            </p>
-          }
+
           <p dangerouslySetInnerHTML={{__html: comment.text}}/>
           <div className="comment__children">
             <Comments commentsActions={commentsActions} parentId={comment.id}/>
