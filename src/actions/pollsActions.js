@@ -120,14 +120,10 @@ export function closePoll(id, closed) {
             );
             Alert.success("Umfrage " + (closed ? "geschlossen" : "geöffnet"));
           },
-          error: error => {
-            console.log(error);
-          }
+          error: error => Alert.error("Umfrage konnte nicht" + (closed ? "geschlossen" : "geöffnet") + "werden")
         });
       },
-      error: error => {
-        console.log(error);
-      }
+      error: error => Alert.error("Umfrage konnte nicht" + (closed ? "geschlossen" : "geöffnet") + "werden")
     });
   };
 }
