@@ -8,6 +8,8 @@ export function loadMeasures() {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure).include("user");
 
+    console.log("Loading measures");
+
     const {measuresReducer} = getState();
 
     if (!measuresReducer.loaded) {

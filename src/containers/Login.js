@@ -17,12 +17,12 @@ class Login extends Component {
 
   static propTypes = {
     children: PropTypes.element,
-    measureActions: PropTypes.object,
-    commentActions: PropTypes.object,
-    userActions: PropTypes.object,
-    pollsActions: PropTypes.object,
-    catalogActions: PropTypes.object,
-    questionActions: PropTypes.object
+    measureActions: PropTypes.object.isRequired,
+    commentActions: PropTypes.object.isRequired,
+    userActions: PropTypes.object.isRequired,
+    pollsActions: PropTypes.object.isRequired,
+    catalogActions: PropTypes.object.isRequired,
+    questionActions: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -43,6 +43,11 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     const { username, password } = this.state;
+    const {
+      measureActions, commentActions,
+      userActions, pollsActions,
+      questionActions, catalogActions,
+    } = this.props; 
 
     event.preventDefault();
     Parse.User.logIn(username, password).then(

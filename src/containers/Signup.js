@@ -9,14 +9,20 @@ import {bindActionCreators} from 'redux';
 import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
+import * as pollsActions from '../actions/pollsActions';
+import * as catalogActions from '../actions/catalogActions';
+import * as questionActions from '../actions/questionsActions';
 
 class Signup extends Component {
 
   static propTypes = {
     children: PropTypes.element,
-    measureActions: PropTypes.object,
-    commentActions: PropTypes.object,
-    userActions: PropTypes.object
+    measureActions: PropTypes.object.isRequired,
+    commentActions: PropTypes.object.isRequired,
+    userActions: PropTypes.object.isRequired,
+    pollsActions: PropTypes.object.isRequired,
+    catalogActions: PropTypes.object.isRequired,
+    questionActions: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -29,6 +35,12 @@ class Signup extends Component {
   }
 
   handleSubmit = (event) => {
+    const {
+      measureActions, commentActions,
+      userActions, pollsActions,
+      questionActions, catalogActions,
+    } = this.props; 
+
     event.preventDefault();
     const user = new Parse.User({
       username: this.state.username,
@@ -36,30 +48,37 @@ class Signup extends Component {
       password: this.state.password
     });
 
-    // TODO: This is a user action, should probably be in userActions instead
     user.signUp().then(
       () => {
         const query = new Parse.Query(Parse.Role);
-
         query.equalTo("name", "Mitarbeiter");
 
         query.find({
           success: results => {
             let role = results[0];
             role.getUsers().add(user);
-            role.save();
+            role.save(null, {
+              success: user => {
+                measureActions.loadMeasures();
+                commentActions.loadComments();
+                userActions.loadUserPermissions();
+                pollsActions.loadPolls();
+                questionActions.loadQuestions();
+                catalogActions.loadMeasures();
+              },
+              error: (user, error) => {
+                Alert.error('Registrierung fehlgeschlagen');
+              }
+            });
+            browserHistory.push('/');
             Alert.success('Registrierung erfolgreich');
           },
           error: () => {
-            console.log(this.state);
-            console.log(this.props);
             Alert.error('Registrierung fehlgeschlagen');
           }
         });
-
-        browserHistory.push('/');
       }, err => {
-        alert(err.message);
+        Alert.error('Registrierung fehlgeschlagen');
       }
     );
   };
@@ -110,7 +129,10 @@ function mapDispatchToProps(dispatch) {
   return {
     measureActions: bindActionCreators(measureActions, dispatch),
     commentActions: bindActionCreators(commentActions, dispatch),
-    userActions: bindActionCreators(userActions, dispatch)
+    userActions: bindActionCreators(userActions, dispatch),
+    pollsActions: bindActionCreators(pollsActions, dispatch),
+    catalogActions: bindActionCreators(catalogActions, dispatch),
+    questionActions: bindActionCreators(questionActions, dispatch)
   };
 }
 
