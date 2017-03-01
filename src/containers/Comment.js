@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
+import FontAwesome from 'react-fontawesome';
 
 import CommentForm from "./CommentForm";
 import * as actions from "../actions/commentsActions";
@@ -58,7 +59,7 @@ class Comment extends React.Component {
           {
             comment.user.id === Parse.User.current().id || isAdmin &&
             <p className="comment__detail">
-              <a onClick={this.onClick} >Bearbeiten</a> \ <a onClick={this.handleDeleteComment} >Löschen</a>
+              <a onClick={this.onClick} ><FontAwesome name="edit"/></a> \ <a onClick={this.handleDeleteComment} ><FontAwesome name="trash"/></a>
             </p>
           }
           <p dangerouslySetInnerHTML={{__html: comment.text}}/>
