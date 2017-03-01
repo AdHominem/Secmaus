@@ -14,7 +14,8 @@ class Comment extends React.Component {
   static propTypes = {
     commentsActions: PropTypes.object.isRequired,
     comment: PropTypes.object.isRequired,
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.array.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
   };
 
   constructor() {
@@ -41,7 +42,7 @@ class Comment extends React.Component {
 
   render() {
 
-    const { comment, commentsActions } = this.props;
+    const { comment, commentsActions,isAdmin } = this.props;
 
     return (
       // parentId is set to the id of the current comment,
@@ -55,7 +56,7 @@ class Comment extends React.Component {
             {comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.createdAt.toLocaleTimeString()}
           </h1>
           {
-            comment.user.id === Parse.User.current().id &&
+            comment.user.id === Parse.User.current().id || isAdmin &&
             <p className="comment__detail">
               <a onClick={this.onClick} >Bearbeiten</a> \ <a onClick={this.handleDeleteComment} >Löschen</a>
             </p>
@@ -91,7 +92,10 @@ class Comment extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {comments: state.commentsReducer.comments};
+  return {
+    isAdmin: state.userReducer.isAdmin,
+    comments: state.commentsReducer.comments
+  };
 }
 
 function mapDispatchToProps(dispatch) {
