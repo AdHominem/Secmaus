@@ -12,15 +12,12 @@ class Search extends Component {
     params: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      measures: [],
-      polls: [],
-      doneLoadingMeasures: false,
-      doneLoadingPolls: false,
-    };
-  }
+  state = {
+    measures: [],
+    polls: [],
+    doneLoadingMeasures: false,
+    doneLoadingPolls: false,
+  };
 
   componentDidMount() {
     this.loadResults(this.props.params.keyword);
