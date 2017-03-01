@@ -74,6 +74,24 @@ main
     &:first-child
       margin-left: 0
 
+.button
+  background-color: #1565c0
+  border: 0
+  border-radius: 3px
+  color: white
+  cursor: pointer
+  display: inline-block
+  font-size: 1em
+  font-weight: 600
+  line-height: 1
+  padding: 0.75em 1.5em
+  text-align: center
+  text-decoration: none
+  transition: background-color 150ms ease
+  &:hover
+    background-color: #11519a
+    color: white
+
 .button-row--left
   padding: 1em
   button, input
@@ -445,6 +463,8 @@ header.navigation
       margin-bottom: 0.5em
     .flex-content
       text-align: left
+      div
+        padding-bottom: 1em
     p
       color: transparentize($flex-box-color, 0.1)
       line-height: 1.5em
