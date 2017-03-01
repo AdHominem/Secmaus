@@ -118,6 +118,7 @@ export function closePoll(id, closed) {
                 closed,
               }
             );
+            Alert.success("Umfrage " + (closed ? "geschlossen" : "geöffnet"));
           },
           error: error => {
             console.log(error);
