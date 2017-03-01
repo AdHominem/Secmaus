@@ -119,7 +119,7 @@ class Poll extends Component {
                 />
               : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
       </div>
-      )
+      );
   };
 
   render() {
