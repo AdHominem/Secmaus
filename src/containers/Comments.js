@@ -41,7 +41,7 @@ class Comments extends Component {
           {comments.map((comment, i) => <Comment key={i} comment={comment} />)}
         </ul>
         <a onClick={this.openModal}>
-          Kommentar hinzufügen
+          Antworten
         </a>
         <Modal
           isOpen={this.state.modalIsOpen}

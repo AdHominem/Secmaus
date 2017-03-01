@@ -57,7 +57,7 @@ class Comment extends React.Component {
             {comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.createdAt.toLocaleTimeString()}
           </h1>
           {
-            comment.user.id === Parse.User.current().id || isAdmin &&
+            (comment.user.id === Parse.User.current().id || isAdmin) &&
             <p className="comment__detail">
               <a onClick={this.onClick} ><FontAwesome name="edit"/></a> \ <a onClick={this.handleDeleteComment} ><FontAwesome name="trash"/></a>
             </p>
