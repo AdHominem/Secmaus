@@ -13,14 +13,11 @@ class QuestionForm extends React.Component {
     removeQuestion: PropTypes.func.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: props.question.text,
-      choices: props.question.choices,
-      choicesCount: props.question.choices.length,
-    };
-  }
+  state = {
+    text: this.props.question.text,
+    choices: this.props.question.choices,
+    choicesCount: this.props.question.choices.length,
+  };
 
   onChangeHandler = (event) => {
     const { changeQuestionChoices } = this.props;
