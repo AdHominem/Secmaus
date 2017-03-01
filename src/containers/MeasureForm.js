@@ -58,10 +58,8 @@ class MeasureForm extends Component {
           theme="snow"
         />
         <div className="button-row">
-          <a className="btn btn-danger" onClick={this.handleClose}>
-            Schließen
-          </a>
-          <button onClick={this.handleSubmit}>Speichern</button>
+          <button className="button-danger" onClick={this.handleClose}>Abbrechen</button>
+          <button className="button-success" onClick={this.handleSubmit}>OK</button>
         </div>
       </form>
     );
