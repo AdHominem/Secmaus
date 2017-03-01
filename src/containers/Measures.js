@@ -66,7 +66,7 @@ class Measures extends Component {
         {
           showButtons === undefined && isAdmin &&
           <p>
-            <a className="btn btn-primary" onClick={this.newMeasure} >Neue Maßnahme</a> / <a className="btn btn-primary" onClick={this.importMeasure} >Maßnahme importieren</a>
+            <button className="btn btn-primary" onClick={this.newMeasure} >Neue Maßnahme</button> <button className="btn btn-primary" onClick={this.importMeasure} >Maßnahme importieren</button>
           </p>
         }
         <div className="flex-boxes">
