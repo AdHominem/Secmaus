@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import PollForm from '../containers/PollForm';
 import * as actions from '../actions/pollsActions';
 
-const neWPollRequiredProps = {
+const newPollRequiredProps = {
   pollsActions: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired
 };
@@ -16,12 +16,12 @@ function NewPoll(props) {
   return (
     <div className="new-poll">
       <h2>Umfrage hinzufügen</h2>
-      <PollForm savePoll={ savePoll } measureId={ measureId } />
+      <PollForm measureId={ measureId } />
     </div>
   );
 }
 
-NewPoll.propTypes = neWPollRequiredProps;
+NewPoll.propTypes = newPollRequiredProps;
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from "react";
+import { Link } from 'react-router';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
@@ -31,7 +32,6 @@ class Poll extends Component {
     this.state = {
       // default to 0 for all answers
       answers: props.questions.map(() => 0),
-      modalIsOpen: false,
       showResults: false
     };
   }
@@ -42,12 +42,6 @@ class Poll extends Component {
       answers: props.questions.map(() => 0)
     };
   }
-
-  openModal = () => { this.setState({ modalIsOpen: true }); };
-
-  afterOpenModal = () => { };
-
-  closeModal = () => {this.setState({ modalIsOpen: false });};
 
   toggleShowResults = (event) => {
     this.setState({
@@ -127,7 +121,7 @@ class Poll extends Component {
       isAdmin,
       poll,
       poll: {
-        text, closed, measureId
+        id, text, closed, measureId
       },
       questions
     } = this.props;
@@ -138,7 +132,11 @@ class Poll extends Component {
     const buttons = isAdmin && <span>
       <a onClick={this.toggleClose}>{ closed ? <FontAwesome name="lock"/> : <FontAwesome name="unlock-alt"/> }</a>
       &nbsp;&nbsp;
-      { unanswered && <a onClick={this.onClick}><FontAwesome name="edit"/>&nbsp;&nbsp;</a> }
+      { unanswered && 
+        <Link to={`/SIDATESecMaus/measure/${ measureId }/polls/${ id }/edit`} >
+          <FontAwesome name="edit"/>
+        </Link>
+      }
       { !alreadyAnswered && <a onClick={ this.toggleShowResults }><FontAwesome name="bar-chart"/></a> }
       &nbsp;&nbsp;
       <a onClick={this.handleDeletePoll}><FontAwesome name="trash"/></a>
@@ -151,21 +149,6 @@ class Poll extends Component {
           <span className="inline" dangerouslySetInnerHTML={{__html: text}}/> &nbsp; {buttons}
         </h1>
         <div className="flex-content">
-
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            contentLabel="Umfrage editieren"
-          >
-            <PollForm
-              pollsActions={pollsActions}
-              measureId={measureId}
-              poll={poll}
-              questions={questions}
-              text = {text}
-            />
-          </Modal>
-
           { pipe(sortBy(prop('index')))(questions).map(this.selectQuestionForm) }
           { !alreadyAnswered && <button onClick={this.submitAnswers} >Antworten</button> }
         </div>

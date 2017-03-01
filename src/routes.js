@@ -9,6 +9,7 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import Polls from './presentational/Polls';
 import NewPoll from './presentational/NewPoll';
+import EditPoll from './presentational/EditPoll';
 import Search from './containers/Search';
 import AllPolls from './presentational/AllPolls';
 
@@ -40,9 +41,10 @@ export default (
     <Route path="/SIDATESecMaus/" >
       <IndexRoute component={Measures} onEnter={requireAuth}/>
       <Route path="measures" component={Measures} onEnter={requireAuth}/>
+      <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
       <Route path="measure/:measureId/polls" component={Polls} onEnter={requireAuth}/>
       <Route path="measure/:measureId/polls/new" component={NewPoll} onEnter={requireAuth}/>
-      <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
+      <Route path="measure/:measureId/polls/:pollId/edit" component={EditPoll} onEnter={requireAuth}/>
       <Route path="polls" component={AllPolls} onEnter={requireAuth}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>
