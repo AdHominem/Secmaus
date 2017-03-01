@@ -25,21 +25,18 @@ class Signup extends Component {
     questionActions: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      email: "",
-      password: ""
-    };
-  }
+  state = {
+    username: "",
+    email: "",
+    password: ""
+  };
 
   handleSubmit = (event) => {
     const {
       measureActions, commentActions,
       userActions, pollsActions,
       questionActions, catalogActions,
-    } = this.props; 
+    } = this.props;
 
     event.preventDefault();
     const user = new Parse.User({
