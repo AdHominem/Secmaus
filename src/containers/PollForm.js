@@ -21,13 +21,10 @@ class PollForm extends React.Component {
     poll: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: props.text ? props.text : props.description,
-      questions: props.questions ? props.questions : []
-    };
-  }
+  state = {
+    text: this.props.text ? this.props.text : this.props.description,
+    questions: this.props.questions ? this.props.questions : []
+  };
 
   removeQuestion = (event, index) => {
     const temp = clone(this.state.questions);
