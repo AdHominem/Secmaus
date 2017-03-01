@@ -167,8 +167,10 @@ h2
       color: $comment-detail-color
       font-size: 0.9em
       font-style: italic
-  .comment__children:empty
+  .comment__children
     padding-top: 1em
+    &:empty
+      padding-top: 0em
 
 
 header.navigation
