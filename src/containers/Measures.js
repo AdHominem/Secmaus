@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import MeasureForm from './MeasureForm';
-import ImportMeasureForm from './ImportMeasureForm';
 import * as actions from '../actions/measuresActions';
 
 class Measures extends Component {
@@ -20,30 +19,17 @@ class Measures extends Component {
 
   state = {
     modalIsOpen: false,
-    modalIsOpen2: false
   };
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
-
-  afterOpenModal = () => { };
-
   closeModal = () => { this.setState({ modalIsOpen: false }); };
-
-  openModal2 = () => { this.setState({ modalIsOpen2: true }); };
-
-  afterOpenModal2 = () => { };
-
-  closeModal2 = () => { this.setState({ modalIsOpen2: false }); };
+  afterOpenModal = () => { };
 
   newMeasure = event => {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
     event.preventDefault();
   };
 
-  importMeasure = event => {
-    this.setState({ modalIsOpen2: !this.state.modalIsOpen2 });
-    event.preventDefault();
-  };
 
   render() {
     const { measures, measureActions: { addMeasureFromCatalog, saveMeasure }, showButtons, isAdmin } = this.props;
@@ -66,7 +52,7 @@ class Measures extends Component {
         {
           showButtons === undefined && isAdmin &&
           <p>
-            <button className="btn btn-primary" onClick={this.newMeasure} >Neue Maßnahme</button> <button className="btn btn-primary" onClick={this.importMeasure} >Maßnahme importieren</button>
+            <button className="btn btn-primary" onClick={this.newMeasure} >Neue Maßnahme</button>
           </p>
         }
         <div className="flex-boxes">
@@ -89,22 +75,6 @@ class Measures extends Component {
             name=""
             description=""
             close={this.closeModal}
-          />
-        </Modal>
-        <Modal
-          isOpen={this.state.modalIsOpen2}
-          onAfterOpen={this.afterOpenModal2}
-          onRequestClose={this.closeModal2}
-          contentLabel="Maßnahme importieren"
-        >
-          <ImportMeasureForm
-            importMeasure={
-              (id) => {
-                addMeasureFromCatalog(id);
-                this.closeModal2();
-              }
-            }
-            close={this.closeModal2}
           />
         </Modal>
       </div>

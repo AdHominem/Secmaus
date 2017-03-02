@@ -113,19 +113,3 @@ export function addMeasure(id, createdAt, name, description, createdBy) {
     name, createdAt, description, id, createdBy
   };
 }
-
-export function addMeasureFromCatalog(id) {
-  return dispatch => {
-    const CatalogMeasure = Parse.Object.extend("CatalogMeasure");
-    const query = new Parse.Query(CatalogMeasure);
-
-    query.get(id, {
-      success: measure => {
-        dispatch(saveMeasure(measure.get("name"), measure.get("description")));
-      },
-      error: error => {
-        Alert.error('Zu importierende Maßnahme konnte nicht gefunden werden: ' + error);
-      }
-    });
-  };
-}
