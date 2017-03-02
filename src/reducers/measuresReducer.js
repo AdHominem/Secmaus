@@ -11,6 +11,7 @@ export default function measuresReducer(state = {loaded: false, measures: []}, a
           name: action.name,
           description: action.description,
           id: action.id,
+          createdAt: action.createdAt,
           createdBy: action.createdBy
         }]
       }});

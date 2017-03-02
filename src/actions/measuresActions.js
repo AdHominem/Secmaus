@@ -16,6 +16,7 @@ export function loadMeasures() {
           results.forEach(result => {
             dispatch(addMeasure(
               result.id,
+              result.createdAt,
               result.get("name"),
               result.get("description"),
               result.get("user"),
@@ -41,7 +42,7 @@ export function saveMeasure(name, description) {
 
     measure.save(null, {
       success: measure => {
-        dispatch(addMeasure(measure.id, name, description, Parse.User.current()));
+        dispatch(addMeasure(measure.id, measure.createdAt, name, description, Parse.User.current()));
         browserHistory.push(`/SIDATESecMaus/measure/${measure.id}`);
         Alert.success('Maßnahme erfolgreich angelegt');
       },
@@ -106,10 +107,10 @@ export function editMeasure(id, name, description) {
   };
 }
 
-export function addMeasure(id, name, description, createdBy) {
+export function addMeasure(id, createdAt, name, description, createdBy) {
   return {
     type: types.ADD_MEASURE,
-    name, description, id, createdBy
+    name, createdAt, description, id, createdBy
   };
 }
 

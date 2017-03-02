@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Modal from 'react-modal';
-import { reverse } from 'ramda';
+import { sortBy, prop, reverse } from 'ramda';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -48,7 +48,7 @@ class Measures extends Component {
   render() {
     const { measures, measureActions: { addMeasureFromCatalog, saveMeasure }, showButtons, isAdmin } = this.props;
 
-    const body = reverse(measures).map((measure, i) =>
+    const body = measures.map((measure, i) =>
       <Link key={i} className="flex-box" to={`/SIDATESecMaus/measure/${measure.id}`}>
         <h1 className="flex-title">{measure.name}</h1>
       </Link>
@@ -113,8 +113,9 @@ class Measures extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  const measures = ownProps.measures || state.measuresReducer.measures;
   return {
-    measures: ownProps.measures || state.measuresReducer.measures,
+    measures: reverse(sortBy(prop('createdAt'), measures)),
     isAdmin: state.userReducer.isAdmin
   };
 }
