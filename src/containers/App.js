@@ -115,7 +115,9 @@ class App extends React.Component {
           </div>
         </header>
         <main>
-          {this.props.children}
+          <div className="centered">
+            {this.props.children}
+          </div>
         </main>
         <Alert
           stack={{limit: 3}}
