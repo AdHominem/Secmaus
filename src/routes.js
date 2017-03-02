@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, IndexRoute } from 'react-router';
+import { IndexRedirect, Route, IndexRoute } from 'react-router';
 import { Parse } from 'parse';
 
 import App from './containers/App';
@@ -37,9 +37,9 @@ function requireAuth(nextState, replace) {
 
 export default (
   <Route path="/" component={App}>
-    // <Redirect from="" to="/SIDATESecMaus/" />
-    <Route path="/SIDATESecMaus/" >
-      <IndexRoute component={Measures} onEnter={requireAuth}/>
+    <IndexRedirect to="/SIDATESecMaus/measures" />
+    <Route path="/SIDATESecMaus" >
+      <IndexRedirect to="measures" />
       <Route path="measures" component={Measures} onEnter={requireAuth}/>
       <Route path="measure/:measureId" component={Measure} onEnter={requireAuth}/>
       <Route path="measure/:measureId/polls" component={Polls} onEnter={requireAuth}/>
