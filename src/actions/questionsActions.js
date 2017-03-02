@@ -1,31 +1,28 @@
 import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
-
+import { forEach } from 'ramda';
 
 export function loadQuestions() {
   return dispatch => {
     const Question = Parse.Object.extend("Question");
     const query = new Parse.Query(Question);
 
-    query.find({
-      success: results => {
-        results.forEach(result => {
-          dispatch(addQuestion(
-            result.id,
-            result.get("answers"),
-            result.get("choices"),
-            result.get("text"),
-            result.get("pollId"),
-            result.get("questionType"),
-            result.get("index")
-          ));
-        })
-      },
-      error: error => {
-        Alert.error("Fragen konnten nicht geladen werden");
-      }
-    });
+    query.find().then(
+      forEach(result => {
+        dispatch(addQuestion(
+          result.id,
+          result.get("answers"),
+          result.get("choices"),
+          result.get("text"),
+          result.get("pollId"),
+          result.get("questionType"),
+          result.get("index")
+        ));
+      })
+    ).catch(
+      () => Alert.error("Fragen konnten nicht geladen werden")
+    );
   };
 }
 
@@ -41,14 +38,13 @@ export function saveQuestion(choices, questionType, text, pollId, index) {
     question.set('pollId', pollId);
     question.set('index', index);
 
-    question.save(null, {
-      success: question => {
-        dispatch(addQuestion(question.id, [], choices, text, pollId, questionType, index));
-      },
-      error: (comment, error) => {
-        Alert.error("Frage konnte nicht gespeichert werden");
-      }
-    });
+    question.save(null).then(
+      question => dispatch(
+        addQuestion(question.id, [], choices, text, pollId, questionType, index)
+      )
+    ).catch(
+      () => Alert.error("Frage konnte nicht gespeichert werden")
+    )
   };
 }
 
@@ -63,26 +59,24 @@ export function answerQuestion(id, answerIndex) {
     const userId = Parse.User.current().id;
     const answer = [ userId, answerIndex ];
 
-    query.get(id, {
-      success: question => {
+    query.get(id).then(
+      question => {
         question.add("answers", answer);
-        question.save(null, {
-          success: () => {
-            dispatch(
-              {
-                type: types.ANSWER_QUESTION,
-                id,
-                answerIndex,
-                userId
-              }
-            );
-          },
-          error: error => Alert.error("Zu beantwortende Frage konnte nicht geladen werden")
-        });
-      },
-      error: error => Alert.error("Frage konnte nicht beantwortet werden")
-    });
-  };
+        return question.save(null)
+      }
+    ).then(
+      () => dispatch({
+        type: types.ANSWER_QUESTION,
+        id,
+        answerIndex,
+        userId
+      })
+    ).then(
+      () => Alert.success("Antwort wurde gespeichert")  
+    ).catch(
+      (error) => Alert.error("Frage konnte nicht beantwortet werden")
+    );
+  }
 }
 
 export function editQuestion(id, choices, text) {
@@ -90,26 +84,22 @@ export function editQuestion(id, choices, text) {
     const Question = Parse.Object.extend("Question");
     const query = new Parse.Query(Question);
 
-    query.get(id, {
-      success: question => {
+    query.get(id).then(
+      question => {
         question.set('choices', choices);
         question.set('text', text);
-        question.save(null, {
-          success: () => {
-            dispatch(
-              {
-                type: types.EDIT_QUESTION,
-                id,
-                choices,
-                text
-              }
-            );
-          },
-          error: error => Alert.error("Zu bearbeitende Frage konnte nicht geladen werden")
-        });
-      },
-      error: error => Alert.error("Frage konnte nicht bearbeitet werden")
-    });
+        return question.save(null);
+      }
+    ).then(
+      () => dispatch({
+        type: types.EDIT_QUESTION,
+        id,
+        choices,
+        text
+      })
+    ).catch(
+      () => Alert.error("Frage konnte nicht bearbeitet werden")
+    )
   };
 }
 
@@ -130,15 +120,16 @@ export function deleteQuestion(id) {
   return dispatch => {
     const Question = Parse.Object.extend("Question");
     const query = new Parse.Query(Question);
-    query.get(id, {
-      success: question => {
+    query.get(id).then(
+      question => {
         question.destroy({});
         dispatch({
           type: types.DELETE_QUESTION,
           id: id
         });
-      },
-      error: error => Alert.error("Frage konnte nicht gelöscht werden")
-    });
+      }
+    ).catch(
+      () => Alert.error("Frage konnte nicht gelöscht werden")
+    );
   };
 }

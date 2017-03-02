@@ -37,21 +37,18 @@ class Search extends Component {
     // Case insensitive:
     query1.matches("description", keyword, "i") || query1.matches("name", keyword, "i");
 
-    query1.find(
-      {
-        success: results => {
-          const measures = results.map(result => ({
-            id: result.id,
-            name: result.get("name"),
-            description: result.get("description"),
-            createdBy: result.get("createdBy"),
-          }));
-          this.setState({measures: measures, doneLoadingMeasures: true});
-        },
-        error: error => {
-          Alert.error('Suche fehlgeschlagen: ' + error);
-        }
+    query1.find().then(
+      results => {
+        const measures = results.map(result => ({
+          id: result.id,
+          name: result.get("name"),
+          description: result.get("description"),
+          createdBy: result.get("createdBy"),
+        }));
+        this.setState({measures: measures, doneLoadingMeasures: true});
       }
+    ).catch(
+      () => Alert.error('Suche fehlgeschlagen')
     );
 
     const Poll = Parse.Object.extend("Poll");
@@ -61,21 +58,18 @@ class Search extends Component {
     // Case insensitive:
     query2.matches("text", keyword, "i");
 
-    query2.find(
-      {
-        success: results => {
-          const polls = results.map(result => ({
-            id: result.id,
-            measureId: result.get("measureId"),
-            text: result.get("text"),
-            closed: result.get("closed"),
-          }));
-          this.setState({polls: polls, doneLoadingPolls: true});
-        },
-        error: error => {
-          Alert.error('Suche fehlgeschlagen: ' + error);
-        }
+    query2.find().then(
+      results => {
+        const polls = results.map(result => ({
+          id: result.id,
+          measureId: result.get("measureId"),
+          text: result.get("text"),
+          closed: result.get("closed"),
+        }));
+        this.setState({polls: polls, doneLoadingPolls: true});
       }
+    ).catch(
+      () => Alert.error('Suche fehlgeschlagen')
     );
   }
 

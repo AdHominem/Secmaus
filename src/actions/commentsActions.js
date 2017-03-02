@@ -1,27 +1,25 @@
 import * as types from '../constants/actionTypes';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
-import {filter} from 'ramda';
+import {filter, propEq, forEach} from 'ramda';
 
 export function loadComments() {
   return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment).include("user");
 
-    query.find({
-      success: results => {
-        results.forEach(result => {
-          dispatch(addComment(
-            result.id,
-            result.get("text"),
-            result.get("parentID"),
-            result.get("user"),
-            result.get("createdAt")
-          ))
-        })
-      },
-      error: () => Alert.error('Kommentare konnten nicht geladen werden')
-    });
+    query.find().then(
+      forEach((result) => 
+        dispatch(addComment(
+          result.id,
+          result.get("text"),
+          result.get("parentID"),
+          result.get("user"),
+          result.get("createdAt")
+        )))
+    ).catch(
+      () => Alert.error('Kommentare konnten nicht geladen werden')
+    );
   };
 }
 
@@ -36,12 +34,11 @@ export function saveComment(text, parentID) {
     const now = new Date();
     comment.set('createdAt', now);
 
-    comment.save(null, {
-      success: comment => {
-        dispatch(addComment(comment.id, text, parentID, Parse.User.current(), now));
-      },
-      error: () => Alert.error('Kommentar konnten nicht gespeichert werden')
-    });
+    comment.save(null).then(
+      comment => dispatch(addComment(comment.id, text, parentID, Parse.User.current(), now))
+    ).catch(
+      () => Alert.error('Kommentar konnten nicht gespeichert werden')
+    );
   };
 }
 
@@ -50,24 +47,20 @@ export function editComment(id, text) {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment);
 
-    query.get(id, {
-      success: comment => {
+    query.get(id).then(
+      (comment) => {
         comment.set('text', text);
-        comment.save(null, {
-          success: () => {
-            dispatch(
-              {
-                type: types.EDIT_COMMENT,
-                text: text,
-                id: id
-              }
-            );
-          },
-          error: () => Alert.error('Zu bearbeitender Kommentar konnten nicht geladen werden')
-        });
-      },
-      error: () => Alert.error('Zu bearbeitender Kommentar konnten nicht gespeichert werden')
-    });
+        return comment.save(null);
+      }
+    ).then(
+      () => dispatch({
+        type: types.EDIT_COMMENT,
+        text: text,
+        id: id
+      })
+    ).catch(
+      (error) => Alert.error('Kommentar konnte nicht bearbeitet werden')  
+    )
   };
 }
 
@@ -82,9 +75,10 @@ export function deleteComment(id, comments, isNotRecursive = true) {
   return dispatch => {
     const Comment = Parse.Object.extend("Comment");
     const query = new Parse.Query(Comment);
-    query.get(id, {
-      success: comment => {
-        filter((childComment) => comment.id == childComment.parentID, comments).forEach(childComment => dispatch(deleteComment(childComment.id, comments, false)));
+    query.get(id).then(
+      comment => {
+        filter(propEq('parentID', comment.id), comments).
+          forEach(child => dispatch(deleteComment(child.id, comments, false)));
         comment.destroy({});
         dispatch({
           type: types.DELETE_COMMENT,
@@ -92,7 +86,6 @@ export function deleteComment(id, comments, isNotRecursive = true) {
         });
         isNotRecursive && Alert.success('Kommentar erfolgreich gelöscht');
       },
-      error: () => Alert.error('Kommentar konnte nicht gelöscht werden')
-    });
+    ).catch(() => Alert.error('Kommentar konnte nicht gelöscht werden'))
   };
 }

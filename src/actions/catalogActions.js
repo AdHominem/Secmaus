@@ -19,21 +19,20 @@ export function loadMeasures() {
     const loadChunk = (i, max) => {
       if (i < max) {
         query.skip(chunk_size * i).limit(chunk_size);
-        query.find({
-          success: measures => {
+        query.find().then(
+          measures => {
             dispatch({
               type: types.ADD_CATALOG_MEASURES,
               measures: measures.map( m => ({id: m.id, name: m.get("name"), category: m.get("category")}))
             });
             loadChunk(i + 1, max);
-          },
-          error: error => Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error)
-        });
+          }
+        ).catch(
+          () => Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error)
+        );
       }
     };
 
-    if (!catalogReducer.loaded) {
-      loadChunk(0, chunk_count);
-    }
+    catalogReducer.loaded || loadChunk(0, chunk_count);
   };
 }

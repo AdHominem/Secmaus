@@ -49,35 +49,28 @@ class Signup extends Component {
       () => {
         const query = new Parse.Query(Parse.Role);
         query.equalTo("name", "Mitarbeiter");
-
-        query.find({
-          success: results => {
-            let role = results[0];
-            role.getUsers().add(user);
-            role.save(null, {
-              success: user => {
-                measureActions.loadMeasures();
-                commentActions.loadComments();
-                userActions.loadUserPermissions();
-                pollsActions.loadPolls();
-                questionActions.loadQuestions();
-                catalogActions.loadMeasures();
-              },
-              error: (user, error) => {
-                Alert.error('Registrierung fehlgeschlagen');
-              }
-            });
-            browserHistory.push('/');
-            Alert.success('Registrierung erfolgreich');
-          },
-          error: () => {
-            Alert.error('Registrierung fehlgeschlagen');
-          }
-        });
-      }, err => {
-        Alert.error('Registrierung fehlgeschlagen');
+        return query.find();
       }
-    );
+    ).then(
+      results => {
+        let role = results[0];
+        role.getUsers().add(user);
+        return role.save(null);
+      }
+    ).then(
+      user => {
+        measureActions.loadMeasures();
+        commentActions.loadComments();
+        userActions.loadUserPermissions();
+        pollsActions.loadPolls();
+        questionActions.loadQuestions();
+        catalogActions.loadMeasures();
+        browserHistory.push('/');
+        Alert.success('Registrierung erfolgreich');
+      }
+    ).catch(
+      () => Alert.error('Registrierung fehlgeschlagen')
+    )
   };
 
   onUsernameChange = (event) => {

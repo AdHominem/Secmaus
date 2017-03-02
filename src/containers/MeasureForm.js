@@ -52,17 +52,14 @@ class MeasureForm extends Component {
     const CatalogMeasure = Parse.Object.extend("CatalogMeasure");
     const query = new Parse.Query(CatalogMeasure);
 
-    query.get(this.state.option.id, {
-      success: measure => {
-        this.setState({
-          name: measure.get("name"),
-          description: measure.get("description")
-        })
-      },
-      error: error => {
-        Alert.error('Zu importierende Maßnahme konnte nicht gefunden werden');
-      }
-    });
+    query.get(this.state.option.id).then(
+      measure => this.setState({
+        name: measure.get("name"),
+        description: measure.get("description")
+      })
+    ).catch(
+      () => Alert.error('Zu importierende Maßnahme konnte nicht gefunden werden')
+    );
     
     event.preventDefault();
   };
