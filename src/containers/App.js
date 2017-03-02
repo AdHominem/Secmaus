@@ -6,6 +6,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Identicon from "../presentational/Identicon";
 
 import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
@@ -77,7 +78,6 @@ class App extends React.Component {
                   <li className="nav-link"><Link to="/SIDATESecMaus/measures">Maßnahmen</Link></li>
                   <li className="nav-link"><Link to="/SIDATESecMaus/polls">Umfragen</Link></li>
                   <li className="nav-link"><a onClick={this.logOut}>Log Out</a></li>
-                  <li className="nav-link"><Link to="/SIDATESecMaus/user">{ Parse.User.current().getUsername() }</Link></li>
                 </ul> :
                 <ul id="js-navigation-menu" className="navigation-menu show">
                   <li className="nav-link"><Link to="/SIDATESecMaus/login">Log In</Link></li>
@@ -99,6 +99,18 @@ class App extends React.Component {
                   </button>
                 </form>
               </div>
+              { 
+                Parse.User.current() &&
+                <div className="user-indicator">
+                  <p>{ Parse.User.current().getUsername() }</p>
+                </div>
+              }
+              {
+                Parse.User.current() &&
+                <div className="user-indicator">
+                  <Identicon string={Parse.User.current().getUsername()} size={12}/>
+                </div>
+              }
             </div>
           </div>
         </header>
