@@ -23,7 +23,6 @@ class QuestionForm extends React.Component {
     const { changeQuestionChoices } = this.props;
     const count = +event.target.value;
 
-    // .fill(null) is necessary because js arrays are broken
     const newChoices = (new Array(count)).fill().map((e, i) => this.state.choices[i] || "");
     this.setState({
       choicesCount: count,
@@ -62,21 +61,12 @@ class QuestionForm extends React.Component {
         <br/>
 
         <label>Text der { translations[questionType] } Frage:</label>
-
         <input type="text" value={ text } onChange={ changeQuestionText }/>
 
           { questionType == 'single choice' &&
             <div className="answers">
               <select defaultValue={3} name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
+                { range(2, 11).map(i => <option>{i}</option>) }
               </select>
 
               { range(0, choicesCount).map(i =>
@@ -86,8 +76,6 @@ class QuestionForm extends React.Component {
                   </div>)
               }
             </div>}
-
-
         <div className="button-row">
           <button className="button-danger" onClick={ removeQuestion }>Frage löschen</button>
         </div>

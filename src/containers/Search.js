@@ -74,8 +74,6 @@ class Search extends Component {
   }
 
   render() {
-    // this.loadResults();
-
     const keyword = this.props.params.keyword;
     const { measures, polls, doneLoadingMeasures, doneLoadingPolls } = this.state;
 
