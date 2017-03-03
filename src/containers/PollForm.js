@@ -6,15 +6,17 @@ import { bindActionCreators } from 'redux';
 import { clone } from 'ramda';
 import update from 'immutability-helper';
 
+import ButtonRow from '../presentational/ButtonRow';
+import QuestionForm from '../containers/QuestionForm';
 import * as actions from '../actions/pollsActions';
 import '../styles/quill.css';
-import QuestionForm from '../containers/QuestionForm';
 
 class PollForm extends React.Component {
 
   static propTypes = {
     pollsActions: PropTypes.object.isRequired,
     measureId: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired,
     text: PropTypes.string,
     description: PropTypes.string,
     questions: PropTypes.array,
@@ -48,6 +50,11 @@ class PollForm extends React.Component {
     }
     browserHistory.push(`/SIDATESecMaus/measure/${ measureId }`);
   };
+
+  handleClose = () => {
+    browserHistory.goBack();
+    event.preventDefault();
+  }
 
   changeQuestionText = (index) => {
     return event=> {
@@ -118,9 +125,7 @@ class PollForm extends React.Component {
 
         { questions }
 
-        <div className="button-row">
-          <button className="button-success" onClick={this.handleSubmit}>Speichern</button>
-        </div>
+        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} />
       </div>
     );
   }

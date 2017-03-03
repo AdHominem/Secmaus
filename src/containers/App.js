@@ -120,10 +120,7 @@ class App extends React.Component {
             {this.props.children}
           </div>
         </main>
-        <Alert
-          stack={{limit: 3}}
-          effect="bouncyflip"
-        />
+        <Alert stack={{limit: 3}} effect="bouncyflip" />
       </div>
     );
   }

@@ -6,8 +6,9 @@ import { Typeahead } from 'react-typeahead';
 import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
-import '../styles/quill.css';
+import ButtonRow from '../presentational/ButtonRow';
 import * as actions from '../actions/measuresActions';
+import '../styles/quill.css';
 
 class MeasureForm extends Component {
   static propTypes = {
@@ -93,10 +94,8 @@ class MeasureForm extends Component {
           onChange={this.onDescriptionChange}
           theme="snow"
         />
-        <div className="button-row">
-          <button className="button-danger" onClick={this.handleClose}>Abbrechen</button>
-          <button className="button-success" onClick={this.handleSubmit}>OK</button>
-        </div>
+        <div/>
+        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} />
       </form>
     );
   }

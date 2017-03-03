@@ -6,7 +6,7 @@ import { likertColors } from '../constants/colors';
 import { count } from '../utils/count';
 
 const likertQuestionRequiredProps = {
-  question: PropTypes.object
+  question: PropTypes.object.isRequired
 };
 
 function LikertQuestion({ question, question: { answers } }) {

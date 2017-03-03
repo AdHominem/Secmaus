@@ -15,8 +15,7 @@ import AllPolls from './presentational/AllPolls';
 
 function requireAuth(nextState, replace) {
   // If the user is not logged in,
-  // redirect to the login page
-  // and store the current url,
+  // redirect to the login page and store the current url,
   // so that we can return to it later
   if (!Parse.User.current()) {
     replace({
@@ -25,15 +24,6 @@ function requireAuth(nextState, replace) {
     });
   }
 }
-
-// function requireAdminAuth(nextState, replace) {
-//   if (!Parse.User.current()) {
-//     replace({
-//       pathname: 'login',
-//       query: { return_to: nextState.location.pathname }
-//     });
-//   }
-// }
 
 export default (
   <Route path="/" component={App}>
@@ -51,7 +41,4 @@ export default (
       <Route path="search/:keyword" component={Search} onEnter={requireAuth}/>
     </Route>
   </Route>
-  // <Route path="catalog" component={Catalog} onEnter={requireAuth}/>
-  // <Route path="admin" component={AdminPage} onEnter={requireAdminAuth}/>
-  // <Route path="*" component={NotFoundPage}/>
 );

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactQuill from 'react-quill';
 
+import ButtonRow from '../presentational/ButtonRow';
 import '../styles/quill.css';
 
 class CommentForm extends React.Component {
@@ -38,10 +39,7 @@ class CommentForm extends React.Component {
           onChange={this.onTextChange}
           theme="snow"
         />
-        <div className="button-row">
-          <button className="button-danger" onClick={this.handleClose}>Abbrechen</button>
-          <button className="button-success" onClick={this.handleSubmit}>OK</button>
-        </div>
+        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} />
       </div>
     );
   }
