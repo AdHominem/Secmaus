@@ -4,18 +4,13 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
 import { sortBy, pipe, prop, propEq, update, any, isEmpty } from "ramda";
-import FontAwesome from 'react-fontawesome';
-import Modal from 'react-modal';
+import FontAwesome from "react-fontawesome";
+import Modal from "react-modal";
 
+import questionTypes from "../constants/questionTypes";
+import PollForm from "./PollForm";
 import * as pollsActions from "../actions/pollsActions";
 import * as questionsActions from "../actions/questionsActions";
-import BinaryQuestion from "../presentational/Binary";
-import LikertQuestion from "../presentational/Likert";
-import SingleChoiceQuestion from "../presentational/SingleChoice";
-import BinaryForm from "../presentational/BinaryForm";
-import LikertForm from "../presentational/LikertForm";
-import SingleChoiceForm from "../presentational/SingleChoiceForm";
-import PollForm from './PollForm';
 
 class Poll extends Component {
 
@@ -78,39 +73,28 @@ class Poll extends Component {
   };
 
   selectQuestionForm = (question, i) => {
-
     const { poll: { closed }, questions } = this.props;
     const { answers, showResults } = this.state;
 
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
+    alreadyAnswered = closed || alreadyAnswered || showResults;
 
-    return (
-      <div key={i}>
-        { alreadyAnswered = closed || alreadyAnswered || showResults }
-        {question.questionType === "binary" ?
-          alreadyAnswered ? <BinaryQuestion question={question}/>
-            : <BinaryForm
-              question={question}
-              value={answers[i]}
-              onChange={this.selectAnswer(i)}
-            />
-          : question.questionType === "likert" ?
-            alreadyAnswered ? <LikertQuestion question={question}/>
-              : <LikertForm
-                question={question}
-                value={answers[i]}
-                onChange={this.selectAnswer(i)}
-              />
-            : question.questionType === "single choice" ?
-              alreadyAnswered ? <SingleChoiceQuestion question={question}/>
-                : <SingleChoiceForm
-                  question={question}
-                  value={answers[i]}
-                  onChange={this.selectAnswer(i)}
-                />
-              : <p>Fehler: Unbekannter Fragentyp {question.questionType}</p>}
-      </div>
-      );
+    const component = questionTypes[question.questionType] ||
+      {result: <p>Ungültiger Fragetyp</p>, form: <p>Ungültiger Fragetyp</p>};
+
+    if (alreadyAnswered) {
+      return React.createElement(component.results, {
+        key: i,
+        question: question
+      });
+    } else {
+      return React.createElement(component.form, {
+        key: i,
+        question: question,
+        value: answers[i],
+        onChange: this.selectAnswer(i)
+      });
+    }
   };
 
   render() {
