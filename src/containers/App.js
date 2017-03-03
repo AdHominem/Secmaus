@@ -6,8 +6,9 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import Identicon from "../presentational/Identicon";
+import FontAwesome from 'react-fontawesome';
 
+import Identicon from "../presentational/Identicon";
 import * as measureActions from '../actions/measuresActions';
 import * as commentActions from '../actions/commentsActions';
 import * as userActions from '../actions/userActions';
@@ -68,7 +69,7 @@ class App extends React.Component {
         <header className="navigation" role="banner">
           <div className="navigation-wrapper">
             <a href="javascript:void(0)" className="logo">
-              <img src="https://sidate-portal.regioit.de/o/sidate-2-theme/images/sidate/logo_sidate.png" alt="" />
+              <img src="/images/logo_sidate.png" alt="SIDATE Logo" />
             </a>
             <a href="javascript:void(0)" className="navigation-menu-button" id="js-mobile-menu">MENU</a>
             <nav role="navigation">
@@ -95,7 +96,7 @@ class App extends React.Component {
                     onChange={this.updateSearch}
                   />
                   <button type="submit" onClick={this.startSearch}>
-                    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon" />
+                    <img src="/images/search-icon.png" alt="Search Icon" />
                   </button>
                 </form>
               </div>
