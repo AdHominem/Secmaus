@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Modal from 'react-modal';
-import FontAwesome from 'react-fontawesome';
 import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -9,6 +8,7 @@ import { find, propEq, isNil } from 'ramda';
 import MeasureForm from './MeasureForm';
 import Comments from './Comments';
 import Polls from '../presentational/Polls';
+import IconButtonRow from '../presentational/IconButtonRow';
 import * as measuresActions from '../actions/measuresActions';
 import * as commentsActions from '../actions/commentsActions';
 import * as pollsActions from '../actions/pollsActions';
@@ -65,12 +65,13 @@ class Measure extends React.Component {
         <div className="measure">
           <h1>
             {name}
-            { isAdmin && <span>
-              &nbsp;
-              <a onClick={this.onClick} ><FontAwesome name="edit"/></a>
-              &nbsp;
-              <a onClick={this.handleDeleteMeasure}><FontAwesome name="trash"/></a>
-            </span> }
+            {
+              isAdmin &&
+              <IconButtonRow buttons={[
+                {icon: "edit", onClick: this.onClick},
+                {icon: "trash", onClick: this.handleDeleteMeasure},
+              ]} />
+            }
           </h1>
           <p dangerouslySetInnerHTML={{__html: description}}/>
 

@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
 import { sortBy, pipe, prop, propEq, update, any, isEmpty } from "ramda";
-import FontAwesome from "react-fontawesome";
 import Modal from "react-modal";
 
+import IconButtonRow from '../presentational/IconButtonRow';
 import questionTypes from "../constants/questionTypes";
 import PollForm from "./PollForm";
 import * as pollsActions from "../actions/pollsActions";
@@ -110,24 +110,19 @@ class Poll extends Component {
     const unanswered = isEmpty(questions) || isEmpty(questions[0].answers);
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
-    const buttons = isAdmin && <span>
-      <a onClick={this.toggleClose}>{ closed ? <FontAwesome name="lock"/> : <FontAwesome name="unlock-alt"/> }</a>
-      &nbsp;&nbsp;
-      { unanswered &&
-        <Link to={`/SIDATESecMaus/measure/${ measureId }/polls/${ id }/edit`} >
-          <FontAwesome name="edit"/>
-        </Link>
-      }
-      { !alreadyAnswered && <a onClick={ this.toggleShowResults }><FontAwesome name="bar-chart"/></a> }
-      &nbsp;&nbsp;
-      <a onClick={this.handleDeletePoll}><FontAwesome name="trash"/></a>
-      &nbsp;&nbsp;
-    </span>;
+    let buttons = [];
+    buttons.push({icon: (closed ? "lock" : "unlock-alt"), onClick: this.toggleClose});
+    if (!alreadyAnswered) {
+      buttons.push({icon: "edit", link: `/SIDATESecMaus/measure/${ measureId }/polls/${ id }/edit`});
+      buttons.push({icon: "bar-chart", onClick: this.toggleShowResults})
+    }
+    buttons.push({icon: "trash", onClick: this.handleDeletePoll});
 
     return (
       <div className="flex-box poll">
         <h1 className="flex-title">
-          <span className="inline" dangerouslySetInnerHTML={{__html: text}}/> &nbsp; {buttons}
+          <span className="inline" dangerouslySetInnerHTML={{__html: text}}/>
+          { isAdmin && <IconButtonRow buttons={buttons}/> }
         </h1>
         <div className="flex-content">
           { pipe(sortBy(prop('index')))(questions).map(this.selectQuestionForm) }

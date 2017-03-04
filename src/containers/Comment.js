@@ -3,8 +3,8 @@ import Modal from "react-modal";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
-import FontAwesome from 'react-fontawesome';
 
+import IconButtonRow from '../presentational/IconButtonRow';
 import CommentForm from "./CommentForm";
 import * as actions from "../actions/commentsActions";
 import Comments from "../containers/Comments";
@@ -55,9 +55,10 @@ class Comment extends React.Component {
             {comment.user.getUsername()} schrieb am {comment.user.createdAt.toLocaleDateString()}, {comment.createdAt.toLocaleTimeString()}
             {
               (comment.user.id === Parse.User.current().id || isAdmin) &&
-              <span className="comment__detail">
-                <a onClick={this.onClick} ><FontAwesome name="edit"/></a> <a onClick={this.handleDeleteComment} ><FontAwesome name="trash"/></a>
-              </span>
+              <IconButtonRow buttons={[
+                {icon: "edit", onClick: this.onClick},
+                {icon: "trash", onClick: this.handleDeleteComment},
+              ]} />
             }
           </h1>
 
@@ -85,7 +86,6 @@ class Comment extends React.Component {
             close={this.closeModal}
           />
         </Modal>
-
       </div>
     );
   }
