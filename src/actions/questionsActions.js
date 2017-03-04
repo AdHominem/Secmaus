@@ -44,7 +44,7 @@ export function saveQuestion(choices, questionType, text, pollId, index) {
       )
     ).catch(
       () => Alert.error("Frage konnte nicht gespeichert werden")
-    )
+    );
   };
 }
 
@@ -62,7 +62,7 @@ export function answerQuestion(id, answerIndex) {
     query.get(id).then(
       question => {
         question.add("answers", answer);
-        return question.save(null)
+        return question.save(null);
       }
     ).then(
       () => dispatch({
@@ -74,9 +74,9 @@ export function answerQuestion(id, answerIndex) {
     ).then(
       () => Alert.success("Antwort wurde gespeichert")  
     ).catch(
-      (error) => Alert.error("Frage konnte nicht beantwortet werden")
+      () => Alert.error("Frage konnte nicht beantwortet werden")
     );
-  }
+  };
 }
 
 export function editQuestion(id, choices, text) {
@@ -99,7 +99,7 @@ export function editQuestion(id, choices, text) {
       })
     ).catch(
       () => Alert.error("Frage konnte nicht bearbeitet werden")
-    )
+    );
   };
 }
 

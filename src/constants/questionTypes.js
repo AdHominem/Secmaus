@@ -9,6 +9,6 @@ const questionTypes = {
   "binary": {results: BinaryQuestion, form: BinaryForm},
   "likert": {results: LikertQuestion, form: LikertForm},
   "single choice": {results: SingleChoiceQuestion, form: SingleChoiceForm}
-}
+};
 
 export default questionTypes;

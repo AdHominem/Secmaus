@@ -15,7 +15,7 @@ function IconButtonRow({ buttons }) {
           : <Link to={b.link}><FontAwesome name={b.icon}/></Link>
       ) }
     </span>
-  )
+  );
 }
 
 IconButtonRow.propTypes = iconButtonRowRequiredProps;

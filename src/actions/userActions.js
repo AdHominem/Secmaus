@@ -6,6 +6,6 @@ export function loadUserPermissions() {
     const query = new Parse.Query(Parse.Role);
     query.equalTo("name", "Administrator");
     query.equalTo("users", Parse.User.current());
-    query.first().then(adminRole => adminRole && dispatch({type: types.SET_IS_ADMIN}))
+    query.first().then(adminRole => adminRole && dispatch({type: types.SET_IS_ADMIN}));
   };
 }

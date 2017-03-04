@@ -1,14 +1,11 @@
 import React, { PropTypes, Component } from "react";
-import { Link } from 'react-router';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
-import { sortBy, pipe, prop, propEq, update, any, isEmpty } from "ramda";
-import Modal from "react-modal";
+import { sortBy, pipe, prop, propEq, update, any } from "ramda";
 
 import IconButtonRow from '../presentational/IconButtonRow';
 import questionTypes from "../constants/questionTypes";
-import PollForm from "./PollForm";
 import * as pollsActions from "../actions/pollsActions";
 import * as questionsActions from "../actions/questionsActions";
 
@@ -55,9 +52,7 @@ class Poll extends Component {
 
   toggleClose = (event) => {
     const { poll: { id, closed }, pollsActions: { closePoll } } = this.props;
-    // TODO: The action takes a different number of params
     closePoll(id, !closed);
-    console.log(closed ? "Poll " + id + " has been opened" : "Poll " + id + " has been closed");
     event.preventDefault();
   };
 
@@ -100,21 +95,18 @@ class Poll extends Component {
   render() {
     const {
       isAdmin,
-      poll,
-      poll: {
-        id, text, closed, measureId
-      },
+      poll: { id, text, closed, measureId },
       questions
     } = this.props;
 
-    const unanswered = isEmpty(questions) || isEmpty(questions[0].answers);
-    let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
+    let alreadyAnswered = questions.length > 0 && 
+      any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
     let buttons = [];
-    buttons.push({icon: (closed ? "lock" : "unlock-alt"), onClick: this.toggleClose});
+    buttons.push({icon: closed ? "lock" : "unlock-alt", onClick: this.toggleClose});
     if (!alreadyAnswered) {
       buttons.push({icon: "edit", link: `/SIDATESecMaus/measure/${ measureId }/polls/${ id }/edit`});
-      buttons.push({icon: "bar-chart", onClick: this.toggleShowResults})
+      buttons.push({icon: "bar-chart", onClick: this.toggleShowResults});
     }
     buttons.push({icon: "trash", onClick: this.handleDeletePoll});
 

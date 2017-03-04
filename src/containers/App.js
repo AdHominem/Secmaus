@@ -6,7 +6,6 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import FontAwesome from 'react-fontawesome';
 
 import Identicon from "../presentational/Identicon";
 import * as measureActions from '../actions/measuresActions';

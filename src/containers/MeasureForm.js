@@ -15,7 +15,8 @@ class MeasureForm extends Component {
     saveMeasure: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
+    catalogMeasures: PropTypes.array.isRequired
   };
 
   state = {

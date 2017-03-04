@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import { reject, propEq, map, filter } from 'ramda';
+import { reject, propEq, map } from 'ramda';
 
 import update from 'immutability-helper';
 

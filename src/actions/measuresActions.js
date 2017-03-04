@@ -53,7 +53,7 @@ export function saveMeasure(name, description) {
         Alert.success('Maßnahme erfolgreich angelegt');
       }
     ).catch(
-      () => Alert.error('Maßnahme konnten nicht angelegt werden: ' + error)
+      () => Alert.error('Maßnahme konnten nicht angelegt werden')
     );
   };
 }
@@ -73,7 +73,7 @@ export function deleteMeasure(id) {
         browserHistory.push('/SIDATESecMaus/measures');
       }
     ).catch(
-      () => Alert.error('Maßnahme konnte nicht gelöscht werden: ' + error)
+      () => Alert.error('Maßnahme konnte nicht gelöscht werden')
     );
   };
 }
@@ -87,7 +87,7 @@ export function editMeasure(id, name, description) {
       measure => {
         measure.set('name', name);
         measure.set('description', description);
-        return measure.save(null)
+        return measure.save(null);
       }
     ).then(
       () => dispatch({

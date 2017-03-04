@@ -28,7 +28,7 @@ export function loadMeasures() {
             loadChunk(i + 1, max);
           }
         ).catch(
-          () => Alert.error('Maßnahmenkatalog konnte nicht geladen werden: ' + error)
+          () => Alert.error('Maßnahmenkatalog konnte nicht geladen werden')
         );
       }
     };

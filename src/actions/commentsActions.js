@@ -59,8 +59,8 @@ export function editComment(id, text) {
         id: id
       })
     ).catch(
-      (error) => Alert.error('Kommentar konnte nicht bearbeitet werden')  
-    )
+      () => Alert.error('Kommentar konnte nicht bearbeitet werden')
+    );
   };
 }
 
@@ -86,6 +86,6 @@ export function deleteComment(id, comments, isNotRecursive = true) {
         });
         isNotRecursive && Alert.success('Kommentar erfolgreich gelöscht');
       },
-    ).catch(() => Alert.error('Kommentar konnte nicht gelöscht werden'))
+    ).catch(() => Alert.error('Kommentar konnte nicht gelöscht werden'));
   };
 }

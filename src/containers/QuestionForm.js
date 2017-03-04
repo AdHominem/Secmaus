@@ -66,7 +66,7 @@ class QuestionForm extends React.Component {
           { questionType == 'single choice' &&
             <div className="answers">
               <select defaultValue={3} name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
-                { range(2, 11).map(i => <option>{i}</option>) }
+                { range(2, 11).map(i => <option key={i}>{i}</option>) }
               </select>
 
               { range(0, choicesCount).map(i =>

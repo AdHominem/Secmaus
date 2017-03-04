@@ -58,7 +58,7 @@ class Signup extends Component {
         return role.save(null);
       }
     ).then(
-      user => {
+      () => {
         measureActions.loadMeasures();
         commentActions.loadComments();
         userActions.loadUserPermissions();
@@ -70,7 +70,7 @@ class Signup extends Component {
       }
     ).catch(
       () => Alert.error('Registrierung fehlgeschlagen')
-    )
+    );
   };
 
   onUsernameChange = (event) => {

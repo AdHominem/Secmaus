@@ -11,7 +11,7 @@ function SingleChoiceForm({ question, value, onChange }) {
     <div className="question">
       <h1>{question.text}</h1>
       <form>
-      { question.choices.map((choice, i) => (
+      { question.choices.map((choice, i) =>
           <label key={i}>
             <input
               type="radio" name={choice}
@@ -20,7 +20,7 @@ function SingleChoiceForm({ question, value, onChange }) {
             />
             {choice}
           </label>
-        )) }
+        ) }
       </form>
     </div>
   );

@@ -32,7 +32,7 @@ class Measures extends Component {
 
 
   render() {
-    const { measures, measureActions: { addMeasureFromCatalog, saveMeasure }, showButtons, isAdmin } = this.props;
+    const { measures, measureActions: { saveMeasure }, showButtons, isAdmin } = this.props;
 
     const body = measures.map((measure, i) =>
       <Link key={i} className="flex-box" to={`/SIDATESecMaus/measure/${measure.id}`}>
@@ -40,13 +40,6 @@ class Measures extends Component {
       </Link>
     );
 
-    // <ReactCSSTransitionGroup
-    //   transitionName="example"
-    //   transitionEnterTimeout={0}
-    //   transitionLeaveTimeout={0}
-    //   transitionAppear={true}
-    //   transitionAppearTimeout={3000}>
-    // </ReactCSSTransitionGroup>
     return (
       <div className="measures-container">
         {

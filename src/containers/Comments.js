@@ -13,7 +13,8 @@ class Comments extends Component {
   static propTypes = {
     comments: PropTypes.array.isRequired,
     commentsActions: PropTypes.object.isRequired,
-    parentId: PropTypes.string.isRequired
+    parentId: PropTypes.string.isRequired,
+    depth: PropTypes.number,
   };
 
   state = { modalIsOpen: false };

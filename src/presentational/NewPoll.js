@@ -1,17 +1,13 @@
 import React, { PropTypes } from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 import PollForm from '../containers/PollForm';
-import * as actions from '../actions/pollsActions';
 
 const newPollRequiredProps = {
-  pollsActions: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired
 };
 
 function NewPoll(props) {
-  const { pollsActions: { savePoll }, params: { measureId } } = props;
+  const { params: { measureId } } = props;
 
   return (
     <div className="new-poll">
@@ -23,12 +19,4 @@ function NewPoll(props) {
 
 NewPoll.propTypes = newPollRequiredProps;
 
-function mapDispatchToProps(dispatch) {
-  return {
-    pollsActions: bindActionCreators(actions, dispatch)
-  };
-}
-
-export default connect(
-  mapDispatchToProps
-)(NewPoll);
+export default NewPoll;

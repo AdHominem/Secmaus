@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexRedirect, Route, IndexRoute } from 'react-router';
+import { IndexRedirect, Route } from 'react-router';
 import { Parse } from 'parse';
 
 import App from './containers/App';

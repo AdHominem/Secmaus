@@ -27,9 +27,7 @@ function Polls({ polls, showButtons, measureId, isAdmin }) {
         </Link>
       }
       <div className="flex-boxes">
-        {polls.map((poll, i) => (
-            <Poll key={i} poll={ poll } />
-        ))}
+        {polls.map((poll, i) => <Poll key={i} poll={ poll } />)}
       </div>
     </div>
   );

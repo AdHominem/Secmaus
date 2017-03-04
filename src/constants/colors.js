@@ -1,7 +1,7 @@
 export const binaryColors = [
   "#27ae60", // green
   "#c0392b", // red
-]
+];
 
 export const likertColors = [
   "#27ae60", // green
@@ -9,7 +9,7 @@ export const likertColors = [
   "#f1c40f", // yellow
   "#e67e22", // orange
   "#c0392b", // red
-]
+];
 
 export const singleChoiceColors = [
   "#1abc9c",
@@ -22,4 +22,4 @@ export const singleChoiceColors = [
   "#f39c12",
   "#c0392b",
   "#2980b9",
-]
+];

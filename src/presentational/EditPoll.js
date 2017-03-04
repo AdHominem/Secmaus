@@ -6,9 +6,14 @@ import { find, propEq } from 'ramda';
 import PollForm from '../containers/PollForm';
 import * as actions from '../actions/pollsActions';
 
+// TODO: Why is passing in "poll" not enough?
 const editPollRequiredProps = {
   pollsActions: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired
+  params: PropTypes.object.isRequired,
+  measureId: PropTypes.string.isRequired,
+  poll: PropTypes.object.isRequired,
+  questions: PropTypes.array.isRequired,
+  text: PropTypes.string.isRequired
 };
 
 function EditPoll(props) {
