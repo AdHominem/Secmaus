@@ -4,25 +4,29 @@ import Alert from 'react-s-alert';
 import { forEach } from 'ramda';
 
 export function loadQuestions() {
-  return dispatch => {
-    const Question = Parse.Object.extend("Question");
-    const query = new Parse.Query(Question);
+  return (dispatch, getState) => {
+    const { questions } = getState();
 
-    query.find().then(
-      forEach(result => {
-        dispatch(addQuestion(
-          result.id,
-          result.get("answers"),
-          result.get("choices"),
-          result.get("text"),
-          result.get("pollId"),
-          result.get("questionType"),
-          result.get("index")
-        ));
-      })
-    ).catch(
-      () => Alert.error("Fragen konnten nicht geladen werden")
-    );
+    if (questions.length == 0) {
+      const Question = Parse.Object.extend("Question");
+      const query = new Parse.Query(Question);
+
+      query.find().then(
+        forEach(result => {
+          dispatch(addQuestion(
+            result.id,
+            result.get("answers"),
+            result.get("choices"),
+            result.get("text"),
+            result.get("pollId"),
+            result.get("questionType"),
+            result.get("index")
+          ));
+        })
+      ).catch(
+        () => Alert.error("Fragen konnten nicht geladen werden")
+      );
+    }
   };
 }
 

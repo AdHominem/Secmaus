@@ -5,22 +5,26 @@ import Alert from "react-s-alert";
 import { forEach } from "ramda";
 
 export function loadPolls() {
-  return dispatch => {
-    const Poll = Parse.Object.extend("Poll");
-    const query = new Parse.Query(Poll);
+  return (dispatch, getState) => {
+    const { polls } = getState();
 
-    query.find().then(
-      forEach(result => dispatch(
-        addPoll(
-          result.id,
-          result.get("text"),
-          result.get("closed"),
-          result.get("measureId")
-        )
-      ))
-    ).catch(
-      () => Alert.error("Umfragen konnten nicht geladen werden")
-    );
+    if (polls.length == 0) {
+      const Poll = Parse.Object.extend("Poll");
+      const query = new Parse.Query(Poll);
+
+      query.find().then(
+        forEach(result => dispatch(
+          addPoll(
+            result.id,
+            result.get("text"),
+            result.get("closed"),
+            result.get("measureId")
+          )
+        ))
+      ).catch(
+        () => Alert.error("Umfragen konnten nicht geladen werden")
+      );
+    }
   };
 }
 

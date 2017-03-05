@@ -4,22 +4,26 @@ import Alert from 'react-s-alert';
 import {filter, propEq, forEach} from 'ramda';
 
 export function loadComments() {
-  return dispatch => {
-    const Comment = Parse.Object.extend("Comment");
-    const query = new Parse.Query(Comment).include("user");
+  return (dispatch, getState) => {
+    const { comments } = getState();
 
-    query.find().then(
-      forEach((result) => 
-        dispatch(addComment(
-          result.id,
-          result.get("text"),
-          result.get("parentID"),
-          result.get("user"),
-          result.get("createdAt")
-        )))
-    ).catch(
-      () => Alert.error('Kommentare konnten nicht geladen werden')
-    );
+    if (comments.length == 0) {
+      const Comment = Parse.Object.extend("Comment");
+      const query = new Parse.Query(Comment).include("user");
+
+      query.find().then(
+        forEach((result) => 
+          dispatch(addComment(
+            result.id,
+            result.get("text"),
+            result.get("parentID"),
+            result.get("user"),
+            result.get("createdAt")
+          )))
+      ).catch(
+        () => Alert.error('Kommentare konnten nicht geladen werden')
+      );
+    }
   };
 }
 
