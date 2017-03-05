@@ -18,7 +18,7 @@ class Measure extends React.Component {
   static propTypes = {
     measureActions: PropTypes.object.isRequired,
     commentsActions: PropTypes.object.isRequired,
-    measure: PropTypes.object.isRequired,
+    measure: PropTypes.object,
     isAdmin: PropTypes.bool.isRequired
   };
 

@@ -9,10 +9,10 @@ const iconButtonRowRequiredProps = {
 function IconButtonRow({ buttons }) {
   return (
     <span className="icon-button-row">
-      { buttons.map(b =>
+      { buttons.map((b, i) =>
           b.onClick
-          ? <a onClick={b.onClick}><FontAwesome name={b.icon}/></a>
-          : <Link to={b.link}><FontAwesome name={b.icon}/></Link>
+          ? <a key={i} onClick={b.onClick}><FontAwesome name={b.icon}/></a>
+          : <Link key={i} to={b.link}><FontAwesome name={b.icon}/></Link>
       ) }
     </span>
   );

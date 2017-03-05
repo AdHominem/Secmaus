@@ -8,6 +8,7 @@ export const count = curry(
 export const updateById = (id, changes) =>
   map(ifElse(propEq('id', id), e => update(e, changes), identity));
 
+// http://redux.js.org/docs/recipes/ReducingBoilerplate.html
 export function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {

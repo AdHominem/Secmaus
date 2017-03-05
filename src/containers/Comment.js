@@ -17,7 +17,7 @@ class Comment extends React.Component {
     comment: PropTypes.object.isRequired,
     comments: PropTypes.array.isRequired,
     isAdmin: PropTypes.bool.isRequired,
-    depth: PropTypes.bool.isRequired,
+    depth: PropTypes.number.isRequired
   };
 
   state = { modalIsOpen: false };
