@@ -75,8 +75,6 @@ export function answerQuestion(id, answerIndex) {
         answerIndex,
         userId
       })
-    ).then(
-      () => Alert.success("Antwort wurde gespeichert")  
     ).catch(
       () => Alert.error("Frage konnte nicht beantwortet werden")
     );

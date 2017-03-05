@@ -42,6 +42,8 @@ export function savePoll(text, questions, measureId) {
         questions.forEach(question => dispatch(saveQuestion(question.choices, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
       }    
+    ).then(
+      () => Alert.success("Umfrage wurde erfolgreich gespeichert")
     ).catch(
       () => Alert.error("Umfrage konnte nicht gespeichert werden")
     );

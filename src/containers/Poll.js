@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
+import Alert from "react-s-alert";
 import { sortBy, pipe, prop, propEq, update, any } from "ramda";
 
 import IconButtonRow from '../presentational/IconButtonRow';
@@ -48,6 +49,7 @@ class Poll extends Component {
     questions.forEach((question, i) => {
       answerQuestion(question.id, this.state.answers[i]);
     });
+    Alert.success("Antworten wurde erfolgreich gespeichert");
   };
 
   toggleClose = (event) => {
