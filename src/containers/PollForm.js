@@ -48,7 +48,7 @@ class PollForm extends React.Component {
     } else {
       savePoll(text, questions, measureId);
     }
-    browserHistory.push(`/SIDATESecMaus/measure/${ measureId }`);
+    browserHistory.goBack();
   };
 
   handleClose = () => {
