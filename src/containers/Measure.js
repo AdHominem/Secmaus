@@ -112,9 +112,9 @@ class Measure extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    measure: find(propEq('id', ownProps.params.measureId), state.measuresReducer.measures),
-    comments: state.commentsReducer.comments,
-    isAdmin: state.userReducer.isAdmin
+    measure: find(propEq('id', ownProps.params.measureId), state.measures),
+    comments: state.comments,
+    isAdmin: state.isAdmin
   };
 }
 

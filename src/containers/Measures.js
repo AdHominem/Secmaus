@@ -76,10 +76,10 @@ class Measures extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const measures = ownProps.measures || state.measuresReducer.measures;
+  const measures = ownProps.measures || state.measures;
   return {
     measures: reverse(sortBy(prop('createdAt'), measures)),
-    isAdmin: state.userReducer.isAdmin
+    isAdmin: state.isAdmin
   };
 }
 

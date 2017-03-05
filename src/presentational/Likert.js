@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import { map, nth, pipe, equals } from 'ramda';
 
 import { likertColors } from '../constants/colors';
-import { count } from '../utils/count';
+import { count } from '../utils/ramda';
 
 const likertQuestionRequiredProps = {
   question: PropTypes.object.isRequired

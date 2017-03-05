@@ -37,8 +37,8 @@ Polls.propTypes = pollRequiredProps;
 
 function mapStateToProps(state, ownProps) {
   return {
-    isAdmin: state.userReducer.isAdmin,
-    polls: state.pollsReducer.polls.filter(propEq("measureId", ownProps.measureId))
+    isAdmin: state.isAdmin,
+    polls: state.polls.filter(propEq('measureId', ownProps.measureId))
   };
 }
 

@@ -22,7 +22,7 @@ AllPolls.propTypes = allPollsRequiredProps;
 
 function mapStateToProps(state, ownProps) {
   return {
-    polls: ownProps.polls || state.pollsReducer.polls,
+    polls: ownProps.polls || state.polls,
   };
 }
 

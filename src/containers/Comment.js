@@ -93,8 +93,8 @@ class Comment extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isAdmin: state.userReducer.isAdmin,
-    comments: state.commentsReducer.comments
+    isAdmin: state.isAdmin,
+    comments: state.comments
   };
 }
 

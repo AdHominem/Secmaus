@@ -5,27 +5,23 @@ import Alert from 'react-s-alert';
 import { forEach } from 'ramda';
 
 export function loadMeasures() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const Measure = Parse.Object.extend("Measure");
     const query = new Parse.Query(Measure).include("user");
 
-    const {measuresReducer} = getState();
-
-    if (!measuresReducer.loaded) {
-      query.find().then(
-        forEach(result => dispatch(
-          addMeasure(
-            result.id,
-            result.createdAt,
-            result.get("name"),
-            result.get("description"),
-            result.get("user")
-          )
-        ))
-      ).catch(
-        () => Alert.error("Maßnahmen konnten nicht geladen werden")
-      );
-    }
+    query.find().then(
+      forEach(result => dispatch(
+        addMeasure(
+          result.id,
+          result.createdAt,
+          result.get("name"),
+          result.get("description"),
+          result.get("user")
+        )
+      ))
+    ).catch(
+      () => Alert.error("Maßnahmen konnten nicht geladen werden")
+    );
   };
 }
 

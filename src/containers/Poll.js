@@ -127,8 +127,8 @@ class Poll extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isAdmin: state.userReducer.isAdmin,
-    questions: state.questionsReducer.questions.filter(propEq("pollId", ownProps.poll.id))
+    isAdmin: state.isAdmin,
+    questions: state.questions.filter(propEq("pollId", ownProps.poll.id))
   };
 }
 

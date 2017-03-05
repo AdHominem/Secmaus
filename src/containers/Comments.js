@@ -67,7 +67,7 @@ class Comments extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    comments: state.commentsReducer.comments.filter(propEq('parentID', ownProps.parentId))
+    comments: state.comments.filter(propEq('parentID', ownProps.parentId))
   };
 }
 

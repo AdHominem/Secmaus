@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import measuresReducer from './measuresReducer';
-import commentsReducer from './commentsReducer';
-import userReducer from './userReducer';
-import pollsReducer from './pollsReducer';
-import questionsReducer from './questionsReducer';
-import catalogReducer from './catalogReducer';
+import measures from './measures';
+import comments from './comments';
+import user from './user';
+import polls from './polls';
+import questions from './questions';
+import catalog from './catalog';
 
 const rootReducer = combineReducers({
-  pollsReducer,
-  questionsReducer,
-  measuresReducer,
-  commentsReducer,
-  userReducer,
-  catalogReducer,
+  polls,
+  questions,
+  measures,
+  comments,
+  isAdmin: user,
+  catalog,
   routing: routerReducer
 });
 

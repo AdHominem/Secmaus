@@ -3,10 +3,9 @@ import { Parse } from 'parse';
 import Alert from 'react-s-alert';
 
 export function loadMeasures() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const CatalogMeasure = Parse.Object.extend("CatalogMeasure");
     const query = new Parse.Query(CatalogMeasure);
-    const { catalogReducer } = getState();
 
     const chunk_size = 200;
     const chunk_count = 10;
@@ -33,6 +32,6 @@ export function loadMeasures() {
       }
     };
 
-    catalogReducer.loaded || loadChunk(0, chunk_count);
+    loadChunk(0, chunk_count);
   };
 }

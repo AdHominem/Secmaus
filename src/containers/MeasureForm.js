@@ -104,7 +104,7 @@ class MeasureForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    catalogMeasures: state.catalogReducer.measures
+    catalogMeasures: state.catalog
   };
 }
 

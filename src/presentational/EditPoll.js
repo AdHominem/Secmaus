@@ -37,11 +37,11 @@ EditPoll.propTypes = editPollRequiredProps;
 function mapStateToProps(state, ownProps) {
   const measureId = ownProps.params.measureId;
   const pollId = ownProps.params.pollId;
-  const poll = find(propEq('id', pollId), state.pollsReducer.polls);
+  const poll = find(propEq('id', pollId), state.polls);
 
   return {
     measureId, poll,
-    questions: state.questionsReducer.questions.filter(propEq("pollId", pollId)),
+    questions: state.questions.filter(propEq("pollId", pollId)),
     text: poll.text
   };
 }
