@@ -22,8 +22,12 @@ function Identicon({ size, string }) {
 
   const rects = mapIndexed(
     (col, x) => mapIndexed(
-      (value, y) => <rect x={x * size} y={y * size} width={size} height={size}
-                          fill={value ? color : "white"}/>,
+      (value, y) =>
+        <rect 
+          x={x * size} y={y * size}
+          width={size} height={size}
+          fill={value ? color : "white"}
+        />,
       col
     ),
     cols
