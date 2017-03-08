@@ -74,12 +74,11 @@ class Poll extends Component {
     const { answers, showResults } = this.state;
 
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
-    alreadyAnswered = closed || alreadyAnswered || showResults;
 
     const component = questionTypes[question.questionType] ||
       {result: <p>Ungültiger Fragetyp</p>, form: <p>Ungültiger Fragetyp</p>};
 
-    if (alreadyAnswered) {
+    if (closed || alreadyAnswered || showResults) {
       return React.createElement(component.results, {
         key: i,
         question: question
@@ -101,7 +100,7 @@ class Poll extends Component {
       questions
     } = this.props;
 
-    let alreadyAnswered = questions.length > 0 && 
+    let alreadyAnswered = questions.length > 0 &&
       any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
     let buttons = [];
