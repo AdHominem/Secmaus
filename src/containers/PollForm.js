@@ -54,7 +54,7 @@ class PollForm extends React.Component {
   handleClose = () => {
     browserHistory.goBack();
     event.preventDefault();
-  }
+  };
 
   changeQuestionText = (index) => {
     return event=> {
