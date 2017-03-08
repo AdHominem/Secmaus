@@ -72,7 +72,7 @@ class MeasureForm extends Component {
       <form className="editor-form">
         <div className="editor-form--header">
 
-          { this.state.edit && <label>
+          { !this.props.edit && <label>
             Vorlage:
             <div className="search-form">
               <Typeahead
