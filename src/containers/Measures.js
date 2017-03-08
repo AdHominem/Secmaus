@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { sortBy, prop, reverse } from 'ramda';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import FontAwesome from 'react-fontawesome';
 
 import MeasureForm from './MeasureForm';
 import * as actions from '../actions/measuresActions';
@@ -42,13 +43,14 @@ class Measures extends Component {
 
     return (
       <div className="measures-container">
-        {
-          showButtons === undefined && isAdmin &&
-          <p>
-            <button className="btn btn-primary" onClick={this.newMeasure} >Neue Maßnahme</button>
-          </p>
-        }
+
         <div className="flex-boxes">
+          {
+            showButtons === undefined && isAdmin &&
+            <Link className="flex-box" onClick={this.newMeasure}>
+              <FontAwesome className="add-measure" name="plus" size="3x"/>
+            </Link>
+          }
             {body}
         </div>
 

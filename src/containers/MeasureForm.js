@@ -23,7 +23,7 @@ class MeasureForm extends Component {
   state = {
     description: this.props.description,
     name: this.props.name,
-    option: null,
+    option: null
   };
 
   onDescriptionChange = (value) => {
