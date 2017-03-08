@@ -97,6 +97,7 @@ class Measure extends React.Component {
             name={name}
             description={description}
             close={this.closeModal}
+            edit={true}
           />
         </Modal>
         </div>

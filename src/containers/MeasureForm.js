@@ -16,7 +16,8 @@ class MeasureForm extends Component {
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
-    catalogMeasures: PropTypes.array.isRequired
+    catalogMeasures: PropTypes.array.isRequired,
+    edit: PropTypes.bool
   };
 
   state = {
@@ -62,7 +63,7 @@ class MeasureForm extends Component {
     ).catch(
       () => Alert.error('Zu importierende Maßnahme konnte nicht gefunden werden')
     );
-    
+
     event.preventDefault();
   };
 
@@ -70,7 +71,8 @@ class MeasureForm extends Component {
     return (
       <form className="editor-form">
         <div className="editor-form--header">
-          <label>
+
+          { this.state.edit && <label>
             Vorlage:
             <div className="search-form">
               <Typeahead
@@ -84,7 +86,8 @@ class MeasureForm extends Component {
                 onClick={this.handleImport}
               >Benutzen</button>
             </div>
-          </label>
+          </label> }
+
           <label>
             Name:
             <input type="text" ref="name" value={this.state.name} onChange={this.onNameChange} />
