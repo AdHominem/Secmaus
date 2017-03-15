@@ -39,8 +39,7 @@ class PollForm extends React.Component {
   };
 
   handleSubmit = () => {
-    let { savePoll, editPoll } = this.props.pollsActions;
-    let { measureId, poll } = this.props;
+    const { measureId, poll, pollsActions: { savePoll, editPoll } } = this.props;
     let { text, questions } = this.state;
 
     if (poll) {
@@ -57,6 +56,7 @@ class PollForm extends React.Component {
   };
 
   changeQuestionText = (index) => {
+    console.log(this.state.questions);
     return event=> {
       const temp = clone(this.state.questions);
       temp[index].text = event.target.value;
