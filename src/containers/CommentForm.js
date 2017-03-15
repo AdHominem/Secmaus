@@ -32,14 +32,16 @@ class CommentForm extends React.Component {
   };
 
   render() {
+    const { text } = this.state;
+
     return (
       <div className="editor-form">
         <ReactQuill
-          value={this.state.text}
+          value={text}
           onChange={this.onTextChange}
           theme="snow"
         />
-        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} />
+        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} disableSubmit={ !text }/>
       </div>
     );
   }
