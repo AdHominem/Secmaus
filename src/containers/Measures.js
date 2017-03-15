@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Modal from 'react-modal';
-import { sortBy, prop, reverse } from 'ramda';
+import { sortBy, prop, reverse, T } from 'ramda';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import FontAwesome from 'react-fontawesome';
@@ -24,7 +24,6 @@ class Measures extends Component {
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
   closeModal = () => { this.setState({ modalIsOpen: false }); };
-  afterOpenModal = () => { };
 
   newMeasure = event => {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
@@ -56,7 +55,7 @@ class Measures extends Component {
 
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
+          onAfterOpen={T}
           onRequestClose={this.closeModal}
           contentLabel="Maßnahme hinzufügen"
         >

@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
+import { T } from 'ramda';
 
 import IconButtonRow from '../presentational/IconButtonRow';
 import CommentForm from "./CommentForm";
@@ -24,7 +25,6 @@ class Comment extends React.Component {
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
 
-  afterOpenModal = () => { };
 
   closeModal = () => {this.setState({ modalIsOpen: false });};
 
@@ -70,7 +70,7 @@ class Comment extends React.Component {
 
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
+          onAfterOpen={T}
           onRequestClose={this.closeModal}
           contentLabel="Kommentar hinzufügen"
         >
