@@ -101,7 +101,7 @@ class PollForm extends React.Component {
         <QuestionForm
           changeQuestionText={ this.changeQuestionText(i) }
           changeQuestionChoices={this.changeQuestionChoices(i)} question={ question }
-          index={ i } removeQuestion={ event => this.removeQuestion(event, i) }
+          index={ i } removeQuestion={ event => this.removeQuestion( event, i) }
         />
       </div>
     );

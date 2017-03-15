@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { propEq, T } from 'ramda';
+import { propEq, T, isEmpty } from 'ramda';
 
 import CommentForm from './CommentForm';
 import Comment from './Comment';
@@ -30,7 +30,7 @@ class Comments extends Component {
   render() {
     const { commentsActions, comments, parentId, depth = 0 } = this.props;
     return (
-      <div className="comments">
+      comments === [] ? <p>Keine Kommentare zu dieser Maßnahme</p> : <div className="comments">
         <ul>
           {comments.map((comment, i) => <Comment key={i} comment={comment} depth={depth + 1}/>)}
         </ul>
