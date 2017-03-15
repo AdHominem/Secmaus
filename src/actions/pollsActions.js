@@ -50,7 +50,7 @@ export function savePoll(text, questions, measureId) {
   };
 }
 
-export function editPoll(id, text, questions, measureId) {
+export function editPoll(id, text, questions, oldQuestions, measureId) {
   return dispatch => {
     const Poll = Parse.Object.extend("Poll");
     const query = new Parse.Query(Poll);
@@ -64,13 +64,8 @@ export function editPoll(id, text, questions, measureId) {
       }
     ).then(
       () => {
-        questions.forEach(question => dispatch(editQuestion(question.id, question.choices, question.text)));
-        dispatch({
-          type: types.EDIT_POLL,
-          id,
-          text,
-          measureId
-        });
+        oldQuestions.forEach(q => dispatch(deleteQuestion(q.id)));
+        questions.forEach(q => dispatch(saveQuestion(q.choices, q.questionType, q.text, id, q.index, q.answers)));
       }
     ).then(
       () => Alert.success("Umfrage erfolgreich bearbeitet")

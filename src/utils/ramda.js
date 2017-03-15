@@ -1,4 +1,4 @@
-import { curry, ifElse, propEq, propOr, identity, map } from 'ramda';
+import { curry, ifElse, propEq, identity, map } from 'ramda';
 import update from 'immutability-helper';
 
 export const count = curry(
@@ -12,9 +12,9 @@ export const updateById = (id, changes) =>
 export function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
-      return handlers[action.type](action)(state)
+      return handlers[action.type](action)(state);
     } else {
-      return state
+      return state;
     }
-  }
+  };
 }
