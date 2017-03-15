@@ -43,7 +43,7 @@ class Login extends Component {
     const {
       measureActions, commentActions,
       userActions, pollsActions,
-      questionActions, catalogActions,
+      questionActions, catalogActions
     } = this.props;
 
     event.preventDefault();

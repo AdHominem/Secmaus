@@ -16,7 +16,6 @@ class PollForm extends React.Component {
   static propTypes = {
     pollsActions: PropTypes.object.isRequired,
     measureId: PropTypes.string.isRequired,
-    close: PropTypes.func.isRequired,
     text: PropTypes.string,
     description: PropTypes.string,
     questions: PropTypes.array,
@@ -30,9 +29,7 @@ class PollForm extends React.Component {
 
   removeQuestion = (event, index) => {
     const temp = clone(this.state.questions);
-    console.log(temp);
     temp.splice(index, 1);
-    console.log(temp);
     this.setState({ questions: temp });
   };
 
@@ -58,7 +55,6 @@ class PollForm extends React.Component {
   };
 
   changeQuestionText = (index) => {
-    console.log(this.state.questions);
     return event=> {
       const temp = clone(this.state.questions);
       temp[index].text = event.target.value;
