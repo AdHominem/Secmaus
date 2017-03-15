@@ -30,12 +30,12 @@ export function loadQuestions() {
   };
 }
 
-export function saveQuestion(choices, questionType, text, pollId, index) {
+export function saveQuestion(choices, questionType, text, pollId, index, answers = []) {
   return dispatch => {
     const Question = Parse.Object.extend("Question");
     const question = new Question();
 
-    question.set('answers', []);
+    question.set('answers', answers);
     question.set('choices', choices);
     question.set('questionType', questionType);
     question.set('text', text);
@@ -44,7 +44,7 @@ export function saveQuestion(choices, questionType, text, pollId, index) {
 
     question.save(null).then(
       question => dispatch(
-        addQuestion(question.id, [], choices, text, pollId, questionType, index)
+        addQuestion(question.id, answers, choices, text, pollId, questionType, index)
       )
     ).catch(
       () => Alert.error("Frage konnte nicht gespeichert werden")

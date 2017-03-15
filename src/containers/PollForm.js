@@ -24,7 +24,8 @@ class PollForm extends React.Component {
 
   state = {
     text: this.props.text ? this.props.text : this.props.description,
-    questions: this.props.questions ? this.props.questions : []
+    questions: this.props.questions ? clone(this.props.questions) : [],
+    oldQuestions: this.props.questions ? clone(this.props.questions) : []
   };
 
   removeQuestion = (event, index) => {
@@ -39,10 +40,10 @@ class PollForm extends React.Component {
 
   handleSubmit = () => {
     const { measureId, poll, pollsActions: { savePoll, editPoll } } = this.props;
-    let { text, questions } = this.state;
+    const { text, questions, oldQuestions } = this.state;
 
     if (poll) {
-      editPoll(poll.id, text, questions, measureId);
+      editPoll(poll.id, text, questions, oldQuestions, measureId);
     } else {
       savePoll(text, questions, measureId);
     }
