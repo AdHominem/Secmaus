@@ -16,7 +16,6 @@ class QuestionForm extends React.Component {
   state = {
     text: this.props.question.text,
     choices: this.props.question.choices,
-    choicesCount: this.props.question.choices.length,
   };
 
   onChangeHandler = (event) => {
@@ -25,7 +24,6 @@ class QuestionForm extends React.Component {
 
     const newChoices = (new Array(count)).fill().map((e, i) => this.state.choices[i] || "");
     this.setState({
-      choicesCount: count,
       choices: newChoices,
     });
 
@@ -54,7 +52,6 @@ class QuestionForm extends React.Component {
   render() {
     const { changeQuestionText, removeQuestion, question: { questionType, choices, text }} = this.props;
     const translations = { 'binary' : 'binären', 'single choice' : 'Single Choice', 'likert' : 'Likert'};
-    const { choicesCount } = this.state;
 
     return (
       <div className="question-form">
@@ -69,10 +66,10 @@ class QuestionForm extends React.Component {
                 { range(2, 11).map(i => <option key={i}>{i}</option>) }
               </select>
 
-              { range(0, choicesCount).map(i =>
+              { choices.map((e, i) =>
                   <div key={ i }>
                     <label className="answer-label">Antwort {i + 1}</label>
-                    <input className="answer-input" onChange={ this.onChoicesChange(i) } value={ choices[i] }/>
+                    <input className="answer-input" onChange={ this.onChoicesChange(i) } value={ e }/>
                   </div>)
               }
             </div>}
