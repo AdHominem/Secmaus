@@ -41,7 +41,7 @@ export function savePoll(text, questions, measureId) {
       (poll, i) => {
         questions.forEach(question => dispatch(saveQuestion(question.choices, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
-      }    
+      }
     ).then(
       () => Alert.success("Umfrage wurde erfolgreich gespeichert")
     ).catch(
@@ -57,7 +57,7 @@ export function editPoll(id, text, questions, measureId) {
 
     query.get(id).then(
       poll => {
-        poll.set('id'. id);
+        poll.set('id', id);
         poll.set('text', text);
         poll.set('measureId', measureId);
         return poll.save(null);
