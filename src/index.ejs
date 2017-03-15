@@ -25,10 +25,12 @@
   (function(l) {
     if (l.search) {
       var q = {};
+
       l.search.slice(1).split('&').forEach(function(v) {
         var a = v.split('=');
         q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
       });
+
       if (q.p !== undefined) {
         window.history.replaceState(null, null,
             l.pathname.slice(0, -1) + (q.p || '') +
@@ -41,11 +43,11 @@
   </script>
   <script type="text/javascript">
   $(window).resize(function() {
-    var more = document.getElementById("js-navigation-more");
+    const more = document.getElementById("js-navigation-more");
     if ($(more).length > 0) {
-      var windowWidth = $(window).width();
-      var moreLeftSideToPageLeftSide = $(more).offset().left;
-      var moreLeftSideToPageRightSide = windowWidth - moreLeftSideToPageLeftSide;
+      const windowWidth = $(window).width();
+      const moreLeftSideToPageLeftSide = $(more).offset().left;
+      const moreLeftSideToPageRightSide = windowWidth - moreLeftSideToPageLeftSide;
 
       if (moreLeftSideToPageRightSide < 330) {
         $("#js-navigation-more .submenu .submenu").removeClass("fly-out-right");
