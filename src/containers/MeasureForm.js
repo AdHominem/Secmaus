@@ -68,21 +68,24 @@ class MeasureForm extends Component {
   };
 
   render() {
+    const { edit, catalogMeasures } = this.props;
+    const { option, name, description } = this.state;
+
     return (
       <form className="editor-form">
         <div className="editor-form--header">
 
-          { !this.props.edit && <label>
+          { !edit && <label>
             Vorlage:
             <div className="search-form">
               <Typeahead
-                options={this.props.catalogMeasures}
+                options={catalogMeasures}
                 filterOption="name"
                 displayOption="name"
                 onOptionSelected={this.handleOnOptionSelected}
               />
               <button
-                disabled={this.state.option === null}
+                disabled={option === null}
                 onClick={this.handleImport}
               >Benutzen</button>
             </div>
@@ -90,16 +93,16 @@ class MeasureForm extends Component {
 
           <label>
             Name:
-            <input type="text" ref="name" value={this.state.name} onChange={this.onNameChange} />
+            <input type="text" ref="name" value={name} onChange={this.onNameChange} />
           </label>
         </div>
         <ReactQuill
-          value={this.state.description}
+          value={description}
           onChange={this.onDescriptionChange}
           theme="snow"
         />
         <div/>
-        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} />
+        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} disableSubmit={ !name || !description } />
       </form>
     );
   }
