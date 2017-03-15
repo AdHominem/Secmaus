@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactQuill from 'react-quill';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { clone } from 'ramda';
+import { clone, all, prop, filter, map, identity, none, any } from 'ramda';
 import update from 'immutability-helper';
 
 import ButtonRow from '../presentational/ButtonRow';
@@ -92,8 +92,11 @@ class PollForm extends React.Component {
   };
 
   render() {
-    // TODO: Clean up
-    const questions = this.state.questions.map((question, i) =>
+    const { text, questions } = this.state;
+    const oneQuestionHasNoText = any(question => !question.text)(questions);
+    const oneAnswerHasNoText = any(q => q.questionType === "single choice" && any(choice => !choice, q.choices), questions)
+
+    const body = questions.map((question, i) =>
       <div key={ i }>
         <QuestionForm
           changeQuestionText={ this.changeQuestionText(i) }
@@ -110,7 +113,7 @@ class PollForm extends React.Component {
         <label>Text der Umfrage:</label>
 
         <ReactQuill
-          value={this.state.text}
+          value={text}
           onChange={this.onPollTextChange}
           theme="snow"
         />
@@ -121,9 +124,9 @@ class PollForm extends React.Component {
           <button className="button-primary" onClick={ this.newQuestion('single choice') }>Neue Single Choice Frage</button>
         </div>
 
-        { questions }
+        { body }
 
-        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} />
+        <ButtonRow onClose={this.handleClose} onSubmit={this.handleSubmit} disableSubmit={ !text || oneQuestionHasNoText || oneAnswerHasNoText }/>
       </div>
     );
   }
