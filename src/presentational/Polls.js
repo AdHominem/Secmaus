@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { propEq } from 'ramda';
+import { propEq, isEmpty } from 'ramda';
 
 import * as actions from '../actions/pollsActions';
 import Poll from '../containers/Poll';
@@ -27,7 +27,7 @@ function Polls({ polls, showButtons, measureId, isAdmin }) {
         </Link>
       }
       <div className="flex-boxes">
-        {polls.map((poll, i) => <Poll key={i} poll={ poll } />)}
+        { isEmpty(polls) ? <p>Keine Umfragen zu dieser Maßnahme</p> : polls.map((poll, i) => <Poll key={i} poll={ poll } />)}
       </div>
     </div>
   );
