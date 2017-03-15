@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { find, propEq, isNil } from 'ramda';
+import { find, propEq, isNil, T } from 'ramda';
 
 import MeasureForm from './MeasureForm';
 import Comments from './Comments';
@@ -25,8 +25,6 @@ class Measure extends React.Component {
   state = {modalIsOpen: false};
 
   openModal = () => { this.setState({ modalIsOpen: true }); };
-
-  afterOpenModal = () => { };
 
   closeModal = () => { this.setState({ modalIsOpen: false }); };
 
@@ -83,7 +81,7 @@ class Measure extends React.Component {
 
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
+          onAfterOpen={T}
           onRequestClose={this.closeModal}
           contentLabel="Maßnahme bearbeiten"
         >
@@ -105,7 +103,6 @@ class Measure extends React.Component {
     }
 
     return (
-      // TODO: 404
       <h1>Keine Maßnahme mit dieser ID gefunden</h1>
     );
   }
