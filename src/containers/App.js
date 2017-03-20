@@ -15,6 +15,9 @@ import * as pollsActions from '../actions/pollsActions';
 import * as catalogActions from '../actions/catalogActions';
 import * as questionActions from '../actions/questionsActions';
 
+import LogoImg from '../images/logo_sidate.png';
+import SearchImg from '../images/search-icon.png';
+
 class App extends React.Component {
 
   static propTypes = {
@@ -68,7 +71,7 @@ class App extends React.Component {
         <header className="navigation" role="banner">
           <div className="navigation-wrapper">
             <a href="javascript:void(0)" className="logo">
-              <img src="/images/logo_sidate.png" alt="SIDATE Logo" />
+              <img src={LogoImg} alt="SIDATE Logo" />
             </a>
             <a href="javascript:void(0)" className="navigation-menu-button" id="js-mobile-menu">MENU</a>
             <nav role="navigation">
@@ -95,7 +98,7 @@ class App extends React.Component {
                     onChange={this.updateSearch}
                   />
                   <button type="submit" onClick={this.startSearch}>
-                    <img src="/images/search-icon.png" alt="Search Icon" />
+                    <img src={SearchImg} alt="Search Icon" />
                   </button>
                 </form>
               </div>

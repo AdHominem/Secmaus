@@ -7,9 +7,16 @@ import { Router, browserHistory } from 'react-router';
 import { Parse } from 'parse';
 import routes from './routes';
 import configureStore from './store/configureStore';
+
 require('./favicon.ico'); // Tell webpack to load favicon.ico
 import './styles/styles.scss';
 import './styles/styles.sass';
+import './styles/font-awesome.min.css';
+import './styles/roboto.css';
+import './styles/jquery-3.1.1.min.js';
+import './images/logo_sidate.png';
+import './images/search-icon.png';
+
 import { syncHistoryWithStore } from 'react-router-redux';
 
 const store = configureStore();
