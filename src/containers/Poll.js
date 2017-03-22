@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
 import Alert from "react-s-alert";
-import { sortBy, pipe, prop, propEq, update, any } from "ramda";
+import { sortBy, pipe, prop, propEq, update, any, ifElse, always } from "ramda";
 
 import IconButtonRow from '../presentational/IconButtonRow';
 import questionTypes from "../constants/questionTypes";
@@ -21,15 +21,13 @@ class Poll extends Component {
   };
 
   state = {
-    // default to 0 for all answers
-    answers: this.props.questions.map(() => 0),
+    answers: this.props.questions.map(ifElse(propEq('questionType', 'freeform'), always(""), always(0))),
     showResults: false
   };
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps() {
     this.state = {
-      // default to 0 for all answers
-      answers: props.questions.map(() => 0)
+      answers: this.props.questions.map(ifElse(propEq('questionType', 'freeform'), always(""), always(0))),
     };
   }
 
@@ -41,6 +39,7 @@ class Poll extends Component {
   };
 
   selectAnswer = (index) => (value) => () => {
+    console.log("selectAnswers");
     this.setState({ answers: update(index, value, this.state.answers) });
   };
 
@@ -96,6 +95,9 @@ class Poll extends Component {
   };
 
   render() {
+    console.log("Poll rendered");
+    console.log(this.state);
+
     const {
       isAdmin,
       poll: { id, text, closed, measureId },

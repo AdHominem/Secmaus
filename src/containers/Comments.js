@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { propEq, T, isEmpty } from 'ramda';
+import { propEq, T } from 'ramda';
 
 import CommentForm from './CommentForm';
 import Comment from './Comment';
@@ -35,7 +35,7 @@ class Comments extends Component {
           {comments.map((comment, i) => <Comment key={i} comment={comment} depth={depth + 1}/>)}
         </ul>
         { depth < 5 && (
-            depth == 0 ?
+            depth === 0 ?
               <button onClick={this.openModal}>Kommentar hinzufügen</button> :
               <a onClick={this.openModal}>Antworten</a>
         ) }

@@ -85,7 +85,7 @@ class PollForm extends React.Component {
         questions: { $push: [{
           text: '',
           questionType: type,
-          choices: []
+          choices: [] // TODO this is probably unncessary
         }]}
       }));
     }
@@ -94,7 +94,7 @@ class PollForm extends React.Component {
   render() {
     const { text, questions } = this.state;
     const oneQuestionHasNoText = any(question => !question.text)(questions);
-    const oneAnswerHasNoText = any(q => q.questionType === "single choice" && any(choice => !choice, q.choices), questions)
+    const oneAnswerHasNoText = any(q => q.questionType === "single choice" && any(choice => !choice, q.choices), questions);
 
     const body = questions.map((question, i) =>
       <div key={ i }>
