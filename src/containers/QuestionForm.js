@@ -51,7 +51,7 @@ class QuestionForm extends React.Component {
 
   render() {
     const { changeQuestionText, removeQuestion, question: { questionType, choices, text }} = this.props;
-    const translations = { 'binary' : 'binären', 'single choice' : 'Single Choice', 'likert' : 'Likert'};
+    const translations = { 'binary' : 'binären', 'single choice' : 'Single Choice', 'likert' : 'Likert', 'freeform': 'Freitext'};
 
     return (
       <div className="question-form">
@@ -60,7 +60,7 @@ class QuestionForm extends React.Component {
         <label>Text der { translations[questionType] } Frage:</label>
         <input type="text" value={ text } onChange={ changeQuestionText }/>
 
-          { questionType == 'single choice' &&
+          { questionType === 'single choice' &&
             <div className="answers">
               <select defaultValue={3} name="answer_dropdown" size="1" onChange={ this.onChangeHandler }>
                 { range(2, 11).map(i => <option key={i}>{i}</option>) }
