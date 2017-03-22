@@ -75,8 +75,10 @@ class Poll extends Component {
 
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
 
-    const component = questionTypes[question.questionType] ||
-      {result: <p>Ungültiger Fragetyp</p>, form: <p>Ungültiger Fragetyp</p>};
+    const component = questionTypes[question.questionType];
+    if(!component) {
+      return <p>Ungültiger Fragetyp</p>;
+    }
 
     if (closed || alreadyAnswered || showResults) {
       return React.createElement(component.results, {
