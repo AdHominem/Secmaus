@@ -1,33 +1,20 @@
-import React, { PropTypes, Component } from 'react';
-import { Pie } from 'react-chartjs-2';
-import { map, nth, pipe, equals } from 'ramda';
+import React, { PropTypes } from 'react';
 
-import { binaryColors } from '../constants/colors';
-import { count } from '../utils/ramda';
+const freeFormRequiredPropTypes = {
+  question: PropTypes.object.isRequired
+};
 
-class FreeForm extends Component {
+function FreeForm({ question: { text, answers } }) {
+  const body = answers.map((answer, i) => <p key={i}>{answer[1]}</p>);
 
-  static propTypes = {
-    question: PropTypes.object.isRequired
-  };
-
-  state = {
-    text: ""
-  };
-
-  render() {
-    const { question: { text, answers } } = this.props;
-
-    console.log(answers);
-    const body = answers.map((answer) => answer[1]);
-
-    return (
-        <div className="question">
-          <h1>{ text }</h1>
-          { body }
-        </div>
-      );
-    }
+  return (
+      <div className="question">
+        <h1>{ text }</h1>
+        { body }
+      </div>
+    );
 }
+
+FreeForm.propTypes = freeFormRequiredPropTypes;
 
 export default FreeForm;
