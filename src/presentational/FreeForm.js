@@ -16,9 +16,15 @@ class FreeForm extends Component {
   };
 
   render() {
+    const { question: { text, answers } } = this.props;
+
+    console.log(answers);
+    const body = answers.map((answer) => answer[1]);
+
     return (
         <div className="question">
-          <h1>Dummy</h1>
+          <h1>{ text }</h1>
+          { body }
         </div>
       );
     }
