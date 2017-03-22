@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Parse from "parse";
 import Alert from "react-s-alert";
-import { sortBy, pipe, prop, propEq, update, any, ifElse, always } from "ramda";
+import { sortBy, pipe, prop, propEq, update, any } from "ramda";
 
 import IconButtonRow from '../presentational/IconButtonRow';
 import questionTypes from "../constants/questionTypes";
@@ -21,13 +21,15 @@ class Poll extends Component {
   };
 
   state = {
-    answers: this.props.questions.map(ifElse(propEq('questionType', 'freeform'), always(""), always(0))),
+    // default to 0 for all answers
+    answers: this.props.questions.map(() => 0),
     showResults: false
   };
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(props) {
     this.state = {
-      answers: this.props.questions.map(ifElse(propEq('questionType', 'freeform'), always(""), always(0))),
+      // default to 0 for all answers
+      answers: props.questions.map(() => 0)
     };
   }
 
@@ -39,8 +41,11 @@ class Poll extends Component {
   };
 
   selectAnswer = (index) => (value) => () => {
-    console.log("selectAnswers");
     this.setState({ answers: update(index, value, this.state.answers) });
+  };
+
+  setAnswer = (index) => (event) => {
+    this.setState({ answers: update(index, event.target.value, this.state.answers) });
   };
 
   submitAnswers = () => {
@@ -89,15 +94,12 @@ class Poll extends Component {
         key: i,
         question: question,
         value: answers[i],
-        onChange: this.selectAnswer(i)
+        onChange: question.questionType === "freeform" ? this.setAnswer(i) : this.selectAnswer(i)
       });
     }
   };
 
   render() {
-    console.log("Poll rendered");
-    console.log(this.state);
-
     const {
       isAdmin,
       poll: { id, text, closed, measureId },
