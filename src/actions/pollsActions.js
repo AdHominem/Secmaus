@@ -41,7 +41,7 @@ export function savePoll(text, questions, measureId) {
       (poll, i) => {
         questions.forEach(question => dispatch(saveQuestion(question.choices, question.questionType, question.text, poll.id, i)));
         dispatch(addPoll(poll.id, text, false, measureId));
-      }
+      }    
     ).then(
       () => Alert.success("Umfrage wurde erfolgreich gespeichert")
     ).catch(
@@ -66,6 +66,11 @@ export function editPoll(id, text, questions, oldQuestions, measureId) {
       () => {
         oldQuestions.forEach(q => dispatch(deleteQuestion(q.id)));
         questions.forEach(q => dispatch(saveQuestion(q.choices, q.questionType, q.text, id, q.index, q.answers)));
+        dispatch({    
+          type: types.EDIT_POLL,
+          id: id,
+          text: text
+        });
       }
     ).then(
       () => Alert.success("Umfrage erfolgreich bearbeitet")
