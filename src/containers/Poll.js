@@ -72,7 +72,7 @@ class Poll extends Component {
   };
 
   selectQuestionForm = (question, i) => {
-    const { poll: { closed }, questions } = this.props;
+    const { isAdmin, poll: { closed }, questions } = this.props;
     const { answers, showResults } = this.state;
 
     let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
@@ -87,7 +87,7 @@ class Poll extends Component {
         key: i,
         question: question
       });
-    } else {
+    } else if (question.questionType !== "freeform" || isAdmin) {
       return React.createElement(component.form, {
         key: i,
         question: question,
