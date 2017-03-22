@@ -74,10 +74,9 @@ class Poll extends Component {
   selectQuestionForm = (question, i) => {
     const { poll: { closed }, questions } = this.props;
     const { answers, showResults } = this.state;
-
-    let alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
-
+    const alreadyAnswered = questions.length && any(answer => answer[0] === Parse.User.current().id, questions[0].answers);
     const component = questionTypes[question.questionType];
+
     if(!component) {
       return <p>Ungültiger Fragetyp</p>;
     }

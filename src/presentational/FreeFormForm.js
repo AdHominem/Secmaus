@@ -9,7 +9,7 @@ const freeFormFormRequiredPropTypes = {
 function FreeFormForm({ onChange, value, question: { text } }) {
   return (
     <div className="question">
-      <h1>Free Form {text}</h1>
+      <h1>{text}</h1>
       <input
         type="text"
         value={value}
