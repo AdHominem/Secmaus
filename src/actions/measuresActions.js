@@ -3,6 +3,8 @@ import { Parse } from 'parse';
 import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 import { forEach } from 'ramda';
+import * as pollsActions from './pollsActions';
+import pollTemplate from '../constants/pollTemplate';
 
 export function loadMeasures() {
   return (dispatch, getState) => {
@@ -47,6 +49,13 @@ export function saveMeasure(name, description) {
             name,
             description,
             Parse.User.current()
+          )
+        );
+        dispatch(
+          pollsActions.savePoll(
+            pollTemplate.text,
+            pollTemplate.questions,
+            measure.id
           )
         );
         browserHistory.push(`/SIDATESecMaus/measure/${measure.id}`);
